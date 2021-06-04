@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @friend_request.name %>
+</p>
+
+<%= link_to 'Edit', edit_friend_request_path(@friend_request) %> |
+<%= link_to 'Back', friend_requests_path %>

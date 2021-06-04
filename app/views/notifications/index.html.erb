@@ -1,0 +1,121 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Notifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notifications.each do |notification| %>
+      <tr>
+        <td><%= notification.name %></td>
+        <td><%= link_to 'Show', notification %></td>
+        <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
+        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notification', new_notification_path %>
+
+<div class="row"> 
+  <div class="col-lg-12 px-0 px-sm-3"> 
+    <div class="card" data-pgc="jr.pagename"> 
+      <div class="card-body"> 
+        <h5 class="card-title mb-0" data-pgc-field="title">Notifications</h5> 
+      </div>                                 
+    </div>
+    <div class="card"> 
+      <div class="card-body"> 
+        <h5 class="card-title">Messages</h5> 
+        <div class="table-responsive"> 
+          <table class="table table-hover"> 
+            <thead> 
+              <tr> 
+                <th scope="col">Event<br></th> 
+                <th scope="col">Event</th>
+                <th>Actions<br></th> 
+              </tr>                                                 
+            </thead>                                             
+            <tbody> 
+              <tr class="table-active"> 
+                <td>&nbsp;
+                  <%= image_pack_tag "meg.jpg", class: "rounded-circle", width: "100px", 'height' => "100px" %>
+                  <p>Meg Mayers</p>
+                </td>                                                     
+                <td><p>User Serge Vinogradoff added 124 subrecords to your record &quot;.</p></td>
+                <td>
+                  <button type="button" class="btn btn-light btn-block">
+                    <i class="fa fa-check"></i>&nbsp;mark   as read
+                  </button>
+                  <button type="button" class="btn btn-light btn-block">
+                    <i class="fa fa-close"></i>&nbsp;Delete
+                  </button>
+                </td>                                                     
+              </tr>
+              <tr class="table-active"> 
+                <td>&nbsp;
+                  <%= image_pack_tag "meg.jpg", class: "rounded-circle", width: "100px", 'height' => "100px" %>
+                  <p>Meg Mayers</p>
+                </td>                                                     
+                <td>User Serge Vinogradoff added 124 subrecords to your record &quot;.<br></td>
+                <td>
+                  <button type="button" class="btn btn-light btn-block">
+                    <i class="fa fa-check"></i> MARK AS READ
+                  </button>
+                  <button type="button" class="btn btn-light btn-block">
+                    <i class="fa fa-close"></i>&nbsp;Delete
+                  </button>
+                </td>                                                     
+              </tr>
+              <tr> 
+                <td>&nbsp;
+                  <%= image_pack_tag "meg.jpg", class: "rounded-circle", width: "100px", 'height' => "100px" %>
+                  <p>Meg Mayers</p>
+                </td>                                                     
+                <td>User Serge Vinogradoff added 124 subrecords to your record &quot;.<br></td>
+                <td>
+                  <button type="button" class="btn btn-light btn-block">
+                    <i class="fa fa-check"></i> MARK AS READ
+                  </button>
+                  <button type="button" class="btn btn-light btn-block">
+                    <i class="fa fa-close"></i>&nbsp;Delete
+                  </button>
+                </td>                                                     
+              </tr>                                                 
+              <tr> 
+              </tr>                                                 
+            </tbody>                                             
+          </table>                                         
+        </div>                                     
+      </div>                                 
+    </div>
+    <div class="d-flex justify-content-center">
+      <ul class="pagination"> 
+        <li class="page-item">
+          <a class="page-link" href="#">Previous</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>                                     
+      </ul>
+    </div>                             
+  </div>                         
+</div>

@@ -1,0 +1,2 @@
+class MessageChain < ApplicationRecord
+end

@@ -1,0 +1,122 @@
+<div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true" data-pgc="jr.sidemenu"> 
+    <div class="brand-logo"> 
+        <%= link_to records_path do %> 
+            <%= image_pack_tag 'logo-icon.png', class: "logo-icon", alt: "logo icon" %> 
+            <h5 class="logo-text">Akadan</h5> 
+        <% end %> 
+    </div>                 
+    <ul class="sidebar-menu do-nicescrol"> 
+        <li class="sidebar-header">MAIN NAVIGATION</li>                     
+        <li> 
+            <%= link_to records_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Repetitive Records / Projects</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to new_record_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a new record</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to record_types_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Types of Repetitive Records</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to new_record_type_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a new type</span> <% end %> 
+        </li>
+        <li> 
+            <a href="calendar.html"> <i class="zmdi zmdi-calendar-alt"></i> <span>Import Events from Google Calendar as  Repetitive Records</span> </a> 
+        </li>
+        <li> 
+            <%= link_to connection_types_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Types of Connections Between Repetitive Records</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to new_connection_type_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a new connection type</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to connections_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Connections Between Repetitive Records</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to new_connection_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a new connection</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to friends_path do %> <i class="zmdi zmdi-accounts-alt"></i> <span>My Friends</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to blocked_users_path do %> <i class="zmdi zmdi-accounts-outline"></i> <span>Black List</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to message_chains_path do %> <i class="zmdi zmdi-comment-list"></i> <span>My Messages</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to people_path do %> <i class="zmdi zmdi-accounts-list"></i> <span>People</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to sensors_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Sensors / Camera Recognitions</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to new_sensor_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a New Sensor / Camera Recognition</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to notifications_path do %> <i class="zmdi zmdi-comments"></i> <span>Notifications</span> <% end %> 
+        </li>
+        <li> 
+            <a href="store.html"> <i class="zmdi zmdi-store"></i> <span>Online Store</span> </a> 
+        </li>
+        <li> 
+            <a href="sell.html"> <i class="zmdi zmdi-shopping-cart"></i> <span>Sell</span> </a> 
+        </li>
+        <li> 
+            <a href="platforms.html"> <i class="zmdi zmdi-download"></i> <span>Platforms (Downloads)</span> </a> 
+        </li>
+        <li> 
+            <%= link_to edit_user_path(1) do %> <i class="zmdi zmdi-settings"></i> <span>Settings</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to seminars_path do %> <i class="zmdi zmdi-calendar"></i> <span>Seminars &amp; Courses</span> <% end %> 
+        </li>
+        <li> 
+            <%= link_to events_path do %> <i class="zmdi zmdi-calendar-note"></i> <span>Events</span> <% end %> 
+        </li>
+        <li> 
+            <a href="wallet.html"> <i class="zmdi zmdi-balance-wallet"></i> <span>Wallet</span> </a> 
+        </li>
+        <li> 
+            <a href="payment.html"> <i class="zmdi zmdi-view-dashboard"></i> <span>Payment Plan</span> </a> 
+        </li>                     
+        <li> 
+            <a href="icons.html"> <i class="zmdi zmdi-invert-colors"></i> <span>UI Icons</span> </a> 
+        </li>                     
+        <li> 
+            <a href="forms.html"> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Forms</span> </a> 
+        </li>                     
+        <li> 
+            <a href="tables.html"> <i class="zmdi zmdi-grid"></i> <span>Tables</span> </a> 
+        </li>                     
+        <li> 
+            <a href="calendar.html"> <i class="zmdi zmdi-calendar-check"></i> <span>Calendar</span> <small class="badge float-right badge-light">New</small> </a> 
+        </li>                     
+        <li> 
+            <%= link_to user_path(1) do %> <i class="zmdi zmdi-face"></i> <span>Profile</span> <% end %> 
+        </li>                     
+        <li> 
+            <a href="login.html" target="_blank"> <i class="zmdi zmdi-lock"></i> <span>Login</span> </a> 
+        </li>
+        <li> 
+            <a href="login.html" target="_blank"> <i class="zmdi zmdi-lock"></i> <span>Logout</span> </a> 
+        </li>
+        <li> 
+            <a href="login.html" target="_blank"> <i class="zmdi zmdi-lock"></i> <span>Register</span> </a> 
+        </li>
+        <li> 
+</li>                     
+        <li> 
+            <a href="register.html" target="_blank"> <i class="zmdi zmdi-account-circle"></i> <span>Registration</span> </a> 
+        </li>                     
+        <li class="sidebar-header">LABELS</li>                     
+        <li>
+            <a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
+        </li>                     
+        <li>
+            <a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a>
+        </li>                     
+        <li>
+            <a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
+        </li>                     
+    </ul>                 
+</div>

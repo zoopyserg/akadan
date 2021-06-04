@@ -1,0 +1,1495 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<strong>Name:</strong>
+<%= @record.name %>
+</p>
+
+<%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to 'Back', records_path %>
+<div class="row"> 
+  <div class="col-lg-12 px-0 px-sm-3"> 
+    <div class="card"> 
+    </div>
+    <div class="card"> 
+      <div class="card-body"> 
+        <div class="row">
+          <div class="col-lg-12">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="http://pinegrow.com/placeholders/img11.jpg" class="w-100"/>
+                </div>
+                <div class="carousel-item">
+                  <img src="http://pinegrow.com/placeholders/img13.jpg" class="w-100"/>
+                </div>
+                <div class="carousel-item">
+                  <img src="http://pinegrow.com/placeholders/img16.jpg" class="w-100"/>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="align-items-center col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div class="d-flex flex-column">
+                <div class="icheck-material-white"> 
+                  <input type="checkbox" id="user-checkbox1" checked=""/> 
+                  <label for="user-checkbox1"></label>                                                         
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <i class="fa fa-chevron-up mx-1 my-1"></i>
+                <i class="fa fa-chevron-down mx-1 my-1"></i>
+              </div>
+              <div>
+                <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+              </div>
+            </div>
+            <div class="align-items-center d-flex">
+              <i class="fa fa-comment mx-1 my-1"></i>
+            </div>
+          </div>
+        </div>                                     
+        <div class="row"> 
+          <div class="col-lg-8">
+            <div class="input-group input-group-sm">
+              <div class="input-group-prepend">
+                <span class="input-group-text">URL:</span>
+              </div>
+              <input type="text" class="form-control" value="http://myurl.com/problems/293293222">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-copy mr-1"></i>Copy
+                </button>
+                <button class="btn btn-primary" type="button">
+                  <i class="fa fa-eye mr-1"></i>Show
+                </button>
+              </div>
+            </div>
+            <button class="btn btn-link btn-sm d-flex flex-row align-items-center" type="button">
+              <span><i class="fa fa-star-o mr-1"></i></span>
+              <span>Add to Favourites</span>
+            </button>
+            <p>Описание созданное в WYSIWYG (только не длинное) іормоіаміі мліотмілоа мілвао мілліовамтілаомтілаомлмтілвмтілмотілоамтілвомтілвомтілвоамтілвоамтлівм івало мівл амл валм івла млів амлівла млів тамлів тамл івалмівлат млів тамлівамлівал мілв амлівамлівамлітлмлавміамілм і<i class="fa fa-edit mx-1"></i></p>
+            <h6>Completed (%):</h6>
+            <div class="progress">
+              <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">50%</div>
+            </div>
+            <p class="mb-0"><strong class="mr-1">Type:</strong>Some kind of record type<i class="fa fa-edit mx-1"></i></p>
+            <div role="tablist" id="accordion-1">
+              <p class="mb-0">You spent <strong>123 hours 48 minutes</strong> on this</p>
+              <p class="mb-0">Repeated <strong>123</strong> times</p>
+              <h6>Attachments</h6>
+              <div class="row row-cols-1">
+                <div class="col-lg-12">
+                  <a href="#">Attachment File 1.pdf</a>
+                </div>
+                <div class="col-lg-12">
+                  <a href="#">Attachment File 2.cad</a>
+                </div>
+                <div class="col-lg-12">
+                  <a href="#">Attachment File 3.exe</a>
+                </div>
+                <div class="col-lg-12">
+                  <a href="#">Attachment File 4.zip</a>
+                </div>
+                <div class="col-lg-12">
+                  <button class="btn btn-primary btn-sm" type="button">Add Attachment</button>
+                </div>
+              </div>
+              <h6>Sensors</h6>
+              <div class="row row-cols-1">
+                <div class="col-lg-12">
+                  <div class="row row-cols-1">
+                    <div class="col-lg-12">
+                      <div class="row">
+                        <div class="col">
+                          <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                          <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                          <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                          <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                          <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <a href="#">Add a New Sensor</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-cols-1">
+                <div class="col-12">
+                  <h6>Print a Report</h6>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="align-items-center col-sm-6 d-flex">
+                      <p class="mb-0">Download PDF</p>
+                      <i class="fa fa-file-pdf-o mx-1"></i>
+                    </div>
+                    <div class="align-items-center col-sm-6 d-flex">
+                      <p class="mb-0">Print</p>
+                      <i class="fa fa-print mx-1"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-cols-1">
+                <div class="col-12">
+                  <h6>Sharing</h6>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12">
+                      <iframe src="https://platform.twitter.com/widgets/tweet_button.html?via=BootstrapStudio&amp;text=Text" frameborder="0" scrolling="no" allowtransparency="true" width="80" height="20"></iframe>
+                    </div>
+                    <div class="col-12">
+                      <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fbootstrapstudio.io%2F&amp;layout=button&amp;action=like&amp;size=small&amp;share=true" scrolling="no" frameborder="0" allow="encrypted-media" allowtransparency="true" height="20" width="200px"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-cols-1">
+                <div class="col-12">
+                  <h6>Separate Room</h6>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p>Выдели под этот проект/систему/подсистему отдельное помещение (ради избавления от путаницы и модульности) </p>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-check custom-control custom-switch">
+                        <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch-1"/>
+                        <label class="form-check-label custom-control-label" for="customSwitch1">Сделано</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-cols-1">
+                <div class="col-12">
+                  <h6>Profit Information</h6>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <p>total money made</p>
+                    </div>
+                    <div class="col-sm-6">
+                      <p>12345 dollars</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-cols-1">
+                <div class="col-12">
+                  <h6>Apply For Partnership</h6>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="button">Apply for review / partnership / funding (we will fund 100%, help to set it up, and take 14% of your profit once you have it).</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="button">Start Crowdfunding Campaign (visible for owner after 100% solved, and probably after 100% of factory is planned, makes it public)</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="button">Donate (visible to everyone if Crowdfunding was approved)</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-cols-1">
+                <div class="col-12">
+                  <h6>Turn Into A Factory</h6>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="button">Turn Into a Factory (visible after problem is close to 100% solved).</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-repeat"></i>
+              <span style="font-family: inherit; font-size: 0.7rem;"><font face="FontAwesome">&nbsp;Repeated</font></span>
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-check"></i>&nbsp;Solve
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-puzzle-piece"></i>&nbsp;create / connect subrecords
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-level-up"></i>
+              <a href="#">&nbsp;Перенести на слой иерархии выше</a>
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-angle-double-up fa-twitter-square"></i>
+              <a href="#"><a href="#" style="font-family: inherit; font-size: 0.7rem;">&nbsp;</a><i contenteditable="false"></i>Extract into separate project</a>
+            </button>
+            <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsModal">
+              <i class="fa fa-lock"></i>&nbsp;permissions
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-close"></i>
+              <a href="#"></a>
+              <a href="#" style="font-family: inherit; font-size: 0.7rem;">&nbsp;</a>
+              <i contenteditable="false"></i>Delete
+            </button>
+          </div>                                         
+        </div>                                     
+      </div>                                 
+    </div>
+    <div class="card"> 
+      <div class="card-body"> 
+        <div class="row">
+          <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
+            <h5 class="card-title" data-pgc-field="title">Comments</h5>
+          </div>
+          <div class="col-lg-12">
+            <div class="row" id="comments">
+              <div class="col-lg-12 mb-4" data-pgc-define="jr.commentgroup" data-pgc-define-name="Comment Group" data-pgc-define-description="Several Replies" data-pgc-section="Page Components">
+                <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc-define="jr.comment" data-pgc-define-name="Comment" data-pgc-section="Page Components">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                          <i class="fa fa-chevron-up"></i>
+                          <p class="mb-0">1</p>
+                          <i class="fa fa-chevron-down"></i>
+                        </div>
+                        <div>
+                          <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                          <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                          <button class="btn btn-light btn-sm mr-1 p-1">
+                            <i class="fa fa-edit mx-1"></i>edit
+                          </button>
+                          <button class="btn btn-light btn-sm mr-1 p-1">
+                            <i class="fa fa-reply mx-1"></i>Reply
+                          </button>
+                        </div>
+                      </div>
+                      <div class="align-items-end d-flex flex-column">
+                        <i class="fa fa-close"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col offset-1">
+                    <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <div class="d-flex">
+                            <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                              <i class="fa fa-chevron-up"></i>
+                              <p class="mb-0">1</p>
+                              <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div>
+                              <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                              <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                              <button class="btn btn-light btn-sm mr-1 p-1">
+                                <i class="fa fa-edit mx-1"></i>edit
+                              </button>
+                              <button class="btn btn-light btn-sm mr-1 p-1">
+                                <i class="fa fa-reply mx-1"></i>Reply
+                              </button>
+                            </div>
+                          </div>
+                          <div class="align-items-end d-flex flex-column">
+                            <i class="fa fa-close"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col offset-1">
+                        <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex">
+                                <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                                  <i class="fa fa-chevron-up"></i>
+                                  <p class="mb-0">1</p>
+                                  <i class="fa fa-chevron-down"></i>
+                                </div>
+                                <div>
+                                  <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                                  <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                                  <button class="btn btn-light btn-sm mr-1 p-1">
+                                    <i class="fa fa-edit mx-1"></i>edit
+                                  </button>
+                                  <button class="btn btn-light btn-sm mr-1 p-1">
+                                    <i class="fa fa-reply mx-1"></i>Reply
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="align-items-end d-flex flex-column">
+                                <i class="fa fa-close"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 mb-4" data-pgc="jr.commentgroup">
+                <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                          <i class="fa fa-chevron-up"></i>
+                          <p class="mb-0">1</p>
+                          <i class="fa fa-chevron-down"></i>
+                        </div>
+                        <div>
+                          <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                          <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                          <button class="btn btn-light btn-sm mr-1 p-1">
+                            <i class="fa fa-edit mx-1"></i>edit
+                          </button>
+                          <button class="btn btn-light btn-sm mr-1 p-1">
+                            <i class="fa fa-reply mx-1"></i>Reply
+                          </button>
+                        </div>
+                      </div>
+                      <div class="align-items-end d-flex flex-column">
+                        <i class="fa fa-close"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col offset-1">
+                    <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <div class="d-flex">
+                            <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                              <i class="fa fa-chevron-up"></i>
+                              <p class="mb-0">1</p>
+                              <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div>
+                              <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                              <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                              <button class="btn btn-light btn-sm mr-1 p-1">
+                                <i class="fa fa-edit mx-1"></i>edit
+                              </button>
+                              <button class="btn btn-light btn-sm mr-1 p-1">
+                                <i class="fa fa-reply mx-1"></i>Reply
+                              </button>
+                            </div>
+                          </div>
+                          <div class="align-items-end d-flex flex-column">
+                            <i class="fa fa-close"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col offset-1">
+                        <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex">
+                                <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                                  <i class="fa fa-chevron-up"></i>
+                                  <p class="mb-0">1</p>
+                                  <i class="fa fa-chevron-down"></i>
+                                </div>
+                                <div>
+                                  <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                                  <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                                  <button class="btn btn-light btn-sm mr-1 p-1">
+                                    <i class="fa fa-edit mx-1"></i>edit
+                                  </button>
+                                  <button class="btn btn-light btn-sm mr-1 p-1">
+                                    <i class="fa fa-reply mx-1"></i>Reply
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="align-items-end d-flex flex-column">
+                                <i class="fa fa-close"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 mb-4" data-pgc="jr.commentgroup">
+                <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                          <i class="fa fa-chevron-up"></i>
+                          <p class="mb-0">1</p>
+                          <i class="fa fa-chevron-down"></i>
+                        </div>
+                        <div>
+                          <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                          <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                          <button class="btn btn-light btn-sm mr-1 p-1">
+                            <i class="fa fa-edit mx-1"></i>edit
+                          </button>
+                          <button class="btn btn-light btn-sm mr-1 p-1">
+                            <i class="fa fa-reply mx-1"></i>Reply
+                          </button>
+                        </div>
+                      </div>
+                      <div class="align-items-end d-flex flex-column">
+                        <i class="fa fa-close"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col offset-1">
+                    <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <div class="d-flex">
+                            <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                              <i class="fa fa-chevron-up"></i>
+                              <p class="mb-0">1</p>
+                              <i class="fa fa-chevron-down"></i>
+                            </div>
+                            <div>
+                              <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                              <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                              <button class="btn btn-light btn-sm mr-1 p-1">
+                                <i class="fa fa-edit mx-1"></i>edit
+                              </button>
+                              <button class="btn btn-light btn-sm mr-1 p-1">
+                                <i class="fa fa-reply mx-1"></i>Reply
+                              </button>
+                            </div>
+                          </div>
+                          <div class="align-items-end d-flex flex-column">
+                            <i class="fa fa-close"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col offset-1">
+                        <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                              <div class="d-flex">
+                                <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+                                  <i class="fa fa-chevron-up"></i>
+                                  <p class="mb-0">1</p>
+                                  <i class="fa fa-chevron-down"></i>
+                                </div>
+                                <div>
+                                  <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
+                                  <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                                  <button class="btn btn-light btn-sm mr-1 p-1">
+                                    <i class="fa fa-edit mx-1"></i>edit
+                                  </button>
+                                  <button class="btn btn-light btn-sm mr-1 p-1">
+                                    <i class="fa fa-reply mx-1"></i>Reply
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="align-items-end d-flex flex-column">
+                                <i class="fa fa-close"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>                                     
+      </div>                                 
+    </div>
+    <div class="card"> 
+      <div class="card-body"> 
+        <div class="row">
+          <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
+            <h5 class="card-title mb-0" data-pgc-field="title">Sub-Records</h5>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-12 col-lg-12 col-md-12 col-sm-6 col-xl-5 d-flex d-md-flex d-sm-flex justify-content-md-end justify-content-sm-start justify-content-start">
+                <div class="dropdown" data-pgc="jr.dropdown">
+                  <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
+                    <i class="icon-lock"></i>&nbsp;Add A Column
+
+
+
+
+
+
+
+
+                  </button>
+                  <div class="dropdown-menu" x-placement='bottom start'>
+                    <a class="dropdown-item" href='#'>Link</a>
+                    <a href="#" class="dropdown-item">Link</a>
+                    <a href="#" class="dropdown-item">Link</a>
+                    <a href="#" class="dropdown-item">Link</a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-12 col-md-12 col-sm-6 col-xl-7 d-flex d-md-flex d-sm-flex justify-content-md-end justify-content-sm-start justify-content-start">
+                <div class="dropdown" data-pgc="jr.dropdown">
+                  <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
+                    <i class="icon-lock"></i>&nbsp;Actions on Selected Records
+
+
+
+
+
+
+
+
+                  </button>
+                  <div class="dropdown-menu" x-placement='bottom start'>
+                    <a class="dropdown-item" href='#'>Link</a>
+                    <a href="#" class="dropdown-item">Link</a>
+                    <a href="#" class="dropdown-item">Link</a>
+                    <a href="#" class="dropdown-item">Link</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>                                     
+      </div>                                 
+    </div>
+    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
+      <div class="card-body px-0 px-sm-3 py-1"> 
+        <div class="row"></div>
+        <div class="px-3 row">
+          <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
+            <div class="align-items-center d-flex">
+              <div class="d-flex flex-column">
+                <div class="icheck-material-white"> 
+                  <input type="checkbox" id="user-checkbox1" checked=""/> 
+                  <label for="user-checkbox1"></label>                                                         
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <i class="fa fa-chevron-up mx-1 my-1"></i>
+                <i class="fa fa-chevron-down mx-1 my-1"></i>
+              </div>
+              <div>
+                <h5 class="card-title mb-0 mx-1" data-pgc-field="columnname">Repetitive Records</h5>
+              </div>
+            </div>
+            <div class="align-items-center d-flex">
+              <i class="fa fa-close mx-1 my-1"></i>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="form-check custom-control custom-switch">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="custom-control-label form-check-label" for="customSwitch1">Split Into Solved and Not-Solved</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Show Not Only Direct Children But Also Their Deep nested Children of this type</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Collapsed view</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12">
+            <p class="mb-0">123 direct records of this type</p>
+            <p class="mb-0">1230 deeply found records of this type</p>
+            <p class="mb-0">1353 records of this type total</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="d-flex justify-content-center" data-pgc="jr.pagination">
+              <ul class="pagination"> 
+                <li class="page-item">
+                  <a class="page-link" href="#">Previous</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">1</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">2</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">3</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>                                                     
+              </ul>
+            </div>
+          </div>
+        </div>                                     
+      </div>                                 
+    </div>
+    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
+      <div class="card-body px-0 px-sm-3 py-1"> 
+        <div class="row"></div>
+        <div class="px-3 row">
+          <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
+            <div class="align-items-center d-flex">
+              <div class="d-flex flex-column">
+                <div class="icheck-material-white"> 
+                  <input type="checkbox" id="user-checkbox1" checked=""/> 
+                  <label for="user-checkbox1"></label>                                                         
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <i class="fa fa-chevron-up mx-1 my-1"></i>
+                <i class="fa fa-chevron-down mx-1 my-1"></i>
+              </div>
+              <div>
+                <h5 class="card-title mb-0 mx-1" data-pgc-field="columnname">Records of Type 123</h5>
+              </div>
+            </div>
+            <div class="align-items-center d-flex">
+              <i class="fa fa-close mx-1 my-1"></i>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="form-check custom-control custom-switch">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="custom-control-label form-check-label" for="customSwitch1">Split Into Solved and Not-Solved</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Show Not Only Direct Children But Also Their Deep nested Children of this type</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Collapsed view</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12">
+            <p class="mb-0">123 direct records of this type</p>
+            <p class="mb-0">1230 deeply found records of this type</p>
+            <p class="mb-0">1353 records of this type total</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="d-flex justify-content-center" data-pgc="jr.pagination">
+              <ul class="pagination"> 
+                <li class="page-item">
+                  <a class="page-link" href="#">Previous</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">1</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">2</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">3</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>                                                     
+              </ul>
+            </div>
+          </div>
+        </div>                                     
+      </div>                                 
+    </div>
+    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
+      <div class="card-body px-0 px-sm-3 py-1"> 
+        <div class="row"></div>
+        <div class="px-3 row">
+          <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
+            <div class="align-items-center d-flex">
+              <div class="d-flex flex-column">
+                <div class="icheck-material-white"> 
+                  <input type="checkbox" id="user-checkbox1" checked=""/> 
+                  <label for="user-checkbox1"></label>                                                         
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <i class="fa fa-chevron-up mx-1 my-1"></i>
+                <i class="fa fa-chevron-down mx-1 my-1"></i>
+              </div>
+              <div>
+                <h5 class="card-title mb-0 mx-1" data-pgc-field="columnname">Connections of type Blah Blah (to this record or whatever)</h5>
+              </div>
+            </div>
+            <div class="align-items-center d-flex">
+              <i class="fa fa-close mx-1 my-1"></i>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="form-check custom-control custom-switch">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="custom-control-label form-check-label" for="customSwitch1">Split Into Solved and Not-Solved</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Show Not Only Direct Children But Also Their Deep nested Children of this type</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Collapsed view</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12">
+            <p class="mb-0">123 direct records of this type</p>
+            <p class="mb-0">1230 deeply found records of this type</p>
+            <p class="mb-0">1353 records of this type total</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="d-flex justify-content-center" data-pgc="jr.pagination">
+              <ul class="pagination"> 
+                <li class="page-item">
+                  <a class="page-link" href="#">Previous</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">1</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">2</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">3</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>                                                     
+              </ul>
+            </div>
+          </div>
+        </div>                                     
+      </div>                                 
+    </div>
+    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
+      <div class="card-body px-0 px-sm-3 py-1"> 
+        <div class="row"></div>
+        <div class="px-3 row">
+          <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
+            <div class="align-items-center d-flex">
+              <div class="d-flex flex-column">
+                <div class="icheck-material-white"> 
+                  <input type="checkbox" id="user-checkbox1" checked=""/> 
+                  <label for="user-checkbox1"></label>                                                         
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <i class="fa fa-chevron-up mx-1 my-1"></i>
+                <i class="fa fa-chevron-down mx-1 my-1"></i>
+              </div>
+              <div>
+                <h5 class="card-title mb-0 mx-1" data-pgc-field="columnname">Subrecords of a record with a connection of type 123</h5>
+              </div>
+            </div>
+            <div class="align-items-center d-flex">
+              <i class="fa fa-close mx-1 my-1"></i>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="form-check custom-control custom-switch">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="custom-control-label form-check-label" for="customSwitch1">Split Into Solved and Not-Solved</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Show Not Only Direct Children But Also Their Deep nested Children of this type</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12 d-flex justify-content-between">
+            <div class="align-items-center d-flex">
+              <div>
+                <div class="align-middle custom-control custom-switch d-flex form-check">
+                  <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                  <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Collapsed view</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 row">
+          <div class="col-lg-12">
+            <p class="mb-0">123 direct records of this type</p>
+            <p class="mb-0">1230 deeply found records of this type</p>
+            <p class="mb-0">1353 records of this type total</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
+              <div class="card-body py-0"> 
+                <div class="row">
+                  <div class="align-items-center col-lg-12 d-flex justify-content-between">
+                    <div class="align-items-center d-flex">
+                      <div class="d-flex flex-column">
+                        <div class="icheck-material-white"> 
+                          <input type="checkbox" id="user-checkbox1" checked=""/> 
+                          <label for="user-checkbox1"></label>                                                                         
+                        </div>
+                      </div>
+                      <div class="align-items-center d-flex flex-column">
+                        <i class="fa fa-chevron-up mx-1 my-1"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-chevron-down mx-1 my-1"></i>
+                      </div>
+                      <div>
+                        <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
+                        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                      </div>
+                    </div>
+                    <div class="align-items-center d-flex">
+                      <i class="fa fa-repeat mx-1 my-1"></i>
+                      <i class="fa fa-check mx-1 my-1"></i>
+                      <i class="fa fa-eye mx-1 my-1"></i>
+                      <i class="fa fa-comment mx-1 my-1"></i>
+                      <i class="fa fa-cog mx-1 my-1"></i>
+                      <i class="fa fa-close mx-1 my-1"></i>
+                    </div>
+                  </div>
+                </div>                                                     
+              </div>                                                 
+            </div>
+            <div class="d-flex justify-content-center" data-pgc="jr.pagination">
+              <ul class="pagination"> 
+                <li class="page-item">
+                  <a class="page-link" href="#">Previous</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">1</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">2</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">3</a>
+                </li>                                                     
+                <li class="page-item">
+                  <a class="page-link" href="#">Next</a>
+                </li>                                                     
+              </ul>
+            </div>
+          </div>
+        </div>                                     
+      </div>                                 
+    </div>                             
+  </div>                         
+</div>
+

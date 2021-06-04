@@ -1,0 +1,184 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Connections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @connections.each do |connection| %>
+      <tr>
+        <td><%= connection.name %></td>
+        <td><%= link_to 'Show', connection %></td>
+        <td><%= link_to 'Edit', edit_connection_path(connection) %></td>
+        <td><%= link_to 'Destroy', connection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Connection', new_connection_path %>
+
+<div class="row"> 
+  <div class="col-lg-12 px-0 px-sm-3"> 
+    <div class="card" data-pgc="jr.pagename"> 
+      <div class="card-body"> 
+        <h5 class="card-title mb-0" data-pgc-field="title">Connections Between Repetitive Records</h5> 
+      </div>                                 
+    </div>
+    <div class="card" data-pgc-define="jr.connection" data-pgc-define-name="Connection" data-pgc-section="Page components">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4>Название Какой-то Связи (его может не быть)</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="d-sm-flex justify-content-between align-items-sm-center">
+              <p>Lorem Ipsum Blah Blah Ipsum Dipsum Pipsum Lorem Sripsum.</p>
+              <div class="flex-shrink-0" style="margin: 10px;">
+                <i class="zmdi zmdi-close"></i>
+                <i class="fa fa-long-arrow-left"></i>
+                <i class="zmdi zmdi-close"></i>
+              </div>
+              <p>Capitipsum Bipsum Pipsum Mipsum Lorepapipipsum</p>
+            </div>
+            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+          </div>
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-edit"></i>&nbsp;Edit
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-close"></i>&nbsp;Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+    <div class="card" data-pgc="jr.connection">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4>Название Какой-то Связи (его может не быть)</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="d-sm-flex justify-content-between align-items-sm-center">
+              <p>Lorem Ipsum Blah Blah Ipsum Dipsum Pipsum Lorem Sripsum.</p>
+              <div class="flex-shrink-0" style="margin: 10px;">
+                <i class="zmdi zmdi-close"></i>
+                <i class="fa fa-long-arrow-left"></i>
+                <i class="zmdi zmdi-close"></i>
+              </div>
+              <p>Capitipsum Bipsum Pipsum Mipsum Lorepapipipsum</p>
+            </div>
+            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+          </div>
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-edit"></i>&nbsp;Edit
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-close"></i>&nbsp;Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+    <div class="card" data-pgc="jr.connection">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4>Название Какой-то Связи (его может не быть)</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="d-sm-flex justify-content-between align-items-sm-center">
+              <p>Lorem Ipsum Blah Blah Ipsum Dipsum Pipsum Lorem Sripsum.</p>
+              <div class="flex-shrink-0" style="margin: 10px;">
+                <i class="zmdi zmdi-close"></i>
+                <i class="fa fa-long-arrow-left"></i>
+                <i class="zmdi zmdi-close"></i>
+              </div>
+              <p>Capitipsum Bipsum Pipsum Mipsum Lorepapipipsum</p>
+            </div>
+            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+          </div>
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-edit"></i>&nbsp;Edit
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-close"></i>&nbsp;Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+    <div class="card" data-pgc="jr.connection">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <h4>Название Какой-то Связи (его может не быть)</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="d-sm-flex justify-content-between align-items-sm-center">
+              <p>Lorem Ipsum Blah Blah Ipsum Dipsum Pipsum Lorem Sripsum.</p>
+              <div class="flex-shrink-0" style="margin: 10px;">
+                <i class="zmdi zmdi-close"></i>
+                <i class="fa fa-long-arrow-left"></i>
+                <i class="zmdi zmdi-close"></i>
+              </div>
+              <p>Capitipsum Bipsum Pipsum Mipsum Lorepapipipsum</p>
+            </div>
+            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+          </div>
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-edit"></i>&nbsp;Edit
+            </button>
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-close"></i>&nbsp;Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+    <div class="d-flex justify-content-center" data-pgc="jr.pagination">
+      <ul class="pagination"> 
+        <li class="page-item">
+          <a class="page-link" href="#">Previous</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>                                     
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>                                     
+      </ul>
+    </div>                             
+  </div>                         
+</div>
