@@ -1,4 +1,5 @@
 class SensorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_sensor, only: %i[ show edit update destroy ]
 
   # GET /sensors or /sensors.json
@@ -12,7 +13,7 @@ class SensorsController < ApplicationController
 
   # GET /sensors/new
   def new
-    @sensor = Sensor.new
+    @sensor = current_user.sensors.new
   end
 
   # GET /sensors/1/edit
@@ -21,7 +22,7 @@ class SensorsController < ApplicationController
 
   # POST /sensors or /sensors.json
   def create
-    @sensor = Sensor.new(sensor_params)
+    @sensor = current_user.sensors.new(sensor_params)
 
     respond_to do |format|
       if @sensor.save
@@ -59,7 +60,7 @@ class SensorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sensor
-      @sensor = Sensor.find(params[:id])
+      @sensor = current_user.sensors.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

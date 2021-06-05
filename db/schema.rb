@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_092923) do
+ActiveRecord::Schema.define(version: 2021_06_05_105116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,18 @@ ActiveRecord::Schema.define(version: 2021_06_04_092923) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_connection_types_on_user_id"
   end
 
   create_table "connections", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_connections_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -55,6 +61,8 @@ ActiveRecord::Schema.define(version: 2021_06_04_092923) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_message_chains_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -79,12 +87,18 @@ ActiveRecord::Schema.define(version: 2021_06_04_092923) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_record_types_on_user_id"
   end
 
   create_table "records", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.text "description"
+    t.index ["user_id"], name: "index_records_on_user_id"
   end
 
   create_table "seminars", force: :cascade do |t|
@@ -97,12 +111,37 @@ ActiveRecord::Schema.define(version: 2021_06_04_092923) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.text "description"
+    t.index ["user_id"], name: "index_sensors_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username"
+    t.boolean "accept_terms"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "connection_types", "users"
+  add_foreign_key "connections", "users"
+  add_foreign_key "message_chains", "users"
+  add_foreign_key "record_types", "users"
+  add_foreign_key "records", "users"
+  add_foreign_key "sensors", "users"
 end

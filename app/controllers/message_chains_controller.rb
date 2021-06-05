@@ -1,9 +1,10 @@
 class MessageChainsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_message_chain, only: %i[ show edit update destroy ]
 
   # GET /message_chains or /message_chains.json
   def index
-    @message_chains = MessageChain.all
+    @message_chains = current_user.message_chains.all
   end
 
   # GET /message_chains/1 or /message_chains/1.json
@@ -12,7 +13,7 @@ class MessageChainsController < ApplicationController
 
   # GET /message_chains/new
   def new
-    @message_chain = MessageChain.new
+    @message_chain = current_user.message_chains.new
   end
 
   # GET /message_chains/1/edit
@@ -21,7 +22,7 @@ class MessageChainsController < ApplicationController
 
   # POST /message_chains or /message_chains.json
   def create
-    @message_chain = MessageChain.new(message_chain_params)
+    @message_chain = current_user.message_chains.new(message_chain_params)
 
     respond_to do |format|
       if @message_chain.save
@@ -59,7 +60,7 @@ class MessageChainsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message_chain
-      @message_chain = MessageChain.find(params[:id])
+      @message_chain = current_user.message_chains.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

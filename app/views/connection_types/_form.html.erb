@@ -1,22 +1,171 @@
-<%= form_with(model: connection_type) do |form| %>
-  <% if connection_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(connection_type.errors.count, "error") %> prohibited this connection_type from being saved:</h2>
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: connection_type) do |form| %>
+      <% if connection_type.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(connection_type.errors.count, "error") %> prohibited this connection_type from being saved:</h2>
 
-      <ul>
-        <% connection_type.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <ul>
+            <% connection_type.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter Connection Type Name" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter Description" %>
+      </div>
+      <div class="form-group">
+        <label for="input-3">Directional</label>
+        <p>Once you know you have two records (A and B) that are connected, will this mean that once you solve one of them, the other will go away on its own?</p>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Yes (directional, A becomes irrelevant once I solve B or vise versa)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">No (non-directional, both A and B need to be solved individually dispite the fact that they are connected)</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-3">Destructive</label>
+        <p>* visible only if &quot;directional&quot; is chosen.</p>
+        <p>If you have two records (A and B), and say you need to summarize their progress, will progress in A mean that B received progress too? Or progress in A won&apos;t matter for progress of B?</p>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Yes (destructive, progress of A means progress of B grows too)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">No (non-destructive, progress of A does not affect progress of B, they are separate in terms of values or properties)</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-3">How many such connections can a record have</label>
+        <p>* visible for both &quot;directional&quot; and &quot;non-directional&quot;</p>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">One-To-One (if it is directional, a record for this type of connection can be mentioned not more than once as A and not more than once as B), One a record has such connection as A, an option to connect it as A with some other record will be disabled (the record will be excluded from the list. If the connection is directional, a record can have at most two such connections).</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">One-To-Many (you can mention some record as A - source - for this type of connection only once, but that same record can be mentioed many times as B - target - with this type of connection, to any number of records, an example would be &quot;a system has many subsystems, but a subsystem belongs to only one system&quot;)</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-3">Records of what type can be selected as a target</label>
+        <p>* as B (for connections A -&gt; B)</p>
+        <p></p>
+        <p>* as A (for connections B -&gt; A)</p>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Тот же что и А (source)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Любой тип</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Конкретный тип из дропдауна (скажем только системы или только причины)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Конкретный подтип (из дропдауна) конкретного типа (тоже из дропдауна) Например искать только среди причин проблем, или только среди решений причин, или только среди винтиков систем</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-3">Выберете тип таргетов</label>
+        <p>* виден только если выбран либо &quot;тип&quot; либо &quot;подтип типов&quot;</p>
+        <div class="dropdown" data-pgc-define="jr.dropdown" data-pgc-define-name="Dropdown Menu" data-pgc-section="Page components">
+          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-edit="ButtonName[class]">&nbsp;Select
+          </button>
+          <div class="dropdown-menu" x-placement='bottom start'>
+            <a class="dropdown-item" href='#'>Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-3">Выберете тип под-таргетов</label>
+        <p>* виден только если выбран &quot;подтип типов&quot;</p>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
+            &nbsp;Select
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </button>
+          <div class="dropdown-menu" x-placement='bottom start'>
+            <a class="dropdown-item" href='#'>Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-3">Records of what hierarchy can be selected as a target</label>
+        <p>* as B (for connections A -&gt; B)</p>
+        <p></p>
+        <p>* as A (for connections B -&gt; A)</p>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Сиблинги (чайлды моего прямого парента)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Все поколения парентов</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Чайлды моего дерева того же колена что и А (напр. другие правнуки моего прадеда)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Все пункты в моём семейном древе (кроме парентов?, пра-парентов? и т.п.)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Все пункты (кроме парентов? и пра-парентов? и т.п.)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Пункты главного списка (те у которых нет парентов)</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Ближайший парент такого-то типа</label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">Корень дерева (главный пункт с которого всё началось)</label>
+        </div>
+      </div>
+      <div class="form-group py-2">
+      </div>
+      <div class="form-group">
+        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+          <i class="fa fa-check mx-1"></i>Create!
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

@@ -1,4 +1,5 @@
 class ConnectionTypesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_connection_type, only: %i[ show edit update destroy ]
 
   # GET /connection_types or /connection_types.json
@@ -12,7 +13,7 @@ class ConnectionTypesController < ApplicationController
 
   # GET /connection_types/new
   def new
-    @connection_type = ConnectionType.new
+    @connection_type = current_user.connection_types.new
   end
 
   # GET /connection_types/1/edit
@@ -21,7 +22,7 @@ class ConnectionTypesController < ApplicationController
 
   # POST /connection_types or /connection_types.json
   def create
-    @connection_type = ConnectionType.new(connection_type_params)
+    @connection_type = current_user.connection_types.new(connection_type_params)
 
     respond_to do |format|
       if @connection_type.save
@@ -59,11 +60,11 @@ class ConnectionTypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_connection_type
-      @connection_type = ConnectionType.find(params[:id])
+      @connection_type = current_user.connection_types.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def connection_type_params
-      params.require(:connection_type).permit(:name)
+      params.require(:connection_type).permit(:name, :description)
     end
 end

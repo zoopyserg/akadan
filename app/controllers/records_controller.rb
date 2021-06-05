@@ -1,4 +1,5 @@
 class RecordsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_record, only: %i[ show edit update destroy ]
 
   # GET /records or /records.json
@@ -12,7 +13,7 @@ class RecordsController < ApplicationController
 
   # GET /records/new
   def new
-    @record = Record.new
+    @record = current_user.records.new
   end
 
   # GET /records/1/edit
@@ -21,7 +22,7 @@ class RecordsController < ApplicationController
 
   # POST /records or /records.json
   def create
-    @record = Record.new(record_params)
+    @record = current_user.records.new(record_params)
 
     respond_to do |format|
       if @record.save
@@ -64,6 +65,6 @@ class RecordsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def record_params
-      params.require(:record).permit(:name)
+      params.require(:record).permit(:name, :description)
     end
 end

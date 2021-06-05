@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :users
   resources :seminars
   resources :events
@@ -16,4 +17,5 @@ Rails.application.routes.draw do
   get "/pages/*id" => 'pages#show', as: :page, format: false
   resources :records
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: "records#index"
 end

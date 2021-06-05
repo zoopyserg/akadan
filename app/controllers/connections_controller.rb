@@ -1,4 +1,5 @@
 class ConnectionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_connection, only: %i[ show edit update destroy ]
 
   # GET /connections or /connections.json
@@ -12,7 +13,7 @@ class ConnectionsController < ApplicationController
 
   # GET /connections/new
   def new
-    @connection = Connection.new
+    @connection = current_user.connections.new
   end
 
   # GET /connections/1/edit
@@ -21,7 +22,7 @@ class ConnectionsController < ApplicationController
 
   # POST /connections or /connections.json
   def create
-    @connection = Connection.new(connection_params)
+    @connection = current_user.connections.new(connection_params)
 
     respond_to do |format|
       if @connection.save
@@ -59,11 +60,11 @@ class ConnectionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_connection
-      @connection = Connection.find(params[:id])
+      @connection = current_user.connections.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def connection_params
-      params.require(:connection).permit(:name)
+      params.require(:connection).permit(:name, :description)
     end
 end

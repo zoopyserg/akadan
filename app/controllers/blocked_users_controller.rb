@@ -1,4 +1,5 @@
 class BlockedUsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_blocked_user, only: %i[ show edit update destroy ]
 
   # GET /blocked_users or /blocked_users.json

@@ -27,6 +27,10 @@ File: app-style */
   - Text colors
   - CheckBoxes & Radios
   - Responsive */
+
+/* Edited: replaced all first-child selectors with nth-child(2) for checkboxes (icheck-material classes)
+ * because Rails generates a hidden input before a checkbox to submit zero value if it's not selected */
+
 /* Google Font */
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
 
@@ -3445,7 +3449,7 @@ table.grid td {
     cursor: pointer;
 }
 
-[class*="icheck-material"] > input:first-child {
+[class*="icheck-material"] > input:nth-child(2) {
     position: absolute !important;
     opacity: 0;
     margin: 0;
@@ -3464,14 +3468,14 @@ table.grid td {
     transition: opacity 0.3s, transform 0.3s;
 }
 
-[class*="icheck-material"] > input:first-child:disabled {
+[class*="icheck-material"] > input:nth-child(2):disabled {
     cursor: default;
 }
 
-[class*="icheck-material"] > input:first-child:disabled + label,
-[class*="icheck-material"] > input:first-child:disabled + input[type="hidden"] + label,
-[class*="icheck-material"] > input:first-child:disabled + label::before,
-[class*="icheck-material"] > input:first-child:disabled + input[type="hidden"] + label::before {
+[class*="icheck-material"] > input:nth-child(2):disabled + label,
+[class*="icheck-material"] > input:nth-child(2):disabled + input[type="hidden"] + label,
+[class*="icheck-material"] > input:nth-child(2):disabled + label::before,
+[class*="icheck-material"] > input:nth-child(2):disabled + input[type="hidden"] + label::before {
     pointer-events: none;
     cursor: default;
     filter: alpha(opacity=65);
@@ -3480,8 +3484,8 @@ table.grid td {
     opacity: .65;
 }
 
-[class*="icheck-material"] > input:first-child + label::before,
-[class*="icheck-material"] > input:first-child + input[type="hidden"] + label::before {
+[class*="icheck-material"] > input:nth-child(2) + label::before,
+[class*="icheck-material"] > input:nth-child(2) + input[type="hidden"] + label::before {
     content: "";
     display: inline-block;
     position: absolute;
@@ -3493,8 +3497,8 @@ table.grid td {
     box-sizing: border-box;
 }
 
-[class*="icheck-material"] > input:first-child:checked + label::after,
-[class*="icheck-material"] > input:first-child:checked + input[type="hidden"] + label::after {
+[class*="icheck-material"] > input:nth-child(2):checked + label::after,
+[class*="icheck-material"] > input:nth-child(2):checked + input[type="hidden"] + label::after {
     content: "";
     display: inline-block;
     position: absolute;
@@ -3510,35 +3514,35 @@ table.grid td {
     box-sizing: border-box;
 }
 
-[class*="icheck-material"] > input:first-child:not(:checked):not(:disabled):hover + label::before,
-[class*="icheck-material"] > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+[class*="icheck-material"] > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+[class*="icheck-material"] > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-width: 2px;
 }
 
-[class*="icheck-material"] > input:first-child::-ms-check {
+[class*="icheck-material"] > input:nth-child(2)::-ms-check {
     opacity: 0;
     border-radius: 50%;
 }
 
-[class*="icheck-material"] > input:first-child:active {
+[class*="icheck-material"] > input:nth-child(2):active {
     transform: scale(0);
     -ms-transform: scale(0);
     opacity: 1;
     transition: opacity 0s, transform 0s;
 }
 
-[class*="icheck-material"] > input[type="radio"]:first-child + label::before,
-[class*="icheck-material"] > input[type="radio"]:first-child + input[type="hidden"] + label::before {
+[class*="icheck-material"] > input[type="radio"]:nth-child(2) + label::before,
+[class*="icheck-material"] > input[type="radio"]:nth-child(2) + input[type="hidden"] + label::before {
     border-radius: 50%;
 }
 
-[class*="icheck-material"] > input[type="radio"]:first-child:checked + label::before,
-[class*="icheck-material"] > input[type="radio"]:first-child:checked + input[type="hidden"] + label::before {
+[class*="icheck-material"] > input[type="radio"]:nth-child(2):checked + label::before,
+[class*="icheck-material"] > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: transparent;
 }
 
-[class*="icheck-material"] > input[type="radio"]:first-child:checked + label::after,
-[class*="icheck-material"] > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+[class*="icheck-material"] > input[type="radio"]:nth-child(2):checked + label::after,
+[class*="icheck-material"] > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     content: "";
     position: absolute;
     width: 10px;
@@ -3551,8 +3555,8 @@ table.grid td {
     -ms-transform: none;
 }
 
-[class*="icheck-material"] > input[type="checkbox"]:first-child:checked + label::after,
-[class*="icheck-material"] > input[type="checkbox"]:first-child:checked + input[type="hidden"] + label::after {
+[class*="icheck-material"] > input[type="checkbox"]:nth-child(2):checked + label::after,
+[class*="icheck-material"] > input[type="checkbox"]:nth-child(2):checked + input[type="hidden"] + label::after {
     width: 6px;
     height: 12px;
     transform: translate(7px, 2px) rotate(45deg);
@@ -3568,213 +3572,213 @@ table.grid td {
     margin-top: 6px;
 }
 
-.icheck-material-primary > input:first-child {
+.icheck-material-primary > input:nth-child(2) {
     background-color: #14abef;
 }
 
-.icheck-material-primary > input:first-child::-ms-check {
+.icheck-material-primary > input:nth-child(2)::-ms-check {
     background-color: #14abef;
 }
 
-.icheck-material-primary > input:first-child:not(:checked):not(:disabled):hover + label::before,
-.icheck-material-primary > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+.icheck-material-primary > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+.icheck-material-primary > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-color: #14abef;
 }
 
-.icheck-material-primary > input:first-child:checked + label::before,
-.icheck-material-primary > input:first-child:checked + input[type="hidden"] + label::before {
+.icheck-material-primary > input:nth-child(2):checked + label::before,
+.icheck-material-primary > input:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: #14abef;
     border-color: #14abef;
 }
 
-.icheck-material-primary > input:first-child:checked + label::after,
-.icheck-material-primary > input:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-primary > input:nth-child(2):checked + label::after,
+.icheck-material-primary > input:nth-child(2):checked + input[type="hidden"] + label::after {
     border-bottom-color: #fff;
     border-right-color: #fff;
 }
 
-.icheck-material-primary > input[type="radio"]:first-child:checked + label::after,
-.icheck-material-primary > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-primary > input[type="radio"]:nth-child(2):checked + label::after,
+.icheck-material-primary > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     background-color: #14abef;
 }
 
-.icheck-material-success > input:first-child {
+.icheck-material-success > input:nth-child(2) {
     background-color: #02ba5a;
 }
 
-.icheck-material-success > input:first-child::-ms-check {
+.icheck-material-success > input:nth-child(2)::-ms-check {
     background-color: #02ba5a;
 }
 
-.icheck-material-success > input:first-child:not(:checked):not(:disabled):hover + label::before,
-.icheck-material-success > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+.icheck-material-success > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+.icheck-material-success > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-color: #02ba5a;
 }
 
-.icheck-material-success > input:first-child:checked + label::before,
-.icheck-material-success > input:first-child:checked + input[type="hidden"] + label::before {
+.icheck-material-success > input:nth-child(2):checked + label::before,
+.icheck-material-success > input:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: #02ba5a;
     border-color: #02ba5a;
 }
 
-.icheck-material-success > input:first-child:checked + label::after,
-.icheck-material-success > input:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-success > input:nth-child(2):checked + label::after,
+.icheck-material-success > input:nth-child(2):checked + input[type="hidden"] + label::after {
     border-bottom-color: #fff;
     border-right-color: #fff;
 }
 
-.icheck-material-success > input[type="radio"]:first-child:checked + label::after,
-.icheck-material-success > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-success > input[type="radio"]:nth-child(2):checked + label::after,
+.icheck-material-success > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     background-color: #02ba5a;
 }
 
-.icheck-material-danger > input:first-child {
+.icheck-material-danger > input:nth-child(2) {
     background-color: #f5365c;
 }
 
-.icheck-material-danger > input:first-child::-ms-check {
+.icheck-material-danger > input:nth-child(2)::-ms-check {
     background-color: #f5365c;
 }
 
-.icheck-material-danger > input:first-child:not(:checked):not(:disabled):hover + label::before,
-.icheck-material-danger > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+.icheck-material-danger > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+.icheck-material-danger > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-color: #f5365c;
 }
 
-.icheck-material-danger > input:first-child:checked + label::before,
-.icheck-material-danger > input:first-child:checked + input[type="hidden"] + label::before {
+.icheck-material-danger > input:nth-child(2):checked + label::before,
+.icheck-material-danger > input:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: #f5365c;
     border-color: #f5365c;
 }
 
-.icheck-material-danger > input:first-child:checked + label::after,
-.icheck-material-danger > input:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-danger > input:nth-child(2):checked + label::after,
+.icheck-material-danger > input:nth-child(2):checked + input[type="hidden"] + label::after {
     border-bottom-color: #fff;
     border-right-color: #fff;
 }
 
-.icheck-material-danger > input[type="radio"]:first-child:checked + label::after,
-.icheck-material-danger > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-danger > input[type="radio"]:nth-child(2):checked + label::after,
+.icheck-material-danger > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     background-color: #f5365c;
 }
 
-.icheck-material-info > input:first-child {
+.icheck-material-info > input:nth-child(2) {
     background-color: #03d0ea;
 }
 
-.icheck-material-info > input:first-child::-ms-check {
+.icheck-material-info > input:nth-child(2)::-ms-check {
     background-color: #03d0ea;
 }
 
-.icheck-material-info > input:first-child:not(:checked):not(:disabled):hover + label::before,
-.icheck-material-info > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+.icheck-material-info > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+.icheck-material-info > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-color: #03d0ea;
 }
 
-.icheck-material-info > input:first-child:checked + label::before,
-.icheck-material-info > input:first-child:checked + input[type="hidden"] + label::before {
+.icheck-material-info > input:nth-child(2):checked + label::before,
+.icheck-material-info > input:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: #03d0ea;
     border-color: #03d0ea;
 }
 
-.icheck-material-info > input:first-child:checked + label::after,
-.icheck-material-info > input:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-info > input:nth-child(2):checked + label::after,
+.icheck-material-info > input:nth-child(2):checked + input[type="hidden"] + label::after {
     border-bottom-color: #fff;
     border-right-color: #fff;
 }
 
-.icheck-material-info > input[type="radio"]:first-child:checked + label::after,
-.icheck-material-info > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-info > input[type="radio"]:nth-child(2):checked + label::after,
+.icheck-material-info > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     background-color: #03d0ea;
 }
 
-.icheck-material-warning > input:first-child {
+.icheck-material-warning > input:nth-child(2) {
     background-color: #fba540;
 }
 
-.icheck-material-warning > input:first-child::-ms-check {
+.icheck-material-warning > input:nth-child(2)::-ms-check {
     background-color: #fba540;
 }
 
-.icheck-material-warning > input:first-child:not(:checked):not(:disabled):hover + label::before,
-.icheck-material-warning > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+.icheck-material-warning > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+.icheck-material-warning > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-color: #fba540;
 }
 
-.icheck-material-warning > input:first-child:checked + label::before,
-.icheck-material-warning > input:first-child:checked + input[type="hidden"] + label::before {
+.icheck-material-warning > input:nth-child(2):checked + label::before,
+.icheck-material-warning > input:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: #fba540;
     border-color: #fba540;
 }
 
-.icheck-material-warning > input:first-child:checked + label::after,
-.icheck-material-warning > input:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-warning > input:nth-child(2):checked + label::after,
+.icheck-material-warning > input:nth-child(2):checked + input[type="hidden"] + label::after {
     border-bottom-color: #fff;
     border-right-color: #fff;
 }
 
-.icheck-material-warning > input[type="radio"]:first-child:checked + label::after,
-.icheck-material-warning > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-warning > input[type="radio"]:nth-child(2):checked + label::after,
+.icheck-material-warning > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     background-color: #fba540;
 }
 
-.icheck-material-secondary > input:first-child {
+.icheck-material-secondary > input:nth-child(2) {
     background-color: #d13adf;
 }
 
-.icheck-material-secondary > input:first-child::-ms-check {
+.icheck-material-secondary > input:nth-child(2)::-ms-check {
     background-color: #d13adf;
 }
 
-.icheck-material-secondary > input:first-child:not(:checked):not(:disabled):hover + label::before,
-.icheck-material-secondary > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+.icheck-material-secondary > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+.icheck-material-secondary > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-color: #d13adf;
 }
 
-.icheck-material-secondary > input:first-child:checked + label::before,
-.icheck-material-secondary > input:first-child:checked + input[type="hidden"] + label::before {
+.icheck-material-secondary > input:nth-child(2):checked + label::before,
+.icheck-material-secondary > input:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: #d13adf;
     border-color: #d13adf;
 }
 
-.icheck-material-secondary > input:first-child:checked + label::after,
-.icheck-material-secondary > input:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-secondary > input:nth-child(2):checked + label::after,
+.icheck-material-secondary > input:nth-child(2):checked + input[type="hidden"] + label::after {
     border-bottom-color: #fff;
     border-right-color: #fff;
 }
 
-.icheck-material-secondary > input[type="radio"]:first-child:checked + label::after,
-.icheck-material-secondary > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-secondary > input[type="radio"]:nth-child(2):checked + label::after,
+.icheck-material-secondary > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     background-color: #d13adf;
 }
 
-.icheck-material-white > input:first-child {
+.icheck-material-white > input:nth-child(2) {
     background-color: #ffffff;
 }
 
-.icheck-material-white > input:first-child::-ms-check {
+.icheck-material-white > input:nth-child(2)::-ms-check {
     background-color: #ffffff;
 }
 
-.icheck-material-white > input:first-child:not(:checked):not(:disabled):hover + label::before,
-.icheck-material-white > input:first-child:not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
+.icheck-material-white > input:nth-child(2):not(:checked):not(:disabled):hover + label::before,
+.icheck-material-white > input:nth-child(2):not(:checked):not(:disabled):hover + input[type="hidden"] + label::before {
     border-color: #ffffff;
 }
 
-.icheck-material-white > input:first-child:checked + label::before,
-.icheck-material-white > input:first-child:checked + input[type="hidden"] + label::before {
+.icheck-material-white > input:nth-child(2):checked + label::before,
+.icheck-material-white > input:nth-child(2):checked + input[type="hidden"] + label::before {
     background-color: #ffffff;
     border-color: #ffffff;
 }
 
-.icheck-material-white > input:first-child:checked + label::after,
-.icheck-material-white > input:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-white > input:nth-child(2):checked + label::after,
+.icheck-material-white > input:nth-child(2):checked + input[type="hidden"] + label::after {
     border-bottom-color: #000;
     border-right-color: #000;
 }
 
-.icheck-material-white > input[type="radio"]:first-child:checked + label::after,
-.icheck-material-white > input[type="radio"]:first-child:checked + input[type="hidden"] + label::after {
+.icheck-material-white > input[type="radio"]:nth-child(2):checked + label::after,
+.icheck-material-white > input[type="radio"]:nth-child(2):checked + input[type="hidden"] + label::after {
     background-color: #ffffff;
 }
 

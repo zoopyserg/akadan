@@ -1,22 +1,97 @@
-<%= form_with(model: connection) do |form| %>
-  <% if connection.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(connection.errors.count, "error") %> prohibited this connection from being saved:</h2>
+<div class="card">
+  <div class="card-body">
+    <div class="card-title"></div>
+    <%= form_with(model: connection) do |form| %>
+      <% if connection.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(connection.errors.count, "error") %> prohibited this connection from being saved:</h2>
+          <ul>
+            <% connection.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <label for="input-3">Type</label>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
+            &nbsp;Select
+          </button>
+          <div class="dropdown-menu" x-placement='bottom start'>
+            <a class="dropdown-item" href='#'>Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :name %>
 
-      <ul>
-        <% connection.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <p>* optional</p>
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter Connection Name" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description %>
+
+        <p>* optional</p>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter Connection Description (for example a reason you are creating it)" %>
+      </div>
+      <div class="form-group">
+        <label for="input-1">Record A</label>
+        <input type="text" class="form-control" id="input-1" placeholder="Enter Your Name">
+      </div>
+      <div class="form-group">
+        <label for="input-1">Preview</label>
+        <div class="text-center">
+          <div>
+            <i class="zmdi zmdi-close"></i>
+          </div>
+          <div>
+            <i class="zmdi zmdi-long-arrow-up"></i>
+            <i class="zmdi zmdi-long-arrow-down"></i>
+            <i class="zmdi zmdi-arrow-split"></i>
+          </div>
+          <div>
+            <i class="zmdi zmdi-close"></i>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="input-1">Record B</label>
+        <p>Find or create</p>
+        <p>circular dependencies are forbidden, so all parents of A are excluded</p>
+        <input type="text" class="form-control" id="input-1" placeholder="Enter Your Name">
+      </div>
+      <div class="form-group">
+        <label for="input-3">Direction</label>
+        <p>* This field is visible only if this connection is set as directional, if it&apos;s non-directional both A and B are equally important.</p>
+        <p>Does Hierarchy go from A to B?</p>
+        <p>Is it true that A is a source and B is a target?</p>
+        <p>Is it true that A is a</p>
+        <p>Or A is an entrance, B is an exit?</p>
+        <p>Or vice versa?</p>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">
+            <p>A -&gt; B (B partially solves or replaces A<br>A is a source, B is a target)</p>
+          </label>
+        </div>
+        <div class="icheck-material-white">
+          <input type="checkbox" id="user-checkbox1" checked=""/>
+          <label for="user-checkbox1">
+            <p>A &lt;- B (A partially solves or replaces B<br>B is a source, A is a target)</p>
+          </label>
+        </div>
+      </div>
+      <div class="form-group py-2">
+      </div>
+      <div class="form-group">
+        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+          <i class="fa fa-check mx-1"></i>Create!
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

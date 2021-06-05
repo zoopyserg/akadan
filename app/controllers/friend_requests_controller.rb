@@ -1,4 +1,5 @@
 class FriendRequestsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_friend_request, only: %i[ show edit update destroy ]
 
   # GET /friend_requests or /friend_requests.json

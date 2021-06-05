@@ -1,4 +1,5 @@
 class RecordTypesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_record_type, only: %i[ show edit update destroy ]
 
   # GET /record_types or /record_types.json
@@ -12,7 +13,7 @@ class RecordTypesController < ApplicationController
 
   # GET /record_types/new
   def new
-    @record_type = RecordType.new
+    @record_type = current_user.record_types.new
   end
 
   # GET /record_types/1/edit
@@ -21,7 +22,7 @@ class RecordTypesController < ApplicationController
 
   # POST /record_types or /record_types.json
   def create
-    @record_type = RecordType.new(record_type_params)
+    @record_type = current_user.record_types.new(record_type_params)
 
     respond_to do |format|
       if @record_type.save
@@ -59,11 +60,11 @@ class RecordTypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_record_type
-      @record_type = RecordType.find(params[:id])
+      @record_type = current_user.record_types.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def record_type_params
-      params.require(:record_type).permit(:name)
+      params.require(:record_type).permit(:name, :description)
     end
 end

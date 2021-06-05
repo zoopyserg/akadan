@@ -1,22 +1,166 @@
-<%= form_with(model: record) do |form| %>
-  <% if record.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:</h2>
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: record) do |form| %>
+      <% if record.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:</h2>
 
-      <ul>
-        <% record.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <ul>
+            <% record.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <label class="d-flex justify-content-between">Type</label>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
+            &nbsp;Select
+          </button>
+          <div class="dropdown-menu" x-placement='bottom start'>
+            <a class="dropdown-item" href='#'>Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :name, class: "d-flex justify-content-between" do %>
+          <span> Name / Title </span>
+          <i class="fa fa-microphone"></i>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description, class: "d-flex justify-content-between" do %>
+          <span> Description </span>
+          <i class="fa fa-microphone"></i>
+        <% end %>
+        <%= form.text_area :description, class: "form-control", placeholder: 'Enter description' %>
+      </div>
+      <p>First Dot Details</p>
+      <p class="hint">These details (start/end time/date, duration, income) will be added to the first &quot;dot&quot; of your record. I will have this as a separate form too (that opens when I click &quot;repeated&quot; on a record).</p>
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label class="d-flex justify-content-between">Start Date</label>
+            <input class="form-control" type="date"/>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label class="d-flex justify-content-between">Start Time</label>
+            <input class="form-control" type="time"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label class="d-flex justify-content-between">End Date</label>
+            <input class="form-control" type="date"/>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label class="d-flex justify-content-between">End Time</label>
+            <input class="form-control" type="time"/>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="d-flex justify-content-between">Duration</label>
+        <p class="hint">todo: time mask and maybe a clock</p>
+        <input class="form-control" type="text"/>
+      </div>
+      <div class="form-group">
+        <label class="d-flex justify-content-between">Income</label>
+        <p class="hint">How much money or value it brought to you.</p>
+        <p class="hint">todo: currency mask</p>
+        <input class="form-control" type="text"/>
+      </div>
+      <div class="form-group">
+        <label class="d-flex justify-content-between">Draw</label>
+        <div id="bcPaint"></div>
+      </div>
+      <div class="form-group files color" id="picsuploadjs">
+        <label>Pictures</label>
+        <input type="file" class="form-control-file" multiple name="files"/>
+      </div>
+      <div class="form-group files color" id="picsuploadjs">
+        <label>Files</label>
+        <input type="file" class="form-control-file" multiple name="files"/>
+      </div>
+      <div class="form-group">
+        <label>Connection Type To Subrecord</label>
+        <p class="hint">* find or create? It would be good but there are so many options, maybe if create then only in a modal. Or a form should be inside the dropdown (which is basically a modal - div, only looks like a dropdown)</p>
+        <p class="hint">If I have to create then I&#39;ll need all the settings (directional or not, destructive or not), I can add them here, but honestly... It&#39;s a duplicate of Create New Connection form. And this record is A by default. Adding an option to make it B is too complex and brings no value.</p>
+        <p class="hint">Next Subrecord Connection Type should be the same as the previous one. For convenience.</p>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
+            &nbsp;Select
+          </button>
+          <div class="dropdown-menu" x-placement='bottom start'>
+            <a class="dropdown-item" href='#'>Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Connection Direction</label>
+        <p class="hint">* this field is visible only if the connection type is directional</p>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="formCheck-1"/>
+          <label class="form-check-label" for="formCheck-1">Outgoing (как Выход, т.е. открывается инлайн форма где этот пункт указан как А - т.е. выход)
+            <br/>This record is a Source, Subrecords are Targets
+            <br/>The connection is Exiting this record and Entering  the Subrecords
+            <br/>This record is more importnat than subrecords (Default)
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="formCheck-1"/>
+          <label class="form-check-label" for="formCheck-1">Incoming (как Вход, т.е. открывается инлайн форма где этот пункт указан как Б - т.е. вход)
+            <br/>This record is a Target, Subrecords are Sources (which is why are you adding them in the first place?).
+            <br/>The connection is Exiting the Subrecord and entering This Record.
+            <br/>The SubRecord is Bigger / More Important than this record.
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="formCheck-2"/>
+          <label class="form-check-label" for="formCheck-1">Presence (Non-Directional, само наличие рядом с этим пунктом какого-то другого создаёт третий пункт - где можно указать второй пункт но между ними не стрелка а точки на концах типа порядка &quot;От До&quot; нету)
+            <br/>This option is probably visible only if connection is non-directional.
+            <br/>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subrecord Title</label>
+        <p class="hint">* find or create?</p>
+        <p class="hint">* make sure I exclude circular dependencies from here.</p>
+        <p class="hint">* возможно тут добавить вопросник Гештальта (что ты видишь как инопланетянен в вакууме или как там было)</p>
+        <input class="form-control" type="text"/>
+      </div>
+      <div class="form-group d-flex justify-content-between">
+        <button class="btn btn-light px-5" type="button">
+          <i class="fa fa-plus"></i> Add Subrecord
+        </button>
+        <button class="btn btn-light px-5" type="button">
+          <i class="fa fa-plus"></i> Add Connection
+        </button>
+      </div>
+      <div class="form-group d-flex d-sm-flex justify-content-between">
+        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+          <i class="fa fa-check mx-1"></i>Create!
+        <% end %>
+        <button class="btn btn-light px-5" type="button">
+          <i class="fa fa-close mx-1"></i>Clear
+        </button>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
