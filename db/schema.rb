@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_105116) do
+ActiveRecord::Schema.define(version: 2021_06_07_073020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(version: 2021_06_05_105116) do
     t.text "description"
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_connections_on_user_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -69,6 +74,11 @@ ActiveRecord::Schema.define(version: 2021_06_05_105116) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "sender_id", null: false
+    t.text "body"
+    t.bigint "conversation_id", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -77,10 +87,29 @@ ActiveRecord::Schema.define(version: 2021_06_05_105116) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "participations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_participations_on_conversation_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "readings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "message_id", null: false
+    t.boolean "read"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id"], name: "index_readings_on_message_id"
+    t.index ["user_id"], name: "index_readings_on_user_id"
   end
 
   create_table "record_types", force: :cascade do |t|
@@ -133,6 +162,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_105116) do
     t.string "last_name"
     t.string "username"
     t.boolean "accept_terms"
+    t.string "avatar"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -141,6 +171,12 @@ ActiveRecord::Schema.define(version: 2021_06_05_105116) do
   add_foreign_key "connection_types", "users"
   add_foreign_key "connections", "users"
   add_foreign_key "message_chains", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "participations", "conversations"
+  add_foreign_key "participations", "users"
+  add_foreign_key "readings", "messages"
+  add_foreign_key "readings", "users"
   add_foreign_key "record_types", "users"
   add_foreign_key "records", "users"
   add_foreign_key "sensors", "users"

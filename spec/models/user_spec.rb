@@ -6,14 +6,20 @@ RSpec.describe User, type: :model do
   it { should have_many(:connection_types).dependent(:destroy) }
   it { should have_many(:connections).dependent(:destroy) }
   it { should have_many(:sensors).dependent(:destroy) }
-  # it { should have_many(:messages).dependent(:destroy) }
-  it { should have_many(:message_chains).dependent(:destroy) }
+
+  it { should have_many(:sent_messages).class_name('Message').with_foreign_key('sender_id') }
+
+  it { should have_many(:readings).dependent(:destroy) }
+  it { should have_many(:messages).through(:readings) }
+
+  it { should have_many(:participations).dependent(:destroy) }
+  it { should have_many(:conversations).through(:participations) }
 
   describe 'validations' do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:username) }
-    it { should validate_uniqueness_of(:username) }
+    # it { should validate_uniqueness_of(:username) } # removed because of conflicts with Devise keys setup, but it works (tested in features/signup)
 
     it { should allow_value(true).for(:accept_terms) }
     it { should_not allow_value(false).for(:accept_terms) }
@@ -78,6 +84,14 @@ RSpec.describe User, type: :model do
       it { should_not allow_value("Анђела").for(:username) }
       it { should_not allow_value('I have spaces').for(:username) }
       it { should_not allow_value('v*&)@!asia').for(:username) }
+    end
+  end
+
+  describe 'methods' do
+    describe '#name' do
+      let!(:user) { create :user, first_name: 'John', last_name: 'Wick' }
+
+      it { expect(user.name).to eq 'John Wick' }
     end
   end
 end

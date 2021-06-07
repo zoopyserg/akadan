@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :message do
-    name { 'my message' }
+    body { 'my message' }
 
-    user { create :user }
+    sender { create :user }
+    conversation { create :conversation }
   end
 end

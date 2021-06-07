@@ -20,5 +20,9 @@ FactoryBot.define do
     trait :premium do
       premium { true }
     end
+
+    trait :with_avatar do
+      avatar { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/images/me.jpg'), 'image/jpeg') }
+    end
   end
 end

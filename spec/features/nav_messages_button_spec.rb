@@ -27,7 +27,7 @@ RSpec.feature "NavMessagesButtons", type: :feature do
         click_on 'My Messages'
       end
 
-      expect(current_path).to eq message_chains_path
+      expect(current_path).to eq conversations_path
     end
   end
 end

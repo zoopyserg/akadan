@@ -76,6 +76,10 @@ module FeaturesHelper
     click_on 'Create!'
   end
 
+  def open_image(name)
+    Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/images/#{name}"), 'image/jpeg')
+  end
+
   def toggle_tables
     click_on_selector '#splitTablesEnabled input'
   end
