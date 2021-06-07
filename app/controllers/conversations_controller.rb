@@ -9,6 +9,11 @@ class ConversationsController < ApplicationController
 
   # GET /conversations/1 or /conversations/1.json
   def show
+    if @conversation
+      render 'show'
+    else
+      redirect_to conversations_path
+    end
   end
 
   # GET /conversations/new
@@ -60,7 +65,7 @@ class ConversationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_conversation
-      @conversation = current_user.conversations.find(params[:id])
+      @conversation = current_user.conversations.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
