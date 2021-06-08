@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-4">
         <h5><%= connection_type.name %></h5>
-        <p>Some Description blah blah lorem ipsum</p>
+        <p><%= connection_type.description %></p>
         <%= render "shared/created_by", user: connection_type.user %>
       </div>
       <div class="col-md-4">
