@@ -62,14 +62,6 @@ ActiveRecord::Schema.define(version: 2021_06_07_073020) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "message_chains", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_message_chains_on_user_id"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -170,7 +162,6 @@ ActiveRecord::Schema.define(version: 2021_06_07_073020) do
 
   add_foreign_key "connection_types", "users"
   add_foreign_key "connections", "users"
-  add_foreign_key "message_chains", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "participations", "conversations"

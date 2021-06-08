@@ -1,8 +1,11 @@
 <div class="row">
   <div class="col-lg-12 px-0 px-sm-3">
     <div class="card" data-pgc="jr.pagename">
-      <div class="card-body">
-        <h5 class="card-title mb-0" data-pgc-field="title">Chat</h5>
+      <div class="card-body align-items-center d-flex justify-content-between">
+        <h5 class="card-title mb-0" data-pgc-field="title">Participants</h5>
+        <%= link_to conversation_path(@conversation), class: 'btn btn-light' do %>
+          <i class="fa fa-arrow-left"></i>&nbsp;Back
+        <% end %>
       </div>
     </div>
 

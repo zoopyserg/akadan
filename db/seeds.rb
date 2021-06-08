@@ -18,3 +18,9 @@ message = Message.create! body: "some body", sender: user1, conversation: conver
 
 Reading.create user: user1, message: message, read: false
 Reading.create user: user2, message: message, read: true
+
+User.create! username: 'user3', email: 'dude3@me.com', first_name: 'Giana', last_name: 'Michaels', password: '11111111', password_confirmation: '11111111', accept_terms: true
+User.create! username: 'user4', email: 'dude4@me.com', first_name: 'Some', last_name: 'Chick', password: '11111111', password_confirmation: '11111111', accept_terms: true
+User.create! username: 'user5', email: 'dude5@me.com', first_name: 'Some', last_name: 'President', password: '11111111', password_confirmation: '11111111', accept_terms: true
+User.create! username: 'user6', email: 'dude6@me.com', first_name: 'Chick', last_name: 'Ducksuckers', password: '11111111', password_confirmation: '11111111', accept_terms: true
+User.create! username: 'user7', email: 'dude7@me.com', first_name: 'Porn', last_name: 'Star', password: '11111111', password_confirmation: '11111111', accept_terms: true
