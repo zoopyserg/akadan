@@ -1,13 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'factory_bot_rails'
+require 'faker'
 
-user1 = User.new username: 'user1', email: 'dude1@me.com', first_name: 'Dude', last_name: 'Dubidud', password: '11111111', password_confirmation: '11111111', accept_terms: true
-user2 = User.new username: 'user2', email: 'dude2@me.com', first_name: 'Dude', last_name: 'Dubidud', password: '11111111', password_confirmation: '11111111', accept_terms: true
+user1 = FactoryBot.build :user
+user2 = FactoryBot.build :user
 
 user1.skip_confirmation!
 user2.skip_confirmation!
@@ -15,33 +10,70 @@ user2.skip_confirmation!
 user1.save!
 user2.save!
 
-conversation = Conversation.create!
+# messaging between users 1 & 2
+conversation = FactoryBot.create :conversation
 
-Participation.create! conversation: conversation, user: user1
-Participation.create! conversation: conversation, user: user2
+FactoryBot.create :participation, conversation: conversation, user: user1
+FactoryBot.create :participation, conversation: conversation, user: user2
 
-ct1 = ConnectionType.create! user: user1, name: 'Lorem Ipsum'
-ct2 = ConnectionType.create! user: user2, name: 'Lorems Ipsums'
+message = FactoryBot.create :message, body: "some body", sender: user1, conversation: conversation
 
-message = Message.create! body: "some body", sender: user1, conversation: conversation
+FactoryBot.create :reading, user: user1, message: message, read: false
+FactoryBot.create :reading, user: user2, message: message, read: true
 
-Reading.create user: user1, message: message, read: false
-Reading.create user: user2, message: message, read: true
 
-user3 = User.new username: 'user3', email: 'dude3@me.com', first_name: 'Giana', last_name: 'Michaels', password: '11111111', password_confirmation: '11111111', accept_terms: true
-user4 = User.new username: 'user4', email: 'dude4@me.com', first_name: 'Some', last_name: 'Chick', password: '11111111', password_confirmation: '11111111', accept_terms: true
-user5 = User.new username: 'user5', email: 'dude5@me.com', first_name: 'Some', last_name: 'President', password: '11111111', password_confirmation: '11111111', accept_terms: true
-user6 = User.new username: 'user6', email: 'dude6@me.com', first_name: 'Chick', last_name: 'Ducksuckers', password: '11111111', password_confirmation: '11111111', accept_terms: true
-user7 = User.new username: 'user7', email: 'dude7@me.com', first_name: 'Porn', last_name: 'Star', password: '11111111', password_confirmation: '11111111', accept_terms: true
+# public/private types/records etc.
+10.times do
+  FactoryBot.create :record, user: user1, is_public: true
+end
 
-user3.skip_confirmation!
-user4.skip_confirmation!
-user5.skip_confirmation!
-user6.skip_confirmation!
-user7.skip_confirmation!
+10.times do
+  FactoryBot.create :record, user: user2, is_public: false
+end
 
-user3.save!
-user4.save!
-user5.save!
-user6.save!
-user7.save!
+10.times do
+  FactoryBot.create :connection_type, user: user1, is_public: true
+end
+
+10.times do
+  FactoryBot.create :connection_type, user: user2, is_public: false
+end
+
+10.times do
+  FactoryBot.create :record_type, user: user1, is_public: true
+end
+
+10.times do
+  FactoryBot.create :record_type, user: user2, is_public: false
+end
+
+# a bunch of random users
+10.times do
+  user = FactoryBot.build :user
+  user.skip_confirmation!
+  user.save!
+
+  Faker::Number.within(range: 1..10).times do
+    FactoryBot.create :record, user: user, is_public: true
+  end
+
+  Faker::Number.within(range: 1..10).times do
+    FactoryBot.create :record, user: user, is_public: false
+  end
+
+  Faker::Number.within(range: 1..10).times do
+    FactoryBot.create :connection_type, user: user, is_public: true
+  end
+
+  Faker::Number.within(range: 1..10).times do
+    FactoryBot.create :connection_type, user: user, is_public: false
+  end
+
+  Faker::Number.within(range: 1..10).times do
+    FactoryBot.create :record_type, user: user, is_public: true
+  end
+
+  Faker::Number.within(range: 1..10).times do
+    FactoryBot.create :record_type, user: user, is_public: false
+  end
+end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :message do
-    body { 'my message' }
+    body { Faker::Quote.yoda }
 
     sender { create :user }
     conversation { create :conversation }

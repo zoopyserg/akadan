@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :record_type do
-    name { 'my record type' }
+    name { Faker::Quote.yoda }
     description { 'long and boring description' }
     is_public { false }
 

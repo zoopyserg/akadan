@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :connection_type do
-    name { 'my connection type' }
+    name { Faker::Quote.yoda }
     description { 'long and boring description' }
     is_public { false }
 
