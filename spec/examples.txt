@@ -182,6 +182,10 @@ example_id                                                                      
 ./spec/features/record_creation_spec.rb[1:2:1]                                     | passed  | 0.34376 seconds |
 ./spec/features/record_type_creation_spec.rb[1:1:1]                                | passed  | 0.04269 seconds |
 ./spec/features/record_type_creation_spec.rb[1:2:1]                                | passed  | 0.33445 seconds |
+./spec/features/record_types_index_created_by_spec.rb[1:1:1]                       | passed  | 0.38341 seconds |
+./spec/features/record_types_index_created_by_spec.rb[1:1:2]                       | passed  | 0.05167 seconds |
+./spec/features/record_types_index_created_by_spec.rb[1:2:1]                       | passed  | 0.37628 seconds |
+./spec/features/record_types_index_created_by_spec.rb[1:2:2]                       | passed  | 0.42913 seconds |
 ./spec/features/record_types_index_spec.rb[1:1:1]                                  | passed  | 0.0395 seconds  |
 ./spec/features/record_types_index_spec.rb[1:1:2]                                  | passed  | 0.04678 seconds |
 ./spec/features/record_types_index_spec.rb[1:1:3]                                  | passed  | 0.05127 seconds |

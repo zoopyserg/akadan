@@ -1,131 +1,31 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Record Types</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body">
+        <h5 class="card-title mb-0" data-pgc-field="title">Record Types</h5>
+      </div>
+    </div>
     <% @record_types.each do |record_type| %>
-      <tr>
-        <td><%= record_type.name %></td>
-        <td><%= link_to 'Show', record_type %></td>
-        <td><%= link_to 'Edit', edit_record_type_path(record_type) %></td>
-        <td><%= link_to 'Destroy', record_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= render "record_types/record_type", record_type: record_type %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Record Type', new_record_type_path %>
-<div class="row"> 
-  <div class="col-lg-12 px-0 px-sm-3"> 
-    <div class="card" data-pgc="jr.pagename"> 
-      <div class="card-body"> 
-        <h5 class="card-title mb-0" data-pgc-field="title">Record Types</h5> 
-      </div>                                 
-    </div>
-    <div class="card" data-pgc-define="jr.recordtype" data-pgc-define-name="Record Type" data-pgc-section="Page components"> 
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-8">
-            <h5>Some Record Type</h5>
-            <p>Long and boring description. Blah blah blah blah blah sdkfjvn sdkf vkd sfv sdkfjvk dfkv skdjf vksdf</p>
-            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-edit"></i>&nbsp;Edit
-            </button>
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-close"></i>&nbsp;Delete
-            </button>
-          </div>
-        </div>                                     
-      </div>                                 
-    </div>
-    <div class="card" data-pgc="jr.recordtype"> 
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-8">
-            <h5>Some Record Type</h5>
-            <p>Long and boring description. Blah blah blah blah blah sdkfjvn sdkf vkd sfv sdkfjvk dfkv skdjf vksdf</p>
-            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-edit"></i>&nbsp;Edit
-            </button>
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-close"></i>&nbsp;Delete
-            </button>
-          </div>
-        </div>                                     
-      </div>                                 
-    </div>
-    <div class="card" data-pgc="jr.recordtype"> 
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-8">
-            <h5>Some Record Type</h5>
-            <p>Long and boring description. Blah blah blah blah blah sdkfjvn sdkf vkd sfv sdkfjvk dfkv skdjf vksdf</p>
-            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-edit"></i>&nbsp;Edit
-            </button>
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-close"></i>&nbsp;Delete
-            </button>
-          </div>
-        </div>                                     
-      </div>                                 
-    </div>
-    <div class="card" data-pgc="jr.recordtype"> 
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-8">
-            <h5>Some Record Type</h5>
-            <p>Long and boring description. Blah blah blah blah blah sdkfjvn sdkf vkd sfv sdkfjvk dfkv skdjf vksdf</p>
-            <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-          </div>
-          <div class="col-md-4">
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-edit"></i>&nbsp;Edit
-            </button>
-            <button type="button" class="btn btn-light btn-block">
-              <i class="fa fa-close"></i>&nbsp;Delete
-            </button>
-          </div>
-        </div>                                     
-      </div>                                 
-    </div>
     <div class="d-flex justify-content-center" data-pgc="jr.pagination">
-      <ul class="pagination"> 
+      <ul class="pagination">
         <li class="page-item">
           <a class="page-link" href="#">Previous</a>
-        </li>                                     
+        </li>
         <li class="page-item">
           <a class="page-link" href="#">1</a>
-        </li>                                     
+        </li>
         <li class="page-item">
           <a class="page-link" href="#">2</a>
-        </li>                                     
+        </li>
         <li class="page-item">
           <a class="page-link" href="#">3</a>
-        </li>                                     
+        </li>
         <li class="page-item">
           <a class="page-link" href="#">Next</a>
-        </li>                                     
+        </li>
       </ul>
-    </div>                             
-  </div>                         
+    </div>
+  </div>
 </div>

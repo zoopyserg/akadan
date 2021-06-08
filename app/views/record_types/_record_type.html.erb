@@ -1,0 +1,19 @@
+<div class="card" data-pgc-define="jr.recordtype" data-pgc-define-name="Record Type" data-pgc-section="Page components">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-8">
+        <h5><%= record_type.name %> </h5>
+        <p>Long and boring description. Blah blah blah blah blah sdkfjvn sdkf vkd sfv sdkfjvk dfkv skdjf vksdf</p>
+        <%= render "shared/created_by", user: record_type.user %>
+      </div>
+      <div class="col-md-4">
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-edit"></i>&nbsp;Edit
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-close"></i>&nbsp;Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
