@@ -16,7 +16,7 @@
           </div>
           <p>Capitipsum Bipsum Pipsum Mipsum Lorepapipipsum</p>
         </div>
-        <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><%= link_to connection.user.name, user_path(connection.user), 'data-pgc-field' => "name" %></strong></p>
+        <%= render "shared/created_by", user: connection.user %>
       </div>
       <div class="col-lg-4">
         <button type="button" class="btn btn-light btn-block">

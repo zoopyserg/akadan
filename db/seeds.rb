@@ -20,6 +20,9 @@ conversation = Conversation.create!
 Participation.create! conversation: conversation, user: user1
 Participation.create! conversation: conversation, user: user2
 
+ct1 = ConnectionType.create! user: user1, name: 'Lorem Ipsum'
+ct2 = ConnectionType.create! user: user2, name: 'Lorems Ipsums'
+
 message = Message.create! body: "some body", sender: user1, conversation: conversation
 
 Reading.create user: user1, message: message, read: false
