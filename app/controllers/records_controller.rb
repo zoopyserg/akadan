@@ -1,10 +1,14 @@
 class RecordsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :set_record, only: %i[ show edit update destroy ]
 
   # GET /records or /records.json
   def index
-    @records = Record.all
+    if signed_in?
+      @records = Record.where(is_public: true).or(Record.where(user: current_user))
+    else
+      @records = Record.where(is_public: true)
+    end
   end
 
   # GET /records/1 or /records/1.json

@@ -7,6 +7,7 @@ module FeaturesHelper
   end
 
   def sign_in(email, password)
+    click_on 'Login'
     within '.card-authentication1' do
       fill_in 'user_email', with: email
       fill_in 'user_password', with: password
