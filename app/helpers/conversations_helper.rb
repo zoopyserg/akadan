@@ -1,6 +1,6 @@
 module ConversationsHelper
   def conversation_classes(conversation)
-    classes = ['card-body']
+    classes = ['card-body', 'conversation']
     classes << 'bg-light' if conversation_active?(conversation)
     classes.join ' '
   end
