@@ -1,10 +1,14 @@
 class SensorsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :set_sensor, only: %i[ show edit update destroy ]
 
   # GET /sensors or /sensors.json
   def index
-    @sensors = Sensor.all
+    if signed_in?
+      @sensors = Sensor.where(is_public: true).or(Sensor.where(user: current_user))
+    else
+      @sensors = Sensor.where(is_public: true)
+    end
   end
 
   # GET /sensors/1 or /sensors/1.json
@@ -65,6 +69,6 @@ class SensorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def sensor_params
-      params.require(:sensor).permit(:name)
+      params.require(:sensor).permit(:name, :description)
     end
 end

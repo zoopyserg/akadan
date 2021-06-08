@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :sensor do
-    name { 'my sensor' }
-    description { 'long and boring description' }
+    name { Faker::Quote.yoda }
+    description { Faker::Quote.yoda }
+    is_public { false }
 
     user { create :user }
   end

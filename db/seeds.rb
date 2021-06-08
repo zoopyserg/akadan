@@ -24,27 +24,19 @@ FactoryBot.create :reading, user: user2, message: message, read: true
 
 # public/private types/records etc.
 10.times do
-  FactoryBot.create :record, user: user1, is_public: true
+  FactoryBot.create :record, user: user1, is_public: Faker::Boolean.boolean
 end
 
 10.times do
-  FactoryBot.create :record, user: user2, is_public: false
+  FactoryBot.create :connection_type, user: user1, is_public: Faker::Boolean.boolean
 end
 
 10.times do
-  FactoryBot.create :connection_type, user: user1, is_public: true
+  FactoryBot.create :record_type, user: user1, is_public: Faker::Boolean.boolean
 end
 
 10.times do
-  FactoryBot.create :connection_type, user: user2, is_public: false
-end
-
-10.times do
-  FactoryBot.create :record_type, user: user1, is_public: true
-end
-
-10.times do
-  FactoryBot.create :record_type, user: user2, is_public: false
+  FactoryBot.create :sensor, user: user1, is_public: Faker::Boolean.boolean
 end
 
 # a bunch of random users
@@ -54,26 +46,18 @@ end
   user.save!
 
   Faker::Number.within(range: 1..10).times do
-    FactoryBot.create :record, user: user, is_public: true
+    FactoryBot.create :record, user: user, is_public: Faker::Boolean.boolean
   end
 
   Faker::Number.within(range: 1..10).times do
-    FactoryBot.create :record, user: user, is_public: false
+    FactoryBot.create :connection_type, user: user, is_public: Faker::Boolean.boolean
   end
 
   Faker::Number.within(range: 1..10).times do
-    FactoryBot.create :connection_type, user: user, is_public: true
+    FactoryBot.create :record_type, user: user, is_public: Faker::Boolean.boolean
   end
 
   Faker::Number.within(range: 1..10).times do
-    FactoryBot.create :connection_type, user: user, is_public: false
-  end
-
-  Faker::Number.within(range: 1..10).times do
-    FactoryBot.create :record_type, user: user, is_public: true
-  end
-
-  Faker::Number.within(range: 1..10).times do
-    FactoryBot.create :record_type, user: user, is_public: false
+    FactoryBot.create :sensor, user: user, is_public: Faker::Boolean.boolean
   end
 end

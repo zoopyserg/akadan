@@ -1,17 +1,17 @@
 <div class="card">
   <div class="card-body">
-<%= form_with(model: sensor) do |form| %>
-  <% if sensor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(sensor.errors.count, "error") %> prohibited this sensor from being saved:</h2>
+    <%= form_with(model: sensor) do |form| %>
+      <% if sensor.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(sensor.errors.count, "error") %> prohibited this sensor from being saved:</h2>
 
-      <ul>
-        <% sensor.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% sensor.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="form-group">
         <p class="hint">A Sensor is a piece of hardware (an arduino board, a phone, an AI camera, an AI device, a computer, a button, or any other IoT device, or even a person) that submits repetitive events as records on its own through JSON API.</p>
         <a href="sensors_learn_more.html">Learn more about sensors.</a>

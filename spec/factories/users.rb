@@ -3,9 +3,9 @@ FactoryBot.define do
     sequence(:first_name) {|n| Faker::Name.first_name }
     sequence(:last_name) {|n| Faker::Name.last_name }
     sequence(:username) {|n| "user#{n}name" }
-    sequence(:email) {|n| "me#{n}@mymail.com" }
-    password { 'ybddbddpswr13' }
-    password_confirmation { 'ybddbddpswr13' }
+    sequence(:email) {|n| "me#{n}@gmail.com" }
+    password { '11111111' }
+    password_confirmation { '11111111' }
     accept_terms { true }
 
     trait :confirmed do
