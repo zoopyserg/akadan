@@ -1,10 +1,14 @@
 class ConnectionTypesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :set_connection_type, only: %i[ show edit update destroy ]
 
   # GET /connection_types or /connection_types.json
   def index
-    @connection_types = ConnectionType.all
+    if signed_in?
+      @connection_types = ConnectionType.where(is_public: true).or(ConnectionType.where(user: current_user))
+    else
+      @connection_types = ConnectionType.where(is_public: true)
+    end
   end
 
   # GET /connection_types/1 or /connection_types/1.json
