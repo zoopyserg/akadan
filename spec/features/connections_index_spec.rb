@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ConnectionsIndices", type: :feature do
+RSpec.feature "ConnectionsIndices Permissions", type: :feature do
   let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:public_connection) { create :connection, name: 'Public Connection', user: user, is_public: true }
   let!(:private_connection) { create :connection, name: 'Private Connection', user: user, is_public: false }

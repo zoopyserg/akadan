@@ -9,6 +9,10 @@ example_id                                                                      
 ./spec/features/connection_creation_spec.rb[1:2:1]                                 | passed  | 0.31502 seconds |
 ./spec/features/connection_type_creation_spec.rb[1:1:1]                            | passed  | 0.04187 seconds |
 ./spec/features/connection_type_creation_spec.rb[1:2:1]                            | passed  | 0.34476 seconds |
+./spec/features/connections_index_created_by_spec.rb[1:1:1]                        | passed  | 0.39447 seconds |
+./spec/features/connections_index_created_by_spec.rb[1:1:2]                        | passed  | 0.05657 seconds |
+./spec/features/connections_index_created_by_spec.rb[1:2:1]                        | passed  | 0.3711 seconds  |
+./spec/features/connections_index_created_by_spec.rb[1:2:2]                        | passed  | 0.40534 seconds |
 ./spec/features/connections_index_spec.rb[1:1:1]                                   | passed  | 0.0375 seconds  |
 ./spec/features/connections_index_spec.rb[1:1:2]                                   | passed  | 0.04814 seconds |
 ./spec/features/connections_index_spec.rb[1:1:3]                                   | passed  | 0.05582 seconds |
