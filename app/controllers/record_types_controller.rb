@@ -1,10 +1,15 @@
 class RecordTypesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :set_record_type, only: %i[ show edit update destroy ]
 
   # GET /record_types or /record_types.json
   def index
     @record_types = RecordType.all
+    if signed_in?
+      @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user))
+    else
+      @record_types = RecordType.where(is_public: true)
+    end
   end
 
   # GET /record_types/1 or /record_types/1.json
