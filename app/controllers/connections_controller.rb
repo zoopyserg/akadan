@@ -1,10 +1,14 @@
 class ConnectionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :set_connection, only: %i[ show edit update destroy ]
 
   # GET /connections or /connections.json
   def index
-    @connections = Connection.all
+    if signed_in?
+      @connections = Connection.where(is_public: true).or(Connection.where(user: current_user))
+    else
+      @connections = Connection.where(is_public: true)
+    end
   end
 
   # GET /connections/1 or /connections/1.json

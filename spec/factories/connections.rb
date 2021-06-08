@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :connections do
+  factory :connection do
     name { 'my connection' }
     description { 'long and boring description' }
 
