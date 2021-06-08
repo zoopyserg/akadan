@@ -1,16 +1,13 @@
 <div class="row">
   <div class="col-lg-12 px-0 px-sm-3">
     <div class="card" data-pgc="jr.pagename">
-      <div class="card-body align-items-center d-flex justify-content-between">
+      <div class="card-body">
         <h5 class="card-title mb-0" data-pgc-field="title">Chat</h5>
-        <%= link_to conversation_participations_path(@conversation), class: 'btn btn-light' do %>
-          <i class="fa fa-users"></i>&nbsp;Participants
-        <% end %>
       </div>
     </div>
 
-    <% @conversation.messages.each do |message| %>
-      <%= render "messages/message", message: message %>
+    <% @conversation.participations.each do |participation| %>
+      <%= render "participations/participation", participation: participation %>
     <% end %>
 
     <div class="d-flex justify-content-center" data-pgc="jr.pagination">
@@ -33,6 +30,10 @@
       </ul>
     </div>
 
-    <%= render "messages/form" %>
+    <div class="card">
+      <div class="card-body">
+        <%= link_to 'Add a New Participant', new_conversation_participation_path(@conversation) %>
+      </div>
+    </div>
   </div>
 </div>
