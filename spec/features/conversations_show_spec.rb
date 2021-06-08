@@ -4,7 +4,7 @@ RSpec.feature "Conversations show", type: :feature do
   context 'not signed in' do
     let(:conversation) { create :conversation }
     it 'should redirect to sign in page' do
-      visit conversation_path(conversation)
+      visit conversation_messages_path(conversation)
 
       expect(current_path).to eq new_user_session_path
     end
@@ -78,7 +78,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let me see my messages' do
@@ -99,7 +99,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let him see his messages' do
@@ -120,7 +120,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('collaborator2@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should not let him see a conversation of which he is not part of' do
@@ -208,7 +208,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let me see my name when I am a sender' do
@@ -232,7 +232,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let him see names of senders of messages sent to him' do
@@ -324,7 +324,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let me see my name when I was the one who sent the message in the conversation' do
@@ -348,7 +348,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let him see photo of senders of messages sent to him' do
@@ -402,7 +402,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let me see the message he sent' do
@@ -418,7 +418,7 @@ RSpec.feature "Conversations show", type: :feature do
         before do
           visit root_path
           sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-          visit conversation_path(conversation1)
+          visit conversation_messages_path(conversation1)
         end
 
         it 'should let him see his message' do
@@ -465,7 +465,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -477,7 +477,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -496,7 +496,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as not active' do
@@ -508,7 +508,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -527,7 +527,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -539,7 +539,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -558,7 +558,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -570,7 +570,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -591,7 +591,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -603,7 +603,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -622,7 +622,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -634,7 +634,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -653,7 +653,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -665,7 +665,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -684,7 +684,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
@@ -696,7 +696,7 @@ RSpec.feature "Conversations show", type: :feature do
             before do
               visit root_path
               sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
-              visit conversation_path(conversation1)
+              visit conversation_messages_path(conversation1)
             end
 
             it 'should show conversation as active' do
