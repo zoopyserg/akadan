@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Conversations show", type: :feature do
+RSpec.feature "Conversations messages index", type: :feature do
   context 'not signed in' do
     let(:conversation) { create :conversation }
     it 'should redirect to sign in page' do

@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
   # GET /messages or /messages.json
   def index
     @messages = @conversation.messages.all
+    @message = Message.new
   end
 
   # GET /messages/1 or /messages/1.json
@@ -25,10 +26,15 @@ class MessagesController < ApplicationController
   # POST /messages or /messages.json
   def create
     @message = @conversation.messages.new(message_params)
+    @message.sender = current_user
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: "Message was successfully created." }
+        @conversation.users.each do |user|
+          Reading.create message: @message, user: user, read: (user == current_user)
+        end
+
+        format.html { redirect_to conversation_messages_path(@conversation) }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -75,6 +81,6 @@ class MessagesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def message_params
-    params.require(:message).permit(:body)
+    params.require(:message).permit(:body, :conversation_id)
   end
 end
