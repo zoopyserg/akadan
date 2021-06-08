@@ -1,0 +1,154 @@
+<div class="card" data-pgc-define="jr.record" data-pgc-define-name="Record" data-pgc-section="Page components">
+  <div class="card-body">
+    <div class="row">
+      <div class="align-items-center col-lg-12 d-flex justify-content-between">
+        <div class="align-items-center d-flex">
+          <div class="d-flex flex-column">
+            <div class="icheck-material-white">
+              <input type="checkbox" id="user-checkbox1" checked=""/>
+              <label for="user-checkbox1"></label>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <i class="fa fa-chevron-up mx-1 my-1"></i>
+            <i class="fa fa-chevron-down mx-1 my-1"></i>
+          </div>
+          <div>
+            <h5 class="card-title mb-0 mx-1"><%= record.name %><i class="fa fa-edit mx-1"></i></h5>
+            <%= render "shared/created_by", user: record.user %>
+          </div>
+        </div>
+        <div class="align-items-center d-flex">
+          <i class="fa fa-comment mx-1 my-1"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">URL:</span>
+          </div>
+          <input type="text" class="form-control" value="http://myurl.com/problems/293293222">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+              <i class="fa fa-copy mr-1"></i>Copy
+            </button>
+            <button class="btn btn-primary" type="button">
+              <i class="fa fa-eye mr-1"></i>Show
+            </button>
+          </div>
+        </div>
+        <button class="btn btn-link btn-sm d-flex flex-row align-items-center" type="button">
+          <span><i class="fa fa-star-o mr-1"></i></span>
+          <span>Add to Favourites</span>
+        </button>
+        <p>Описание созданное в WYSIWYG (только не длинное) іормоіаміі мліотмілоа мілвао мілліовамтілаомтілаомлмтілвмтілмотілоамтілвомтілвомтілвоамтілвоамтлівм івало мівл амл валм івла млів амлівла млів тамлів тамл івалмівлат млів тамлівамлівал мілв амлівамлівамлітлмлавміамілм і<i class="fa fa-edit mx-1"></i></p>
+        <h6>Completed (%):</h6>
+        <div class="progress">
+          <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">50%</div>
+        </div>
+        <p class="mb-0"><strong class="mr-1">Type:</strong>Some kind of record type<i class="fa fa-edit mx-1"></i></p>
+        <div role="tablist" id="accordion-1">
+          <p class="mb-0">You spent <strong>123 hours 48 minutes</strong> on this</p>
+          <p class="mb-0">Repeated <strong>123</strong> times</p>
+          <div class="accordioncollapse card mb-0">
+            <div role="tab" class="card-header">
+              <h6 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1">Attachments</a></h6>
+            </div>
+            <div role="tabpanel" data-parent="#accordion-1" class="collapse item-1">
+              <div class="card-body">
+                <div class="row row-cols-1">
+                  <div class="col-lg-12">
+                    <div class="row row-cols-1">
+                      <div class="col-lg-12">
+                        <a href="#">Attachment File 1.pdf</a>
+                      </div>
+                      <div class="col-lg-12">
+                        <a href="#">Attachment File 2.cad</a>
+                      </div>
+                      <div class="col-lg-12">
+                        <a href="#">Attachment File 3.exe</a>
+                      </div>
+                      <div class="col-lg-12">
+                        <a href="#">Attachment File 4.zip</a>
+                      </div>
+                      <div class="col-lg-12">
+                        <button class="btn btn-primary btn-sm" type="button">Add Attachment</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordioncollapse card mb-0">
+            <div role="tab" class="card-header">
+              <h6 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-2">Sensors</a></h6>
+            </div>
+            <div role="tabpanel" data-parent="#accordion-1" class="collapse item-2">
+              <div class="card-body">
+                <div class="row row-cols-1">
+                  <div class="col-lg-12">
+                  </div>
+                  <div class="col-lg-12">
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="row row-cols-1">
+                      <div class="col-lg-12">
+                        <div class="row">
+                          <div class="col">
+                            <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                            <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                            <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                            <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                            <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <a href="#">Add a New Sensor</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordioncollapse card mb-0">
+            <div role="tabpanel" data-parent="#accordion-1" class="collapse item-3">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-repeat"></i>
+          <span style="font-family: inherit; font-size: 0.7rem;"><font face="FontAwesome">&nbsp;Repeated</font></span>
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-check"></i>&nbsp;Solve
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-puzzle-piece"></i>&nbsp;create / connect subrecords
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-level-up"></i>
+          <span href="#">&nbsp;Перенести на слой иерархии выше</span>
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-angle-double-up fa-twitter-square"></i>
+          <span href="#">Extract into separate project</span>
+        </button>
+        <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsModal">
+          <i class="fa fa-lock"></i>&nbsp;permissions
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-close fa-twitter-square"></i>Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
