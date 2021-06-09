@@ -70,6 +70,6 @@ class ConnectionTypesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def connection_type_params
-      params.require(:connection_type).permit(:name, :description, :directional, :destructive, :one_to_many, :target_type, :target_hierarchy, :target_record_type_id)
+      params.require(:connection_type).permit(:name, :description, :directional, :destructive, :one_to_many, :target_type, :target_hierarchy, :target_record_type_id, :target_record_subtype_id)
     end
 end
