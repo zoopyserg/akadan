@@ -25,20 +25,20 @@ FactoryBot.create :reading, user: user2, message: message, read: true
 # public/private types/records etc.
 
 %i[ record connection_type record_type sensor connection ].each do |item|
-  10.times do
+  Faker::Number.digit.times do
     FactoryBot.create item, user: user1, is_public: Faker::Boolean.boolean
   end
 end
 
 
 # a bunch of random users
-10.times do
+Faker::Number.digit.times do
   user = FactoryBot.build :user
   user.skip_confirmation!
   user.save!
 
   %i[ record connection_type record_type sensor connection ].each do |item|
-    10.times do
+    Faker::Number.digit.times do
       FactoryBot.create item, user: user, is_public: Faker::Boolean.boolean
     end
   end
