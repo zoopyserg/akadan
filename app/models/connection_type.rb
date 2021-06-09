@@ -53,6 +53,6 @@ class ConnectionType < ApplicationRecord
   end
 
   def hierarchy_closest_parent_of_type?
-    target_hierarchy == 'closest_parent_of_type'
+    target_hierarchy == 'closest_root'
   end
 end

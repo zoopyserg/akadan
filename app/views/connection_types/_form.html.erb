@@ -24,12 +24,16 @@
         <label for="input-3">Directional</label>
         <p>Once you know you have two records (A and B) that are connected, will this mean that once you solve one of them, the other will go away on its own?</p>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Yes (directional, A becomes irrelevant once I solve B or vise versa)</label>
+          <%= form.radio_button :directional, true %>
+          <%= form.label :directional, value: true do %>
+            Yes (directional, A becomes irrelevant once I solve B or vise versa)
+          <% end%>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">No (non-directional, both A and B need to be solved individually dispite the fact that they are connected)</label>
+          <%= form.radio_button :directional, false %>
+          <%= form.label :directional, value: false do %>
+            No (non-directional, both A and B need to be solved individually dispite the fact that they are connected)
+          <% end %>
         </div>
       </div>
       <div class="form-group">
@@ -37,24 +41,34 @@
         <p>* visible only if &quot;directional&quot; is chosen.</p>
         <p>If you have two records (A and B), and say you need to summarize their progress, will progress in A mean that B received progress too? Or progress in A won&apos;t matter for progress of B?</p>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Yes (destructive, progress of A means progress of B grows too)</label>
+          <%= form.radio_button :destructive, true %>
+          <%= form.label :destructive, value: true do %>
+            Yes (destructive, progress of A means progress of B grows too)
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">No (non-destructive, progress of A does not affect progress of B, they are separate in terms of values or properties)</label>
+          <%= form.radio_button :destructive, false %>
+          <%= form.label :destructive, value: false do %>
+            No (non-destructive, progress of A does not affect progress of B, they are separate in terms of values or properties)
+          <% end %>
         </div>
       </div>
       <div class="form-group">
         <label for="input-3">How many such connections can a record have</label>
         <p>* visible for both &quot;directional&quot; and &quot;non-directional&quot;</p>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">One-To-One (if it is directional, a record for this type of connection can be mentioned not more than once as A and not more than once as B), One a record has such connection as A, an option to connect it as A with some other record will be disabled (the record will be excluded from the list. If the connection is directional, a record can have at most two such connections).</label>
+          <%= form.radio_button :one_to_many, false %>
+          <%= form.label :one_to_many, value: false do %>
+            <p> One-To-One </p>
+            <p> (if it is directional, a record for this type of connection can be mentioned not more than once as A and not more than once as B), One a record has such connection as A, an option to connect it as A with some other record will be disabled (the record will be excluded from the list. If the connection is directional, a record can have at most two such connections). </p>
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">One-To-Many (you can mention some record as A - source - for this type of connection only once, but that same record can be mentioed many times as B - target - with this type of connection, to any number of records, an example would be &quot;a system has many subsystems, but a subsystem belongs to only one system&quot;)</label>
+          <%= form.radio_button :one_to_many, true %>
+          <%= form.label :one_to_many, value: true do %>
+            <p> One-To-Many </p>
+            <p> (you can mention some record as A - source - for this type of connection only once, but that same record can be mentioed many times as B - target - with this type of connection, to any number of records, an example would be &quot;a system has many subsystems, but a subsystem belongs to only one system&quot;) </p>
+          <% end %>
         </div>
       </div>
       <div class="form-group">
@@ -63,20 +77,28 @@
         <p></p>
         <p>* as A (for connections B -&gt; A)</p>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Тот же что и А (source)</label>
+          <%= form.radio_button :target_type, :same_as_source %>
+          <%= form.label :target_type, value: :same_as_source do %>
+            Тот же что и source
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Любой тип</label>
+          <%= form.radio_button :target_type, :any %>
+          <%= form.label :target_type, value: :any do %>
+            Любой тип
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Конкретный тип из дропдауна (скажем только системы или только причины)</label>
+          <%= form.radio_button :target_type, :specific_type %>
+          <%= form.label :target_type, value: :specific_type do %>
+            Конкретный тип
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Конкретный подтип (из дропдауна) конкретного типа (тоже из дропдауна) Например искать только среди причин проблем, или только среди решений причин, или только среди винтиков систем</label>
+          <%= form.radio_button :target_type, :specific_subtype %>
+          <%= form.label :target_type, value: :specific_subtype do %>
+            Конкретный подтип конкретного типа
+          <% end %>
         </div>
       </div>
       <div class="form-group">
@@ -99,19 +121,6 @@
         <div class="dropdown" data-pgc="jr.dropdown">
           <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
             &nbsp;Select
-
-
-
-
-
-
-
-
-
-
-
-
-
           </button>
           <div class="dropdown-menu" x-placement='bottom start'>
             <a class="dropdown-item" href='#'>Link</a>
@@ -127,36 +136,52 @@
         <p></p>
         <p>* as A (for connections B -&gt; A)</p>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Сиблинги (чайлды моего прямого парента)</label>
+          <%= form.radio_button :target_hierarchy, :siblings %>
+          <%= form.label :target_hierarchy, value: :siblings do %>
+            Сиблинги (чайлды моего прямого парента)
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Все поколения парентов</label>
+          <%= form.radio_button :target_hierarchy, :all_parent_generations %>
+          <%= form.label :target_hierarchy, value: :all_parent_generations do %>
+            Все поколения парентов
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Чайлды моего дерева того же колена что и А (напр. другие правнуки моего прадеда)</label>
+          <%= form.radio_button :target_hierarchy, :deep_siblings %>
+          <%= form.label :target_hierarchy, value: :deep_siblings do %>
+            Чайлды моего дерева того же колена что и А (напр. другие правнуки моего прадеда)
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Все пункты в моём семейном древе (кроме парентов?, пра-парентов? и т.п.)</label>
+          <%= form.radio_button :target_hierarchy, :all_tree_records %>
+          <%= form.label :target_hierarchy, value: :all_tree_records do %>
+            Все пункты в моём семейном древе (кроме парентов?, пра-парентов? и т.п.)
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Все пункты (кроме парентов? и пра-парентов? и т.п.)</label>
+          <%= form.radio_button :target_hierarchy, :all %>
+          <%= form.label :target_hierarchy, value: :all do %>
+            Все пункты (кроме парентов? и пра-парентов? и т.п.)
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Пункты главного списка (те у которых нет парентов)</label>
+          <%= form.radio_button :target_hierarchy, :root %>
+          <%= form.label :target_hierarchy, value: :root do %>
+            Пункты главного списка (те у которых нет парентов)
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Ближайший парент такого-то типа</label>
+          <%= form.radio_button :target_hierarchy, :specific_parent_type %>
+          <%= form.label :target_hierarchy, value: :specific_parent_type do %>
+            Ближайший парент такого-то типа
+          <% end %>
         </div>
         <div class="icheck-material-white">
-          <input type="checkbox" id="user-checkbox1" checked=""/>
-          <label for="user-checkbox1">Корень дерева (главный пункт с которого всё началось)</label>
+          <%= form.radio_button :target_hierarchy, :closest_root %>
+          <%= form.label :target_hierarchy, value: :closest_root do %>
+            Корень дерева (главный пункт с которого всё началось)
+          <% end %>
         </div>
       </div>
       <div class="form-group py-2">

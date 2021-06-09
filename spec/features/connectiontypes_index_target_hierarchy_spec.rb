@@ -121,7 +121,7 @@ RSpec.feature "Connection Types Index Target Hierarchy", type: :feature do
     before { visit connection_types_path }
 
     context 'Correct Hierarchy' do
-      let(:hierarchy) { :closest_parent_of_type }
+      let(:hierarchy) { :closest_root }
 
       it { expect(page).to have_content 'Hierarchy of targets: Closest parent of type My Parent Type' }
     end

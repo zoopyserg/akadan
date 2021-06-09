@@ -7,6 +7,7 @@ FactoryBot.define do
     destructive { false }
     target_type { :any }
     target_hierarchy { :all }
+    one_to_many { false }
 
     user { create :user }
 

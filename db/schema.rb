@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_103912) do
+ActiveRecord::Schema.define(version: 2021_06_09_151242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_103912) do
     t.bigint "target_record_subtype_id"
     t.string "target_hierarchy"
     t.bigint "closest_parent_type_id"
+    t.boolean "one_to_many"
     t.index ["closest_parent_type_id"], name: "index_connection_types_on_closest_parent_type_id"
     t.index ["target_record_subtype_id"], name: "index_connection_types_on_target_record_subtype_id"
     t.index ["target_record_type_id"], name: "index_connection_types_on_target_record_type_id"
