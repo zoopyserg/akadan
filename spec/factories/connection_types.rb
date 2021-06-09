@@ -5,7 +5,13 @@ FactoryBot.define do
     is_public { false }
     directional { false }
     destructive { false }
+    target_type { :any }
 
     user { create :user }
+
+    trait :specific_type do
+      target_type { :specific_type }
+      target_record_type { create :record_type }
+    end
   end
 end

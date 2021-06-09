@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_064141) do
+ActiveRecord::Schema.define(version: 2021_06_09_081450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(version: 2021_06_09_064141) do
     t.boolean "is_public"
     t.boolean "directional"
     t.boolean "destructive"
+    t.string "target_type"
+    t.bigint "target_record_type_id"
+    t.bigint "target_record_subtype_id"
+    t.index ["target_record_subtype_id"], name: "index_connection_types_on_target_record_subtype_id"
+    t.index ["target_record_type_id"], name: "index_connection_types_on_target_record_type_id"
     t.index ["user_id"], name: "index_connection_types_on_user_id"
   end
 
@@ -167,6 +172,8 @@ ActiveRecord::Schema.define(version: 2021_06_09_064141) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "connection_types", "record_types", column: "target_record_subtype_id"
+  add_foreign_key "connection_types", "record_types", column: "target_record_type_id"
   add_foreign_key "connection_types", "users"
   add_foreign_key "connections", "users"
   add_foreign_key "messages", "conversations"

@@ -1,0 +1,17 @@
+<% if connection_type.any_target_type? %>
+  <div class="col-lg-12">
+    <span class="badge badge-primary">Type of targets: Any</span>
+  </div>
+<% elsif connection_type.target_type_same_as_source_type? %>
+  <div class="col-lg-12">
+    <span class="badge badge-primary">Type of targets: Same as source</span>
+  </div>
+<% elsif connection_type.target_specific_type? %>
+  <div class="col-lg-12">
+    <span class="badge badge-primary">Type of targets: <%= connection_type.target_record_type.name %></span>
+  </div>
+<% elsif connection_type.target_specific_subtype? %>
+  <div class="col-lg-12">
+    <span class="badge badge-primary">Type of targets: <%= connection_type.target_record_subtype.name %> under the records of type <%= connection_type.target_record_type.name %></span>
+  </div>
+<% end %>
