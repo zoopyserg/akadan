@@ -17,6 +17,8 @@ example_id                                                                      
 ./spec/features/connections_index_description_spec.rb[1:1:2]                       | passed  | 0.06195 seconds |
 ./spec/features/connections_index_description_spec.rb[1:2:1]                       | passed  | 0.1805 seconds  |
 ./spec/features/connections_index_description_spec.rb[1:2:2]                       | passed  | 0.18588 seconds |
+./spec/features/connections_index_destructive_cross_spec.rb[1:1:1]                 | passed  | 0.53851 seconds |
+./spec/features/connections_index_destructive_cross_spec.rb[1:2:1]                 | passed  | 0.05229 seconds |
 ./spec/features/connections_index_record_names_spec.rb[1:1]                        | passed  | 0.05132 seconds |
 ./spec/features/connections_index_record_names_spec.rb[1:2]                        | passed  | 0.05086 seconds |
 ./spec/features/connections_index_spec.rb[1:1:1]                                   | passed  | 0.04578 seconds |
