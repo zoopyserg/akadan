@@ -156,19 +156,23 @@
           <% end %>
         </div>
         <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :specific_parent_type %>
-          <%= form.label :target_hierarchy, value: :specific_parent_type do %>
-            Ближайший парент такого-то типа
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
           <%= form.radio_button :target_hierarchy, :closest_root %>
           <%= form.label :target_hierarchy, value: :closest_root do %>
             Корень дерева (главный пункт с которого всё началось)
           <% end %>
         </div>
+        <div class="icheck-material-white">
+          <%= form.radio_button :target_hierarchy, :specific_parent_type %>
+          <%= form.label :target_hierarchy, value: :specific_parent_type do %>
+            Ближайший парент такого-то типа
+          <% end %>
+        </div>
       </div>
       <div class="form-group py-2">
+        <label for="input-3">Выберете тип ближайшего парента</label>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <%= form.collection_select :closest_parent_type_id, @target_record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+        </div>
       </div>
       <div class="form-group">
         <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
