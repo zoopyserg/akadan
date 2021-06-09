@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ConnectionsIndex Created By", type: :feature do
+RSpec.feature "ConnectionsIndex Description", type: :feature do
   let!(:user1) { create :user, :confirmed, :free, first_name: 'John', last_name: 'Smith', username: 'something1', email: 'jacky.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, first_name: 'Bob', last_name: 'Smith', username: 'something2', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:public_connection) { create :connection, description: 'Public Description', user: user1, is_public: true }

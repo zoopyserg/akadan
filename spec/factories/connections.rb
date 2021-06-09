@@ -4,5 +4,8 @@ FactoryBot.define do
     description { Faker::Quote.yoda }
 
     user { create :user }
+
+    record_a { create :record, user: user }
+    record_b { create :record, user: user }
   end
 end

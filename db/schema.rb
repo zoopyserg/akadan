@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_092057) do
+ActiveRecord::Schema.define(version: 2021_06_09_102153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 2021_06_09_092057) do
     t.text "description"
     t.bigint "user_id", null: false
     t.boolean "is_public"
+    t.bigint "record_a_id", null: false
+    t.bigint "record_b_id", null: false
+    t.index ["record_a_id"], name: "index_connections_on_record_a_id"
+    t.index ["record_b_id"], name: "index_connections_on_record_b_id"
     t.index ["user_id"], name: "index_connections_on_user_id"
   end
 
@@ -179,6 +183,8 @@ ActiveRecord::Schema.define(version: 2021_06_09_092057) do
   add_foreign_key "connection_types", "record_types", column: "target_record_subtype_id"
   add_foreign_key "connection_types", "record_types", column: "target_record_type_id"
   add_foreign_key "connection_types", "users"
+  add_foreign_key "connections", "records", column: "record_a_id"
+  add_foreign_key "connections", "records", column: "record_b_id"
   add_foreign_key "connections", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "sender_id"
