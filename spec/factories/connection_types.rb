@@ -3,6 +3,7 @@ FactoryBot.define do
     name { Faker::Quote.yoda }
     description { Faker::Quote.yoda }
     is_public { false }
+    directional { false }
 
     user { create :user }
   end
