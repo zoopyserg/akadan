@@ -27,6 +27,10 @@ example_id                                                                      
 ./spec/features/connectiontypes_index_created_by_spec.rb[1:1:2]                    | passed  | 0.05027 seconds |
 ./spec/features/connectiontypes_index_created_by_spec.rb[1:2:1]                    | passed  | 0.25807 seconds |
 ./spec/features/connectiontypes_index_created_by_spec.rb[1:2:2]                    | passed  | 0.34808 seconds |
+./spec/features/connectiontypes_index_destructive_spec.rb[1:1:1]                   | passed  | 0.05001 seconds |
+./spec/features/connectiontypes_index_destructive_spec.rb[1:1:2]                   | passed  | 0.05437 seconds |
+./spec/features/connectiontypes_index_destructive_spec.rb[1:2:1]                   | passed  | 0.17837 seconds |
+./spec/features/connectiontypes_index_destructive_spec.rb[1:2:2]                   | passed  | 0.62799 seconds |
 ./spec/features/connectiontypes_index_directional_spec.rb[1:1:1]                   | passed  | 0.04971 seconds |
 ./spec/features/connectiontypes_index_directional_spec.rb[1:1:2]                   | passed  | 0.05027 seconds |
 ./spec/features/connectiontypes_index_directional_spec.rb[1:2:1]                   | passed  | 1.45 seconds    |

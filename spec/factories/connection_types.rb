@@ -4,6 +4,7 @@ FactoryBot.define do
     description { Faker::Quote.yoda }
     is_public { false }
     directional { false }
+    destructive { false }
 
     user { create :user }
   end
