@@ -18,6 +18,7 @@ class ConnectionTypesController < ApplicationController
   # GET /connection_types/new
   def new
     @connection_type = current_user.connection_types.new
+    @target_record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user))
   end
 
   # GET /connection_types/1/edit
@@ -69,6 +70,6 @@ class ConnectionTypesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def connection_type_params
-      params.require(:connection_type).permit(:name, :description, :directional, :destructive, :one_to_many, :target_type, :target_hierarchy)
+      params.require(:connection_type).permit(:name, :description, :directional, :destructive, :one_to_many, :target_type, :target_hierarchy, :target_record_type_id)
     end
 end

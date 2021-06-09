@@ -103,31 +103,15 @@
       </div>
       <div class="form-group">
         <label for="input-3">Выберете тип таргетов</label>
-        <p>* виден только если выбран либо &quot;тип&quot; либо &quot;подтип типов&quot;</p>
         <div class="dropdown" data-pgc-define="jr.dropdown" data-pgc-define-name="Dropdown Menu" data-pgc-section="Page components">
-          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-edit="ButtonName[class]">&nbsp;Select
-          </button>
-          <div class="dropdown-menu" x-placement='bottom start'>
-            <a class="dropdown-item" href='#'>Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-          </div>
+          <%= form.collection_select :target_record_type_id, @target_record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
       </div>
       <div class="form-group">
         <label for="input-3">Выберете тип под-таргетов</label>
         <p>* виден только если выбран &quot;подтип типов&quot;</p>
         <div class="dropdown" data-pgc="jr.dropdown">
-          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
-            &nbsp;Select
-          </button>
-          <div class="dropdown-menu" x-placement='bottom start'>
-            <a class="dropdown-item" href='#'>Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-          </div>
+          <%= form.collection_select :target_record_subtype_id, @target_record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
       </div>
       <div class="form-group">
