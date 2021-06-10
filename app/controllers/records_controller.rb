@@ -1,6 +1,7 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :set_record, only: %i[ show edit update destroy ]
+  before_action :set_record_types, only: %i[ new edit ]
 
   # GET /records or /records.json
   def index
@@ -18,6 +19,7 @@ class RecordsController < ApplicationController
   # GET /records/new
   def new
     @record = current_user.records.new
+    @record.dots.build
   end
 
   # GET /records/1/edit
@@ -27,6 +29,9 @@ class RecordsController < ApplicationController
   # POST /records or /records.json
   def create
     @record = current_user.records.new(record_params)
+    @record.dots.each do |dot|
+      dot.user = current_user
+    end
 
     respond_to do |format|
       if @record.save
@@ -62,13 +67,17 @@ class RecordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_record
-      @record = Record.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_record
+    @record = Record.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def record_params
-      params.require(:record).permit(:name, :description)
-    end
+  # Only allow a list of trusted parameters through.
+  def record_params
+    params.require(:record).permit(:name, :description, :record_type_id, dots_attributes: [ :id, :duration ])
+  end
+
+  def set_record_types
+    @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user))
+  end
 end

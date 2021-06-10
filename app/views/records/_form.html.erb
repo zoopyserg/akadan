@@ -15,15 +15,7 @@
       <div class="form-group">
         <label class="d-flex justify-content-between">Type</label>
         <div class="dropdown" data-pgc="jr.dropdown">
-          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
-            &nbsp;Select
-          </button>
-          <div class="dropdown-menu" x-placement='bottom start'>
-            <a class="dropdown-item" href='#'>Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-          </div>
+          <%= form.collection_select :record_type_id, @record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
       </div>
       <div class="form-group">
@@ -43,45 +35,9 @@
       </div>
       <p>First Dot Details</p>
       <p class="hint">These details (start/end time/date, duration, income) will be added to the first &quot;dot&quot; of your record. I will have this as a separate form too (that opens when I click &quot;repeated&quot; on a record).</p>
-      <div class="row">
-        <div class="col-lg-6 col-sm-6">
-          <div class="form-group">
-            <label class="d-flex justify-content-between">Start Date</label>
-            <input class="form-control" type="date"/>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="form-group">
-            <label class="d-flex justify-content-between">Start Time</label>
-            <input class="form-control" type="time"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-6">
-          <div class="form-group">
-            <label class="d-flex justify-content-between">End Date</label>
-            <input class="form-control" type="date"/>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="form-group">
-            <label class="d-flex justify-content-between">End Time</label>
-            <input class="form-control" type="time"/>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="d-flex justify-content-between">Duration</label>
-        <p class="hint">todo: time mask and maybe a clock</p>
-        <input class="form-control" type="text"/>
-      </div>
-      <div class="form-group">
-        <label class="d-flex justify-content-between">Income</label>
-        <p class="hint">How much money or value it brought to you.</p>
-        <p class="hint">todo: currency mask</p>
-        <input class="form-control" type="text"/>
-      </div>
+      <%= form.fields_for :dots do |builder|  %>
+        <%= render "records/dot_fields", form: builder %>
+      <% end %>
       <div class="form-group">
         <label class="d-flex justify-content-between">Draw</label>
         <div id="bcPaint"></div>
@@ -157,9 +113,9 @@
         <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
           <i class="fa fa-check mx-1"></i>Create!
         <% end %>
-        <button class="btn btn-light px-5" type="button">
-          <i class="fa fa-close mx-1"></i>Clear
-        </button>
+        <%= link_to records_path, class: 'btn btn-light px-5' do %>
+          <i class="fa fa-close mx-1"></i>Cancel
+        <% end %>
       </div>
     <% end %>
   </div>

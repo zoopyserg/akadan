@@ -20,10 +20,12 @@ require("bootstrap")
 import "../stylesheets/application";
 document.addEventListener("turbolinks:load", function() {
     $(function () {
+        require("../src/durationpicker/setup")
         $('[data-toggle="tooltip"]').tooltip()
         $('[data-toggle="popover"]').popover()
     })
 })
+
 
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';

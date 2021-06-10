@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_151242) do
+ActiveRecord::Schema.define(version: 2021_06_10_150300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 2021_06_09_151242) do
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "dots", force: :cascade do |t|
+    t.bigint "record_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "duration"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_id"], name: "index_dots_on_record_id"
+    t.index ["user_id"], name: "index_dots_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -140,6 +150,8 @@ ActiveRecord::Schema.define(version: 2021_06_09_151242) do
     t.bigint "user_id", null: false
     t.text "description"
     t.boolean "is_public"
+    t.bigint "record_type_id", null: false
+    t.index ["record_type_id"], name: "index_records_on_record_type_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end
 
@@ -190,6 +202,8 @@ ActiveRecord::Schema.define(version: 2021_06_09_151242) do
   add_foreign_key "connections", "records", column: "record_a_id"
   add_foreign_key "connections", "records", column: "record_b_id"
   add_foreign_key "connections", "users"
+  add_foreign_key "dots", "records"
+  add_foreign_key "dots", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "participations", "conversations"
@@ -197,6 +211,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_151242) do
   add_foreign_key "readings", "messages"
   add_foreign_key "readings", "users"
   add_foreign_key "record_types", "users"
+  add_foreign_key "records", "record_types"
   add_foreign_key "records", "users"
   add_foreign_key "sensors", "users"
 end

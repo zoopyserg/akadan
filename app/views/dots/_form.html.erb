@@ -1,0 +1,52 @@
+<%= form_with(model: dot) do |form| %>
+  <% if dot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dot.errors.count, "error") %> prohibited this dot from being saved:</h2>
+
+      <ul>
+        <% dot.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :record_id %>
+    <%= form.text_field :record_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.date_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.time_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_select :end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.time_select :end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :income %>
+    <%= form.text_field :income %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.time_select :duration %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

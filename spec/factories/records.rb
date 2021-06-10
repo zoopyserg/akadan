@@ -4,5 +4,6 @@ FactoryBot.define do
     description { Faker::Quote.yoda }
 
     user { create :user }
+    record_type { create :record_type, user: user }
   end
 end

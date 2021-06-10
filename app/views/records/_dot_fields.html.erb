@@ -1,0 +1,23 @@
+<% # todo: do a Vue component for duration picker as right now all these turbolinks are too glitchy without 2-way binding %>
+<% # todo: plus it submits time as a string - "1h 38m 28s" - I thought it will be submitting seconds only, definitely need Vue, but on back-end side everything works, tired wasting my time on datepickers that aren't even needed %>
+<div class="form-group">
+  <%= form.label :duration, class: "d-flex justify-content-between" do %>
+    Duration
+  <% end %>
+  <p class="hint">How long did it last?</p>
+  <%= form.text_field :duration, class: "form-control duration_picker_field" %>
+
+  <div class="row">
+    <div class='col col-lg-12'>
+      <label class="">StopWatch</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class='col col-lg-12'>
+      <button class="btn btn-primary " id="startButton">Start </button>
+      <button class="btn btn-danger" id="stopButton" >Stop </button>
+      <button class=" btn btn-warning" id="resetButton">Reset </button>
+    </div>
+  </div>
+</div>
