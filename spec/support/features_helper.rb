@@ -47,9 +47,10 @@ module FeaturesHelper
     end
   end
 
-  def create_record(name, description)
+  def create_record(name, description, type)
     fill_in 'record_name', with: name
     fill_in 'record_description', with: description
+    select 'my type', from: :record_record_type_id
     click_on 'Create!'
   end
 

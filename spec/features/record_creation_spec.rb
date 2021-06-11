@@ -11,6 +11,7 @@ RSpec.feature "RecordCreations", type: :feature do
 
   context 'signed in' do
     let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
+    let!(:record_type) { create :record_type, name: "my type", user: user }
 
     before do
       visit root_path
@@ -20,7 +21,11 @@ RSpec.feature "RecordCreations", type: :feature do
 
     it 'should let me create' do
       expect(page).to have_no_content 'successfully created'
-      create_record('some record', 'description')
+
+      select 'my type', from: :record_record_type_id
+      fill_in :record_name, with: 'some record'
+      fill_in :record_description, with: 'some record'
+      click_on 'Create!'
 
       expect(page).to have_content 'successfully created'
     end

@@ -38,7 +38,10 @@ class RecordsController < ApplicationController
         format.html { redirect_to @record, notice: "Record was successfully created." }
         format.json { render :show, status: :created, location: @record }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html do
+          set_record_types
+          render :new, status: :unprocessable_entity
+        end
         format.json { render json: @record.errors, status: :unprocessable_entity }
       end
     end
