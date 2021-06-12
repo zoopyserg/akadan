@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ConnectionCreations", type: :feature do
+RSpec.feature "ConnectionCreation Success", type: :feature do
   context 'not signed in' do
     it 'should redirect to sign in page' do
       visit new_connection_path

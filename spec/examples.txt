@@ -5,6 +5,13 @@ example_id                                                                      
 ./spec/features/add_users_to_conversation_spec.rb[1:2:1:1:2:1]                                            | passed  | 0.36005 seconds |
 ./spec/features/add_users_to_conversation_spec.rb[1:2:1:1:2:2]                                            | passed  | 0.39391 seconds |
 ./spec/features/back_from_participants_to_conversation_button_spec.rb[1:2:1:1:1:1]                        | passed  | 0.43382 seconds |
+./spec/features/connection_creation_cancel_button_spec.rb[1:2:1]                                          | passed  | 0.22087 seconds |
+./spec/features/connection_creation_cancel_button_spec.rb[1:2:2]                                          | passed  | 0.74664 seconds |
+./spec/features/connection_creation_connection_type_spec.rb[1:2:1]                                        | passed  | 0.73205 seconds |
+./spec/features/connection_creation_description_spec.rb[1:2:1]                                            | passed  | 0.73546 seconds |
+./spec/features/connection_creation_name_spec.rb[1:2:1]                                                   | passed  | 0.77034 seconds |
+./spec/features/connection_creation_record_a_spec.rb[1:2:1]                                               | passed  | 0.73256 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:1]                                               | passed  | 0.74887 seconds |
 ./spec/features/connection_creation_spec.rb[1:1:1]                                                        | passed  | 0.55492 seconds |
 ./spec/features/connection_creation_spec.rb[1:2:1]                                                        | passed  | 0.31041 seconds |
 ./spec/features/connection_creation_spec.rb[1:2:2]                                                        | passed  | 0.2257 seconds  |
