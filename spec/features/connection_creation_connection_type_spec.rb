@@ -14,12 +14,25 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit new_connection_type_connection_path(connection_type)
+      visit new_record_connection_type_connection_path(record_a, connection_type)
     end
 
-    it 'should let me create' do
+    it 'should let me create by selecting the record' do
       expect {
         create_connection('some connection', 'description', 'Regular Type', 'Record A', 'Record B')
+      }.to change {
+        user.connections.where(connection_type: connection_type.reload.id).count
+      }.by(1)
+    end
+
+    it 'should autoselect the connection type' do
+      expect {
+        fill_in 'connection_name', with: 'some connection'
+        fill_in 'connection_description', with: 'description'
+        # skipping type selection on purpose to check autoselect
+        select 'Record A', from: :connection_record_a_id
+        select 'Record B', from: :connection_record_b_id
+        click_on 'Create!'
       }.to change {
         user.connections.where(connection_type: connection_type.reload.id).count
       }.by(1)

@@ -1,5 +1,6 @@
 class ConnectionsController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :set_record
   before_action :set_connection_type
   before_action :set_connection, only: %i[ show edit update destroy ]
   before_action :set_connection_types, only: %i[ new edit ]
@@ -22,6 +23,8 @@ class ConnectionsController < ApplicationController
   # GET /connections/new
   def new
     @connection = current_user.connections.new
+    @connection.record_a = @record_a
+    @connection.connection_type = @connection_type
   end
 
   # GET /connections/1/edit
@@ -87,7 +90,11 @@ class ConnectionsController < ApplicationController
   end
 
   def set_connection_type
-    @connection_type = current_user.connection_types.find(params[:connection_type_id]) if params[:connection_type_id]
+    @connection_type = current_user.connection_types.find(params[:connection_type_id]) if params[:connection_type_id].present?
+  end
+
+  def set_record
+    @record_a = Record.where(is_public: true).or(Record.where(user: current_user)).find(params[:record_id]) if params[:record_id].present?
   end
 
   def set_connection_types

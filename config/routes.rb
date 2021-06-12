@@ -5,11 +5,8 @@ Rails.application.routes.draw do
 
   resources :record_types
 
-  resources :connection_types do
-    resources :connections
-  end
-
   resources :connections
+  resources :connection_types
 
   resources :conversations do
     resources :messages
@@ -25,7 +22,12 @@ Rails.application.routes.draw do
   resources :friend_requests
   resources :blocked_users
   resources :friends
-  resources :records
+
+  resources :records do
+    resources :connection_types do
+      resources :connections
+    end
+  end
 
   root to: "records#index"
 end
