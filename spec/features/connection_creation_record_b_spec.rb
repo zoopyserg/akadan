@@ -43,15 +43,23 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
     describe 'limiting targets by record type' do
       let!(:record_type_1) { create :record_type, user: user }
       let!(:record_type_2) { create :record_type, user: user }
-      let!(:record_subtype_1) { create :record_type, user: user }
-      let!(:record_subtype_2) { create :record_type, user: user }
-      let!(:record_a) { create :record, record_type: record_type_1, user: user }
-      let!(:record_b1) { create :record, name: 'Record B1', record_type: record_type_1, user: user }
-      let!(:record_b2) { create :record, name: 'Record B2', record_type: record_type_2, user: user }
-      let!(:record_b3) { create :record, name: 'Record B3', record_type: record_subtype_1, user: user }
-      let!(:record_b4) { create :record, name: 'Record B4', record_type: record_subtype_2, user: user }
+      let!(:record_a) { create :record, name: 'A1', record_type: record_type_1, user: user }
+      let!(:record_b1) { create :record, name: 'B1', record_type: record_type_1, user: user }
+      let!(:record_b2) { create :record, name: 'B2', record_type: record_type_2, user: user }
+      let!(:record_b3) { create :record, name: 'B3', record_type: record_type_1, user: user }
+      let!(:record_b4) { create :record, name: 'B4', record_type: record_type_2, user: user }
+      let!(:record_b5) { create :record, name: 'B5', record_type: record_type_1, user: user }
+      let!(:record_b6) { create :record, name: 'B6', record_type: record_type_2, user: user }
+      let!(:record_b7) { create :record, name: 'B7', record_type: record_type_1, user: user }
+      let!(:record_b8) { create :record, name: 'B8', record_type: record_type_2, user: user }
+
       let!(:connection1) { create :connection, user: user, record_a: record_b1, record_b: record_b3 }
-      let!(:connection2) { create :connection, user: user, record_a: record_b2, record_b: record_b4 }
+      let!(:connection2) { create :connection, user: user, record_a: record_b1, record_b: record_b4 }
+      let!(:connection3) { create :connection, user: user, record_a: record_b2, record_b: record_b5 }
+      let!(:connection4) { create :connection, user: user, record_a: record_b2, record_b: record_b6 }
+      let!(:connection5) { create :connection, user: user, record_a: record_b6, record_b: record_b7 }
+      let!(:connection6) { create :connection, user: user, record_a: record_b6, record_b: record_b8 }
+
       let!(:connection_type) { create :connection_type, target_type: target_type, user: user, target_record_type: record_type_2, target_record_subtype: record_type_2 }
 
       before do
@@ -64,10 +72,15 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         let(:target_type) { 'any' }
 
         it 'should have all the options for b' do
-          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B1')
-          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B2')
-          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B3')
-          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B4')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B1')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B2')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B3')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B4')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B5')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B7')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
         end
       end
 
@@ -75,27 +88,48 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         let(:target_type) { 'same_as_source' }
 
         it 'should only have the records_b of the same type' do
-          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B1')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B2')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B4')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B5')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B6')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B7')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B8')
         end
       end
 
       context 'target can be only of specific type' do
         let(:target_type) { 'specific_type' }
 
-        it 'should only have the records_b of the same type' do
-          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B1')
-          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B2')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B4')
+        it 'should only have the records_b of the required type' do
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B2')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B4')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
         end
       end
 
       context 'target can be only specific subtype of specific type' do
         let(:target_type) { 'specific_subtype' }
 
+        it 'should only have the records_b of the required' do
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
+        end
       end
     end
 
