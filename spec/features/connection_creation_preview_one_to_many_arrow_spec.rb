@@ -20,13 +20,13 @@ RSpec.feature "ConnectionCreation One To Many Arrow", type: :feature do
     context 'one to many' do
       let(:one_to_many) { true }
 
-      it { expect(page).to have_css '.zmdi.zmdi-arrow-split' }
+      it { expect(page).to have_css '.zmdi.zmdi-arrow-split.rotated' }
     end
 
     context 'one to one' do
       let(:one_to_many) { false }
 
-      it { expect(page).to have_no_css '.zmdi.zmdi-arrow-down' }
+      it { expect(page).to have_no_css '.zmdi.zmdi-arrow-down.rotated' }
     end
   end
 end

@@ -20,13 +20,13 @@ RSpec.feature "ConnectionCreation One To One Arrow", type: :feature do
     context 'one to one' do
       let(:one_to_many) { false }
 
-      it { expect(page).to have_css '.zmdi.zmdi-long-arrow-down' }
+      it { expect(page).to have_css '#splitting-preview .zmdi.zmdi-long-arrow-down' }
     end
 
     context 'one to many' do
       let(:one_to_many) { true }
 
-      it { expect(page).to have_no_css '.zmdi.zmdi-long-arrow-down' }
+      it { expect(page).to have_no_css '#splitting-preview .zmdi.zmdi-long-arrow-down' }
     end
   end
 end

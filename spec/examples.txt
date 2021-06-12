@@ -10,10 +10,12 @@ example_id                                                                      
 ./spec/features/connection_creation_connection_type_spec.rb[1:2:1]                                        | passed  | 0.73205 seconds |
 ./spec/features/connection_creation_description_spec.rb[1:2:1]                                            | passed  | 0.73546 seconds |
 ./spec/features/connection_creation_name_spec.rb[1:2:1]                                                   | passed  | 0.77034 seconds |
-./spec/features/connection_creation_preview_one_to_many_arrow_spec.rb[1:2:1:1]                            | passed  | 0.18982 seconds |
-./spec/features/connection_creation_preview_one_to_many_arrow_spec.rb[1:2:2:1]                            | passed  | 0.69128 seconds |
-./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:1:1]                             | passed  | 0.70105 seconds |
-./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:2:1]                             | passed  | 0.17879 seconds |
+./spec/features/connection_creation_preview_destructive_connection_cross_spec.rb[1:2:1:1]                 | passed  | 0.17946 seconds |
+./spec/features/connection_creation_preview_destructive_connection_cross_spec.rb[1:2:2:1]                 | passed  | 0.6261 seconds  |
+./spec/features/connection_creation_preview_one_to_many_arrow_spec.rb[1:2:1:1]                            | passed  | 0.77436 seconds |
+./spec/features/connection_creation_preview_one_to_many_arrow_spec.rb[1:2:2:1]                            | passed  | 0.18749 seconds |
+./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:1:1]                             | passed  | 0.69325 seconds |
+./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:2:1]                             | passed  | 0.16873 seconds |
 ./spec/features/connection_creation_record_a_spec.rb[1:2:1]                                               | passed  | 0.73256 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:1]                                               | passed  | 0.74887 seconds |
 ./spec/features/connection_creation_spec.rb[1:1:1]                                                        | passed  | 0.55492 seconds |

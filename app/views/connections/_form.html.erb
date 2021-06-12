@@ -43,18 +43,17 @@
       <div class="form-group">
         <label for="input-1">Preview</label>
         <div class="text-center">
-          <div>
-            <i class="zmdi zmdi-close"></i>
+          <div id='destructive-preview'>
+            <% if @connection_type.destructive? %>
+              <i class="zmdi zmdi-close"></i>
+            <% end %>
           </div>
-          <div>
-            <% if @connection_type.one_to_many %>
-              <i class="zmdi zmdi-arrow-split"></i>
+          <div id='splitting-preview'>
+            <% if @connection_type.one_to_many? %>
+              <i class="zmdi zmdi-arrow-split rotated"></i>
             <% else %>
               <i class="zmdi zmdi-long-arrow-down"></i>
             <% end %>
-          </div>
-          <div>
-            <i class="zmdi zmdi-close"></i>
           </div>
         </div>
       </div>

@@ -4192,8 +4192,6 @@ radiocontainer {
     box-shadow: none;
 }
 
-
-
-
-
-
+.rotated {
+    transform: rotate(180deg);
+}
