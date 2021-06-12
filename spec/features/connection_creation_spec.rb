@@ -27,5 +27,10 @@ RSpec.feature "ConnectionCreations", type: :feature do
 
       expect(page).to have_content 'successfully created'
     end
+
+    it 'should open index page' do
+      create_connection('some connection', 'description', 'Regular Type', 'Record A', 'Record B')
+      expect(current_path).to eq connections_path
+    end
   end
 end

@@ -33,7 +33,7 @@ class ConnectionsController < ApplicationController
 
     respond_to do |format|
       if @connection.save
-        format.html { redirect_to @connection, notice: "Connection was successfully created." }
+        format.html { redirect_to connections_path, notice: "Connection was successfully created." }
         format.json { render :show, status: :created, location: @connection }
       else
         format.html do
@@ -51,7 +51,7 @@ class ConnectionsController < ApplicationController
   def update
     respond_to do |format|
       if @connection.update(connection_params)
-        format.html { redirect_to @connection, notice: "Connection was successfully updated." }
+        format.html { redirect_to connections_path, notice: "Connection was successfully updated." }
         format.json { render :show, status: :ok, location: @connection }
       else
         format.html do

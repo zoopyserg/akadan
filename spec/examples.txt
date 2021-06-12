@@ -5,8 +5,9 @@ example_id                                                                      
 ./spec/features/add_users_to_conversation_spec.rb[1:2:1:1:2:1]                                            | passed  | 0.36005 seconds |
 ./spec/features/add_users_to_conversation_spec.rb[1:2:1:1:2:2]                                            | passed  | 0.39391 seconds |
 ./spec/features/back_from_participants_to_conversation_button_spec.rb[1:2:1:1:1:1]                        | passed  | 0.43382 seconds |
-./spec/features/connection_creation_spec.rb[1:1:1]                                                        | passed  | 0.06696 seconds |
-./spec/features/connection_creation_spec.rb[1:2:1]                                                        | passed  | 0.76965 seconds |
+./spec/features/connection_creation_spec.rb[1:1:1]                                                        | passed  | 0.55492 seconds |
+./spec/features/connection_creation_spec.rb[1:2:1]                                                        | passed  | 0.31041 seconds |
+./spec/features/connection_creation_spec.rb[1:2:2]                                                        | passed  | 0.2257 seconds  |
 ./spec/features/connection_type_creation_spec.rb[1:1:1]                                                   | passed  | 0.04384 seconds |
 ./spec/features/connection_type_creation_spec.rb[1:2:1]                                                   | passed  | 0.21807 seconds |
 ./spec/features/connections_index_created_by_spec.rb[1:1:1]                                               | passed  | 0.15472 seconds |
