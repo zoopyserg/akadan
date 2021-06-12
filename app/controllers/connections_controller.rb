@@ -87,7 +87,7 @@ class ConnectionsController < ApplicationController
   end
 
   def set_connection_type
-    @connection_type = current_user.connection_types.find(params[:connection_type_id])
+    @connection_type = current_user.connection_types.find(params[:connection_type_id]) if params[:connection_type_id]
   end
 
   def set_connection_types

@@ -5,7 +5,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
     # skipping because it is tested in Success
   end
 
-  context 'signed in' do
+  xcontext 'signed in' do
     let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
     let!(:connection_type) { create :connection_type, name: 'Regular Type', user: user }
     let!(:record_a) { create :record, name: 'Record A', user: user }

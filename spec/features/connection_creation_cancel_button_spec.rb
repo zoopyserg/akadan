@@ -14,7 +14,7 @@ RSpec.feature "ConnectionCreations Cancel Button", type: :feature do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit new_connection_path
+      visit new_connection_type_connection_path(connection_type)
     end
 
     it 'should let me create' do
