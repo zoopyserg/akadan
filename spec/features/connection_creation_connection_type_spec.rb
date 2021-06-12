@@ -25,4 +25,7 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
       }.by(1)
     end
   end
+
+  # note that I'm not reloading the selection options if I picked a different connection type.
+  # which I should.
 end

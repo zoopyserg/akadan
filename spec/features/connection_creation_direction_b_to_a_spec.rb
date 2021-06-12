@@ -5,6 +5,9 @@ RSpec.feature "ConnectionCreations B to A", type: :feature do
     # skipping because it is tested in Success
   end
 
+  # Now I have a problem with this, not all connections can be reversible because the constraints mostly affect the target
+  # In other words, if I select B to be A, then the record that was A may be inaccessible as B.
+  # So... Yeah. I can have a button that would choose B as A, but then for B the list will be different (and may not include A).
   xcontext 'signed in' do
     let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
     let!(:connection_type) { create :connection_type, name: 'Regular Type', user: user }

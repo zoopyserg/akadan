@@ -20,7 +20,7 @@ example_id                                                                      
 ./spec/features/connection_creation_preview_one_to_many_arrow_spec.rb[1:2:2:1]                            | passed  | 0.19517 seconds |
 ./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:1:1]                             | passed  | 0.19235 seconds |
 ./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:2:1]                             | passed  | 0.19915 seconds |
-./spec/features/connection_creation_record_a_spec.rb[1:2:1]                                               | pending | 0.00001 seconds |
+./spec/features/connection_creation_record_a_spec.rb[1:2:1]                                               | passed  | 0.91226 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:1]                                               | pending | 0.00001 seconds |
 ./spec/features/connection_creation_spec.rb[1:1:1]                                                        | passed  | 0.52319 seconds |
 ./spec/features/connection_creation_spec.rb[1:2:1]                                                        | passed  | 0.23425 seconds |

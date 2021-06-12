@@ -5,7 +5,7 @@ RSpec.feature "ConnectionCreation Record A", type: :feature do
     # skipping because it is tested in Success
   end
 
-  xcontext 'signed in' do
+  context 'signed in' do
     let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
     let!(:connection_type) { create :connection_type, name: 'Regular Type', user: user }
     let!(:record_a) { create :record, name: 'Record A', user: user }
@@ -14,7 +14,7 @@ RSpec.feature "ConnectionCreation Record A", type: :feature do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit new_connection_path
+      visit new_connection_type_connection_path(connection_type)
     end
 
     it 'should let me create' do
@@ -24,5 +24,7 @@ RSpec.feature "ConnectionCreation Record A", type: :feature do
         user.connections.where(record_a_id: record_a.reload.id).count
       }.by(1)
     end
+
+    # there are no other requirements for Record A, any record can have an OutGoing connection, all limitations about what record can be a Target.
   end
 end
