@@ -48,12 +48,12 @@ class ConnectionType < ApplicationRecord
     target_hierarchy == 'root'
   end
 
-  def hierarchy_specific_parent_type?
+  def hierarchy_parent_of_specific_type?
     target_hierarchy == 'specific_parent_type'
   end
 
   def hierarchy_closest_parent_of_type?
-    target_hierarchy == 'closest_root'
+    target_hierarchy == 'closest_specific_parent_type'
   end
 
   def possible_records_b_for(user, record_a)
