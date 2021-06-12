@@ -110,6 +110,8 @@ class ConnectionsController < ApplicationController
       @records_b = Record.where(is_public: true).or(Record.where(user: current_user))
     elsif @connection_type.target_type_same_as_source_type?
       @records_b = Record.where(is_public: true).or(Record.where(user: current_user)).where(record_type: @record_a.record_type)
+    elsif @connection_type.target_specific_type?
+      @records_b = Record.where(is_public: true).or(Record.where(user: current_user)).where(record_type: @connection_type.target_record_type)
     end
   end
 end

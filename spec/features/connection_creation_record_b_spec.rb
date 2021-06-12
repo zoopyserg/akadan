@@ -41,7 +41,6 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
     end
 
     describe 'limiting targets by record type' do
-      let!(:connection_type) { create :connection_type, target_type: target_type, user: user }
       let!(:record_type_1) { create :record_type, user: user }
       let!(:record_type_2) { create :record_type, user: user }
       let!(:record_subtype_1) { create :record_type, user: user }
@@ -53,6 +52,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       let!(:record_b4) { create :record, name: 'Record B4', record_type: record_subtype_2, user: user }
       let!(:connection1) { create :connection, user: user, record_a: record_b1, record_b: record_b3 }
       let!(:connection2) { create :connection, user: user, record_a: record_b2, record_b: record_b4 }
+      let!(:connection_type) { create :connection_type, target_type: target_type, user: user, target_record_type: record_type_2, target_record_subtype: record_type_2 }
 
       before do
         visit root_path
@@ -85,6 +85,12 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       context 'target can be only of specific type' do
         let(:target_type) { 'specific_type' }
 
+        it 'should only have the records_b of the same type' do
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B1')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B2')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B4')
+        end
       end
 
       context 'target can be only specific subtype of specific type' do
