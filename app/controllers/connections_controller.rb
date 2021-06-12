@@ -1,5 +1,6 @@
 class ConnectionsController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :set_connection_type
   before_action :set_connection, only: %i[ show edit update destroy ]
   before_action :set_connection_types, only: %i[ new edit ]
   before_action :set_records_a, only: %i[ new edit ]
@@ -83,6 +84,10 @@ class ConnectionsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def connection_params
     params.require(:connection).permit(:name, :description, :connection_type_id, :record_a_id, :record_b_id)
+  end
+
+  def set_connection_type
+    @connection_type = current_user.connection_types.find(params[:connection_type_id])
   end
 
   def set_connection_types

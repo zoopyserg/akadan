@@ -47,9 +47,11 @@
             <i class="zmdi zmdi-close"></i>
           </div>
           <div>
-            <i class="zmdi zmdi-long-arrow-up"></i>
-            <i class="zmdi zmdi-long-arrow-down"></i>
-            <i class="zmdi zmdi-arrow-split"></i>
+            <% if @connection_type.one_to_many %>
+              <i class="zmdi zmdi-arrow-split"></i>
+            <% else %>
+              <i class="zmdi zmdi-long-arrow-down"></i>
+            <% end %>
           </div>
           <div>
             <i class="zmdi zmdi-close"></i>

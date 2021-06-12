@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
   resources :record_types
-  resources :connection_types
+
+  resources :connection_types do
+    resources :connections
+  end
+
   resources :connections
 
   resources :conversations do
