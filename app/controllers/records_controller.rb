@@ -54,7 +54,10 @@ class RecordsController < ApplicationController
         format.html { redirect_to @record, notice: "Record was successfully updated." }
         format.json { render :show, status: :ok, location: @record }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html do
+          set_record_types
+          render :edit, status: :unprocessable_entity
+        end
         format.json { render json: @record.errors, status: :unprocessable_entity }
       end
     end

@@ -13,17 +13,11 @@
         </div>
       <% end %>
       <div class="form-group">
-        <label for="input-3">Type</label>
+        <%= form.label :connection_type_id do %>
+          Connection Type
+        <% end %>
         <div class="dropdown" data-pgc="jr.dropdown">
-          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
-            &nbsp;Select
-          </button>
-          <div class="dropdown-menu" x-placement='bottom start'>
-            <a class="dropdown-item" href='#'>Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-            <a href="#" class="dropdown-item">Link</a>
-          </div>
+          <%= form.collection_select :connection_type_id, @connection_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
       </div>
       <div class="form-group">
@@ -39,8 +33,12 @@
         <%= form.text_area :description, class: "form-control", placeholder: "Enter Connection Description (for example a reason you are creating it)" %>
       </div>
       <div class="form-group">
-        <label for="input-1">Record A</label>
-        <input type="text" class="form-control" id="input-1" placeholder="Enter Your Name">
+        <%= form.label :record_a_id do %>
+          Record A
+        <% end %>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <%= form.collection_select :record_a_id, @records_a, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+        </div>
       </div>
       <div class="form-group">
         <label for="input-1">Preview</label>
@@ -59,10 +57,12 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="input-1">Record B</label>
-        <p>Find or create</p>
-        <p>circular dependencies are forbidden, so all parents of A are excluded</p>
-        <input type="text" class="form-control" id="input-1" placeholder="Enter Your Name">
+        <%= form.label :record_b_id do %>
+          Record B
+        <% end %>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <%= form.collection_select :record_b_id, @records_b, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+        </div>
       </div>
       <div class="form-group">
         <label for="input-3">Direction</label>

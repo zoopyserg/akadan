@@ -1,6 +1,9 @@
 class ConnectionsController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :set_connection, only: %i[ show edit update destroy ]
+  before_action :set_connection_types, only: %i[ new edit ]
+  before_action :set_records_a, only: %i[ new edit ]
+  before_action :set_records_b, only: %i[ new edit ]
 
   # GET /connections or /connections.json
   def index
@@ -33,7 +36,12 @@ class ConnectionsController < ApplicationController
         format.html { redirect_to @connection, notice: "Connection was successfully created." }
         format.json { render :show, status: :created, location: @connection }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html do
+          set_connection_types
+          set_records_a
+          set_records_b
+          render :new, status: :unprocessable_entity
+        end
         format.json { render json: @connection.errors, status: :unprocessable_entity }
       end
     end
@@ -46,7 +54,12 @@ class ConnectionsController < ApplicationController
         format.html { redirect_to @connection, notice: "Connection was successfully updated." }
         format.json { render :show, status: :ok, location: @connection }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html do
+          set_connection_types
+          set_records_a
+          set_records_b
+          render :edit, status: :unprocessable_entity
+        end
         format.json { render json: @connection.errors, status: :unprocessable_entity }
       end
     end
@@ -62,13 +75,25 @@ class ConnectionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_connection
-      @connection = current_user.connections.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_connection
+    @connection = current_user.connections.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def connection_params
-      params.require(:connection).permit(:name, :description)
-    end
+  # Only allow a list of trusted parameters through.
+  def connection_params
+    params.require(:connection).permit(:name, :description, :connection_type_id, :record_a_id, :record_b_id)
+  end
+
+  def set_connection_types
+    @connection_types = ConnectionType.where(is_public: true).or(ConnectionType.where(user: current_user))
+  end
+
+  def set_records_a
+    @records_a = Record.where(is_public: true).or(Record.where(user: current_user))
+  end
+
+  def set_records_b
+    @records_b = Record.where(is_public: true).or(Record.where(user: current_user))
+  end
 end

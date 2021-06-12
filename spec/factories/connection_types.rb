@@ -11,7 +11,7 @@ FactoryBot.define do
 
     user { create :user }
 
-    trait :specific_type do
+    trait :specific_record_type do
       target_type { :specific_type }
       target_record_type { create :record_type }
     end

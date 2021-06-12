@@ -50,7 +50,7 @@ module FeaturesHelper
   def create_record(name, description, type)
     fill_in 'record_name', with: name
     fill_in 'record_description', with: description
-    select 'my type', from: :record_record_type_id
+    select type, from: :record_record_type_id
     click_on 'Create!'
   end
 
@@ -60,9 +60,12 @@ module FeaturesHelper
     click_on 'Create!'
   end
 
-  def create_connection(name, description)
+  def create_connection(name, description, type, record_a, record_b)
     fill_in 'connection_name', with: name
     fill_in 'connection_description', with: description
+    select type, from: :connection_connection_type_id
+    select record_a, from: :connection_record_a_id
+    select record_b, from: :connection_record_b_id
     click_on 'Create!'
   end
 
