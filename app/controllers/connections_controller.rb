@@ -106,6 +106,10 @@ class ConnectionsController < ApplicationController
   end
 
   def set_records_b
-    @records_b = Record.where(is_public: true).or(Record.where(user: current_user))
+    if @connection_type.any_target_type?
+      @records_b = Record.where(is_public: true).or(Record.where(user: current_user))
+    elsif @connection_type.target_type_same_as_source_type?
+      @records_b = Record.where(is_public: true).or(Record.where(user: current_user)).where(record_type: @record_a.record_type)
+    end
   end
 end

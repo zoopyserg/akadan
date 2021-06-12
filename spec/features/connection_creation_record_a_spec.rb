@@ -38,6 +38,8 @@ RSpec.feature "ConnectionCreation Record A", type: :feature do
       }.by(1)
     end
 
+    xit 'public/private records visibility pending'
+
     # there are no other requirements for Record A, any record can have an OutGoing connection, all limitations about what record can be a Target.
   end
 end

@@ -23,7 +23,9 @@ example_id                                                                      
 ./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:2:1]                             | passed  | 0.7262 seconds  |
 ./spec/features/connection_creation_record_a_spec.rb[1:2:1]                                               | passed  | 0.79674 seconds |
 ./spec/features/connection_creation_record_a_spec.rb[1:2:2]                                               | passed  | 0.26352 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:1]                                               | pending | 0.00001 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:1:1]                                             | passed  | 0.22119 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:1:1]                                           | passed  | 0.22341 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:2:1]                                           | passed  | 1.42 seconds    |
 ./spec/features/connection_creation_spec.rb[1:1:1]                                                        | passed  | 0.05826 seconds |
 ./spec/features/connection_creation_spec.rb[1:2:1]                                                        | passed  | 0.78877 seconds |
 ./spec/features/connection_creation_spec.rb[1:2:2]                                                        | passed  | 0.24408 seconds |

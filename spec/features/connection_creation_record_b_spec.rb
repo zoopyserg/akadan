@@ -16,7 +16,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       before do
         visit root_path
         sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-        visit new_connection_path
+        visit new_record_connection_type_connection_path(record_a, connection_type)
       end
 
       it 'should let me create' do
@@ -28,24 +28,67 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       end
     end
 
+    describe 'public/private records' do
+
+    end
+
+    describe 'excluding record A from record B list' do
+
+    end
+
     describe 'circular dependency exclusion' do
 
     end
 
     describe 'limiting targets by record type' do
-      context 'target only same as source' do
+      let!(:connection_type) { create :connection_type, target_type: target_type, user: user }
+      let!(:record_type_1) { create :record_type, user: user }
+      let!(:record_type_2) { create :record_type, user: user }
+      let!(:record_subtype_1) { create :record_type, user: user }
+      let!(:record_subtype_2) { create :record_type, user: user }
+      let!(:record_a) { create :record, record_type: record_type_1, user: user }
+      let!(:record_b1) { create :record, name: 'Record B1', record_type: record_type_1, user: user }
+      let!(:record_b2) { create :record, name: 'Record B2', record_type: record_type_2, user: user }
+      let!(:record_b3) { create :record, name: 'Record B3', record_type: record_subtype_1, user: user }
+      let!(:record_b4) { create :record, name: 'Record B4', record_type: record_subtype_2, user: user }
+      let!(:connection1) { create :connection, user: user, record_a: record_b1, record_b: record_b3 }
+      let!(:connection2) { create :connection, user: user, record_a: record_b2, record_b: record_b4 }
 
+      before do
+        visit root_path
+        sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+        visit new_record_connection_type_connection_path(record_a, connection_type)
       end
 
       context 'target can be any type' do
+        let(:target_type) { 'any' }
 
+        it 'should have all the options for b' do
+          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B1')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B2')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B3')
+          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B4')
+        end
+      end
+
+      context 'target only same as source' do
+        let(:target_type) { 'same_as_source' }
+
+        it 'should only have the records_b of the same type' do
+          expect_dropdown_to_contain_option('connection_record_b_id', 'Record B1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B2')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', 'Record B4')
+        end
       end
 
       context 'target can be only of specific type' do
+        let(:target_type) { 'specific_type' }
 
       end
 
       context 'target can be only specific subtype of specific type' do
+        let(:target_type) { 'specific_subtype' }
 
       end
     end

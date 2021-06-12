@@ -85,6 +85,14 @@ module FeaturesHelper
     Rack::Test::UploadedFile.new(Rails.root.join("spec/fixtures/images/#{name}"), 'image/jpeg')
   end
 
+  def expect_dropdown_to_contain_option(dropdown, option)
+    expect(page.all("select##{dropdown} option").map(&:text)).to include(option)
+  end
+
+  def expect_dropdown_not_to_contain_option(dropdown, option)
+    expect(page.all("select##{dropdown} option").map(&:text)).not_to include(option)
+  end
+
   def toggle_tables
     click_on_selector '#splitTablesEnabled input'
   end

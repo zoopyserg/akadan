@@ -37,6 +37,11 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
         user.connections.where(connection_type: connection_type.reload.id).count
       }.by(1)
     end
+
+    describe 'public/private connection types' do
+      xit 'pending'
+
+    end
   end
 
   # note that I'm not reloading the selection options if I picked a different connection type.
