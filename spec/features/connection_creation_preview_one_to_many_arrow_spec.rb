@@ -1,32 +1,32 @@
 require 'rails_helper'
 
-RSpec.feature "ConnectionCreations One To Many Arrow", type: :feature do
+RSpec.feature "ConnectionCreation One To Many Arrow", type: :feature do
   context 'not signed in' do
     # skipping because it is tested in Success
   end
 
-  xcontext 'signed in' do
+  context 'signed in' do
     let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
-    let!(:connection_type) { create :connection_type, name: 'Regular Type', user: user }
+    let!(:connection_type) { create :connection_type, name: 'Regular Type', one_to_many: one_to_many, user: user }
     let!(:record_a) { create :record, name: 'Record A', user: user }
     let!(:record_b) { create :record, name: 'Record B', user: user }
 
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit new_connection_path
+      visit new_connection_type_connection_path(connection_type)
     end
 
-    it 'should let me create' do
-      expect(page).to have_no_content 'successfully created'
-      create_connection('some connection', 'description', 'Regular Type', 'Record A', 'Record B')
+    context 'one to many' do
+      let(:one_to_many) { true }
 
-      expect(page).to have_content 'successfully created'
+      it { expect(page).to have_css '.zmdi.zmdi-arrow-split' }
     end
 
-    it 'should open index page' do
-      create_connection('some connection', 'description', 'Regular Type', 'Record A', 'Record B')
-      expect(current_path).to eq connections_path
+    context 'one to one' do
+      let(:one_to_many) { false }
+
+      it { expect(page).to have_no_css '.zmdi.zmdi-arrow-down' }
     end
   end
 end
