@@ -32,10 +32,6 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
 
     end
 
-    describe 'excluding record A from record B list' do
-
-    end
-
     describe 'circular dependency exclusion' do
 
     end
@@ -155,12 +151,44 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       let!(:connection6) { create :connection, user: user, record_a: record_5, record_b: record_6 }
       let!(:connection7) { create :connection, user: user, record_a: record_5, record_b: record_7 }
 
-      let!(:connection_type) { create :connection_type, target_hierarchy: target_hierarchy, user: user, closest_parent_type: record_type_2 }
+      let!(:connection_type) { create :connection_type, target_type: 'any', target_hierarchy: target_hierarchy, user: user, closest_parent_type: record_type_2 }
 
       before do
         visit root_path
         sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
         visit new_record_connection_type_connection_path(record_4, connection_type)
+      end
+
+      context 'target all' do
+        let(:target_hierarchy) { 'all' }
+
+        it 'should show correct probable record_bs' do
+          expect_dropdown_to_contain_option('connection_record_b_id', '0')
+          expect_dropdown_to_contain_option('connection_record_b_id', '1')
+          expect_dropdown_to_contain_option('connection_record_b_id', '2')
+          expect_dropdown_to_contain_option('connection_record_b_id', '3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
+          expect_dropdown_to_contain_option('connection_record_b_id', '5')
+          expect_dropdown_to_contain_option('connection_record_b_id', '6')
+          expect_dropdown_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '10')
+        end
+      end
+
+      context 'target root records' do
+        let(:target_hierarchy) { 'all_roots' }
+
+        it 'should show correct probable record_bs' do
+          expect_dropdown_to_contain_option('connection_record_b_id', '0')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '10')
+        end
       end
 
       context 'target only siblings' do
@@ -224,38 +252,6 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_to_contain_option('connection_record_b_id', '7')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-        end
-      end
-
-      context 'target all' do
-        let(:target_hierarchy) { 'all' }
-
-        it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_to_contain_option('connection_record_b_id', '1')
-          expect_dropdown_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_to_contain_option('connection_record_b_id', '3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-          expect_dropdown_to_contain_option('connection_record_b_id', '5')
-          expect_dropdown_to_contain_option('connection_record_b_id', '6')
-          expect_dropdown_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '10')
-        end
-      end
-
-      context 'target root records' do
-        let(:target_hierarchy) { 'all_roots' }
-
-        it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '10')
         end
       end
 

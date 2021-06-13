@@ -56,13 +56,25 @@ class ConnectionType < ApplicationRecord
     target_hierarchy == 'closest_specific_parent_type'
   end
 
-  def possible_records_b_for(user, record_a)
+  def possible_records_b_by_type_for(user, record_a)
     if any_target_type?
       Record.accessible_record_bs(user, record_a)
     elsif target_type_same_as_source_type?
       Record.accessible_record_bs_by_type(user, record_a, record_a.record_type)
     elsif target_specific_type?
       Record.accessible_record_bs_by_type(user, record_a, target_record_type)
+    elsif target_specific_subtype?
+      Record.accessible_record_bs_by_subtype(user, record_a, target_record_type, target_record_subtype)
+    end
+  end
+
+  def possible_records_b_for(user, record_a)
+    if hierarchy_all?
+      possible_records_b_by_type_for(user, record_a)
+    elsif hierarchy_all_roots?
+      possible_records_b_by_type_for(user, record_a).all_roots
+    elsif hierarchy_siblings?
+      possible_records_b_by_type_for(user, record_a).siblings(user, record_a)
     elsif target_specific_subtype?
       Record.accessible_record_bs_by_subtype(user, record_a, target_record_type, target_record_subtype)
     end

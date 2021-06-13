@@ -13,4 +13,11 @@ class Record < ApplicationRecord
   scope :accessible_record_bs, -> (user, record_a) { visible_to_user(user).without_source(record_a) }
   scope :accessible_record_bs_by_type, -> (user, record_a, type) { accessible_record_bs(user, record_a).of_type(type) }
   scope :accessible_record_bs_by_subtype, -> (user, record_a, type, subtype) { accessible_record_bs_by_type(user, record_a, subtype).joins(:connections_as_target).where(connections: { record_a: (accessible_record_bs_by_type(user, record_a, type) ) })}
+
+  scope :all_roots, -> { where.not(id: Connection.pluck(:record_b_id)) }
+  scope :siblings, -> (user, record_a) { where(id: Record.children(Record.parents(record_a)) ) }
+  scope :children, -> (parent_ids) { Connection.where(record_a_id: parent_ids).pluck(:record_b_id) }
+  scope :parents, -> (record_a) { Connection.where(record_b_id: record_a.id).pluck(:record_a_id) }
+  # scope :siblings, -> (record_a) { where(id: Connection.where(record_a_id: parents(record_a) ).pluck(:record_b_id)) }
+  # scope :parents, -> (record_a) { Record.joins(:connections_as_target).where(connections: { record_b_id: record_a.id } ) }
 end
