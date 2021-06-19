@@ -199,7 +199,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         end
       end
 
-      context 'target only siblings', :js do
+      context 'target only siblings' do
         let(:target_hierarchy) { 'siblings' }
 
         it 'should show correct probable record_bs' do
@@ -235,12 +235,12 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         end
       end
 
-      context 'target deep siblings' do
-        let(:target_hierarchy) { 'deep_siblings' }
+      context 'target all records of my tree' do
+        let(:target_hierarchy) { 'all_tree_records' }
 
         it 'should show correct probable record_bs' do
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
+          expect_dropdown_to_contain_option('connection_record_b_id', '0')
+          expect_dropdown_to_contain_option('connection_record_b_id', '1')
           expect_dropdown_to_contain_option('connection_record_b_id', '2')
           expect_dropdown_to_contain_option('connection_record_b_id', '3')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
@@ -253,12 +253,13 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         end
       end
 
-      context 'target all records of my tree' do
-        let(:target_hierarchy) { 'all_tree_records' }
+
+      context 'target deep siblings' do
+        let(:target_hierarchy) { 'deep_siblings' }
 
         it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_to_contain_option('connection_record_b_id', '1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
           expect_dropdown_to_contain_option('connection_record_b_id', '2')
           expect_dropdown_to_contain_option('connection_record_b_id', '3')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '4')

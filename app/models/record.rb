@@ -40,4 +40,26 @@ class Record < ApplicationRecord
     SQL
     # todo: interpolation
   end
+
+  def self.all_tree_records_of_record(record)
+    where(id: ActiveRecord::Base.connection.execute(all_tree_record_ids(record)).pluck('id'))
+  end
+
+  def self.all_tree_record_ids(record)
+    <<-SQL
+      WITH RECURSIVE search_tree(id, path) AS (
+          SELECT id, ARRAY[id]
+          FROM records
+          WHERE id = #{record.id}
+        UNION
+          SELECT records.id, path || records.id
+          FROM search_tree
+          JOIN connections ON (connections.record_b_id = search_tree.id OR connections.record_a_id = search_tree.id)
+          JOIN records ON (records.id = connections.record_a_id OR records.id = connections.record_b_id)
+          WHERE NOT records.id = ANY(path)
+      )
+      SELECT id FROM search_tree ORDER BY path
+    SQL
+    # todo: interpolation
+  end
 end
