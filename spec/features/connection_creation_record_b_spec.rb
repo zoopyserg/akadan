@@ -275,10 +275,11 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
 
       context 'target root of this tree' do
         let(:target_hierarchy) { 'root' }
+        # there is no "root", there's "roots" (records of my tree that have only the outgoing connections)
 
         it 'should show correct probable record_bs' do
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_to_contain_option('connection_record_b_id', '1')
+          expect_dropdown_to_contain_option('connection_record_b_id', '0')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
