@@ -75,8 +75,9 @@ class ConnectionType < ApplicationRecord
       possible_records_b_by_type_for(user, record_a).all_roots
     elsif hierarchy_siblings?
       possible_records_b_by_type_for(user, record_a).siblings(user, record_a)
-    elsif target_specific_subtype?
-      Record.accessible_record_bs_by_subtype(user, record_a, target_record_type, target_record_subtype)
+    elsif hierarchy_all_parent_generations?
+      possible_records_b_by_type_for(user, record_a).all_parents_of_record(record_a)
     end
   end
+
 end

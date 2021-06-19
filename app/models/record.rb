@@ -18,6 +18,26 @@ class Record < ApplicationRecord
   scope :siblings, -> (user, record_a) { where(id: Record.children(Record.parents(record_a)) ) }
   scope :children, -> (parent_ids) { Connection.where(record_a_id: parent_ids).pluck(:record_b_id) }
   scope :parents, -> (record_a) { Connection.where(record_b_id: record_a.id).pluck(:record_a_id) }
-  # scope :siblings, -> (record_a) { where(id: Connection.where(record_a_id: parents(record_a) ).pluck(:record_b_id)) }
-  # scope :parents, -> (record_a) { Record.joins(:connections_as_target).where(connections: { record_b_id: record_a.id } ) }
+
+  def self.all_parents_of_record(record)
+    where(id: ActiveRecord::Base.connection.execute(all_parent_ids(record)).pluck('id'))
+  end
+
+  def self.all_parent_ids(record)
+    <<-SQL
+      WITH RECURSIVE search_tree(id, path) AS (
+          SELECT id, ARRAY[id]
+          FROM records
+          WHERE id = #{record.id}
+        UNION
+          SELECT records.id, path || records.id
+          FROM search_tree
+          JOIN connections ON connections.record_b_id = search_tree.id
+          JOIN records ON records.id = connections.record_a_id
+          WHERE NOT records.id = ANY(path)
+      )
+      SELECT id FROM search_tree ORDER BY path
+    SQL
+    # todo: interpolation
+  end
 end

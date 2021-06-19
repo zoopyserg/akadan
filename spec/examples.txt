@@ -30,8 +30,8 @@ example_id                                                                      
 ./spec/features/connection_creation_record_b_spec.rb[1:2:4:4:1]                                           | passed  | 0.19472 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:1:1]                                           | passed  | 0.75288 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:2:1]                                           | passed  | 0.75496 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:3:1]                                           | passed  | 0.74373 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:4:1]                                           | failed  | 0.26013 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:3:1]                                           | passed  | 0.73453 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:4:1]                                           | failed  | 0.74108 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:5:1]                                           | passed  | 0.21485 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:6:1]                                           | passed  | 0.20704 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:7:1]                                           | failed  | 0.1871 seconds  |
