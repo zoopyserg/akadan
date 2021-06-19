@@ -81,6 +81,8 @@ class ConnectionType < ApplicationRecord
       possible_records_b_by_type_for(user, record_a).all_tree_records_of_record(record_a)
     elsif hierarchy_parent_of_specific_type?
       possible_records_b_by_type_for(user, record_a).all_parents_of_record(record_a).where(record_type: closest_parent_type)
+    elsif hierarchy_deep_siblings?
+      possible_records_b_by_type_for(user, record_a).all_tree_records_of_record(record_a).where.not(id: Record.all_parents_of_record(record_a))
     end
   end
 

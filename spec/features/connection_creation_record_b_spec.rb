@@ -256,17 +256,18 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
 
       context 'target deep siblings' do
         let(:target_hierarchy) { 'deep_siblings' }
+        # I'm doing it as "all tree members without parents
 
         it 'should show correct probable record_bs' do
           expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
           expect_dropdown_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_to_contain_option('connection_record_b_id', '3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
           expect_dropdown_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
           expect_dropdown_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end

@@ -33,7 +33,7 @@ example_id                                                                      
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:3:1]                                           | passed  | 0.79256 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:4:1]                                           | passed  | 0.75891 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:5:1]                                           | passed  | 1.78 seconds    |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:6:1]                                           | passed  | 0.20704 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:6:1]                                           | passed  | 0.78923 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:7:1]                                           | failed  | 0.1871 seconds  |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:8:1]                                           | passed  | 0.78352 seconds |
 ./spec/features/connection_creation_record_b_spec.rb[1:2:5:9:1]                                           | failed  | 0.16849 seconds |
