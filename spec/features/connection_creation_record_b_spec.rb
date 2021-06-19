@@ -308,6 +308,9 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         end
       end
 
+      # having a "closest" one does not even make any sense now
+      # because "closest" is undefined when I have all records
+      # on the same distance from this one.
       context 'target closest parent of a specific type' do
         let(:target_hierarchy) { 'closest_specific_parent_type' }
 
