@@ -141,6 +141,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       let!(:record_5) { create :record, name: '5', record_type: record_type_1, user: user }
       let!(:record_6) { create :record, name: '6', record_type: record_type_1, user: user }
       let!(:record_7) { create :record, name: '7', record_type: record_type_2, user: user }
+      let!(:record_8) { create :record, name: '8', record_type: record_type_1, user: user }
+      let!(:record_9) { create :record, name: '9', record_type: record_type_2, user: user }
       let!(:record_10) { create :record, name: '10', record_type: record_type_1, user: user }
 
       let!(:connection1) { create :connection, user: user, record_a: record_0, record_b: record_1 }
@@ -150,6 +152,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       let!(:connection5) { create :connection, user: user, record_a: record_3, record_b: record_5 }
       let!(:connection6) { create :connection, user: user, record_a: record_5, record_b: record_6 }
       let!(:connection7) { create :connection, user: user, record_a: record_5, record_b: record_7 }
+      let!(:connection8) { create :connection, user: user, record_a: record_8, record_b: record_3 }
+      let!(:connection9) { create :connection, user: user, record_a: record_8, record_b: record_9 }
 
       let!(:connection_type) { create :connection_type, target_type: 'any', target_hierarchy: target_hierarchy, user: user, closest_parent_type: record_type_2 }
 
@@ -171,6 +175,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_to_contain_option('connection_record_b_id', '10')
         end
       end
@@ -187,11 +193,13 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_to_contain_option('connection_record_b_id', '10')
         end
       end
 
-      context 'target only siblings' do
+      context 'target only siblings', :js do
         let(:target_hierarchy) { 'siblings' }
 
         it 'should show correct probable record_bs' do
@@ -203,6 +211,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end
       end
@@ -219,6 +229,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end
       end
@@ -235,6 +247,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end
       end
@@ -251,6 +265,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end
       end
@@ -267,6 +283,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end
       end
@@ -283,6 +301,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end
       end
@@ -299,6 +319,8 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
+          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
         end
       end
