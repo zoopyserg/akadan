@@ -11,9 +11,9 @@ class ConnectionsController < ApplicationController
   # GET /connections or /connections.json
   def index
     if signed_in?
-      @connections = Connection.where(is_public: true).or(Connection.where(user: current_user))
+      @connections = Connection.where(is_public: true).or(Connection.where(user: current_user)).page(params[:page])
     else
-      @connections = Connection.where(is_public: true)
+      @connections = Connection.where(is_public: true).page(params[:page])
     end
   end
 
