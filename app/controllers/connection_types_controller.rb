@@ -7,9 +7,9 @@ class ConnectionTypesController < ApplicationController
   # GET /connection_types or /connection_types.json
   def index
     if signed_in?
-      @connection_types = ConnectionType.where(is_public: true).or(ConnectionType.where(user: current_user)).page(params[:page])
+      @connection_types = ConnectionType.where(is_public: true).or(ConnectionType.where(user: current_user)).order(created_at: :desc).page(params[:page])
     else
-      @connection_types = ConnectionType.where(is_public: true).page(params[:page])
+      @connection_types = ConnectionType.where(is_public: true).order(created_at: :desc).page(params[:page])
     end
   end
 

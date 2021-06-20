@@ -6,9 +6,9 @@ class RecordTypesController < ApplicationController
   def index
     @record_types = RecordType.all
     if signed_in?
-      @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user))
+      @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user)).order(created_at: :desc).page(params[:page])
     else
-      @record_types = RecordType.where(is_public: true)
+      @record_types = RecordType.where(is_public: true).order(created_at: :desc).page(params[:page])
     end
   end
 
