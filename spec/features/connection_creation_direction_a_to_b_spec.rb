@@ -20,5 +20,7 @@ RSpec.feature "ConnectionCreations Direction A to B", type: :feature do
 
     # pending because record B can only be set by JS (unless I want to go crazy with forms)
     it { expect(current_path).to eq new_record_connection_type_connection_path(record_b, connection_type) }
+    it 'should select the other record if it is available to select as a target'
+    it 'should not set record b if b is not available as a target'
   end
 end
