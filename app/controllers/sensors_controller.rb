@@ -5,9 +5,9 @@ class SensorsController < ApplicationController
   # GET /sensors or /sensors.json
   def index
     if signed_in?
-      @sensors = Sensor.where(is_public: true).or(Sensor.where(user: current_user))
+      @sensors = Sensor.where(is_public: true).or(Sensor.where(user: current_user)).order(created_at: :desc).page(params[:page])
     else
-      @sensors = Sensor.where(is_public: true)
+      @sensors = Sensor.where(is_public: true).order(created_at: :desc).page(params[:page])
     end
   end
 

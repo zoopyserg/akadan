@@ -406,6 +406,14 @@ example_id                                                                      
 ./spec/features/sensors_index_description_spec.rb[1:1:2]                                                  | passed  | 0.08706 seconds |
 ./spec/features/sensors_index_description_spec.rb[1:2:1]                                                  | passed  | 0.17498 seconds |
 ./spec/features/sensors_index_description_spec.rb[1:2:2]                                                  | passed  | 0.25457 seconds |
+./spec/features/sensors_index_pagination_spec.rb[1:1:1:1]                                                 | passed  | 0.70739 seconds |
+./spec/features/sensors_index_pagination_spec.rb[1:1:2:1]                                                 | passed  | 0.65532 seconds |
+./spec/features/sensors_index_pagination_spec.rb[1:1:3:1]                                                 | passed  | 0.64643 seconds |
+./spec/features/sensors_index_pagination_spec.rb[1:2:1:1]                                                 | passed  | 1.44 seconds    |
+./spec/features/sensors_index_pagination_spec.rb[1:2:2:1]                                                 | passed  | 0.76424 seconds |
+./spec/features/sensors_index_pagination_spec.rb[1:2:3:1]                                                 | passed  | 0.87824 seconds |
+./spec/features/sensors_index_pagination_spec.rb[1:2:4:1]                                                 | passed  | 0.9051 seconds  |
+./spec/features/sensors_index_pagination_spec.rb[1:2:5:1]                                                 | passed  | 0.62927 seconds |
 ./spec/features/sensors_index_spec.rb[1:1:1]                                                              | passed  | 0.03996 seconds |
 ./spec/features/sensors_index_spec.rb[1:1:2]                                                              | passed  | 0.05527 seconds |
 ./spec/features/sensors_index_spec.rb[1:1:3]                                                              | passed  | 0.05113 seconds |
