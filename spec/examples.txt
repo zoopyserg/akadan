@@ -9,6 +9,7 @@ example_id                                                                      
 ./spec/features/connection_creation_cancel_button_spec.rb[1:2:2]                                          | passed  | 0.76222 seconds |
 ./spec/features/connection_creation_connection_type_spec.rb[1:2:1]                                        | passed  | 0.27842 seconds |
 ./spec/features/connection_creation_connection_type_spec.rb[1:2:2]                                        | passed  | 0.82318 seconds |
+./spec/features/connection_creation_connection_type_spec.rb[1:2:3:1]                                      | unknown |                 |
 ./spec/features/connection_creation_description_spec.rb[1:2:1]                                            | passed  | 0.7913 seconds  |
 ./spec/features/connection_creation_direction_a_to_b_spec.rb[1:2:1]                                       | pending | 0.00001 seconds |
 ./spec/features/connection_creation_direction_a_to_b_spec.rb[1:2:2]                                       | pending | 0 seconds       |
@@ -23,20 +24,21 @@ example_id                                                                      
 ./spec/features/connection_creation_preview_one_to_one_arrow_spec.rb[1:2:2:1]                             | passed  | 0.7262 seconds  |
 ./spec/features/connection_creation_record_a_spec.rb[1:2:1]                                               | passed  | 0.79674 seconds |
 ./spec/features/connection_creation_record_a_spec.rb[1:2:2]                                               | passed  | 0.26352 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:1:1]                                             | passed  | 0.21894 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:4:1:1]                                           | passed  | 0.75874 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:4:2:1]                                           | passed  | 0.20294 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:4:3:1]                                           | passed  | 0.20071 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:4:4:1]                                           | passed  | 0.21998 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:1:1]                                           | passed  | 0.22179 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:2:1]                                           | passed  | 0.22115 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:3:1]                                           | passed  | 0.21496 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:4:1]                                           | passed  | 0.20767 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:5:1]                                           | passed  | 0.29697 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:6:1]                                           | passed  | 0.22076 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:7:1]                                           | passed  | 0.21588 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:8:1]                                           | passed  | 0.20878 seconds |
-./spec/features/connection_creation_record_b_spec.rb[1:2:5:9:1]                                           | passed  | 0.20884 seconds |
+./spec/features/connection_creation_record_a_spec.rb[1:2:3]                                               | unknown |                 |
+./spec/features/connection_creation_record_b_spec.rb[1:2:1:1]                                             | passed  | 0.86907 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:4:1:1]                                           | passed  | 0.20358 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:4:2:1]                                           | passed  | 0.20985 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:4:3:1]                                           | passed  | 0.20967 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:4:4:1]                                           | passed  | 0.20716 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:1:1]                                           | passed  | 0.22377 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:2:1]                                           | passed  | 0.21417 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:3:1]                                           | passed  | 0.21216 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:4:1]                                           | passed  | 0.21129 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:5:1]                                           | passed  | 0.26549 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:6:1]                                           | passed  | 0.26606 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:7:1]                                           | passed  | 0.20944 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:8:1]                                           | passed  | 0.21539 seconds |
+./spec/features/connection_creation_record_b_spec.rb[1:2:5:9:1]                                           | passed  | 0.20904 seconds |
 ./spec/features/connection_creation_spec.rb[1:1:1]                                                        | passed  | 0.05826 seconds |
 ./spec/features/connection_creation_spec.rb[1:2:1]                                                        | passed  | 0.78877 seconds |
 ./spec/features/connection_creation_spec.rb[1:2:2]                                                        | passed  | 0.24408 seconds |
@@ -418,6 +420,7 @@ example_id                                                                      
 ./spec/helpers/connection_types_helper_spec.rb[1:1]                                                       | pending | 0.00001 seconds |
 ./spec/helpers/connections_helper_spec.rb[1:1]                                                            | pending | 0.00001 seconds |
 ./spec/helpers/conversations_helper_spec.rb[1:1]                                                          | pending | 0.00001 seconds |
+./spec/helpers/dots_helper_spec.rb[1:1]                                                                   | unknown |                 |
 ./spec/helpers/events_helper_spec.rb[1:1]                                                                 | pending | 0.00001 seconds |
 ./spec/helpers/friend_requests_helper_spec.rb[1:1]                                                        | pending | 0.00001 seconds |
 ./spec/helpers/friends_helper_spec.rb[1:1]                                                                | pending | 0 seconds       |
@@ -434,6 +437,7 @@ example_id                                                                      
 ./spec/models/connection_spec.rb[1:1]                                                                     | passed  | 0.16673 seconds |
 ./spec/models/connection_spec.rb[1:2]                                                                     | unknown |                 |
 ./spec/models/connection_spec.rb[1:3]                                                                     | unknown |                 |
+./spec/models/connection_spec.rb[1:4]                                                                     | unknown |                 |
 ./spec/models/connection_type_spec.rb[1:1]                                                                | passed  | 0.0013 seconds  |
 ./spec/models/connection_type_spec.rb[1:2]                                                                | passed  | 0.00722 seconds |
 ./spec/models/connection_type_spec.rb[1:3]                                                                | unknown |                 |
@@ -441,6 +445,8 @@ example_id                                                                      
 ./spec/models/conversation_spec.rb[1:1]                                                                   | passed  | 0.00507 seconds |
 ./spec/models/conversation_spec.rb[1:2]                                                                   | passed  | 0.00295 seconds |
 ./spec/models/conversation_spec.rb[1:3]                                                                   | passed  | 0.00059 seconds |
+./spec/models/dot_spec.rb[1:1]                                                                            | unknown |                 |
+./spec/models/dot_spec.rb[1:2]                                                                            | unknown |                 |
 ./spec/models/event_spec.rb[1:1]                                                                          | pending | 0.00001 seconds |
 ./spec/models/friend_request_spec.rb[1:1]                                                                 | pending | 0 seconds       |
 ./spec/models/friend_spec.rb[1:1]                                                                         | pending | 0.00001 seconds |
@@ -455,7 +461,18 @@ example_id                                                                      
 ./spec/models/person_spec.rb[1:1]                                                                         | pending | 0.00001 seconds |
 ./spec/models/reading_spec.rb[1:1]                                                                        | passed  | 0.00118 seconds |
 ./spec/models/reading_spec.rb[1:2]                                                                        | passed  | 0.00947 seconds |
-./spec/models/record_spec.rb[1:1]                                                                         | passed  | 0.00871 seconds |
+./spec/models/record_spec.rb[1:1]                                                                         | passed  | 0.16021 seconds |
+./spec/models/record_spec.rb[1:2]                                                                         | passed  | 0.00145 seconds |
+./spec/models/record_spec.rb[1:3]                                                                         | passed  | 0.0169 seconds  |
+./spec/models/record_spec.rb[1:5:1:1]                                                                     | passed  | 0.05841 seconds |
+./spec/models/record_spec.rb[1:5:2:1]                                                                     | passed  | 0.12502 seconds |
+./spec/models/record_spec.rb[1:5:3:1]                                                                     | passed  | 0.04775 seconds |
+./spec/models/record_spec.rb[1:5:4:1]                                                                     | passed  | 0.04858 seconds |
+./spec/models/record_spec.rb[1:5:5:1]                                                                     | passed  | 0.04822 seconds |
+./spec/models/record_spec.rb[1:5:6:1]                                                                     | passed  | 0.05121 seconds |
+./spec/models/record_spec.rb[1:5:7:1]                                                                     | passed  | 0.06681 seconds |
+./spec/models/record_spec.rb[1:5:8:1]                                                                     | passed  | 0.05383 seconds |
+./spec/models/record_spec.rb[1:5:9:1]                                                                     | passed  | 0.0984 seconds  |
 ./spec/models/record_type_spec.rb[1:1]                                                                    | passed  | 0.00744 seconds |
 ./spec/models/seminar_spec.rb[1:1]                                                                        | pending | 0 seconds       |
 ./spec/models/sensor_spec.rb[1:1]                                                                         | passed  | 0.00172 seconds |
@@ -577,6 +594,19 @@ example_id                                                                      
 ./spec/requests/conversations_spec.rb[1:6:2:1]                                                            | pending | 0.00035 seconds |
 ./spec/requests/conversations_spec.rb[1:7:1]                                                              | pending | 0.00044 seconds |
 ./spec/requests/conversations_spec.rb[1:7:2]                                                              | pending | 0.00035 seconds |
+./spec/requests/dots_spec.rb[1:1:1]                                                                       | unknown |                 |
+./spec/requests/dots_spec.rb[1:2:1]                                                                       | unknown |                 |
+./spec/requests/dots_spec.rb[1:3:1]                                                                       | unknown |                 |
+./spec/requests/dots_spec.rb[1:4:1]                                                                       | unknown |                 |
+./spec/requests/dots_spec.rb[1:5:1:1]                                                                     | unknown |                 |
+./spec/requests/dots_spec.rb[1:5:1:2]                                                                     | unknown |                 |
+./spec/requests/dots_spec.rb[1:5:2:1]                                                                     | unknown |                 |
+./spec/requests/dots_spec.rb[1:5:2:2]                                                                     | unknown |                 |
+./spec/requests/dots_spec.rb[1:6:1:1]                                                                     | unknown |                 |
+./spec/requests/dots_spec.rb[1:6:1:2]                                                                     | unknown |                 |
+./spec/requests/dots_spec.rb[1:6:2:1]                                                                     | unknown |                 |
+./spec/requests/dots_spec.rb[1:7:1]                                                                       | unknown |                 |
+./spec/requests/dots_spec.rb[1:7:2]                                                                       | unknown |                 |
 ./spec/requests/events_spec.rb[1:1:1]                                                                     | pending | 0.00036 seconds |
 ./spec/requests/events_spec.rb[1:2:1]                                                                     | pending | 0.00047 seconds |
 ./spec/requests/events_spec.rb[1:3:1]                                                                     | failed  | 0.00626 seconds |
@@ -765,6 +795,14 @@ example_id                                                                      
 ./spec/routing/conversations_routing_spec.rb[1:1:6]                                                       | passed  | 0.00045 seconds |
 ./spec/routing/conversations_routing_spec.rb[1:1:7]                                                       | passed  | 0.00047 seconds |
 ./spec/routing/conversations_routing_spec.rb[1:1:8]                                                       | passed  | 0.00046 seconds |
+./spec/routing/dots_routing_spec.rb[1:1:1]                                                                | unknown |                 |
+./spec/routing/dots_routing_spec.rb[1:1:2]                                                                | unknown |                 |
+./spec/routing/dots_routing_spec.rb[1:1:3]                                                                | unknown |                 |
+./spec/routing/dots_routing_spec.rb[1:1:4]                                                                | unknown |                 |
+./spec/routing/dots_routing_spec.rb[1:1:5]                                                                | unknown |                 |
+./spec/routing/dots_routing_spec.rb[1:1:6]                                                                | unknown |                 |
+./spec/routing/dots_routing_spec.rb[1:1:7]                                                                | unknown |                 |
+./spec/routing/dots_routing_spec.rb[1:1:8]                                                                | unknown |                 |
 ./spec/routing/events_routing_spec.rb[1:1:1]                                                              | passed  | 0.00045 seconds |
 ./spec/routing/events_routing_spec.rb[1:1:2]                                                              | passed  | 0.00046 seconds |
 ./spec/routing/events_routing_spec.rb[1:1:3]                                                              | passed  | 0.00046 seconds |
@@ -880,6 +918,10 @@ example_id                                                                      
 ./spec/views/conversations/index.html.erb_spec.rb[1:1]                                                    | passed  | 0.00688 seconds |
 ./spec/views/conversations/new.html.erb_spec.rb[1:1]                                                      | passed  | 0.00628 seconds |
 ./spec/views/conversations/show.html.erb_spec.rb[1:1]                                                     | passed  | 0.00438 seconds |
+./spec/views/dots/edit.html.erb_spec.rb[1:1]                                                              | unknown |                 |
+./spec/views/dots/index.html.erb_spec.rb[1:1]                                                             | unknown |                 |
+./spec/views/dots/new.html.erb_spec.rb[1:1]                                                               | unknown |                 |
+./spec/views/dots/show.html.erb_spec.rb[1:1]                                                              | unknown |                 |
 ./spec/views/events/edit.html.erb_spec.rb[1:1]                                                            | passed  | 0.00537 seconds |
 ./spec/views/events/index.html.erb_spec.rb[1:1]                                                           | passed  | 0.0101 seconds  |
 ./spec/views/events/new.html.erb_spec.rb[1:1]                                                             | passed  | 0.00562 seconds |

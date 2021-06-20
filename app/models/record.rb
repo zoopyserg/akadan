@@ -15,12 +15,12 @@ class Record < ApplicationRecord
   scope :accessible_record_bs_by_subtype, -> (user, record_a, type, subtype) { accessible_record_bs_by_type(user, record_a, subtype).joins(:connections_as_target).where(connections: { record_a: (accessible_record_bs_by_type(user, record_a, type) ) })}
 
   scope :all_roots, -> { where.not(id: Connection.pluck(:record_b_id)) }
-  scope :siblings, -> (user, record_a) { where(id: Record.children(Record.parents(record_a)) ) }
+  scope :siblings, -> (user, record_a) { where(id: Record.children(Record.parents(record_a)) ).without_source(record_a) }
   scope :children, -> (parent_ids) { Connection.where(record_a_id: parent_ids).pluck(:record_b_id) }
   scope :parents, -> (record_a) { Connection.where(record_b_id: record_a.id).pluck(:record_a_id) }
 
   def self.all_parents_of_record(record)
-    where(id: ActiveRecord::Base.connection.execute(all_parent_ids(record)).pluck('id'))
+    where(id: ActiveRecord::Base.connection.execute(all_parent_ids(record)).pluck('id')).without_source(record)
   end
 
   def self.all_parent_ids(record)
@@ -42,7 +42,7 @@ class Record < ApplicationRecord
   end
 
   def self.all_tree_records_of_record(record)
-    where(id: ActiveRecord::Base.connection.execute(all_tree_record_ids(record)).pluck('id'))
+    where(id: ActiveRecord::Base.connection.execute(all_tree_record_ids(record)).pluck('id')).without_source(record)
   end
 
   def self.all_tree_record_ids(record)
@@ -61,5 +61,21 @@ class Record < ApplicationRecord
       SELECT id FROM search_tree ORDER BY path
     SQL
     # todo: interpolation
+  end
+
+  def self.deep_siblings(record)
+    all_tree_records_of_record(record).where.not(id: Record.all_parents_of_record(record)).without_source(record)
+  end
+
+  def self.root(record)
+    all_tree_records_of_record(record).where.not(id: all_tree_records_of_record(record).joins(:connections_as_target).joins(:connections_as_target)).without_source(record)
+  end
+
+  def self.parents_specific_type(record, _type)
+    all_parents_of_record(record).where(record_type: _type).without_source(record)
+  end
+
+  def self.closest_of_type(record, _type)
+    all_parents_of_record(record).where(record_type: _type).order(created_at: :desc).limit(1)
   end
 end

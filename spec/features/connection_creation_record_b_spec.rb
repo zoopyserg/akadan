@@ -33,6 +33,9 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
     end
 
     describe 'circular dependency exclusion' do
+      # exclude those records for which if I connect to them from record A, I will close the cycle loop.
+      # in other words, exclude all the parents from a potential record b list.
+      # so now what, I should move all these tests to the model? or should I get rid of them? Of all those features that I know work now?
 
     end
 
