@@ -36,10 +36,7 @@ RSpec.describe Record, type: :model do
     let!(:connection8) { create :connection, user: user, record_a: record_8, record_b: record_3 }
     let!(:connection9) { create :connection, user: user, record_a: record_8, record_b: record_9 }
 
-    let!(:connection_type) { create :connection_type, target_type: 'any', target_hierarchy: target_hierarchy, user: user, closest_parent_type: record_type_2 }
-
     context 'target all' do
-      let(:target_hierarchy) { 'all' }
       subject { Record.without_source(record_4) }
 
       it 'should show correct probable record_bs' do
@@ -57,8 +54,25 @@ RSpec.describe Record, type: :model do
       end
     end
 
+    context 'target all without cycles' do
+      subject { Record.all_without_cycles(record_4) }
+
+      it 'should show correct probable record_bs' do
+        expect(subject).not_to include(record_0)
+        expect(subject).not_to include(record_1)
+        expect(subject).to include(record_2)
+        expect(subject).not_to include(record_3)
+        expect(subject).not_to include(record_4)
+        expect(subject).to include(record_5)
+        expect(subject).to include(record_6)
+        expect(subject).to include(record_7)
+        expect(subject).not_to include(record_8)
+        expect(subject).to include(record_9)
+        expect(subject).to include(record_10)
+      end
+    end
+
     context 'all_roots' do
-      let(:target_hierarchy) { 'all_roots' }
       subject { Record.all_roots }
 
       it 'should show correct probable record_bs' do
@@ -76,8 +90,25 @@ RSpec.describe Record, type: :model do
       end
     end
 
+    context 'all_roots_without_cycles' do
+      subject { Record.all_roots_without_cycles(record_4) }
+
+      it 'should show correct probable record_bs' do
+        expect(subject).not_to include (record_0)
+        expect(subject).not_to include (record_1)
+        expect(subject).not_to include (record_2)
+        expect(subject).not_to include (record_3)
+        expect(subject).not_to include (record_4)
+        expect(subject).not_to include (record_5)
+        expect(subject).not_to include (record_6)
+        expect(subject).not_to include (record_7)
+        expect(subject).not_to include (record_8)
+        expect(subject).not_to include (record_9)
+        expect(subject).to include (record_10)
+      end
+    end
+
     context 'target only siblings' do
-      let(:target_hierarchy) { 'siblings' }
       subject { Record.siblings(user, record_4) }
 
       it 'should show correct probable record_bs' do
@@ -96,7 +127,6 @@ RSpec.describe Record, type: :model do
     end
 
     context 'target all previous parents' do
-      let(:target_hierarchy) { 'all_parent_generations' }
       subject { Record.all_parents_of_record(record_4) }
 
       it 'should show correct probable record_bs' do
@@ -115,7 +145,6 @@ RSpec.describe Record, type: :model do
     end
 
     context 'target all records of my tree' do
-      let(:target_hierarchy) { 'all_tree_records' }
       subject { Record.all_tree_records_of_record(record_4) }
 
       it 'should show correct probable record_bs' do
@@ -133,9 +162,7 @@ RSpec.describe Record, type: :model do
       end
     end
 
-
     context 'target deep siblings' do
-      let(:target_hierarchy) { 'deep_siblings' }
       # I'm doing it as "all tree members without parents
       subject { Record.deep_siblings(record_4) }
 
@@ -155,10 +182,7 @@ RSpec.describe Record, type: :model do
     end
 
     context 'target root of this tree' do
-      let(:target_hierarchy) { 'root' }
       # there is no "root", there's "roots" (records of my tree that have only the outgoing connections)
-
-      let(:target_hierarchy) { 'deep_siblings' }
       subject { Record.root(record_4) }
 
       it 'should show correct probable record_bs' do
@@ -177,8 +201,6 @@ RSpec.describe Record, type: :model do
     end
 
     context 'target parents of a specific type' do
-      let(:target_hierarchy) { 'specific_parent_type' }
-
       subject { Record.parents_specific_type(record_4, record_type_2) }
 
       it 'should show correct probable record_bs' do
@@ -222,7 +244,6 @@ RSpec.describe Record, type: :model do
     #
     # worst case scenario I rename it to be "latest parent of type"
     context 'target closest parent of a specific type' do
-      let(:target_hierarchy) { 'closest_specific_parent_type' }
       subject { Record.closest_of_type(record_4, record_type_2) }
 
       it 'should show correct probable record_bs' do

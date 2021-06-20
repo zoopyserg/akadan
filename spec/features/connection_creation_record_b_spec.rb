@@ -32,13 +32,6 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
 
     end
 
-    describe 'circular dependency exclusion' do
-      # exclude those records for which if I connect to them from record A, I will close the cycle loop.
-      # in other words, exclude all the parents from a potential record b list.
-      # so now what, I should move all these tests to the model? or should I get rid of them? Of all those features that I know work now?
-
-    end
-
     describe 'limiting targets by record type' do
       let!(:record_type_1) { create :record_type, user: user }
       let!(:record_type_2) { create :record_type, user: user }
@@ -170,15 +163,15 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         let(:target_hierarchy) { 'all' }
 
         it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_to_contain_option('connection_record_b_id', '1')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
           expect_dropdown_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_to_contain_option('connection_record_b_id', '3')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
           expect_dropdown_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
           expect_dropdown_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_to_contain_option('connection_record_b_id', '10')
         end
@@ -188,7 +181,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         let(:target_hierarchy) { 'all_roots' }
 
         it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
@@ -196,7 +189,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '8')
+          expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
           expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
           expect_dropdown_to_contain_option('connection_record_b_id', '10')
         end
@@ -220,44 +213,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         end
       end
 
-      context 'target all previous parents' do
-        let(:target_hierarchy) { 'all_parent_generations' }
-
-        it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_to_contain_option('connection_record_b_id', '1')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_to_contain_option('connection_record_b_id', '3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '8')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-        end
-      end
-
-      context 'target all records of my tree' do
-        let(:target_hierarchy) { 'all_tree_records' }
-
-        it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_to_contain_option('connection_record_b_id', '1')
-          expect_dropdown_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_to_contain_option('connection_record_b_id', '3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-          expect_dropdown_to_contain_option('connection_record_b_id', '5')
-          expect_dropdown_to_contain_option('connection_record_b_id', '6')
-          expect_dropdown_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '8')
-          expect_dropdown_to_contain_option('connection_record_b_id', '9')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-        end
-      end
-
-
-      context 'target deep siblings' do
+      context 'target tree records (deep siblings)' do
         let(:target_hierarchy) { 'deep_siblings' }
         # I'm doing it as "all tree members without parents
 
@@ -276,85 +232,6 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
         end
       end
 
-      context 'target root of this tree' do
-        let(:target_hierarchy) { 'root' }
-        # there is no "root", there's "roots" (records of my tree that have only the outgoing connections)
-
-        it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_to_contain_option('connection_record_b_id', '8')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-        end
-      end
-
-      context 'target parents of a specific type' do
-        let(:target_hierarchy) { 'specific_parent_type' }
-
-        it 'should show correct probable record_bs' do
-          expect_dropdown_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_to_contain_option('connection_record_b_id', '3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-        end
-      end
-
-      # todo:
-      # having a "closest" one does not even make any sense now
-      # because "closest" is undefined when I have all records
-      # on the same distance from this one.
-      # the only way to go arount this is to sort by "which are the closest to this record"
-      # plus I have the search. Dunno.
-      # Remove this.
-      # I can do "parents"."of type"."limit 1" but that does not solve an impossible to solve problem where first two are equidistant.
-      # I could do "group by path length" and show first several records.
-      # but that's a story for another day.
-      #
-      # todo #2:
-      # я могу прийти несколькими путями к одному и тому же ноуду. что тогда?
-      #
-      # todo: right now it works (created_at: :desc).
-      # but it's a dummy code.
-      # it doesn't have this meaning that I want here.
-      # the "search parent ids" sql does order them by path.
-      # so I "could" ... use ordinarity_with.
-      # but I'm telling you there are a million ways it can go wrong.
-      # there is no shortest path for majority of cases.
-      # committing this and leaving it alone.
-      # maybe come back after everything else is done.
-      #
-      # worst case scenario I rename it to be "latest parent of type"
-      context 'target closest parent of a specific type' do
-        let(:target_hierarchy) { 'closest_specific_parent_type' }
-
-        it 'should show correct probable record_bs' do
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-          expect_dropdown_to_contain_option('connection_record_b_id', '3')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-          expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-        end
-      end
     end
   end
 end

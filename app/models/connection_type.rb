@@ -70,23 +70,13 @@ class ConnectionType < ApplicationRecord
 
   def possible_records_b_for(user, record_a)
     if hierarchy_all?
-      possible_records_b_by_type_for(user, record_a)
+      possible_records_b_by_type_for(user, record_a).without_potential_cycles(record_a)
     elsif hierarchy_all_roots?
-      possible_records_b_by_type_for(user, record_a).all_roots
+      possible_records_b_by_type_for(user, record_a).all_roots_without_cycles(record_a)
     elsif hierarchy_siblings?
-      possible_records_b_by_type_for(user, record_a).siblings(user, record_a)
-    elsif hierarchy_all_parent_generations?
-      possible_records_b_by_type_for(user, record_a).all_parents_of_record(record_a)
-    elsif hierarchy_all_tree_records?
-      possible_records_b_by_type_for(user, record_a).all_tree_records_of_record(record_a)
-    elsif hierarchy_parent_of_specific_type?
-      possible_records_b_by_type_for(user, record_a).parents_specific_type(record_a, closest_parent_type)
+      possible_records_b_by_type_for(user, record_a).siblings(user, record_a).without_potential_cycles(record_a)
     elsif hierarchy_deep_siblings?
       possible_records_b_by_type_for(user, record_a).deep_siblings(record_a)
-    elsif hierarchy_root?
-      possible_records_b_by_type_for(user, record_a).root(record_a)
-    elsif hierarchy_closest_parent_of_type?
-      possible_records_b_by_type_for(user, record_a).closest_of_type(record_a, closest_parent_type)
     end
   end
 
