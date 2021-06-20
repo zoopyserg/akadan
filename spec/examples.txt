@@ -7,9 +7,10 @@ example_id                                                                      
 ./spec/features/back_from_participants_to_conversation_button_spec.rb[1:2:1:1:1:1]                        | passed  | 0.93188 seconds |
 ./spec/features/connection_creation_cancel_button_spec.rb[1:2:1]                                          | passed  | 0.75095 seconds |
 ./spec/features/connection_creation_cancel_button_spec.rb[1:2:2]                                          | passed  | 0.204 seconds   |
-./spec/features/connection_creation_connection_type_spec.rb[1:2:1]                                        | passed  | 0.21656 seconds |
-./spec/features/connection_creation_connection_type_spec.rb[1:2:2]                                        | passed  | 0.21857 seconds |
-./spec/features/connection_creation_connection_type_spec.rb[1:2:3:1]                                      | pending | 0.00001 seconds |
+./spec/features/connection_creation_connection_type_spec.rb[1:2:1:1:1]                                    | passed  | 0.24287 seconds |
+./spec/features/connection_creation_connection_type_spec.rb[1:2:1:2:1]                                    | passed  | 0.30039 seconds |
+./spec/features/connection_creation_connection_type_spec.rb[1:2:1:2:2]                                    | passed  | 0.22793 seconds |
+./spec/features/connection_creation_connection_type_spec.rb[1:2:1:3:1]                                    | passed  | 0.72351 seconds |
 ./spec/features/connection_creation_description_spec.rb[1:2:1]                                            | passed  | 0.22614 seconds |
 ./spec/features/connection_creation_direction_a_to_b_spec.rb[1:2:1]                                       | pending | 0 seconds       |
 ./spec/features/connection_creation_direction_a_to_b_spec.rb[1:2:2]                                       | pending | 0.00001 seconds |
