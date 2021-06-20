@@ -61,8 +61,13 @@ example_id                                                                      
 ./spec/features/connection_creation_spec.rb[1:2:2]                                                        | passed  | 0.22552 seconds |
 ./spec/features/connection_type_creation_cancel_button_spec.rb[1:2:1]                                     | passed  | 0.20538 seconds |
 ./spec/features/connection_type_creation_cancel_button_spec.rb[1:2:2]                                     | passed  | 0.72033 seconds |
-./spec/features/connection_type_creation_spec.rb[1:1:1]                                                   | passed  | 0.04342 seconds |
-./spec/features/connection_type_creation_spec.rb[1:2:1]                                                   | passed  | 0.2251 seconds  |
+./spec/features/connection_type_creation_spec.rb[1:1:1]                                                   | passed  | 0.05372 seconds |
+./spec/features/connection_type_creation_spec.rb[1:2:1]                                                   | passed  | 0.74676 seconds |
+./spec/features/connection_types_index_delete_button_spec.rb[1:2:1]                                       | passed  | 0.72713 seconds |
+./spec/features/connection_types_index_edit_button_spec.rb[1:2:1:1]                                       | passed  | 0.78989 seconds |
+./spec/features/connection_types_index_edit_button_spec.rb[1:2:2:1]                                       | passed  | 0.2834 seconds  |
+./spec/features/connection_types_index_edit_button_spec.rb[1:2:3:1]                                       | passed  | 0.21496 seconds |
+./spec/features/connection_types_index_edit_button_spec.rb[1:2:4:1]                                       | passed  | 0.28793 seconds |
 ./spec/features/connections_index_created_by_spec.rb[1:1:1]                                               | passed  | 0.1616 seconds  |
 ./spec/features/connections_index_created_by_spec.rb[1:1:2]                                               | passed  | 0.08483 seconds |
 ./spec/features/connections_index_created_by_spec.rb[1:2:1]                                               | passed  | 0.27823 seconds |

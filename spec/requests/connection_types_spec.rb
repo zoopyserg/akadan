@@ -13,7 +13,7 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/connection_types", type: :request do
-  
+
   # ConnectionType. As you add validations to ConnectionType, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
@@ -113,12 +113,13 @@ RSpec.describe "/connection_types", type: :request do
     end
   end
 
+  # it should not respond to DELETE
   describe "DELETE /destroy" do
     it "destroys the requested connection_type" do
       connection_type = ConnectionType.create! valid_attributes
       expect {
         delete connection_type_url(connection_type)
-      }.to change(ConnectionType, :count).by(-1)
+      }.to change(ConnectionType, :count).by(0)
     end
 
     it "redirects to the connection_types list" do
