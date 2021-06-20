@@ -37,8 +37,10 @@ RSpec.feature "Edit Connection Types", type: :feature do
 
       it 'should allow to edit' do
         fill_in 'connection_type_name', with: 'New Name'
+        fill_in 'connection_type_description', with: 'New Description'
         click_on 'Save!'
         expect(connection_type.reload.name).to eq 'New Name'
+        expect(connection_type.reload.description).to eq 'New Description'
       end
     end
 
