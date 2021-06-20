@@ -1,7 +1,8 @@
 class ConnectionsController < ApplicationController
   before_action :authenticate_user!, except: :index
-  before_action :set_record
   before_action :set_connection_type
+  before_action :set_record
+  before_action :redirect_to_connections_path, unless: :both_connection_type_and_record_a_present?, only: %i[ new edit ]
   before_action :set_connection, only: %i[ show edit update destroy ]
   before_action :set_connection_types, only: %i[ new edit ]
   before_action :set_records_a, only: %i[ new edit ]
@@ -79,7 +80,6 @@ class ConnectionsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_connection
     @connection = current_user.connections.find(params[:id])
   end
@@ -90,11 +90,11 @@ class ConnectionsController < ApplicationController
   end
 
   def set_connection_type
-    @connection_type = current_user.connection_types.find(params[:connection_type_id]) if params[:connection_type_id].present?
+    @connection_type = ConnectionType.where(is_public: true).or(ConnectionType.where(user: current_user)).find_by(id: params[:connection_type_id]) if params[:connection_type_id].present?
   end
 
   def set_record
-    @record_a = Record.where(is_public: true).or(Record.where(user: current_user)).find(params[:record_id]) if params[:record_id].present?
+    @record_a = Record.where(is_public: true).or(Record.where(user: current_user)).find_by(id: params[:record_id]) if params[:record_id].present?
   end
 
   def set_connection_types
@@ -107,5 +107,21 @@ class ConnectionsController < ApplicationController
 
   def set_records_b
     @records_b = @connection_type.possible_records_b_for(current_user, @record_a)
+  end
+
+  def redirect_to_connections_path
+    redirect_to connections_path
+  end
+
+  def record_a_present?
+    @record_a.present?
+  end
+
+  def connection_type_present?
+    @connection_type.present?
+  end
+
+  def both_connection_type_and_record_a_present?
+    connection_type_present? && record_a_present?
   end
 end
