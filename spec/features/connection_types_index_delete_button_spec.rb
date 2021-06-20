@@ -11,7 +11,7 @@ RSpec.feature "Delete Connection Types", type: :feature do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit new_connection_type_path
+      visit connection_types_path
     end
 
     it 'there is no deletion button for connection types' do
