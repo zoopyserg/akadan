@@ -85,4 +85,5 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
 
   # note that I'm not reloading the selection options if I picked a different connection type.
   # which I should.
+  xit 'should reload a page to new connection type path when I picked a new type from dropdown'
 end
