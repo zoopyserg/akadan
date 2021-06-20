@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ConnectionTypeCreation Cancel", type: :feature do
+RSpec.feature "RecordCreation Cancel", type: :feature do
   context 'not signed in' do
     # skipping because it's tested in New Permissions
   end
