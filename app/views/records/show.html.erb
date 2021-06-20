@@ -1,18 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-<strong>Name:</strong>
-<%= @record.name %>
-</p>
-
-<%= link_to 'Edit', edit_record_path(@record) %> |
-<%= link_to 'Back', records_path %>
-<div class="row"> 
-  <div class="col-lg-12 px-0 px-sm-3"> 
-    <div class="card"> 
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card">
     </div>
-    <div class="card"> 
-      <div class="card-body"> 
+    <div class="card">
+      <div class="card-body">
         <div class="row">
           <div class="col-lg-12">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -36,9 +27,9 @@
           <div class="align-items-center col-lg-12 d-flex justify-content-between">
             <div class="align-items-center d-flex">
               <div class="d-flex flex-column">
-                <div class="icheck-material-white"> 
-                  <input type="checkbox" id="user-checkbox1" checked=""/> 
-                  <label for="user-checkbox1"></label>                                                         
+                <div class="icheck-material-white">
+                  <input type="checkbox" id="user-checkbox1" checked=""/>
+                  <label for="user-checkbox1"></label>
                 </div>
               </div>
               <div class="d-flex flex-column">
@@ -46,41 +37,41 @@
                 <i class="fa fa-chevron-down mx-1 my-1"></i>
               </div>
               <div>
-                <h5 class="card-title mb-0 mx-1">Lorem Ipsum Blah Blah record<i class="fa fa-edit mx-1"></i></h5>
-                <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
+                <h5 class="card-title mb-0 mx-1"><%= @record.name %><i class="fa fa-edit mx-1"></i></h5>
+                <%= render "shared/created_by", user: @record.user %>
               </div>
             </div>
             <div class="align-items-center d-flex">
               <i class="fa fa-comment mx-1 my-1"></i>
             </div>
           </div>
-        </div>                                     
-        <div class="row"> 
+        </div>
+        <div class="row">
           <div class="col-lg-8">
             <div class="input-group input-group-sm">
               <div class="input-group-prepend">
                 <span class="input-group-text">URL:</span>
               </div>
-              <input type="text" class="form-control" value="http://myurl.com/problems/293293222">
+              <input type="text" class="form-control" value="<%= record_url(@record) %>">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fa fa-copy mr-1"></i>Copy
                 </button>
-                <button class="btn btn-primary" type="button">
+                <%= link_to record_path(@record), class: "btn btn-primary", type: "button" do %>
                   <i class="fa fa-eye mr-1"></i>Show
-                </button>
+                <% end %>
               </div>
             </div>
             <button class="btn btn-link btn-sm d-flex flex-row align-items-center" type="button">
               <span><i class="fa fa-star-o mr-1"></i></span>
               <span>Add to Favourites</span>
             </button>
-            <p>Описание созданное в WYSIWYG (только не длинное) іормоіаміі мліотмілоа мілвао мілліовамтілаомтілаомлмтілвмтілмотілоамтілвомтілвомтілвоамтілвоамтлівм івало мівл амл валм івла млів амлівла млів тамлів тамл івалмівлат млів тамлівамлівал мілв амлівамлівамлітлмлавміамілм і<i class="fa fa-edit mx-1"></i></p>
+            <p><%= @record.description %></p>
             <h6>Completed (%):</h6>
             <div class="progress">
               <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">50%</div>
             </div>
-            <p class="mb-0"><strong class="mr-1">Type:</strong>Some kind of record type<i class="fa fa-edit mx-1"></i></p>
+            <p class="mb-0"><strong class="mr-1">Type:</strong><%= @record.record_type.name %><i class="fa fa-edit mx-1"></i></p>
             <div role="tablist" id="accordion-1">
               <p class="mb-0">You spent <strong>123 hours 48 minutes</strong> on this</p>
               <p class="mb-0">Repeated <strong>123</strong> times</p>
@@ -254,12 +245,12 @@
               <a href="#" style="font-family: inherit; font-size: 0.7rem;">&nbsp;</a>
               <i contenteditable="false"></i>Delete
             </button>
-          </div>                                         
-        </div>                                     
-      </div>                                 
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card"> 
-      <div class="card-body"> 
+    <div class="card">
+      <div class="card-body">
         <div class="row">
           <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
             <h5 class="card-title" data-pgc-field="title">Comments</h5>
@@ -532,11 +523,11 @@
               </div>
             </div>
           </div>
-        </div>                                     
-      </div>                                 
+        </div>
+      </div>
     </div>
-    <div class="card"> 
-      <div class="card-body"> 
+    <div class="card">
+      <div class="card-body">
         <div class="row">
           <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
             <h5 class="card-title mb-0" data-pgc-field="title">Sub-Records</h5>
@@ -587,19 +578,19 @@
               </div>
             </div>
           </div>
-        </div>                                     
-      </div>                                 
+        </div>
+      </div>
     </div>
-    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
-      <div class="card-body px-0 px-sm-3 py-1"> 
+    <div class="card" data-pgc="jr.recordCollapsedColumn">
+      <div class="card-body px-0 px-sm-3 py-1">
         <div class="row"></div>
         <div class="px-3 row">
           <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
             <div class="align-items-center d-flex">
               <div class="d-flex flex-column">
-                <div class="icheck-material-white"> 
-                  <input type="checkbox" id="user-checkbox1" checked=""/> 
-                  <label for="user-checkbox1"></label>                                                         
+                <div class="icheck-material-white">
+                  <input type="checkbox" id="user-checkbox1" checked=""/>
+                  <label for="user-checkbox1"></label>
                 </div>
               </div>
               <div class="d-flex flex-column">
@@ -660,15 +651,15 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -690,18 +681,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -723,18 +714,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -756,18 +747,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -789,42 +780,42 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
             <div class="d-flex justify-content-center" data-pgc="jr.pagination">
-              <ul class="pagination"> 
+              <ul class="pagination">
                 <li class="page-item">
                   <a class="page-link" href="#">Previous</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">1</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">2</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">3</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">Next</a>
-                </li>                                                     
+                </li>
               </ul>
             </div>
           </div>
-        </div>                                     
-      </div>                                 
+        </div>
+      </div>
     </div>
-    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
-      <div class="card-body px-0 px-sm-3 py-1"> 
+    <div class="card" data-pgc="jr.recordCollapsedColumn">
+      <div class="card-body px-0 px-sm-3 py-1">
         <div class="row"></div>
         <div class="px-3 row">
           <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
             <div class="align-items-center d-flex">
               <div class="d-flex flex-column">
-                <div class="icheck-material-white"> 
-                  <input type="checkbox" id="user-checkbox1" checked=""/> 
-                  <label for="user-checkbox1"></label>                                                         
+                <div class="icheck-material-white">
+                  <input type="checkbox" id="user-checkbox1" checked=""/>
+                  <label for="user-checkbox1"></label>
                 </div>
               </div>
               <div class="d-flex flex-column">
@@ -885,15 +876,15 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -915,18 +906,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -948,18 +939,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -981,18 +972,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1014,42 +1005,42 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
             <div class="d-flex justify-content-center" data-pgc="jr.pagination">
-              <ul class="pagination"> 
+              <ul class="pagination">
                 <li class="page-item">
                   <a class="page-link" href="#">Previous</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">1</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">2</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">3</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">Next</a>
-                </li>                                                     
+                </li>
               </ul>
             </div>
           </div>
-        </div>                                     
-      </div>                                 
+        </div>
+      </div>
     </div>
-    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
-      <div class="card-body px-0 px-sm-3 py-1"> 
+    <div class="card" data-pgc="jr.recordCollapsedColumn">
+      <div class="card-body px-0 px-sm-3 py-1">
         <div class="row"></div>
         <div class="px-3 row">
           <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
             <div class="align-items-center d-flex">
               <div class="d-flex flex-column">
-                <div class="icheck-material-white"> 
-                  <input type="checkbox" id="user-checkbox1" checked=""/> 
-                  <label for="user-checkbox1"></label>                                                         
+                <div class="icheck-material-white">
+                  <input type="checkbox" id="user-checkbox1" checked=""/>
+                  <label for="user-checkbox1"></label>
                 </div>
               </div>
               <div class="d-flex flex-column">
@@ -1110,15 +1101,15 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1140,18 +1131,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1173,18 +1164,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1206,18 +1197,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1239,42 +1230,42 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
             <div class="d-flex justify-content-center" data-pgc="jr.pagination">
-              <ul class="pagination"> 
+              <ul class="pagination">
                 <li class="page-item">
                   <a class="page-link" href="#">Previous</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">1</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">2</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">3</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">Next</a>
-                </li>                                                     
+                </li>
               </ul>
             </div>
           </div>
-        </div>                                     
-      </div>                                 
+        </div>
+      </div>
     </div>
-    <div class="card" data-pgc="jr.recordCollapsedColumn"> 
-      <div class="card-body px-0 px-sm-3 py-1"> 
+    <div class="card" data-pgc="jr.recordCollapsedColumn">
+      <div class="card-body px-0 px-sm-3 py-1">
         <div class="row"></div>
         <div class="px-3 row">
           <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
             <div class="align-items-center d-flex">
               <div class="d-flex flex-column">
-                <div class="icheck-material-white"> 
-                  <input type="checkbox" id="user-checkbox1" checked=""/> 
-                  <label for="user-checkbox1"></label>                                                         
+                <div class="icheck-material-white">
+                  <input type="checkbox" id="user-checkbox1" checked=""/>
+                  <label for="user-checkbox1"></label>
                 </div>
               </div>
               <div class="d-flex flex-column">
@@ -1335,15 +1326,15 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1365,18 +1356,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1398,18 +1389,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1431,18 +1422,18 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
-            <div class="card mb-0" data-pgc="jr.record_collapsed"> 
-              <div class="card-body py-0"> 
+            <div class="card mb-0" data-pgc="jr.record_collapsed">
+              <div class="card-body py-0">
                 <div class="row">
                   <div class="align-items-center col-lg-12 d-flex justify-content-between">
                     <div class="align-items-center d-flex">
                       <div class="d-flex flex-column">
-                        <div class="icheck-material-white"> 
-                          <input type="checkbox" id="user-checkbox1" checked=""/> 
-                          <label for="user-checkbox1"></label>                                                                         
+                        <div class="icheck-material-white">
+                          <input type="checkbox" id="user-checkbox1" checked=""/>
+                          <label for="user-checkbox1"></label>
                         </div>
                       </div>
                       <div class="align-items-center d-flex flex-column">
@@ -1464,32 +1455,32 @@
                       <i class="fa fa-close mx-1 my-1"></i>
                     </div>
                   </div>
-                </div>                                                     
-              </div>                                                 
+                </div>
+              </div>
             </div>
             <div class="d-flex justify-content-center" data-pgc="jr.pagination">
-              <ul class="pagination"> 
+              <ul class="pagination">
                 <li class="page-item">
                   <a class="page-link" href="#">Previous</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">1</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">2</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">3</a>
-                </li>                                                     
+                </li>
                 <li class="page-item">
                   <a class="page-link" href="#">Next</a>
-                </li>                                                     
+                </li>
               </ul>
             </div>
           </div>
-        </div>                                     
-      </div>                                 
-    </div>                             
-  </div>                         
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 

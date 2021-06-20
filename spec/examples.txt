@@ -76,10 +76,10 @@ example_id                                                                      
 ./spec/features/connection_types_index_pagination_spec.rb[1:2:3:1]                                        | passed  | 1.01 seconds    |
 ./spec/features/connection_types_index_pagination_spec.rb[1:2:4:1]                                        | passed  | 0.91179 seconds |
 ./spec/features/connection_types_index_pagination_spec.rb[1:2:5:1]                                        | passed  | 1.28 seconds    |
-./spec/features/connections_index_created_by_spec.rb[1:1:1]                                               | passed  | 0.1616 seconds  |
-./spec/features/connections_index_created_by_spec.rb[1:1:2]                                               | passed  | 0.08483 seconds |
-./spec/features/connections_index_created_by_spec.rb[1:2:1]                                               | passed  | 0.27823 seconds |
-./spec/features/connections_index_created_by_spec.rb[1:2:2]                                               | passed  | 0.28064 seconds |
+./spec/features/connections_index_created_by_spec.rb[1:1:1]                                               | passed  | 0.16955 seconds |
+./spec/features/connections_index_created_by_spec.rb[1:1:2]                                               | passed  | 0.06892 seconds |
+./spec/features/connections_index_created_by_spec.rb[1:2:1]                                               | passed  | 0.86225 seconds |
+./spec/features/connections_index_created_by_spec.rb[1:2:2]                                               | passed  | 0.28745 seconds |
 ./spec/features/connections_index_description_spec.rb[1:1:1]                                              | passed  | 0.06538 seconds |
 ./spec/features/connections_index_description_spec.rb[1:1:2]                                              | passed  | 0.06417 seconds |
 ./spec/features/connections_index_description_spec.rb[1:2:1]                                              | passed  | 0.18404 seconds |
@@ -308,6 +308,10 @@ example_id                                                                      
 ./spec/features/conversations_new_message_spec.rb[1:2:1:1:1:4]                                            | passed  | 0.36591 seconds |
 ./spec/features/conversations_new_message_spec.rb[1:2:1:1:2:1]                                            | passed  | 0.42855 seconds |
 ./spec/features/conversations_new_message_spec.rb[1:2:1:1:2:2]                                            | passed  | 0.42289 seconds |
+./spec/features/events_index_created_by_spec.rb[1:1:1]                                                    | failed  | 0.03323 seconds |
+./spec/features/events_index_created_by_spec.rb[1:1:2]                                                    | failed  | 0.02341 seconds |
+./spec/features/events_index_created_by_spec.rb[1:2:1]                                                    | failed  | 0.00946 seconds |
+./spec/features/events_index_created_by_spec.rb[1:2:2]                                                    | failed  | 0.01008 seconds |
 ./spec/features/nav_login_button_spec.rb[1:1:1]                                                           | passed  | 0.07659 seconds |
 ./spec/features/nav_login_button_spec.rb[1:2:1]                                                           | passed  | 0.15842 seconds |
 ./spec/features/nav_logout_button_spec.rb[1:1:1]                                                          | passed  | 0.04214 seconds |
@@ -354,6 +358,8 @@ example_id                                                                      
 ./spec/features/record_creation_record_type_selection_spec.rb[1:2:1:2:2:1]                                | passed  | 0.21951 seconds |
 ./spec/features/record_creation_spec.rb[1:1:1]                                                            | passed  | 0.0448 seconds  |
 ./spec/features/record_creation_spec.rb[1:2:1]                                                            | passed  | 0.24985 seconds |
+./spec/features/record_show_created_by_spec.rb[1:1:1]                                                     | passed  | 0.73697 seconds |
+./spec/features/record_show_created_by_spec.rb[1:2:1]                                                     | passed  | 0.32805 seconds |
 ./spec/features/record_type_creation_cancel_button_spec.rb[1:2:1]                                         | passed  | 0.20248 seconds |
 ./spec/features/record_type_creation_cancel_button_spec.rb[1:2:2]                                         | passed  | 0.71064 seconds |
 ./spec/features/record_type_creation_spec.rb[1:1:1]                                                       | passed  | 0.05175 seconds |

@@ -1,7 +1,8 @@
 class RecordsController < ApplicationController
-  before_action :authenticate_user!, except: :index
-  before_action :set_record, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :set_record, only: %i[ show edit update ]
   before_action :set_record_types, only: %i[ new edit ]
+  before_action :redirect_to_records_path, only: %i[ show edit update ], unless: :record_present?
 
   # GET /records or /records.json
   def index
@@ -64,18 +65,30 @@ class RecordsController < ApplicationController
   end
 
   # DELETE /records/1 or /records/1.json
-  def destroy
-    @record.destroy
-    respond_to do |format|
-      format.html { redirect_to records_url, notice: "Record was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @record.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to records_url, notice: "Record was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_record
-    @record = Record.find(params[:id])
+    if signed_in?
+      @record = Record.where(is_public: true).or(Record.where(user: current_user)).find_by(id: params[:id])
+    else
+      @record = Record.where(is_public: true).find_by(id: params[:id])
+    end
+  end
+
+  def record_present?
+    @record.present?
+  end
+
+  def redirect_to_records_path
+    redirect_to records_path
   end
 
   # Only allow a list of trusted parameters through.
