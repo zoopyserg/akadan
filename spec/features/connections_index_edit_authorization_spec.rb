@@ -15,15 +15,19 @@ RSpec.feature "Edit Connections", type: :feature do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit connections_path
+      visit edit_record_connection_type_connection_path(record_a, connection_type, connection)
     end
 
+    # it also affects many people.
+    # it could easily be recognized as a synonym for deletion.
+    # I could easily claim that I should store previous edit versions and support rollback changes etc.
+    # not sure now what to do
     context 'public someone elses' do
       let(:the_user) { user2 }
       let(:is_public) { true }
 
       it 'should not allow to edit' do
-        expect(page).to have_no_link 'Edit'
+        expect(current_path).to eq connections_path
       end
     end
 
@@ -31,10 +35,14 @@ RSpec.feature "Edit Connections", type: :feature do
       let(:the_user) { user }
       let(:is_public) { true }
 
+      before { visit edit_record_connection_type_connection_path(record_a, connection_type, connection) }
+
       it 'should allow to edit' do
-        expect(page).to have_link 'Edit'
-        click_on 'Edit'
-        expect(current_path).to eq edit_record_connection_type_connection_path(record_a, connection_type, connection)
+        fill_in 'connection_name', with: 'New Name'
+        fill_in 'connection_description', with: 'New Description'
+        click_on 'Save!'
+        expect(connection.reload.name).to eq 'New Name'
+        expect(connection.reload.description).to eq 'New Description'
       end
     end
 
@@ -42,8 +50,10 @@ RSpec.feature "Edit Connections", type: :feature do
       let(:the_user) { user2 }
       let(:is_public) { false }
 
+      before { visit edit_record_connection_type_connection_path(record_a, connection_type, connection) }
+
       it 'should not allow to edit' do
-        expect(page).to have_no_link 'Edit'
+        expect(current_path).to eq connections_path
       end
     end
 
@@ -51,10 +61,12 @@ RSpec.feature "Edit Connections", type: :feature do
       let(:the_user) { user }
       let(:is_public) { false }
 
+      before { visit edit_record_connection_type_connection_path(record_a, connection_type, connection) }
+
       it 'should allow to edit' do
-        expect(page).to have_link 'Edit'
-        click_on 'Edit'
-        expect(current_path).to eq edit_record_connection_type_connection_path(record_a, connection_type, connection)
+        fill_in 'connection_name', with: 'New Name'
+        click_on 'Save!'
+        expect(connection.reload.name).to eq 'New Name'
       end
     end
   end

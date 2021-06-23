@@ -77,15 +77,15 @@
         <p></p>
         <p>* as A (for connections B -&gt; A)</p>
         <div class="icheck-material-white">
-          <%= form.radio_button :target_type, :same_as_source %>
-          <%= form.label :target_type, value: :same_as_source do %>
-            Тот же что и source
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
           <%= form.radio_button :target_type, :any %>
           <%= form.label :target_type, value: :any do %>
             Любой тип
+          <% end %>
+        </div>
+        <div class="icheck-material-white">
+          <%= form.radio_button :target_type, :same_as_source %>
+          <%= form.label :target_type, value: :same_as_source do %>
+            Тот же что и source
           <% end %>
         </div>
         <div class="icheck-material-white">
@@ -120,15 +120,15 @@
         <p></p>
         <p>* as A (for connections B -&gt; A)</p>
         <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :siblings %>
-          <%= form.label :target_hierarchy, value: :siblings do %>
-            Сиблинги (чайлды моего прямого парента)
+          <%= form.radio_button :target_hierarchy, :all %>
+          <%= form.label :target_hierarchy, value: :all do %>
+            Все пункты (кроме парентов? и пра-парентов? и т.п.)
           <% end %>
         </div>
         <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :all_parent_generations %>
-          <%= form.label :target_hierarchy, value: :all_parent_generations do %>
-            Все поколения парентов
+          <%= form.radio_button :target_hierarchy, :all_roots %>
+          <%= form.label :target_hierarchy, value: :all_roots do %>
+            Все корни всех деревьев
           <% end %>
         </div>
         <div class="icheck-material-white">
@@ -138,40 +138,10 @@
           <% end %>
         </div>
         <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :all_tree_records %>
-          <%= form.label :target_hierarchy, value: :all_tree_records do %>
-            Все пункты в моём семейном древе (кроме парентов?, пра-парентов? и т.п.)
+          <%= form.radio_button :target_hierarchy, :siblings %>
+          <%= form.label :target_hierarchy, value: :siblings do %>
+            Сиблинги (чайлды моего прямого парента)
           <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :all %>
-          <%= form.label :target_hierarchy, value: :all do %>
-            Все пункты (кроме парентов? и пра-парентов? и т.п.)
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :root %>
-          <%= form.label :target_hierarchy, value: :root do %>
-            Пункты главного списка (те у которых нет парентов)
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :closest_root %>
-          <%= form.label :target_hierarchy, value: :closest_root do %>
-            Корень дерева (главный пункт с которого всё началось)
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :specific_parent_type %>
-          <%= form.label :target_hierarchy, value: :specific_parent_type do %>
-            Ближайший парент такого-то типа
-          <% end %>
-        </div>
-      </div>
-      <div class="form-group py-2">
-        <label for="input-3">Выберете тип ближайшего парента</label>
-        <div class="dropdown" data-pgc="jr.dropdown">
-          <%= form.collection_select :closest_parent_type_id, @target_record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
       </div>
       <div class="form-group d-flex d-sm-flex justify-content-between">

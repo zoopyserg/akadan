@@ -21,11 +21,11 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Parent Type Se
         before { visit new_connection_type_path }
 
         it 'should not include someone elses private type' do
-          expect(page.all('select#connection_type_closest_parent_type_id option').map(&:text)).not_to include('Someone Elses Private Type')
+          expect(page.all('select#connection_type_target_record_type_id option').map(&:text)).not_to include('Someone Elses Private Type')
         end
 
         it 'should include someone elses public type' do
-          expect(page.all('select#connection_type_closest_parent_type_id option').map(&:text)).to include('Someone Elses Public Type')
+          expect(page.all('select#connection_type_target_record_type_id option').map(&:text)).to include('Someone Elses Public Type')
         end
       end
 
@@ -39,11 +39,11 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Parent Type Se
           it 'should let me create' do
             expect {
               fill_in :connection_type_name, with: 'boo'
-              choose :connection_type_target_hierarchy_specific_parent_type
-              select 'My Type', from: :connection_type_closest_parent_type_id
+              choose :connection_type_target_type_specific_type
+              select 'My Type', from: :connection_type_target_record_type_id
               click_on 'Create!'
             }.to change {
-              user.connection_types.where(closest_parent_type_id: record_type.reload.id).count
+              user.connection_types.where(target_record_type: record_type.reload.id).count
             }.by(1)
           end
         end
@@ -54,11 +54,11 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Parent Type Se
           it 'should let me create' do
             expect {
               fill_in :connection_type_name, with: 'boo'
-              choose :connection_type_target_hierarchy_specific_parent_type
-              select 'My Type', from: :connection_type_closest_parent_type_id
+              choose :connection_type_target_type_specific_type
+              select 'My Type', from: :connection_type_target_record_type_id
               click_on 'Create!'
             }.to change {
-              user.connection_types.where(closest_parent_type_id: record_type.reload.id).count
+              user.connection_types.where(target_record_type: record_type.reload.id).count
             }.by(1)
           end
         end

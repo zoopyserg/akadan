@@ -20,6 +20,11 @@ class ConnectionTypesController < ApplicationController
   # GET /connection_types/new
   def new
     @connection_type = current_user.connection_types.new
+    @connection_type.destructive = true
+    @connection_type.directional = true
+    @connection_type.one_to_many = true
+    @connection_type.target_type = 'any'
+    @connection_type.target_hierarchy = 'all'
   end
 
   # GET /connection_types/1/edit

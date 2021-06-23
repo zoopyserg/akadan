@@ -4,6 +4,9 @@ class ConnectionType < ApplicationRecord
   belongs_to :target_record_subtype, class_name: 'RecordType', optional: true
   belongs_to :closest_parent_type, class_name: 'RecordType', optional: true
 
+  validates :target_hierarchy, inclusion: { in: %w(all all_roots deep_siblings siblings) }
+  validates :target_type, inclusion: { in: %w(any same_as_source specific_type specific_subtype) }
+
   def any_target_type?
     target_type == 'any'
   end

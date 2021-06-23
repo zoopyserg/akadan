@@ -35,6 +35,8 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
 
       it 'should allow to edit' do
         expect(page).to have_link 'Edit'
+        click_on 'Edit'
+        expect(current_path).to eq edit_connection_type_path(connection_type)
       end
     end
 
@@ -53,6 +55,8 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
 
       it 'should allow to edit' do
         expect(page).to have_link 'Edit'
+        click_on 'Edit'
+        expect(current_path).to eq edit_connection_type_path(connection_type)
       end
     end
   end

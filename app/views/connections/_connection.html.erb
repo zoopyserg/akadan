@@ -21,12 +21,11 @@
         <%= render "shared/created_by", user: connection.user %>
       </div>
       <div class="col-lg-4">
-        <%= link_to edit_record_connection_type_connection_path(connection.record_a, connection.connection_type, connection), class: "btn btn-light btn-block" do %>
-          <i class="fa fa-edit"></i>&nbsp;Edit
+        <% if connection.user == current_user %>
+          <%= link_to edit_record_connection_type_connection_path(connection.record_a, connection.connection_type, connection), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-edit mx-1"></i>Edit
+          <% end %>
         <% end %>
-        <button type="button" class="btn btn-light btn-block">
-          <i class="fa fa-close"></i>&nbsp;Delete
-        </button>
       </div>
     </div>
   </div>
