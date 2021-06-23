@@ -36,18 +36,24 @@ class ConnectionsController < ApplicationController
   def create
     @connection = current_user.connections.new(connection_params)
 
-    respond_to do |format|
-      if @connection.save
-        format.html { redirect_to connections_path, notice: "Connection was successfully created." }
-        format.json { render :show, status: :created, location: @connection }
-      else
-        format.html do
-          set_connection_types
-          set_records_a
-          set_records_b
-          render :new, status: :unprocessable_entity
+    if @connection.valid? && params[:button] == "swap_direction"
+      redirect_to new_record_connection_type_connection_path(@connection.record_b, @connection.connection_type)
+    else
+      respond_to do |format|
+        if @connection.save
+          format.html { redirect_to connections_path, notice: "Connection was successfully created." }
+          format.json { render :show, status: :created, location: @connection }
+        else
+          format.html do
+            set_connection_type
+            set_record
+            set_connection_types
+            set_records_a
+            set_records_b
+            render :new, status: :unprocessable_entity
+          end
+          format.json { render json: @connection.errors, status: :unprocessable_entity }
         end
-        format.json { render json: @connection.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,6 +66,8 @@ class ConnectionsController < ApplicationController
         format.json { render :show, status: :ok, location: @connection }
       else
         format.html do
+          set_connection_type
+          set_record
           set_connection_types
           set_records_a
           set_records_b

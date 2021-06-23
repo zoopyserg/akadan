@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Edit Connection Types Button", type: :feature do
+RSpec.feature "Edit Connection Types Authorization", type: :feature do
   context 'not signed in' do
     # skipping
   end
@@ -13,7 +13,7 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit connection_types_path
+      visit edit_connection_type_path(connection_type)
     end
 
     # it also affects many people.
@@ -25,7 +25,7 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
       let(:is_public) { true }
 
       it 'should not allow to edit' do
-        expect(page).to have_no_link 'Edit'
+        expect(current_path).to eq connection_types_path
       end
     end
 
@@ -33,8 +33,14 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
       let(:the_user) { user }
       let(:is_public) { true }
 
+      before { visit edit_connection_type_path(connection_type) }
+
       it 'should allow to edit' do
-        expect(page).to have_link 'Edit'
+        fill_in 'connection_type_name', with: 'New Name'
+        fill_in 'connection_type_description', with: 'New Description'
+        click_on 'Save!'
+        expect(connection_type.reload.name).to eq 'New Name'
+        expect(connection_type.reload.description).to eq 'New Description'
       end
     end
 
@@ -42,8 +48,10 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
       let(:the_user) { user2 }
       let(:is_public) { false }
 
+      before { visit edit_connection_type_path(connection_type) }
+
       it 'should not allow to edit' do
-        expect(page).to have_no_link 'Edit'
+        expect(current_path).to eq connection_types_path
       end
     end
 
@@ -51,8 +59,12 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
       let(:the_user) { user }
       let(:is_public) { false }
 
+      before { visit edit_connection_type_path(connection_type) }
+
       it 'should allow to edit' do
-        expect(page).to have_link 'Edit'
+        fill_in 'connection_type_name', with: 'New Name'
+        click_on 'Save!'
+        expect(connection_type.reload.name).to eq 'New Name'
       end
     end
   end

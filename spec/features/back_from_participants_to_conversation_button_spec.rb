@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "BackFromParticipantsToConversationButtons", type: :feature do
+RSpec.feature "BackFromParticipantsToConversation Button", type: :feature do
   context 'not signed in' do
     # skipping because tested
   end

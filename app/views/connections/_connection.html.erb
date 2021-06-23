@@ -21,9 +21,9 @@
         <%= render "shared/created_by", user: connection.user %>
       </div>
       <div class="col-lg-4">
-        <button type="button" class="btn btn-light btn-block">
+        <%= link_to edit_record_connection_type_connection_path(connection.record_a, connection.connection_type, connection), class: "btn btn-light btn-block" do %>
           <i class="fa fa-edit"></i>&nbsp;Edit
-        </button>
+        <% end %>
         <button type="button" class="btn btn-light btn-block">
           <i class="fa fa-close"></i>&nbsp;Delete
         </button>
