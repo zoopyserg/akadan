@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :events
   resources :notifications
   resources :sensors
-  resources :people
+  resources :people, only: :index
   resources :friend_requests
   resources :blocked_users
   resources :friends

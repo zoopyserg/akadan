@@ -1,0 +1,21 @@
+<div class="card" data-pgc="jr.person">
+  <div class="card-body">
+    <div class="row">
+      <div class="align-items-center col-sm-8 d-flex flex-column justify-content-center text-center">
+        <%= image_tag user.avatar_url(:thumb), class: "rounded-circle", width: "100px", 'height' => "100px" %>
+        <p><%= user.name %></p>
+      </div>
+      <div class="col-sm-4" data-pgc-field="buttons">
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-check mx-1"></i>Accept
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-close mx-1"></i>Reject
+        </button>
+        <button type="button" class="btn btn-light btn-block">
+          <i class="fa fa-comment mx-1"></i>Message
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

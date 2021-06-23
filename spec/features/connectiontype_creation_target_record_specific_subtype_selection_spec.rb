@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ConnectionTypeCreation Target Record Type Specific Type Selection", type: :feature do
+RSpec.feature "ConnectionTypeCreation Target Record Type Specific Sub Parent Type Selection", type: :feature do
   context 'not signed in' do
     # skipping because it's tested in New Permissions
   end
@@ -39,11 +39,11 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Type Selection
           it 'should let me create' do
             expect {
               fill_in :connection_type_name, with: 'boo'
-              choose :connection_type_target_type_specific_subtype
+              choose :connection_type_target_type_specific_type
               select 'My Type', from: :connection_type_target_record_subtype_id
               click_on 'Create!'
             }.to change {
-              user.connection_types.where(target_record_subtype_id: record_type.reload.id).count
+              user.connection_types.where(target_record_subtype: record_type.reload.id).count
             }.by(1)
           end
         end
@@ -54,11 +54,11 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Type Selection
           it 'should let me create' do
             expect {
               fill_in :connection_type_name, with: 'boo'
-              choose :connection_type_target_type_specific_subtype
+              choose :connection_type_target_type_specific_type
               select 'My Type', from: :connection_type_target_record_subtype_id
               click_on 'Create!'
             }.to change {
-              user.connection_types.where(target_record_subtype_id: record_type.reload.id).count
+              user.connection_types.where(target_record_subtype: record_type.reload.id).count
             }.by(1)
           end
         end

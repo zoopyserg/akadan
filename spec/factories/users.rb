@@ -7,6 +7,7 @@ FactoryBot.define do
     password { '11111111' }
     password_confirmation { '11111111' }
     accept_terms { true }
+    is_public { true }
 
     trait :confirmed do
       confirmation_sent_at { Time.now }
