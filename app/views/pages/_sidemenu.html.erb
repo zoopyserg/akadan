@@ -8,64 +8,113 @@
     <ul class="sidebar-menu do-nicescrol">
         <li class="sidebar-header">MAIN NAVIGATION</li>
         <li>
-            <%= link_to records_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Repetitive Records / Projects</span> <% end %>
+            <%= link_to records_path do %>
+                <i class="zmdi zmdi-format-list-bulleted"></i>
+                <span>Repetitive Records / Projects</span>
+            <% end %>
         </li>
         <% if user_signed_in? %>
             <li>
-                <%= link_to new_record_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a New Record</span> <% end %>
+                <%= link_to new_record_path do %>
+                    <i class="zmdi zmdi-plus-square"></i>
+                    <span>Add a New Record</span>
+                <% end %>
             </li>
         <% end %>
         <li>
-            <%= link_to record_types_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Types of Repetitive Records</span> <% end %>
+            <%= link_to record_types_path do %>
+                <i class="zmdi zmdi-format-list-bulleted"></i>
+                <span>Types of Repetitive Records</span>
+            <% end %>
         </li>
         <% if user_signed_in? %>
             <li>
-                <%= link_to new_record_type_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a New Record Type</span> <% end %>
+                <%= link_to new_record_type_path do %>
+                    <i class="zmdi zmdi-plus-square"></i>
+                    <span>Add a New Record Type</span>
+                <% end %>
             </li>
         <% end %>
         <li>
             <a href="calendar.html"> <i class="zmdi zmdi-calendar-alt"></i> <span>Import Events from Google Calendar as  Repetitive Records</span> </a>
         </li>
         <li>
-            <%= link_to connection_types_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Types of Connections Between Repetitive Records</span> <% end %>
+            <%= link_to connection_types_path do %>
+                <i class="zmdi zmdi-format-list-bulleted"></i>
+                <span>Types of Connections Between Repetitive Records</span>
+            <% end %>
         </li>
         <% if user_signed_in? %>
             <li>
-                <%= link_to new_connection_type_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a New Connection Type</span> <% end %>
+                <%= link_to new_connection_type_path do %>
+                    <i class="zmdi zmdi-plus-square"></i>
+                    <span>Add a New Connection Type</span>
+                <% end %>
             </li>
         <% end %>
         <li>
-            <%= link_to connections_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Connections Between Repetitive Records</span> <% end %>
+            <%= link_to connections_path do %>
+                <i class="zmdi zmdi-format-list-bulleted"></i>
+                <span>Connections Between Repetitive Records</span>
+            <% end %>
         </li>
         <% if user_signed_in? %>
             <li>
-                <%= link_to new_connection_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a New Connection</span> <% end %>
+                <%= link_to new_connection_path do %>
+                    <i class="zmdi zmdi-plus-square"></i>
+                    <span>Add a New Connection</span>
+                <% end %>
+            </li>
+        <% end %>
+        <% if user_signed_in? %>
+            <li>
+                <%= link_to friends_path do %>
+                    <i class="zmdi zmdi-accounts-alt"></i>
+                    <span>Friends</span>
+                <% end %>
+            </li>
+        <% end %>
+        <% if user_signed_in? %>
+            <li>
+                <%= link_to blocked_users_path do %>
+                    <i class="zmdi zmdi-accounts-outline"></i>
+                    <span>Blocked Users</span>
+                <% end %>
+            </li>
+        <% end %>
+        <% if user_signed_in? %>
+            <li>
+                <%= link_to conversations_path do %>
+                    <i class="zmdi zmdi-comment-list"></i>
+                    <span>My Messages</span>
+                <% end %>
             </li>
         <% end %>
         <li>
-            <%= link_to friends_path do %> <i class="zmdi zmdi-accounts-alt"></i> <span>My Friends</span> <% end %>
+            <%= link_to people_path do %>
+                <i class="zmdi zmdi-accounts-list"></i>
+                <span>People</span>
+            <% end %>
         </li>
         <li>
-            <%= link_to blocked_users_path do %> <i class="zmdi zmdi-accounts-outline"></i> <span>Black List</span> <% end %>
+            <%= link_to sensors_path do %>
+                <i class="zmdi zmdi-format-list-bulleted"></i>
+                <span>Sensors / Camera Recognitions</span>
+            <% end %>
         </li>
         <% if user_signed_in? %>
             <li>
-                <%= link_to conversations_path do %> <i class="zmdi zmdi-comment-list"></i> <span>My Messages</span> <% end %>
+                <%= link_to new_sensor_path do %>
+                    <i class="zmdi zmdi-plus-square"></i>
+                    <span>Add a New Sensor</span>
+                <% end %>
             </li>
         <% end %>
         <li>
-            <%= link_to people_path do %> <i class="zmdi zmdi-accounts-list"></i> <span>People</span> <% end %>
-        </li>
-        <li>
-            <%= link_to sensors_path do %> <i class="zmdi zmdi-format-list-bulleted"></i> <span>Sensors / Camera Recognitions</span> <% end %>
-        </li>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to new_sensor_path do %> <i class="zmdi zmdi-plus-square"></i> <span>Add a New Sensor</span> <% end %>
-            </li>
-        <% end %>
-        <li>
-            <%= link_to notifications_path do %> <i class="zmdi zmdi-comments"></i> <span>Notifications</span> <% end %>
+            <%= link_to notifications_path do %>
+                <i class="zmdi zmdi-comments"></i>
+                <span>Notifications</span>
+            <% end %>
         </li>
         <li>
             <a href="store.html"> <i class="zmdi zmdi-store"></i> <span>Online Store</span> </a>
@@ -77,13 +126,22 @@
             <a href="platforms.html"> <i class="zmdi zmdi-download"></i> <span>Platforms (Downloads)</span> </a>
         </li>
         <li>
-            <%= link_to edit_user_path(1) do %> <i class="zmdi zmdi-settings"></i> <span>Settings</span> <% end %>
+            <%= link_to edit_user_path(1) do %>
+                <i class="zmdi zmdi-settings"></i>
+                <span>Settings</span>
+            <% end %>
         </li>
         <li>
-            <%= link_to seminars_path do %> <i class="zmdi zmdi-calendar"></i> <span>Seminars &amp; Courses</span> <% end %>
+            <%= link_to seminars_path do %>
+                <i class="zmdi zmdi-calendar"></i>
+                <span>Seminars &amp; Courses</span>
+            <% end %>
         </li>
         <li>
-            <%= link_to events_path do %> <i class="zmdi zmdi-calendar-note"></i> <span>Events</span> <% end %>
+            <%= link_to events_path do %>
+                <i class="zmdi zmdi-calendar-note"></i>
+                <span>Events</span>
+            <% end %>
         </li>
         <li>
             <a href="wallet.html"> <i class="zmdi zmdi-balance-wallet"></i> <span>Wallet</span> </a>
@@ -108,17 +166,26 @@
         </li>
         <% unless user_signed_in? %>
             <li>
-                <%= link_to new_user_session_path do %> <i class="zmdi zmdi-lock"></i> <span>Login</span> <% end %>
+                <%= link_to new_user_session_path do %>
+                    <i class="zmdi zmdi-lock"></i>
+                    <span>Login</span>
+                <% end %>
             </li>
         <% end %>
         <% if user_signed_in? %>
             <li>
-                <%= link_to destroy_user_session_path, method: :delete do %> <i class="zmdi zmdi-lock"></i> <span>Logout</span> <% end %>
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                    <i class="zmdi zmdi-lock"></i>
+                    <span>Logout</span>
+                <% end %>
             </li>
         <% end %>
         <% unless user_signed_in? %>
             <li>
-                <%= link_to new_user_registration_path do %> <i class="zmdi zmdi-account-circle"></i> <span>Registration</span> <% end %>
+                <%= link_to new_user_registration_path do %>
+                    <i class="zmdi zmdi-account-circle"></i>
+                    <span>Registration</span>
+                <% end %>
             </li>
         <% end %>
         <li>

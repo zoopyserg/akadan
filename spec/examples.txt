@@ -249,6 +249,8 @@ example_id                                                                      
 ./spec/features/blacklist_index_photo_spec.rb[1:2:11:9]                                                   | passed  | 0.93753 seconds |
 ./spec/features/blacklist_index_photo_spec.rb[1:2:11:10]                                                  | passed  | 0.94849 seconds |
 ./spec/features/blacklist_index_photo_spec.rb[1:2:11:11]                                                  | passed  | 0.95426 seconds |
+./spec/features/blacklist_index_unblock_spec.rb[1:1:1]                                                    | passed  | 0.07329 seconds |
+./spec/features/blacklist_index_unblock_spec.rb[1:2:1]                                                    | passed  | 0.77391 seconds |
 ./spec/features/connection_creation_cancel_button_spec.rb[1:2:1]                                          | passed  | 1.11 seconds    |
 ./spec/features/connection_creation_cancel_button_spec.rb[1:2:2]                                          | passed  | 0.23027 seconds |
 ./spec/features/connection_creation_connection_type_spec.rb[1:2:1:1:1]                                    | passed  | 1.26 seconds    |
@@ -792,6 +794,10 @@ example_id                                                                      
 ./spec/features/friends_index_photo_spec.rb[1:2:11:9]                                                     | passed  | 0.9438 seconds  |
 ./spec/features/friends_index_photo_spec.rb[1:2:11:10]                                                    | passed  | 0.95019 seconds |
 ./spec/features/friends_index_photo_spec.rb[1:2:11:11]                                                    | passed  | 0.94771 seconds |
+./spec/features/nav_blacklist_button_spec.rb[1:1:1]                                                       | passed  | 0.58785 seconds |
+./spec/features/nav_blacklist_button_spec.rb[1:2:1]                                                       | passed  | 0.2429 seconds  |
+./spec/features/nav_friends_button_spec.rb[1:1:1]                                                         | passed  | 1.61 seconds    |
+./spec/features/nav_friends_button_spec.rb[1:2:1]                                                         | passed  | 0.2521 seconds  |
 ./spec/features/nav_login_button_spec.rb[1:1:1]                                                           | passed  | 0.07659 seconds |
 ./spec/features/nav_login_button_spec.rb[1:2:1]                                                           | passed  | 0.15842 seconds |
 ./spec/features/nav_logout_button_spec.rb[1:1:1]                                                          | passed  | 0.04214 seconds |
@@ -808,6 +814,8 @@ example_id                                                                      
 ./spec/features/nav_newrecordtype_button_spec.rb[1:2:1]                                                   | passed  | 0.20232 seconds |
 ./spec/features/nav_newsensor_button_spec.rb[1:1:1]                                                       | passed  | 0.03956 seconds |
 ./spec/features/nav_newsensor_button_spec.rb[1:2:1]                                                       | passed  | 0.21378 seconds |
+./spec/features/nav_people_button_spec.rb[1:1:1]                                                          | passed  | 0.80938 seconds |
+./spec/features/nav_people_button_spec.rb[1:2:1]                                                          | passed  | 0.24053 seconds |
 ./spec/features/nav_register_button_spec.rb[1:1:1]                                                        | passed  | 0.08407 seconds |
 ./spec/features/nav_register_button_spec.rb[1:2:1]                                                        | passed  | 0.16512 seconds |
 ./spec/features/nav_sensor_create_button_spec.rb[1:1:1]                                                   | passed  | 0.03947 seconds |
