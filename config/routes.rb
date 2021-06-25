@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :participations
   end
 
-  resources :users
+  resources :users, only: [:show, :edit]
   resources :seminars
   resources :events
   resources :notifications

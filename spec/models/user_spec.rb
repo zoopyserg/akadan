@@ -15,6 +15,13 @@ RSpec.describe User, type: :model do
   it { should have_many(:participations).dependent(:destroy) }
   it { should have_many(:conversations).through(:participations) }
 
+  it { should have_many(:friend_requests).dependent(:destroy) }
+  it { should have_many(:friends).through(:friend_requests).class_name('User').with_foreign_key('friend_id') }
+  it { should have_many(:users).through(:friend_requests) }
+
+  it { should have_many(:blockings).dependent(:destroy) }
+  it { should have_many(:blocked_users).through(:blockings).class_name('User').with_foreign_key('blocked_user_id') }
+
   describe 'validations' do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
