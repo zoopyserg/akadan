@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :people, only: :index
   resources :friend_requests
   resources :blocked_users
-  resources :friends
+  resources :friends, only: :index
 
   resources :records do
     resources :connection_types do

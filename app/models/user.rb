@@ -43,6 +43,8 @@ class User < ApplicationRecord
 
   scope :visible_users_for, -> (instance) { where(id: ((all_public_ids + mutual_friend_ids(instance)) - [instance.id, blocked_users_ids(instance), blocked_by_users_ids(instance)].flatten )) }
 
+  scope :visible_friends_for, -> (instance) { where(id: (mutual_friend_ids(instance) + for_who_i_am_a_friend_ids(instance))) }
+
   mount_uploader :avatar, AvatarUploader
 
   def name
