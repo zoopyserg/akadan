@@ -6,6 +6,11 @@
         <p><%= user.name %></p>
       </div>
       <div class="col-sm-4" data-pgc-field="buttons">
+        <% if user.unblockable_by(current_user) %>
+          <%= link_to blocked_user_blocking_path(blocked_user_id: user.id, id: current_user.blockings.find_by(blocked_user: user).id), method: :delete, class: "btn btn-light btn-block", data: { confirm: 'Are you sure?' } do %>
+            <i class="fa fa-close mx-1"></i>Unblock
+          <% end %>
+        <% end %>
         <button type="button" class="btn btn-light btn-block">
           <i class="fa fa-check mx-1"></i>Accept
         </button>

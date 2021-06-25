@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   resources :sensors
   resources :people, only: :index
   resources :friend_requests
-  resources :blocked_users, only: :index
+  resources :blocked_users, only: :index do
+    resources :blockings, only: [:create, :destroy]
+  end
   resources :friends, only: :index
 
   resources :records do
