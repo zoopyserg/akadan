@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Blacklist Index Names", type: :feature do
+RSpec.feature "People Index Photos", type: :feature do
   let!(:user1) do
     create :user, :confirmed, :free, username: 'something',
       first_name: 'John',
@@ -138,9 +138,19 @@ RSpec.feature "Blacklist Index Names", type: :feature do
   let!(:blacklisted_me_connection) { create :blocking, user: blacklisted_me, blocked_user: user1 }
 
   context 'not signed in' do
-    before { visit blocked_users_path }
+    before { visit people_path }
 
-    it { expect(current_path).to eq new_user_session_path }
+    it { expect(page).to have_css "img[src*='me.jpg']" }
+    it { expect(page).to have_css "img[src*='stranger.jpg']" }
+    it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
+    it { expect(page).to have_css "img[src*='friend.jpg']" }
+    it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
+    it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
+    it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
+    it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+    it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
+    it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+    it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
   end
 
   context 'signed in' do
@@ -148,19 +158,19 @@ RSpec.feature "Blacklist Index Names", type: :feature do
       before do
         visit root_path
         sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
       it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_private.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
       it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
@@ -168,199 +178,199 @@ RSpec.feature "Blacklist Index Names", type: :feature do
       before do
         visit root_path
         sign_in('stranger@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'stranger_protected@gmail.com signs in' do
       before do
         visit root_path
         sign_in('stranger_protected@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'friend@gmail.com signs in' do
       before do
         visit root_path
         sign_in('friend@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'friend_private@gmail.com signs in' do
       before do
         visit root_path
         sign_in('friend_private@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'friend_request_sent_to_him@gmail.com signs in' do
       before do
         visit root_path
         sign_in('friend_request_sent_to_him@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'friend_request_sent_to_him_private@gmail.com signs in' do
       before do
         visit root_path
         sign_in('friend_request_sent_to_him_private@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'friend_request_sent_to_me@gmail.com signs in' do
       before do
         visit root_path
         sign_in('friend_request_sent_to_me@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'friend_request_sent_to_me_private@gmail.com signs in' do
       before do
         visit root_path
         sign_in('friend_request_sent_to_me_private@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'blacklisted@gmail.com signs in' do
       before do
         visit root_path
         sign_in('blacklisted@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
       it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
       it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted_m_e.jpg']" }
     end
 
     context 'blacklisted_me@gmail.com signs in' do
       before do
         visit root_path
         sign_in('blacklisted_me@gmail.com', 'rediculouslycomplexpassword54321')
-        visit blocked_users_path
+        visit people_path
       end
 
-      it { expect(page).to have_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it { expect(page).to have_no_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
       it { expect(page).to have_no_css "img[src*='stranger_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend.jpg']" }
+      it { expect(page).to have_css "img[src*='friend.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_him.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_him_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='friend_request_sent_to_m_e.jpg']" }
+      it { expect(page).to have_css "img[src*='friend_request_sent_to_m_e.jpg']" }
       it { expect(page).to have_no_css "img[src*='friend_request_sent_to_me_private.jpg']" }
-      it { expect(page).to have_no_css "img[src*='blacklisted.jpg']" }
+      it { expect(page).to have_css "img[src*='blacklisted.jpg']" }
       it { expect(page).to have_no_css "img[src*='blacklisted_m_e.jpg']" }
     end
   end
