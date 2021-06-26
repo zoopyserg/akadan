@@ -19,10 +19,12 @@
             Block
           <% end %>
         <% end %>
-        <button class="btn btn-light btn-block" type="button">
-          <i class="fa fa-check mx-1"></i>
-          Accept
-        </button>
+        <% if user.sent_friend_request_to?(current_user) %>
+          <%= link_to friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
+            <i class="fa fa-close mx-1"></i>
+            Accept Request
+          <% end %>
+        <% end %>
         <button class="btn btn-light btn-block" type="button">
           <i class="fa fa-close mx-1"></i>
           Reject

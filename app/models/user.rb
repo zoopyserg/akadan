@@ -48,12 +48,17 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def unblockable_by(someone_else)
     someone_else.blocked_users.include? self
   end
 
-  def name
-    "#{first_name} #{last_name}"
+  def sent_friend_request_to?(someone_else)
+    self.friends.include?(someone_else) && !someone_else.friends.include?(self)
   end
+
 
 end

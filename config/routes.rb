@@ -19,11 +19,16 @@ Rails.application.routes.draw do
   resources :notifications
   resources :sensors
   resources :people, only: :index
-  resources :friend_requests
   resources :blocked_users, only: :index do
     resources :blockings, only: [:create, :destroy]
   end
-  resources :friends, only: :index
+  resources :friends, only: :index do
+    resources :friend_requests, only: [:create] do
+      collection do
+        delete :destroy, as: :delete
+      end
+    end
+  end
 
   resources :records do
     resources :connection_types do
