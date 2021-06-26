@@ -40,6 +40,7 @@ class User < ApplicationRecord
   scope :my_friend_ids, -> (instance) { instance.friends.pluck(:id) }
   scope :for_who_i_am_a_friend_ids, -> (instance) { User.joins(:friend_requests).where(friend_requests: { friend_id: instance.id } ).pluck(:id) }
   scope :mutual_friend_ids, -> (instance) { my_friend_ids(instance) & for_who_i_am_a_friend_ids(instance) }
+  scope :mutual_friends, -> (instance) { where(id: mutual_friend_ids(instance)) }
 
   scope :visible_users_for, -> (instance) { where(id: ((all_public_ids + mutual_friend_ids(instance)) - [instance.id, blocked_users_ids(instance), blocked_by_users_ids(instance)].flatten )) }
 
@@ -48,7 +49,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   def unblockable_by(someone_else)
-    someone_else.blocked_users.includes self
+    someone_else.blocked_users.include? self
   end
 
   def name

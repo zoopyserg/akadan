@@ -4,6 +4,15 @@ class BlockingsController < ApplicationController
   before_action :set_blocking, only: :destroy
 
   def create
+    if current_user.blockings.create blocked_user_id: params[:blocked_user_id]
+      respond_to do |format|
+        format.html { redirect_to friends_path }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to friends_path, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy

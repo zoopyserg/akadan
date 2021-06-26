@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Blacklist Index Names", type: :feature do
+RSpec.feature "Blacklist Index Unblock Button", type: :feature do
   let!(:user1) do
     create :user, :confirmed, :free, username: 'something',
       first_name: 'John',

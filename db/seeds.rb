@@ -1,7 +1,7 @@
 require 'factory_bot_rails'
 require 'faker'
 
-user1 = FactoryBot.build :user
+user1 = FactoryBot.build :user, email: 'fuckingemail@gmail.com'
 user2 = FactoryBot.build :user
 
 user1.skip_confirmation!
@@ -20,6 +20,14 @@ message = FactoryBot.create :message, body: "some body", sender: user1, conversa
 
 FactoryBot.create :reading, user: user1, message: message, read: false
 FactoryBot.create :reading, user: user2, message: message, read: true
+
+100.times do
+  friend = FactoryBot.build :user
+  friend.skip_confirmation!
+  friend.save!
+  FactoryBot.create :friend_request, user: user1, friend: friend
+  FactoryBot.create :friend_request, user: friend, friend: user1
+end
 
 
 # public/private types/records etc.
