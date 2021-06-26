@@ -1,7 +1,7 @@
 class FriendRequestsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_unblockable_user, only: :reject
-  before_action :set_requests, only: :reject
+  before_action :set_unblockable_user, only: [:reject, :unfriend]
+  before_action :set_requests, only: [:reject, :unfriend]
 
   def create
     if current_user.friend_requests.create friend_id: params[:friend_id]
@@ -16,6 +16,18 @@ class FriendRequestsController < ApplicationController
   end
 
   def reject
+    if @friend_requests.destroy_all
+      respond_to do |format|
+        format.html { redirect_to friends_path }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to friends_path, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def unfriend
     if @friend_requests.destroy_all
       respond_to do |format|
         format.html { redirect_to friends_path }

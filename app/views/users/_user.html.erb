@@ -29,6 +29,12 @@
             Reject Request
           <% end %>
         <% end %>
+        <% if user.mutual_friend_of?(current_user) %>
+          <%= link_to unfriend_friend_friend_requests_path(friend_id: user.id), method: :delete, class: "btn btn-light btn-block" do %>
+            <i class="fa fa-close mx-1"></i>
+            Remove from friends
+          <% end %>
+        <% end %>
         <button class="btn btn-light btn-block" type="button">
           <i class="fa fa-comment mx-1"></i>
           Message

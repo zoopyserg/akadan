@@ -61,5 +61,9 @@ class User < ApplicationRecord
     self.friends.include?(someone_else) && !someone_else.friends.include?(self)
   end
 
+  def mutual_friend_of?(someone_else)
+    User.mutual_friends(someone_else).include? self
+  end
+
 
 end
