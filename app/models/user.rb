@@ -41,6 +41,7 @@ class User < ApplicationRecord
   scope :for_who_i_am_a_friend_ids, -> (instance) { User.joins(:friend_requests).where(friend_requests: { friend_id: instance.id } ).pluck(:id) }
   scope :mutual_friend_ids, -> (instance) { my_friend_ids(instance) & for_who_i_am_a_friend_ids(instance) }
   scope :mutual_friends, -> (instance) { where(id: mutual_friend_ids(instance)) }
+  scope :who_thinks_they_are_friends_of, -> (instance) { where(id: for_who_i_am_a_friend_ids(instance)) }
 
   scope :visible_users_for, -> (instance) { where(id: ((all_public_ids + mutual_friend_ids(instance)) - [instance.id, blocked_users_ids(instance), blocked_by_users_ids(instance)].flatten )) }
 

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :friends, only: :index do
     resources :friend_requests, only: [:create] do
       collection do
-        delete :destroy, as: :delete
+        delete :reject, as: :reject
       end
     end
   end
