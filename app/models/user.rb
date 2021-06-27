@@ -53,8 +53,12 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def unblockable_by(someone_else)
-    someone_else.blocked_users.include? self
+  def blocked?(someone_else)
+    blocked_users.include? someone_else
+  end
+
+  def did_not_block?(someone_else)
+    !blocked?(someone_else)
   end
 
   def sent_friend_request_to?(someone_else)
@@ -64,6 +68,4 @@ class User < ApplicationRecord
   def mutual_friend_of?(someone_else)
     User.mutual_friends(someone_else).include? self
   end
-
-
 end

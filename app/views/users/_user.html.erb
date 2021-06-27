@@ -8,7 +8,7 @@
         </p>
       </div>
       <div class="col-sm-4" data-pgc-field="buttons">
-        <% if user.unblockable_by(current_user) %>
+        <% if current_user.blocked?(user) %>
           <%= link_to blocked_user_blocking_path(blocked_user_id: user.id, id: current_user.blockings.find_by(blocked_user: user).id), method: :delete, class: "btn btn-light btn-block", data: { confirm: 'Are you sure?' } do %>
             <i class="fa fa-close mx-1"></i>
             Unblock
@@ -35,10 +35,12 @@
             Remove from friends
           <% end %>
         <% end %>
-        <button class="btn btn-light btn-block" type="button">
-          <i class="fa fa-comment mx-1"></i>
-          Message
-        </button>
+        <% if user.did_not_block?(current_user) %>
+          <%= link_to person_conversation_starts_path(person_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
+            <i class="fa fa-comment mx-1"></i>
+            Message
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

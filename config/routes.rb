@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   resources :events
   resources :notifications
   resources :sensors
-  resources :people, only: :index
+  resources :people, only: :index do
+    resources :conversation_starts, only: :create
+  end
   resources :blocked_users, only: :index do
     resources :blockings, only: [:create, :destroy]
   end
