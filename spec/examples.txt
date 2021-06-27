@@ -127,6 +127,12 @@ example_id                                                                      
 ./spec/features/blacklist_index_name_spec.rb[1:2:11:9]                                                    | passed  | 0.29438 seconds |
 ./spec/features/blacklist_index_name_spec.rb[1:2:11:10]                                                   | passed  | 0.21469 seconds |
 ./spec/features/blacklist_index_name_spec.rb[1:2:11:11]                                                   | passed  | 0.20936 seconds |
+./spec/features/blacklist_index_pagination_spec.rb[1:1:1]                                                 | passed  | 1.42 seconds    |
+./spec/features/blacklist_index_pagination_spec.rb[1:2:1:1]                                               | passed  | 1.51 seconds    |
+./spec/features/blacklist_index_pagination_spec.rb[1:2:2:1]                                               | passed  | 1.53 seconds    |
+./spec/features/blacklist_index_pagination_spec.rb[1:2:3:1]                                               | passed  | 1.64 seconds    |
+./spec/features/blacklist_index_pagination_spec.rb[1:2:4:1]                                               | passed  | 1.59 seconds    |
+./spec/features/blacklist_index_pagination_spec.rb[1:2:5:1]                                               | passed  | 1.76 seconds    |
 ./spec/features/blacklist_index_photo_spec.rb[1:1:1]                                                      | passed  | 0.84286 seconds |
 ./spec/features/blacklist_index_photo_spec.rb[1:2:1:1]                                                    | passed  | 0.92256 seconds |
 ./spec/features/blacklist_index_photo_spec.rb[1:2:1:2]                                                    | passed  | 0.94825 seconds |
