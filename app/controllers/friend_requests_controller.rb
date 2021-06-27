@@ -15,6 +15,18 @@ class FriendRequestsController < ApplicationController
     end
   end
 
+  def accept
+    if current_user.friend_requests.create friend_id: params[:friend_id]
+      respond_to do |format|
+        format.html { redirect_to friends_path }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to friends_path, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def reject
     if @friend_requests.destroy_all
       respond_to do |format|

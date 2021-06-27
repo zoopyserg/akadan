@@ -129,17 +129,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
   context 'not signed in' do
     before { visit people_path }
 
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-    it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+    it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
   end
 
   context 'signed in' do
@@ -150,29 +150,29 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
 
       describe 'accepting a friend' do
-        it { expect{ find("[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }.to change{ user1.friends.count }.by(1) }
-        it { expect{ find("[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }.to change{ User.mutual_friends(user1).count }.by(1) }
-        it { expect{ find("[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }.to change{ User.mutual_friends(friend_request_sent_to_me).count }.by(1) }
+        it { expect{ find("[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }.to change{ user1.friends.count }.by(1) }
+        it { expect{ find("[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }.to change{ User.mutual_friends(user1).count }.by(1) }
+        it { expect{ find("[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }.to change{ User.mutual_friends(friend_request_sent_to_me).count }.by(1) }
 
         describe 'changes in friends list' do
-          before { find("[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }
+          before { find("[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']").click }
 
           it { expect(current_path).to eq friends_path }
           it { expect(page).to have_content 'Incoming Friend' }
-          it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+          it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
         end
       end
     end
@@ -184,17 +184,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'stranger_protected@gmail.com signs in' do
@@ -204,17 +204,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'friend@gmail.com signs in' do
@@ -224,17 +224,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'friend_private@gmail.com signs in' do
@@ -244,17 +244,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'friend_request_sent_to_him@gmail.com signs in' do
@@ -264,17 +264,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'friend_request_sent_to_him_private@gmail.com signs in' do
@@ -284,17 +284,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'friend_request_sent_to_me@gmail.com signs in' do
@@ -304,17 +304,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'friend_request_sent_to_me_private@gmail.com signs in' do
@@ -324,17 +324,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'blacklisted@gmail.com signs in' do
@@ -344,17 +344,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
 
     context 'blacklisted_me@gmail.com signs in' do
@@ -364,17 +364,17 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
         visit people_path
       end
 
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: user1.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted.id)}']" }
-      it { expect(page).to have_no_css "[href='#{friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: user1.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted.id)}']" }
+      it { expect(page).to have_no_css "[href='#{accept_friend_friend_requests_path(friend_id: blacklisted_me.id)}']" }
     end
   end
 end

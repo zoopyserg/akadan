@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :friends, only: :index do
     resources :friend_requests, only: [:create] do
       collection do
+        post :send, as: :send
+        post :accept, as: :accept
         delete :reject, as: :reject
         delete :unfriend, as: :unfriend
       end

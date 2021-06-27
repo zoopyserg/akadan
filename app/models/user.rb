@@ -68,4 +68,8 @@ class User < ApplicationRecord
   def mutual_friend_of?(someone_else)
     User.mutual_friends(someone_else).include? self
   end
+
+  def can_become_a_friend_of?(someone_else)
+    !User.mutual_friends(someone_else).include?(self) && someone_else.did_not_block?(self) && !someone_else.sent_friend_request_to?(self) && !sent_friend_request_to?(someone_else)
+  end
 end

@@ -21,13 +21,19 @@
             <% end %>
           <% end %>
           <% if user.sent_friend_request_to?(current_user) %>
-            <%= link_to friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
+            <%= link_to accept_friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
               <i class="fa fa-check mx-1"></i>
               Accept Request
             <% end %>
             <%= link_to reject_friend_friend_requests_path(friend_id: user.id), method: :delete, class: "btn btn-light btn-block" do %>
               <i class="fa fa-close mx-1"></i>
               Reject Request
+            <% end %>
+          <% end %>
+          <% if user.can_become_a_friend_of?(current_user) %>
+            <%= link_to friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
+              <i class="fa fa-check mx-1"></i>
+              Send a Friend Request
             <% end %>
           <% end %>
           <% if user.mutual_friend_of?(current_user) %>
