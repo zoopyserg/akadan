@@ -1208,6 +1208,12 @@ example_id                                                                      
 ./spec/features/friends_index_name_spec.rb[1:2:11:9]                                                      | passed  | 0.29705 seconds |
 ./spec/features/friends_index_name_spec.rb[1:2:11:10]                                                     | passed  | 0.25384 seconds |
 ./spec/features/friends_index_name_spec.rb[1:2:11:11]                                                     | passed  | 0.22774 seconds |
+./spec/features/friends_index_pagination_spec.rb[1:1:1]                                                   | passed  | 1.03 seconds    |
+./spec/features/friends_index_pagination_spec.rb[1:2:1:1]                                                 | passed  | 1.56 seconds    |
+./spec/features/friends_index_pagination_spec.rb[1:2:2:1]                                                 | passed  | 2.37 seconds    |
+./spec/features/friends_index_pagination_spec.rb[1:2:3:1]                                                 | passed  | 1.62 seconds    |
+./spec/features/friends_index_pagination_spec.rb[1:2:4:1]                                                 | passed  | 1.75 seconds    |
+./spec/features/friends_index_pagination_spec.rb[1:2:5:1]                                                 | passed  | 1.72 seconds    |
 ./spec/features/friends_index_photo_spec.rb[1:1:1]                                                        | passed  | 0.83493 seconds |
 ./spec/features/friends_index_photo_spec.rb[1:2:1:1]                                                      | passed  | 0.96442 seconds |
 ./spec/features/friends_index_photo_spec.rb[1:2:1:2]                                                      | passed  | 0.96183 seconds |
