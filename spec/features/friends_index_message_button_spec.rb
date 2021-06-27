@@ -1,9 +1,3 @@
-# !blocked.
-# but the problem is that blocked ones are not displayed on friends list (no real testing anywhere)
-# on hold until tomorrow
-#
-# so I need to find (or start) a conversation.
-# between every pair of Users
 require 'rails_helper'
 
 RSpec.feature "Friends Index Message Button", type: :feature do
