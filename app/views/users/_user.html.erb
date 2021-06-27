@@ -4,41 +4,43 @@
       <div class="align-items-center col-sm-8 d-flex flex-column justify-content-center text-center">
         <%= image_tag user.avatar_url(:thumb), class: "rounded-circle", width: "100px", 'height' => "100px" %>
         <p>
-          <%= user.name %>
+        <%= user.name %>
         </p>
       </div>
       <div class="col-sm-4" data-pgc-field="buttons">
-        <% if current_user.blocked?(user) %>
-          <%= link_to blocked_user_blocking_path(blocked_user_id: user.id, id: current_user.blockings.find_by(blocked_user: user).id), method: :delete, class: "btn btn-light btn-block", data: { confirm: 'Are you sure?' } do %>
-            <i class="fa fa-close mx-1"></i>
-            Unblock
+        <% if user_signed_in? %>
+          <% if current_user.blocked?(user) %>
+            <%= link_to blocked_user_blocking_path(blocked_user_id: user.id, id: current_user.blockings.find_by(blocked_user: user).id), method: :delete, class: "btn btn-light btn-block", data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-close mx-1"></i>
+              Unblock
+            <% end %>
+          <% else %>
+            <%= link_to blocked_user_blockings_path(blocked_user_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
+              <i class="fa fa-close mx-1"></i>
+              Block
+            <% end %>
           <% end %>
-        <% else %>
-          <%= link_to blocked_user_blockings_path(blocked_user_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
-            <i class="fa fa-close mx-1"></i>
-            Block
+          <% if user.sent_friend_request_to?(current_user) %>
+            <%= link_to friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
+              <i class="fa fa-check mx-1"></i>
+              Accept Request
+            <% end %>
+            <%= link_to reject_friend_friend_requests_path(friend_id: user.id), method: :delete, class: "btn btn-light btn-block" do %>
+              <i class="fa fa-close mx-1"></i>
+              Reject Request
+            <% end %>
           <% end %>
-        <% end %>
-        <% if user.sent_friend_request_to?(current_user) %>
-          <%= link_to friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
-            <i class="fa fa-check mx-1"></i>
-            Accept Request
+          <% if user.mutual_friend_of?(current_user) %>
+            <%= link_to unfriend_friend_friend_requests_path(friend_id: user.id), method: :delete, class: "btn btn-light btn-block" do %>
+              <i class="fa fa-close mx-1"></i>
+              Remove from friends
+            <% end %>
           <% end %>
-          <%= link_to reject_friend_friend_requests_path(friend_id: user.id), method: :delete, class: "btn btn-light btn-block" do %>
-            <i class="fa fa-close mx-1"></i>
-            Reject Request
-          <% end %>
-        <% end %>
-        <% if user.mutual_friend_of?(current_user) %>
-          <%= link_to unfriend_friend_friend_requests_path(friend_id: user.id), method: :delete, class: "btn btn-light btn-block" do %>
-            <i class="fa fa-close mx-1"></i>
-            Remove from friends
-          <% end %>
-        <% end %>
-        <% if user.did_not_block?(current_user) %>
-          <%= link_to person_conversation_starts_path(person_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
-            <i class="fa fa-comment mx-1"></i>
-            Message
+          <% if user.did_not_block?(current_user) %>
+            <%= link_to person_conversation_starts_path(person_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
+              <i class="fa fa-comment mx-1"></i>
+              Message
+            <% end %>
           <% end %>
         <% end %>
       </div>
