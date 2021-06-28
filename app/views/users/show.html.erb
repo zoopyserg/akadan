@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card mb-3">
       <div class="card-body text-center shadow">
-        <%= image_pack_tag "serge1.jpg", class: "rounded-circle mb-3 mt-4", width: "160", height: "160" %>
+        <%= image_tag @user.avatar_url(:thumb), class: "rounded-circle mb-3 mt-4", width: "160px", 'data-pgc-edit' => "image[src, no_content]", height: "160px" %>
         <div class="mb-3">
           <h5 class="card-title"><%= @user.name %></h5>
         </div>

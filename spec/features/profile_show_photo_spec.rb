@@ -5,6 +5,7 @@ RSpec.feature "Profile Show Name", type: :feature do
     create :user, :confirmed, :free, username: 'something',
       first_name: 'John',
       last_name: 'Wick',
+      avatar: open_image('me.jpg'),
       email: 'me@gmail.com',
       password: 'rediculouslycomplexpassword54321',
       password_confirmation: 'rediculouslycomplexpassword54321',
@@ -15,6 +16,7 @@ RSpec.feature "Profile Show Name", type: :feature do
     create :user, :confirmed, :free, username: 'stranger',
       first_name: 'Stranger',
       last_name: 'Public',
+      avatar: open_image('stranger.jpg'),
       email: 'stranger@gmail.com',
       password: 'rediculouslycomplexpassword54321',
       password_confirmation: 'rediculouslycomplexpassword54321',
@@ -25,15 +27,15 @@ RSpec.feature "Profile Show Name", type: :feature do
     context 'me' do
       before { visit user_path(user1) }
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_no_content 'Stranger Public' }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
     end
 
     context 'stranger' do
       before { visit user_path(stranger) }
 
-      it { expect(page).to have_no_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
+      it { expect(page).to have_no_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
     end
   end
 
@@ -47,15 +49,15 @@ RSpec.feature "Profile Show Name", type: :feature do
     context 'me' do
       before { visit user_path(user1) }
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_no_content 'Stranger Public' }
+      it { expect(page).to have_css "img[src*='me.jpg']" }
+      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
     end
 
     context 'stranger' do
       before { visit user_path(stranger) }
 
-      it { expect(page).to have_no_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
+      it { expect(page).to have_no_css "img[src*='me.jpg']" }
+      it { expect(page).to have_css "img[src*='stranger.jpg']" }
     end
   end
 end
