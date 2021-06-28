@@ -1,28 +1,29 @@
 <% if user_signed_in? %>
-  <% if user.did_not_block?(current_user) %>
+  <% if user.did_not_block?(current_user) && (current_user != user) %>
     <%= link_to person_conversation_starts_path(person_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
       <i class="fa fa-comment mx-1"></i>
       Message
     <% end %>
   <% end %>
-  <% if user.can_become_a_friend_of?(current_user) %>
+  <% if !user.blocked?(current_user) && user.can_become_a_friend_of?(current_user) && (current_user != user) %>
     <%= link_to friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
       <i class="fa fa-check mx-1"></i>
       Send a Friend Request
     <% end %>
   <% end %>
-  <% if current_user.blocked?(user) %>
+  <% if current_user.blocked?(user) && (current_user != user) %>
     <%= link_to blocked_user_blocking_path(blocked_user_id: user.id, id: current_user.blockings.find_by(blocked_user: user).id), method: :delete, class: "btn btn-light btn-block", data: { confirm: 'Are you sure?' } do %>
       <i class="fa fa-close mx-1"></i>
       Unblock
     <% end %>
-  <% else %>
+  <% end %>
+  <% if !current_user.blocked?(user) && (current_user != user) %>
     <%= link_to blocked_user_blockings_path(blocked_user_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
       <i class="fa fa-close mx-1"></i>
       Block
     <% end %>
   <% end %>
-  <% if user.sent_friend_request_to?(current_user) %>
+  <% if user.sent_friend_request_to?(current_user) && (current_user != user) %>
     <%= link_to accept_friend_friend_requests_path(friend_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
       <i class="fa fa-check mx-1"></i>
       Accept Request
@@ -32,7 +33,7 @@
       Reject Request
     <% end %>
   <% end %>
-  <% if user.mutual_friend_of?(current_user) %>
+  <% if user.mutual_friend_of?(current_user) && (current_user != user) %>
     <%= link_to unfriend_friend_friend_requests_path(friend_id: user.id), method: :delete, class: "btn btn-light btn-block" do %>
       <i class="fa fa-close mx-1"></i>
       Remove from friends

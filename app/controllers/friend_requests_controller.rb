@@ -1,3 +1,4 @@
+# todo: check on a controller level (for all the actions) who can or can not do certain things, as right now the showing/hiding buttons does more protection than controller authorization level
 class FriendRequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_unblockable_user, only: [:reject, :unfriend]
