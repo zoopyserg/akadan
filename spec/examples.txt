@@ -2891,6 +2891,10 @@ example_id                                                                      
 ./spec/features/people_index_unfriend_button_spec.rb[1:2:11:9]                                            | passed  | 0.24515 seconds |
 ./spec/features/people_index_unfriend_button_spec.rb[1:2:11:10]                                           | passed  | 0.24267 seconds |
 ./spec/features/people_index_unfriend_button_spec.rb[1:2:11:11]                                           | passed  | 0.22965 seconds |
+./spec/features/profile_show_name_spec.rb[1:1:1:1]                                                        | passed  | 0.12274 seconds |
+./spec/features/profile_show_name_spec.rb[1:1:2:1]                                                        | passed  | 0.55271 seconds |
+./spec/features/profile_show_name_spec.rb[1:2:1:1]                                                        | passed  | 0.29853 seconds |
+./spec/features/profile_show_name_spec.rb[1:2:2:1]                                                        | passed  | 0.47873 seconds |
 ./spec/features/record_creation_description_spec.rb[1:2:1]                                                | passed  | 0.20285 seconds |
 ./spec/features/record_creation_drawing_spec.rb[1:2:1]                                                    | pending | 0.00001 seconds |
 ./spec/features/record_creation_duration_spec.rb[1:2:1]                                                   | passed  | 0.21919 seconds |

@@ -1,17 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-<strong>Name:</strong>
-<%= @user.name %>
-</p>
-
 <div class="row">
   <div class="col-md-12">
     <div class="card mb-3">
       <div class="card-body text-center shadow">
         <%= image_pack_tag "serge1.jpg", class: "rounded-circle mb-3 mt-4", width: "160", height: "160" %>
         <div class="mb-3">
-          <h5 class="card-title">Serge Vinogradoff</h5>
+          <h5 class="card-title"><%= @user.name %></h5>
         </div>
       </div>
     </div>
