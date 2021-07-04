@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :connections, dependent: :destroy
   has_many :sensors, dependent: :destroy
 
+  has_many :bookmarks, dependent: :destroy
+  has_many :favourite_records, through: :bookmarks, class_name: 'Record', foreign_key: :record_id, source: :record
+
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
 
   has_many :readings, dependent: :destroy
@@ -71,5 +74,9 @@ class User < ApplicationRecord
 
   def can_become_a_friend_of?(someone_else)
     !User.mutual_friends(someone_else).include?(self) && someone_else.did_not_block?(self) && !someone_else.sent_friend_request_to?(self) && !sent_friend_request_to?(someone_else)
+  end
+
+  def bookmarked?(_record)
+    bookmarks.where(record: _record).exists?
   end
 end

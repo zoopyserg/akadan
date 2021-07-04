@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :records do
+    resources :bookmarks, only: [:create, :destroy]
     resources :connection_types do
       resources :connections
     end

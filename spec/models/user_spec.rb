@@ -12,6 +12,10 @@ RSpec.describe User, type: :model do
   it { should have_many(:readings).dependent(:destroy) }
   it { should have_many(:messages).through(:readings) }
 
+  # not making the inverse connection for now
+  it { should have_many(:bookmarks).dependent(:destroy) }
+  it { should have_many(:favourite_records).through(:bookmarks).source(:record) }
+
   it { should have_many(:participations).dependent(:destroy) }
   it { should have_many(:conversations).through(:participations) }
 

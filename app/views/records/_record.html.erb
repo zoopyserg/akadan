@@ -39,10 +39,19 @@
             </button>
           </div>
         </div>
-        <button class="btn btn-link btn-sm d-flex flex-row align-items-center" type="button">
-          <span><i class="fa fa-star-o mr-1"></i></span>
-          <span>Add to Favourites</span>
-        </button>
+        <% if user_signed_in? %>
+          <% if current_user.bookmarked?(record) %>
+            <%= link_to record_bookmark_path(record_id: record.id, id: Bookmark.find_by(user: current_user, record:record).id ), method: :delete, class: 'btn btn-link btn-sm d-flex flex-row align-items-center' do %>
+              <span><i class="fa fa-star mr-1"></i></span>
+              <span>Remove from Favourites</span>
+            <% end %>
+          <% else %>
+            <%= link_to record_bookmarks_path(record_id: record.id), method: :post, class: 'btn btn-link btn-sm d-flex flex-row align-items-center' do %>
+              <span><i class="fa fa-star-o mr-1"></i></span>
+              <span>Add to Favourites</span>
+            <% end %>
+          <% end %>
+        <% end %>
         <p><%= record.description %></p>
         <h6>Completed (%):</h6>
         <div class="progress">

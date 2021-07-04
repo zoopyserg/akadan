@@ -7,6 +7,13 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
   xcontext 'not signed in' do
+    # как я планирую тут делать?
+    # т.е. я думал сохранять для каждого юзера его сетап в каждом пункте
+    # но здесь речь о том что нот-сайнед-ин юзер тоже может смотреть нужные ему колонки
+    # следовательно к сайн ину нельзя привязываться
+    # следовательно GET запрос
+    # следовательно не будет персистать.
+    # Либо Джаваскрипт (фронт енд стор). Но это значит что без JS оно не будет работать.
     before { visit records_path }
 
     it 'should say who created one record' do
