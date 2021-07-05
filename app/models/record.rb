@@ -30,6 +30,9 @@ class Record < ApplicationRecord
   scope :all_without_cycles, -> (record) { without_potential_cycles(record).without_source(record) }
   scope :all_roots_without_cycles, -> (record) { all_roots.without_potential_cycles(record).without_source(record) }
 
+  scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')) }
+  scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
+
   def self.all_parent_ids(record)
     <<-SQL
       WITH RECURSIVE search_tree(id, path) AS (
@@ -64,5 +67,27 @@ class Record < ApplicationRecord
       SELECT id FROM search_tree ORDER BY path
     SQL
     # todo: interpolation
+  end
+
+  def self.all_child_ids(record)
+    <<-SQL
+      WITH RECURSIVE search_tree(id, path) AS (
+          SELECT id, ARRAY[id]
+          FROM records
+          WHERE id = #{record.id}
+        UNION
+          SELECT records.id, path || records.id
+          FROM search_tree
+          JOIN connections ON connections.record_a_id = search_tree.id
+          JOIN records ON records.id = connections.record_b_id
+          WHERE NOT records.id = ANY(path)
+      )
+      SELECT id FROM search_tree ORDER BY path
+    SQL
+    # todo: interpolation
+  end
+
+  def progress
+    ((1 - ( Record.last_children_of_record(self).count.to_f / Record.all_children_of_record(self).count.to_f )) * 100).to_i
   end
 end

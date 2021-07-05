@@ -53,9 +53,9 @@
           <% end %>
         <% end %>
         <p><%= record.description %></p>
-        <h6>Completed (%):</h6>
+        <h6>Completed (<%= record.progress %>%):</h6>
         <div class="progress">
-          <div class="progress-bar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">50%</div>
+          <div class="progress-bar" aria-valuenow="<%= record.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= record.progress %>%;"></div>
         </div>
         <p class="mb-0"><strong class="mr-1">Type:</strong>Some kind of record type<i class="fa fa-edit mx-1"></i></p>
         <div role="tablist" id="accordion-1">

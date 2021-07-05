@@ -7,6 +7,14 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
   xcontext 'not signed in' do
+    # вопрос...
+    # т.е. напомню что тут колонки...
+    # т.е. в контроллере переменная @columns (в которой много рекордсов)
+    # но. главный вопрос дня.
+    # как я буду паджинейтить много колонок? делать page_for_column_X, page_for_column_Y и т.д.?
+    # или что?
+    # это явно паршл. в который передаётся column.
+    # иди ниже по списку. вернёшься доделаешь.
     before { visit records_path }
 
     it 'should say who created one record' do
