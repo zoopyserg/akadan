@@ -54,22 +54,22 @@ class RecordTypesController < ApplicationController
   end
 
   # DELETE /record_types/1 or /record_types/1.json
-  def destroy
-    @record_type.destroy
-    respond_to do |format|
-      format.html { redirect_to record_types_url, notice: "Record type was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @record_type.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to record_types_url, notice: "Record type was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_record_type
-      @record_type = current_user.record_types.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_record_type
+    @record_type = current_user.record_types.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def record_type_params
-      params.require(:record_type).permit(:name, :description)
-    end
+  # Only allow a list of trusted parameters through.
+  def record_type_params
+    params.require(:record_type).permit(:name, :description)
+  end
 end

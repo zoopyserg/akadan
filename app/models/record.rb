@@ -90,4 +90,8 @@ class Record < ApplicationRecord
   def progress
     ((1 - ( Record.last_children_of_record(self).count.to_f / Record.all_children_of_record(self).count.to_f )) * 100).to_i
   end
+
+  def children
+    Record.where(id: Record.children(self.id))
+  end
 end

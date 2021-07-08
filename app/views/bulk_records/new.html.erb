@@ -1,0 +1,129 @@
+<div class="row mt-3">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body">
+        <h5 class="card-title mb-0" data-pgc-field="title">Create Many SubRecords</h5>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <%= form_with(scope: :record_collection, url: record_connection_type_record_type_bulk_records_path(record_id: @record.id, connection_type_id: @connection_type.id, record_type_id: @record_type.id)) do |form| %>
+          <div class="form-group">
+            <label class="d-flex justify-content-between">Connection Type</label>
+            <div class="dropdown" data-pgc="jr.dropdown">
+              <%= form.collection_select :connection_type_id, @connection_types, :id, :name, { include_blank: true, selected: @connection_type.id }, { class: "btn btn-light dropdown-toggle px-5" } %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="d-flex justify-content-between">Record Type</label>
+            <div class="dropdown" data-pgc="jr.dropdown">
+              <%= form.collection_select :record_type_id, @record_types, :id, :name, { include_blank: true, selected: @record_type.id }, { class: "btn btn-light dropdown-toggle px-5" } %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_1_name, class: "d-flex justify-content-between" do %>
+              <span> Record #1 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_1_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_2_name, class: "d-flex justify-content-between" do %>
+              <span> Record #2 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_2_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_3_name, class: "d-flex justify-content-between" do %>
+              <span> Record #3 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_3_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_4_name, class: "d-flex justify-content-between" do %>
+              <span> Record #4 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_4_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_5_name, class: "d-flex justify-content-between" do %>
+              <span> Record #5 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_5_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_6_name, class: "d-flex justify-content-between" do %>
+              <span> Record #6 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_6_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_7_name, class: "d-flex justify-content-between" do %>
+              <span> Record #7 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_7_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_8_name, class: "d-flex justify-content-between" do %>
+              <span> Record #8 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_8_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_9_name, class: "d-flex justify-content-between" do %>
+              <span> Record #9 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_9_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :record_10_name, class: "d-flex justify-content-between" do %>
+              <span> Record #10 </span>
+              <i class="fa fa-microphone"></i>
+            <% end %>
+
+            <%= form.text_field :record_10_name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+          </div>
+
+          <div class="form-group d-flex d-sm-flex justify-content-between">
+            <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+              <i class="fa fa-check mx-1"></i><%= submit_name %>
+          <% end %>
+          <%= link_to records_path, class: 'btn btn-light px-5' do %>
+            <i class="fa fa-close mx-1"></i>Cancel
+          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>

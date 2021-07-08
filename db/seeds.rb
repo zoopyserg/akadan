@@ -1,7 +1,7 @@
 require 'factory_bot_rails'
 require 'faker'
 
-user1 = FactoryBot.build :user, email: 'fuckingemail@gmail.com'
+user1 = FactoryBot.build :user, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678'
 user2 = FactoryBot.build :user
 
 user1.skip_confirmation!
@@ -9,6 +9,12 @@ user2.skip_confirmation!
 
 user1.save!
 user2.save!
+
+# needed for production
+FactoryBot.create :connection_type, name: 'Subsystem', user: user1, is_public: true
+FactoryBot.create :connection_type, name: 'Irrelevant Because...', user: user1, is_public: true
+FactoryBot.create :record_type, name: 'Subsystem', user: user1, is_public: true
+# end of stuff needed for production
 
 # messaging between users 1 & 2
 conversation = FactoryBot.create :conversation

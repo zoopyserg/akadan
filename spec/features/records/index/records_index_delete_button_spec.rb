@@ -1,36 +1,167 @@
 require 'rails_helper'
 
-RSpec.feature "Record Created By", type: :feature do
-  let!(:user1) { create :user, :confirmed, :free, first_name: 'John', last_name: 'Smith', username: 'something1', email: 'jacky.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
-  let!(:user2) { create :user, :confirmed, :free, first_name: 'Bob', last_name: 'Smith', username: 'something2', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
-  let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
-  let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
+RSpec.feature "Records Index Create Subrecords Button", type: :feature do
+  let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
+  let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
+  let!(:connection_type_for_other_buttons) { create :connection_type, name: 'Subsystem', is_public: true }
+  let!(:other_record_type_for_other_buttons) { create :record_type, name: 'Subsystem', is_public: true }
 
-  xcontext 'not signed in' do
-    before { visit records_path }
+  let!(:connection_type) { create :connection_type, name: 'Irrelevant Because...', is_public: true }
 
-    it 'should say who created one record' do
-      expect(page).to have_content 'Public Description'
+  context 'public someone elses record' do
+    let!(:record) { create :record, name: 'Record B', user: user2, is_public: true }
+    let!(:record2) { create :record, name: 'Record B', user: user2, is_public: true }
+
+    context 'not signed in' do
+      describe 'a button' do
+        before { visit records_path }
+
+        it 'should have no button' do
+          expect(page).to have_no_link 'Irrelevant'
+        end
+      end
+
+      describe 'a path authorization' do
+        before { visit new_record_connection_type_connection_path(record, connection_type) }
+
+        it 'should have no button' do
+          expect(current_path).to eq new_user_session_path
+        end
+      end
     end
 
-    it 'should not say names of people who do not have public connections' do
-      expect(page).to have_no_content 'Private Description'
+    context 'signed in' do
+      before do
+        visit root_path
+        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        visit records_path
+      end
+
+      it 'should allow to edit' do
+        expect(page).to have_link 'Irrelevant', count: 2
+      end
+
+      it 'should let me create subrecords' do
+        click_on 'Irrelevant', match: :first
+
+        select 'Record B', from: 'connection_record_b_id'
+
+        expect{
+          click_on 'Create'
+        }.to change{
+          record.children.count
+        }.by(1)
+      end
     end
   end
 
-  xcontext 'signed in' do
-    before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit records_path
+  context 'private my record' do
+    let!(:record) { create :record, name: 'Record B', user: user1, is_public: true }
+    let!(:record2) { create :record, name: 'Record B', user: user1, is_public: true }
+
+    context 'not signed in' do
+      describe 'a button' do
+        before { visit records_path }
+
+        it 'should have no button' do
+          expect(page).to have_no_link 'Irrelevant'
+        end
+      end
+
+      describe 'a path authorization' do
+        before { visit new_record_connection_type_connection_path(record, connection_type) }
+
+        it 'should have no button' do
+          expect(current_path).to eq new_user_session_path
+        end
+      end
     end
 
-    it 'should say who created public record' do
-      expect(page).to have_content 'Public Description'
+    context 'signed in' do
+      before do
+        visit root_path
+        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        visit records_path
+      end
+
+      describe 'a button' do
+        it 'should allow to edit' do
+          expect(page).to have_link 'Irrelevant'
+        end
+
+        it 'should let me create subrecords' do
+          click_on 'Irrelevant', match: :first
+
+          select 'Record B', from: 'connection_record_b_id'
+
+          expect{
+            click_on 'Create'
+          }.to change{
+            record.children.count
+          }.by(1)
+        end
+      end
+
+      describe 'a path' do
+        before { visit new_record_connection_type_connection_path(record, connection_type) }
+
+        it 'should let me create subrecords' do
+          select 'Record B', from: 'connection_record_b_id'
+
+          expect{
+            click_on 'Create'
+          }.to change{
+            record.children.count
+          }.by(1)
+        end
+      end
+    end
+  end
+
+  context 'private someone elses record' do
+    let!(:record) { create :record, name: 'Record B', user: user2, is_public: false }
+    let!(:record2) { create :record, name: 'Record B', user: user2, is_public: false }
+
+    context 'not signed in' do
+      describe 'a button' do
+        before { visit records_path }
+
+        it 'should have no button' do
+          expect(page).to have_no_link 'Irrelevant'
+        end
+      end
+
+      describe 'a path authorization' do
+        before { visit new_record_connection_type_connection_path(record, connection_type) }
+
+        it 'should have no button' do
+          expect(current_path).to eq new_user_session_path
+        end
+      end
     end
 
-    it 'should say I created a private record' do
-      expect(page).to have_content 'Private Description'
+    context 'signed in' do
+      before do
+        visit root_path
+        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        visit records_path
+      end
+
+      describe 'a button' do
+        before { visit records_path }
+
+        it 'should have no button' do
+          expect(page).to have_no_link 'Irrelevant'
+        end
+      end
+
+      describe 'a path authorization' do
+        before { visit new_record_connection_type_connection_path(record, connection_type) }
+
+        it 'should have no button' do
+          expect(current_path).to eq connections_path
+        end
+      end
     end
   end
 end
