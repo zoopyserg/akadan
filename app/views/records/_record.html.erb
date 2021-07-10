@@ -137,9 +137,9 @@
           <button type="button" class="btn btn-light btn-block">
             <i class="fa fa-repeat mx-1"></i>Repeated
           </button>
-          <button type="button" class="btn btn-light btn-block">
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: solution_connection_type.id, record_type_id: solution_record_type.id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-check mx-1"></i>Solve
-          </button>
+          <% end %>
           <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: subsystem_connection_type.id, record_type_id: subsystem_record_type.id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-puzzle-piece mx-1"></i>Create / Connect Subrecords
           <% end %>

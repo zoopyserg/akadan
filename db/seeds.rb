@@ -13,7 +13,9 @@ user2.save!
 # needed for production
 FactoryBot.create :connection_type, name: 'Subsystem', user: user1, is_public: true
 FactoryBot.create :connection_type, name: 'Irrelevant Because...', user: user1, is_public: true
+FactoryBot.create :connection_type, name: 'Is Solved By...', user: user1, is_public: true
 FactoryBot.create :record_type, name: 'Subsystem', user: user1, is_public: true
+FactoryBot.create :record_type, name: 'Solution', user: user1, is_public: true
 # end of stuff needed for production
 
 # messaging between users 1 & 2
