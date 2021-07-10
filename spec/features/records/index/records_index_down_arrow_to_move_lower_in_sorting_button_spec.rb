@@ -6,7 +6,11 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
-  xcontext 'not signed in' do
+  # good point.
+  # this is #1 goal for this project.
+  # sorting.
+  # and you don't have this covered.
+  context 'not signed in' do
     before { visit records_path }
 
     it 'should say who created one record' do
@@ -18,7 +22,7 @@ RSpec.feature "Record Created By", type: :feature do
     end
   end
 
-  xcontext 'signed in' do
+  context 'signed in' do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')

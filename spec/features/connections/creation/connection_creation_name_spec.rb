@@ -25,4 +25,6 @@ RSpec.feature "ConnectionCreation Name", type: :feature do
       }.by(1)
     end
   end
+
+  xit 'I think I should remove the name (because it is making things less understandable, especially for cases when I create irrelevance connection or something)'
 end
