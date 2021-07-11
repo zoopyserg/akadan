@@ -6,6 +6,16 @@ module FeaturesHelper
     visit records_path(locale: 'en')
   end
 
+  def prepare_record_buttons
+    create :connection_type, name: 'Subsystem', is_public: true
+    create :connection_type, name: 'Irrelevant Because...', is_public: true
+    create :connection_type, name: 'Subsystem', is_public: true
+    create :connection_type, name: 'Is Solved By...', is_public: true
+    create :connection_type, name: 'Extracted To...', is_public: true
+    create :record_type, name: 'Subsystem', is_public: true
+    create :record_type, name: 'Solution', is_public: true
+  end
+
   def sign_in(email, password)
     click_on 'Login'
     within '.card-authentication1' do

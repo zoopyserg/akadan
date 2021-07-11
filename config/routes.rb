@@ -40,7 +40,11 @@ Rails.application.routes.draw do
   resources :records do
     resources :bookmarks, only: [:create, :destroy]
     resources :connection_types do
-      resources :connections
+      resources :connections do
+        collection do
+          post :into_separate_project
+        end
+      end
       resources :record_types, only: [] do
         resources :bulk_records, only: [:new, :create]
       end

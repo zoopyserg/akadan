@@ -17,17 +17,26 @@ RSpec.feature "RecordCreations", type: :feature do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
       visit new_record_path
-    end
 
-    it 'should let me create' do
       expect(page).to have_no_content 'successfully created'
 
       select 'my type', from: :record_record_type_id
       fill_in :record_name, with: 'some record'
       fill_in :record_description, with: 'some record'
+    end
+
+    it 'should let me create' do
       click_on 'Create!'
 
       expect(page).to have_content 'successfully created'
+    end
+
+    it 'should create a separate project' do
+      expect{
+      click_on 'Create!'
+      }.to change {
+        user.records.where(separate_project: true).count
+      }.by(1)
     end
   end
 end

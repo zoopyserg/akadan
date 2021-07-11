@@ -9,6 +9,10 @@ module RecordsHelper
     ConnectionType.find_by(name: 'Is Solved By...')
   end
 
+  def extracted_to_connection_type
+    ConnectionType.find_by(name: 'Extracted To...')
+  end
+
   def irrelevant_because_connection_type
     ConnectionType.find_by(name: 'Irrelevant Because...')
   end

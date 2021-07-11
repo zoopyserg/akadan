@@ -30,6 +30,7 @@ class RecordsController < ApplicationController
   # POST /records or /records.json
   def create
     @record = current_user.records.new(record_params)
+    @record.separate_project = true
     @record.dots.each do |dot|
       dot.user = current_user
     end

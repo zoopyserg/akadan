@@ -8,7 +8,7 @@ class ConnectionsController < ApplicationController
   before_action :set_records_a, only: %i[ new edit ]
   before_action :set_records_b, only: %i[ new edit ]
 
-  # GET /connections or /connections.json
+  # GET
   def index
     if signed_in?
       @connections = Connection.where(is_public: true).or(Connection.where(user: current_user)).order(created_at: :desc).page(params[:page])
@@ -17,22 +17,22 @@ class ConnectionsController < ApplicationController
     end
   end
 
-  # GET /connections/1 or /connections/1.json
+  # GET
   def show
   end
 
-  # GET /connections/new
+  # GET
   def new
     @connection = current_user.connections.new
     @connection.record_a = @record_a
     @connection.connection_type = @connection_type
   end
 
-  # GET /connections/1/edit
+  # GET
   def edit
   end
 
-  # POST /connections or /connections.json
+  # POST
   def create
     @connection = current_user.connections.new(connection_params)
 
@@ -58,7 +58,27 @@ class ConnectionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /connections/1 or /connections/1.json
+  # POST
+  def into_separate_project
+    # handle presence of record type, connection type - todo: вопрос а что будет если публичная запись создана с использованием приватного рекорд типа?
+    # create a duplicate
+    @record_b = @record_a.dup
+    @record_b.user = current_user
+    @record_b.separate_project = true # todo: what if it already was a separate project?
+    @record_b.save
+    # create a connection where record_a is record_id and record_b is duplicate
+    @connection = current_user.connections.new
+    @connection.record_a = @record_a
+    @connection.record_b = @record_b
+    @connection.connection_type = @connection_type
+    @connection.save
+    # redirect to records path.
+    respond_to do |format|
+      format.html { redirect_to records_path }
+    end
+  end
+
+  # PATCH/PUT
   def update
     respond_to do |format|
       if @connection.update(connection_params)
@@ -78,7 +98,7 @@ class ConnectionsController < ApplicationController
     end
   end
 
-  # DELETE /connections/1 or /connections/1.json
+  # DELETE
   def destroy
     @connection.destroy
     respond_to do |format|
