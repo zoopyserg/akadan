@@ -10,6 +10,8 @@ RSpec.feature "Record Created By", type: :feature do
   # this is #1 goal for this project.
   # sorting.
   # and you don't have this covered.
+  # I'm thinking... Are "down" and "up" movements for non-signed-in users - likes and dislikes?
+  # I thought dots are likes and dislikes, but seems like not only dots.
   context 'not signed in' do
     before { visit records_path }
 

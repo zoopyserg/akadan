@@ -6,7 +6,8 @@ RSpec.feature "Records Index Irrelevant Button", type: :feature do
 
   let!(:connection_type) { create :connection_type, name: 'Extracted To...', is_public: true }
 
-  context 'public someone elses record' do
+  # see Down Error for my thoughts on likes and dislikes.
+  xcontext 'public someone elses record' do
     let!(:record) { create :record, name: 'Record B', user: user2, is_public: true }
 
     context 'not signed in' do
@@ -40,7 +41,7 @@ RSpec.feature "Records Index Irrelevant Button", type: :feature do
     end
   end
 
-  context 'private my record' do
+  xcontext 'private my record' do
     let!(:record) { create :record, name: 'Record B', user: user1, is_public: true }
 
     context 'not signed in' do
@@ -76,7 +77,7 @@ RSpec.feature "Records Index Irrelevant Button", type: :feature do
     end
   end
 
-  context 'private someone elses record' do
+  xcontext 'private someone elses record' do
     let!(:record) { create :record, name: 'Record B', user: user2, is_public: false }
 
     context 'not signed in' do

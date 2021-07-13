@@ -2907,6 +2907,8 @@ example_id                                                                      
 ./spec/features/records/index/records_index_remove_from_favourites_spec.rb[1:2:1:4]                            | passed  | 0.84343 seconds |
 ./spec/features/records/index/records_index_remove_from_favourites_spec.rb[1:2:2:1]                            | passed  | 0.82116 seconds |
 ./spec/features/records/index/records_index_remove_from_favourites_spec.rb[1:2:2:2]                            | passed  | 0.18564 seconds |
+./spec/features/records/index/records_index_show_button_spec.rb[1:1:1]                                         | passed  | 0.1071 seconds  |
+./spec/features/records/index/records_index_show_button_spec.rb[1:2:1]                                         | passed  | 1.01 seconds    |
 ./spec/features/records/index/records_index_solve_record_button_spec.rb[1:1:1:1:1]                             | passed  | 0.77027 seconds |
 ./spec/features/records/index/records_index_solve_record_button_spec.rb[1:1:1:2:1]                             | passed  | 0.12808 seconds |
 ./spec/features/records/index/records_index_solve_record_button_spec.rb[1:1:2:1]                               | passed  | 0.2562 seconds  |

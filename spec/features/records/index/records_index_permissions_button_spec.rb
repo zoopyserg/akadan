@@ -6,6 +6,8 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
+  # Итак. У меня есть "паблик и прайват рекордс" (видят все или вижу только я)
+  # Но здесь речь что тут чтоб ещё были группы юзеров. мол "видит только юзер Х". или "видит только группа юзеров Х в которой такие-то юзеры".
   xcontext 'not signed in' do
     before { visit records_path }
 

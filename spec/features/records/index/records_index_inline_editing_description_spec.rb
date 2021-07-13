@@ -6,6 +6,9 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
+  # removed inline editing from the title.
+  # maybe will remove it from the description too.
+  # it's not what I expect as a user when I click on the description.
   xcontext 'not signed in' do
     before { visit records_path }
 

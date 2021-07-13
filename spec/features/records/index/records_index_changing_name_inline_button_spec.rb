@@ -6,6 +6,10 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
+  # do I even need this?
+  # Because I expected that if I click a title of a record on the list it will open the show page of that record.
+  # which I don't have for now.
+  # but it's a nicer feature anyway.
   xcontext 'not signed in' do
     before { visit records_path }
 

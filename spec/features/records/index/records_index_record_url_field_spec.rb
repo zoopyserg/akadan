@@ -6,6 +6,9 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
+  # тут что?
+  # "вижу... поле в котором текстом моя ссылка"?
+  # чтоб типа копировать и отсылать людям?
   xcontext 'not signed in' do
     before { visit records_path }
 
