@@ -1,52 +1,28 @@
-<%= form_with(model: dot) do |form| %>
-  <% if dot.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(dot.errors.count, "error") %> prohibited this dot from being saved:</h2>
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: dot, url: [@record, @dot]) do |form| %>
+      <div class="form-group">
+        <label class="d-flex justify-content-between">Project inside which this occurred</label>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <%= form.collection_select :project_id, @projects, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+        </div>
+      </div>
 
-      <ul>
-        <% dot.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+      <div class="form-group">
+        <%= form.label :description %>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter a Description" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :duration %>
+        <%= form.text_field :duration, class: "form-control", placeholder: "Enter a Description" %>
+      </div>
+
+      <div class="form-group d-flex d-sm-flex justify-content-between">
+        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+          <i class="fa fa-check mx-1"></i><%= submit_name %>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :record_id %>
-    <%= form.text_field :record_id %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.date_select :start_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :start_time %>
-    <%= form.time_select :start_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.date_select :end_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_time %>
-    <%= form.time_select :end_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :income %>
-    <%= form.text_field :income %>
-  </div>
-
-  <div class="field">
-    <%= form.label :duration %>
-    <%= form.time_select :duration %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

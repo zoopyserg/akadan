@@ -6,7 +6,11 @@ RSpec.describe Record, type: :model do
   it { should have_many(:dots).dependent(:destroy) }
 
   describe 'type selection scopes' do
+    let!(:project) { create :record, separate_project: true }
+    let!(:non_project) { create :record, separate_project: false }
 
+    it { expect(Record.projects).to include project }
+    it { expect(Record.projects).not_to include non_project }
   end
 
   describe 'parentship scopes' do

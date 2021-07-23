@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :records do
-    resources :dots, only: [:new, :create]
+    resources :dots, only: [:new, :create] # maybe do Index too. 'cause it's a scaffold baby
     resources :bookmarks, only: [:create, :destroy]
     resources :connection_types do
       resources :connections do

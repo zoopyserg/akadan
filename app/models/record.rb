@@ -2,9 +2,13 @@ class Record < ApplicationRecord
   belongs_to :user
   belongs_to :record_type
   has_many :dots, dependent: :destroy
+  has_many :project_dots, class_name: 'Dot', foreign_key: :project_id
+
   has_many :connections_as_source, class_name: 'Connection', foreign_key: :record_a_id
   has_many :connections_as_target, class_name: 'Connection', foreign_key: :record_b_id
   accepts_nested_attributes_for :dots
+
+  scope :projects, -> { where(separate_project: true) }
 
   scope :visible_to_user, -> (user) { where(is_public: true).or(where(user: user)) }
   scope :without_source, -> (record_a) { where.not(id: record_a.id) }

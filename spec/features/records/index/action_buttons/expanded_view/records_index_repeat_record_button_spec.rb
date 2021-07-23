@@ -5,7 +5,8 @@ RSpec.feature "Records Index Solve Button", type: :feature do
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
   context 'public someone elses record' do
-    let!(:record) { create :record, user: user2, is_public: true }
+    let!(:record) { create :record, user: user2, is_public: true, separate_project: false }
+    let!(:project) { create :record, name: 'Some Project', user: user2, is_public: true, separate_project: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -17,7 +18,7 @@ RSpec.feature "Records Index Solve Button", type: :feature do
       end
 
       describe 'a path authorization' do
-        before { visit something(record.id) }
+        before { visit new_record_dot_path(record.id) }
 
         it 'should have no button' do
           expect(current_path).to eq new_user_session_path
@@ -37,21 +38,24 @@ RSpec.feature "Records Index Solve Button", type: :feature do
       end
 
       it 'should let me create subrecords' do
-        click_on 'Repeated'
+        click_on 'Repeated', match: :first
 
-        fill_in 'duration', with: '12345'
+        select 'Some Project', from: 'dot_project_id'
+        fill_in 'Description', with: 'some description'
+        fill_in 'Duration', with: '12345'
 
         expect{
           click_on 'Create'
         }.to change{
-          record.dots.where(time: 12345).count
+          record.dots.where(duration: 12345, description: 'some description').count
         }.by(1)
       end
     end
   end
 
   context 'private my record' do
-    let!(:record) { create :record, description: 'Private Description', user: user1, is_public: false }
+    let!(:record) { create :record, user: user1, is_public: false }
+    let!(:project) { create :record, name: 'Some Project', user: user2, is_public: true, separate_project: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -63,7 +67,7 @@ RSpec.feature "Records Index Solve Button", type: :feature do
       end
 
       describe 'a path authorization' do
-        before { visit something(record) }
+        before { visit new_record_dot_path(record) }
 
         it 'should have no button' do
           expect(current_path).to eq new_user_session_path
@@ -84,28 +88,32 @@ RSpec.feature "Records Index Solve Button", type: :feature do
         end
 
         it 'should let me create subrecords' do
-          click_on 'Repeated'
+          click_on 'Repeated', match: :first
 
-          fill_in 'duration', with: '12345'
+          select 'Some Project', from: 'dot_project_id'
+          fill_in 'Description', with: 'some description'
+          fill_in 'Duration', with: '12345'
 
           expect{
             click_on 'Create'
           }.to change{
-            record.dots.where(time: 12345).count
+            record.dots.where(duration: 12345, description: 'some description').count
           }.by(1)
         end
       end
 
       describe 'a path' do
-        before { visit something(record) }
+        before { visit new_record_dot_path(record) }
 
         it 'should let me create subrecords' do
-          fill_in 'duration', with: '12345'
+          select 'Some Project', from: 'dot_project_id'
+          fill_in 'Description', with: 'some description'
+          fill_in 'Duration', with: '12345'
 
           expect{
             click_on 'Create'
           }.to change{
-            record.dots.where(time: 12345).count
+            record.dots.where(duration: 12345, description: 'some description').count
           }.by(1)
         end
       end
@@ -113,7 +121,7 @@ RSpec.feature "Records Index Solve Button", type: :feature do
   end
 
   context 'private someone elses record' do
-    let!(:record) { create :record, description: 'Public Description', user: user2, is_public: false }
+    let!(:record) { create :record, user: user2, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -125,7 +133,7 @@ RSpec.feature "Records Index Solve Button", type: :feature do
       end
 
       describe 'a path authorization' do
-        before { visit something(record.id) }
+        before { visit new_record_dot_path(record.id) }
 
         it 'should have no button' do
           expect(current_path).to eq new_user_session_path
@@ -149,7 +157,7 @@ RSpec.feature "Records Index Solve Button", type: :feature do
       end
 
       describe 'a path authorization' do
-        before { visit something(record) }
+        before { visit new_record_dot_path(record) }
 
         it 'should have no button' do
           expect(current_path).to eq records_path

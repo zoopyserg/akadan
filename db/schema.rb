@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_11_090608) do
+ActiveRecord::Schema.define(version: 2021_07_23_100211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,9 @@ ActiveRecord::Schema.define(version: 2021_07_11_090608) do
     t.integer "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
+    t.bigint "project_id", null: false
+    t.index ["project_id"], name: "index_dots_on_project_id"
     t.index ["record_id"], name: "index_dots_on_record_id"
     t.index ["user_id"], name: "index_dots_on_user_id"
   end
@@ -157,7 +160,6 @@ ActiveRecord::Schema.define(version: 2021_07_11_090608) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
-    t.text "description"
     t.boolean "is_public"
     t.bigint "record_type_id", null: false
     t.boolean "separate_project", default: false
@@ -218,6 +220,7 @@ ActiveRecord::Schema.define(version: 2021_07_11_090608) do
   add_foreign_key "connections", "records", column: "record_b_id"
   add_foreign_key "connections", "users"
   add_foreign_key "dots", "records"
+  add_foreign_key "dots", "records", column: "project_id"
   add_foreign_key "dots", "users"
   add_foreign_key "friend_requests", "users"
   add_foreign_key "friend_requests", "users", column: "friend_id"

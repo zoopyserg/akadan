@@ -52,13 +52,17 @@
             <% end %>
           <% end %>
         <% end %>
-        <p><%= record.description %></p>
+        <% record.dots.each do |dot| %>
+          <p><%= dot.description %></p>
+        <% end %>
+        <% # pending dots count (for all records in the list or for records that repeated within this separate project %>
         <h6>Completed (<%= record.progress %>%):</h6>
         <div class="progress">
           <div class="progress-bar" aria-valuenow="<%= record.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= record.progress %>%;"></div>
         </div>
         <p class="mb-0"><strong class="mr-1">Type:</strong><%= record.record_type.name %><i class="fa fa-edit mx-1"></i></p>
         <div role="tablist" id="accordion-1">
+          <% # pending time sum %>
           <p class="mb-0">You spent <strong>123 hours 48 minutes</strong> on this</p>
           <p class="mb-0">Repeated <strong>123</strong> times</p>
           <div class="accordioncollapse card mb-0">
@@ -70,6 +74,7 @@
                 <div class="row row-cols-1">
                   <div class="col-lg-12">
                     <div class="row row-cols-1">
+                      <% # pending dot.attachments %>
                       <div class="col-lg-12">
                         <a href="#">Attachment File 1.pdf</a>
                       </div>
@@ -134,9 +139,11 @@
       </div>
       <% if user_signed_in? %>
         <div class="col-lg-4">
-          <button type="button" class="btn btn-light btn-block">
+          <%= link_to new_record_dot_path(record_id: record.id, parent_id: nil), class: "btn btn-light btn-block" do %>
+            <% # todo: save project_id (id of project within which this thing repeated - pass the project id into the form) %>
+            <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>
             <i class="fa fa-repeat mx-1"></i>Repeated
-          </button>
+          <% end %>
           <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: solution_connection_type.id, record_type_id: solution_record_type.id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-check mx-1"></i>Solve
           <% end %>
