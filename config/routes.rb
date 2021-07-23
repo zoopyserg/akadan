@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :dots
   devise_for :users
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
@@ -38,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :records do
+    resources :dots, only: [:new, :create]
     resources :bookmarks, only: [:create, :destroy]
     resources :connection_types do
       resources :connections do
