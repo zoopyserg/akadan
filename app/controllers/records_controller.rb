@@ -33,6 +33,7 @@ class RecordsController < ApplicationController
     @record.separate_project = true
     @record.dots.each do |dot|
       dot.user = current_user
+      dot.project = @record
     end
 
     respond_to do |format|
@@ -94,7 +95,7 @@ class RecordsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def record_params
-    params.require(:record).permit(:name, :description, :record_type_id, dots_attributes: [ :id, :duration ])
+    params.require(:record).permit(:name, :record_type_id, dots_attributes: [ :id, :description, :duration ])
   end
 
   def set_record_types

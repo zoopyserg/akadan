@@ -19,10 +19,10 @@ RSpec.feature "New Record Description", type: :feature do
       expect {
         select 'my type', from: :record_record_type_id
         fill_in :record_name, with: 'boo'
-        fill_in :record_description, with: 'boo'
+        fill_in 'Description', with: 'boo'
         click_on 'Create!'
       }.to change {
-        user.records.where(description: 'boo').count
+        user.records.joins(:dots).where(dots: { description: 'boo' }).count
       }.by(1)
     end
   end

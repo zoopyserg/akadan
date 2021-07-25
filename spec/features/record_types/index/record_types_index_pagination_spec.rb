@@ -512,7 +512,7 @@ RSpec.feature "Index Record Types Pagination", type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
+      visit record_types_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
     end
 

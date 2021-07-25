@@ -14,7 +14,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
       let!(:record_b) { create :record, name: 'Record B', user: user }
 
       before do
-        visit root_path
+        visit connections_path
         sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
         visit new_record_connection_type_connection_path(record_a, connection_type)
       end
@@ -54,7 +54,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           let!(:connection_type) { create :connection_type, target_type: target_type, user: user2, target_record_type: record_type_2, target_record_subtype: record_type_2, is_public: true }
 
           before do
-            visit root_path
+            visit connections_path
             sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
             visit new_record_connection_type_connection_path(record_a, connection_type)
           end
@@ -154,7 +154,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           let!(:connection_type) { create :connection_type, target_type: 'any', target_hierarchy: target_hierarchy, user: user2, closest_parent_type: record_type_2, is_public: true }
 
           before do
-            visit root_path
+            visit connections_path
             sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
             visit new_record_connection_type_connection_path(record_4, connection_type)
           end
@@ -266,7 +266,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
             let(:target_type) { 'any' }
 
             before do
-              visit root_path
+              visit connections_path
               sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
               visit new_record_connection_type_connection_path(record_a, connection_type2)
             end
@@ -278,7 +278,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
             let(:target_type) { 'any' }
 
             before do
-              visit root_path
+              visit connections_path
               sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
               visit new_record_connection_type_connection_path(record_a2, connection_type)
             end
@@ -288,7 +288,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
 
           context 'my connection type and my record a' do
             before do
-              visit root_path
+              visit connections_path
               sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
               visit new_record_connection_type_connection_path(record_a, connection_type)
             end
@@ -388,7 +388,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           let!(:connection_type) { create :connection_type, target_type: 'any', target_hierarchy: target_hierarchy, user: user, closest_parent_type: record_type_2 }
 
           before do
-            visit root_path
+            visit connections_path
             sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
             visit new_record_connection_type_connection_path(record_4, connection_type)
           end
@@ -493,7 +493,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           let!(:connection_type) { create :connection_type, target_type: target_type, user: user, target_record_type: record_type_2, target_record_subtype: record_type_2 }
 
           before do
-            visit root_path
+            visit connections_path
             sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
             visit new_record_connection_type_connection_path(record_a, connection_type)
           end
@@ -592,7 +592,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           let!(:connection_type) { create :connection_type, target_type: 'any', target_hierarchy: target_hierarchy, user: user, closest_parent_type: record_type_2 }
 
           before do
-            visit root_path
+            visit connections_path
             sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
             visit new_record_connection_type_connection_path(record_4, connection_type)
           end

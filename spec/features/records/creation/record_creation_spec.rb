@@ -22,7 +22,7 @@ RSpec.feature "RecordCreations", type: :feature do
 
       select 'my type', from: :record_record_type_id
       fill_in :record_name, with: 'some record'
-      fill_in :record_description, with: 'some record'
+      fill_in 'Description', with: 'some record'
     end
 
     it 'should let me create' do

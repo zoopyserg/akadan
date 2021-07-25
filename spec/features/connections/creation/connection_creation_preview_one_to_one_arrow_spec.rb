@@ -12,7 +12,7 @@ RSpec.feature "ConnectionCreation One To One Arrow", type: :feature do
     let!(:record_b) { create :record, name: 'Record B', user: user }
 
     before do
-      visit root_path
+      visit connections_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
       visit new_record_connection_type_connection_path(record_a, connection_type)
     end

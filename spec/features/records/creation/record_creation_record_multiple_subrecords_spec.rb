@@ -5,7 +5,7 @@ RSpec.feature "New Record Multiple Subrecords", type: :feature do
     # skipping because it's tested in New Permissions
   end
 
-  xcontext 'signed in' do
+  xcontext 'signed in', :focus do
     let!(:user) { create :user, :confirmed, :free, email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
     let!(:record_type) { create :record_type, user: user, name: 'Some Record Type' }
     let!(:connection_type) { create :connection_type, user: user, name: 'Some Connection Type' }

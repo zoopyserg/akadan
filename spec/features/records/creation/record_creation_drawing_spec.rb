@@ -5,7 +5,7 @@ RSpec.feature "New Record Drawing", type: :feature do
     # skipping because it's tested in New Permissions
   end
 
-  xcontext 'signed in' do
+  context 'signed in' do
     let!(:user) { create :user, :confirmed, :free, email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
     before do
@@ -14,14 +14,8 @@ RSpec.feature "New Record Drawing", type: :feature do
       visit new_record_path
     end
 
-    it 'should let me create' do
-      expect {
-        fill_in :record_name, with: 'boo'
-        fill_in :record_description, with: 'boo'
-        click_on 'Create!'
-      }.to change {
-        user.records.where(description: 'boo').count
-      }.by(1)
+    it 'should let me draw (not sure for now)' do
+
     end
   end
 end

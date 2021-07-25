@@ -22,7 +22,7 @@ RSpec.feature "ConnectionsIndex Created By", type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
+      visit connections_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
       visit connections_path
     end

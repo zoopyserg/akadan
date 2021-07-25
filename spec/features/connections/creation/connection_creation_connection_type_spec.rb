@@ -16,7 +16,7 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
         let!(:record_b) { create :record, name: 'Record B', user: user }
 
         before do
-          visit root_path
+          visit connections_path
           sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
           visit new_record_connection_type_connection_path(record_a, connection_type)
         end
@@ -36,7 +36,7 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
         let!(:record_b) { create :record, name: 'Record B', user: user }
 
         before do
-          visit root_path
+          visit connections_path
           sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
           visit new_record_connection_type_connection_path(record_a, connection_type)
         end
@@ -70,7 +70,7 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
         let!(:record_b) { create :record, name: 'Record B', user: user }
 
         before do
-          visit root_path
+          visit connections_path
           sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
           visit new_record_connection_type_connection_path(record_a, my_connection_type)
         end
