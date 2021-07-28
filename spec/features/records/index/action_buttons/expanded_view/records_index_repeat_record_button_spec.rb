@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Records Index Solve Button", type: :feature do
+RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 

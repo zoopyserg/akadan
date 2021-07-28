@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.feature "Record Remove From Favourites", type: :feature do
+RSpec.feature "Record Remove From Favourites", :records_index, type: :feature do
   let!(:user1) { create :user, :confirmed, :free, username: 'user1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'user2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
-  let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
-  let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
+  let!(:public_record) { create :record, user: user1, is_public: true }
+  let!(:private_record) { create :record, user: user2, is_public: false }
 
   let!(:bookmark1) { create :bookmark, user: user1, record: public_record }
   let!(:bookmark2) { create :bookmark, user: user1, record: private_record }

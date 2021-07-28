@@ -63,7 +63,7 @@
         <p class="mb-0"><strong class="mr-1">Type:</strong><%= record.record_type.name %><i class="fa fa-edit mx-1"></i></p>
         <div role="tablist" id="accordion-1">
           <% # pending time sum %>
-          <p class="mb-0">You spent <strong>123 hours 48 minutes</strong> on this</p>
+          <p class="mb-0">Total time spent: <strong><%= record.dots.sum(:duration) %></strong> on this</p>
           <p class="mb-0">Repeated <strong>123</strong> times</p>
           <div class="accordioncollapse card mb-0">
             <div role="tab" class="card-header">

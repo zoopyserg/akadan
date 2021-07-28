@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Record Created By", type: :feature do
+RSpec.feature "Record Type", :records_index, type: :feature do
   let!(:user1) { create :user, :confirmed, :free, email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:record_type1) { create :record_type, name: 'Type 1', user: user1, is_public: true }
