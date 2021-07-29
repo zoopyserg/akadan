@@ -15,9 +15,22 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
   context 'not signed in' do
     before { visit records_path }
 
-    it { expect(page).to have_no_content 'for others: 1 times' }
-    it { expect(page).to have_no_content 'for others: 2 times' }
-    it { expect(page).to have_no_content 'for others: 3 times' }
+    it 'should not count someone elses dots' do
+      expect(page).to have_no_content 'time spent by me: 11'
+    end
+
+    it 'should not count my dots' do
+      expect(page).to have_no_content 'time spent by me: 22'
+    end
+
+    it 'should not count all dots' do
+      expect(page).to have_no_content 'time spent by me: 33'
+    end
+
+    it 'should not count private dots' do
+      expect(page).to have_no_content 'time spent by me: 66'
+      expect(page).to have_no_content 'time spent by me: 99'
+    end
   end
 
   context 'signed in' do
@@ -27,8 +40,24 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
       visit records_path
     end
 
-    it { expect(page).to have_content 'for others: 1 times' }
-    it { expect(page).to have_content 'for others: 2 times' }
-    it { expect(page).to have_no_content 'for others: 3 times' }
+    it 'should say who created one record' do
+      expect(page).to have_no_content 'time spent by me: 22'
+    end
+
+    it 'should not count my dots' do
+      expect(page).to have_content 'time spent by me: 11'
+    end
+
+    it 'should not count all dots' do
+      expect(page).to have_no_content 'time spent by me: 33'
+    end
+
+    it 'should count me private dots' do
+      expect(page).to have_content 'time spent by me: 66'
+    end
+
+    it 'should not count all private dots' do
+      expect(page).to have_no_content 'time spent by me: 99'
+    end
   end
 end

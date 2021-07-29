@@ -11,13 +11,14 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
   let!(:private_dot1) { create :dot, user: user2, duration: 33, project: private_record, record: private_record }
   let!(:private_dot2) { create :dot, user: user2, duration: 33, project: private_record, record: private_record }
   let!(:private_dot3) { create :dot, user: user1, duration: 33, project: private_record, record: private_record }
+  let!(:private_dot4) { create :dot, user: user1, duration: 33, project: private_record, record: private_record }
 
   context 'not signed in' do
     before { visit records_path }
 
-    it { expect(page).to have_no_content 'for others: 1 times' }
-    it { expect(page).to have_no_content 'for others: 2 times' }
-    it { expect(page).to have_no_content 'for others: 3 times' }
+    it { expect(page).to have_no_content 'for me: 1 times' }
+    it { expect(page).to have_no_content 'for me: 2 times' }
+    it { expect(page).to have_no_content 'for me: 3 times' }
   end
 
   context 'signed in' do
@@ -27,8 +28,8 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
       visit records_path
     end
 
-    it { expect(page).to have_content 'for others: 1 times' }
-    it { expect(page).to have_content 'for others: 2 times' }
-    it { expect(page).to have_no_content 'for others: 3 times' }
+    it { expect(page).to have_content 'for me: 1 times' }
+    it { expect(page).to have_content 'for me: 2 times' }
+    it { expect(page).to have_no_content 'for me: 3 times' }
   end
 end

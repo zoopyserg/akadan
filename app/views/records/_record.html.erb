@@ -64,7 +64,15 @@
         <div role="tablist" id="accordion-1">
           <% # pending time sum %>
           <p class="mb-0">Total time spent: <strong><%= record.dots.sum(:duration) %></strong> on this</p>
-          <p class="mb-0">Repeated <strong>123</strong> times</p>
+          <% if user_signed_in? %>
+            <p class="mb-0">Total time spent by me: <strong><%= record.dots.where(user: current_user).sum(:duration) %></strong> on this</p>
+            <p class="mb-0">Total time spent by others: <strong><%= record.dots.where.not(user: current_user).sum(:duration) %></strong> on this</p>
+          <% end %>
+          <p class="mb-0">Repeated: <strong><%= record.dots.count %></strong> times</p>
+          <% if user_signed_in? %>
+            <p class="mb-0">Repeated for me: <strong><%= record.dots.where(user: current_user).count %></strong> times</p>
+            <p class="mb-0">Repeated for others: <strong><%= record.dots.where.not(user: current_user).count %></strong> times</p>
+          <% end %>
           <div class="accordioncollapse card mb-0">
             <div role="tab" class="card-header">
               <h6 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1">Attachments</a></h6>
