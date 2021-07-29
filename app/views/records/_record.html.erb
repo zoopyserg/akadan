@@ -62,16 +62,22 @@
         </div>
         <p class="mb-0"><strong class="mr-1">Type:</strong><%= record.record_type.name %><i class="fa fa-edit mx-1"></i></p>
         <div role="tablist" id="accordion-1">
-          <% # pending time sum %>
           <p class="mb-0">Total time spent: <strong><%= record.dots.sum(:duration) %></strong> on this</p>
           <% if user_signed_in? %>
             <p class="mb-0">Total time spent by me: <strong><%= record.dots.where(user: current_user).sum(:duration) %></strong> on this</p>
             <p class="mb-0">Total time spent by others: <strong><%= record.dots.where.not(user: current_user).sum(:duration) %></strong> on this</p>
           <% end %>
+
           <p class="mb-0">Repeated: <strong><%= record.dots.count %></strong> times</p>
           <% if user_signed_in? %>
             <p class="mb-0">Repeated for me: <strong><%= record.dots.where(user: current_user).count %></strong> times</p>
             <p class="mb-0">Repeated for others: <strong><%= record.dots.where.not(user: current_user).count %></strong> times</p>
+          <% end %>
+
+          <p class="mb-0">Projects affected: <strong><%= record.dots.pluck(:project_id).uniq.count %></strong></p>
+          <% if user_signed_in? %>
+            <p class="mb-0">My projects affected: <strong><%= record.dots.where(user: current_user).pluck(:project_id).uniq.count %></strong></p>
+            <p class="mb-0">Other people's projects affected: <strong><%= record.dots.where.not(user: current_user).pluck(:project_id).uniq.count %></strong></p>
           <% end %>
           <div class="accordioncollapse card mb-0">
             <div role="tab" class="card-header">

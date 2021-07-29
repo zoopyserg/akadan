@@ -3054,6 +3054,16 @@ example_id                                                                      
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_completed_percentage_spec.rb[1:1:7:3]                  | passed  | 0.11962 seconds |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_completed_percentage_spec.rb[1:2:1:1]                  | pending | 0 seconds       |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_completed_percentage_spec.rb[1:2:1:2]                  | pending | 0.00001 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_my_projects_affected_spec.rb[1:1:1]              | passed  | 0.78136 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_my_projects_affected_spec.rb[1:2:1]              | passed  | 0.48507 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_my_projects_affected_spec.rb[1:2:2]              | passed  | 0.49732 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_other_people_projects_affected_spec.rb[1:1:1]    | passed  | 0.76777 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_other_people_projects_affected_spec.rb[1:2:1]    | passed  | 0.48195 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_other_people_projects_affected_spec.rb[1:2:2]    | passed  | 0.49413 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_projects_affected_spec.rb[1:1:1]                 | passed  | 0.15132 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_projects_affected_spec.rb[1:1:2]                 | passed  | 0.15233 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_projects_affected_spec.rb[1:2:1]                 | passed  | 0.43721 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_projects_affected_spec.rb[1:2:2]                 | passed  | 1.12 seconds    |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_time_spent_by_me_spec.rb[1:1:1]                  | passed  | 0.20189 seconds |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_time_spent_by_me_spec.rb[1:1:2]                  | passed  | 0.7449 seconds  |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_time_spent_by_me_spec.rb[1:1:3]                  | passed  | 0.12306 seconds |
