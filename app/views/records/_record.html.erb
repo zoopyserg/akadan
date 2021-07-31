@@ -79,6 +79,8 @@
             <p class="mb-0">My projects affected: <strong><%= record.dots.where(user: current_user).pluck(:project_id).uniq.count %></strong></p>
             <p class="mb-0">Other people's projects affected: <strong><%= record.dots.where.not(user: current_user).pluck(:project_id).uniq.count %></strong></p>
           <% end %>
+
+          <p class="mb-0">Records connected: <strong><%= Record.all_tree_records_of_record(record).count %></strong></p>
           <div class="accordioncollapse card mb-0">
             <div role="tab" class="card-header">
               <h6 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1">Attachments</a></h6>
