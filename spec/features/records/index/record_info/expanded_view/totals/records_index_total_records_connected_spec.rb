@@ -18,10 +18,17 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
   let!(:connection4) { create :connection, record_a: public_record4, record_b: public_record }
   let!(:connection5) { create :connection, record_a: public_record4, record_b: public_record5 }
 
+  let!(:private_record6) { create :record, user: user2, is_public: false }
+  let!(:private_record7) { create :record, user: user2, is_public: false }
+
+  let!(:connection6) { create :connection, record_a: public_record5, record_b: private_record6 }
+  let!(:connection7) { create :connection, record_a: public_record3, record_b: private_record7 }
+
   context 'not signed in' do
     before { visit records_path }
 
     it { expect(page).to have_content 'Records connected: 5' }
+    it { expect(page).to have_no_content 'Records connected: 7' }
   end
 
   context 'signed in' do
@@ -31,7 +38,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
       visit records_path
     end
 
-    it { expect(page).to have_content 'Projects affected: 2' }
-    it { expect(page).to have_content 'Projects affected: 1' }
+    it { expect(page).to have_no_content 'Records connected: 5' }
+    it { expect(page).to have_content 'Records connected: 7' }
   end
 end
