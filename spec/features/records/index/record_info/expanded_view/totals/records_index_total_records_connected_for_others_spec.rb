@@ -8,9 +8,9 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
 
   let!(:public_record1) { create :record, user: user1, is_public: true }
   let!(:public_record2) { create :record, user: user1, is_public: true }
-  let!(:public_record3) { create :record, user: user1, is_public: true }
-  let!(:public_record4) { create :record, user: user1, is_public: true }
-  let!(:public_record5) { create :record, user: user1, is_public: true }
+  let!(:public_record3) { create :record, user: user2, is_public: true }
+  let!(:public_record4) { create :record, user: user2, is_public: true }
+  let!(:public_record5) { create :record, user: user2, is_public: true }
 
   let!(:connection1) { create :connection, record_a: public_record2, record_b: public_record }
   let!(:connection2) { create :connection, record_a: public_record1, record_b: public_record2 }
@@ -31,8 +31,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
   context 'not signed in' do
     before { visit records_path }
 
-    it { expect(page).to have_no_content 'Records connected: 5' }
-    it { expect(page).to have_content 'Records connected: 7' }
+    it { expect(page).to have_no_content 'Other people\'s records connected:' }
   end
 
   context 'signed in' do
@@ -42,7 +41,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
       visit records_path
     end
 
-    it { expect(page).to have_no_content 'Records connected: 5' }
-    it { expect(page).to have_content 'Records connected: 7' }
+    it { expect(page).to have_content 'Other people\'s records connected: 2' }
+    it { expect(page).to have_no_content 'Other people\'s records connected: 7' }
   end
 end

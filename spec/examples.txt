@@ -3058,10 +3058,13 @@ example_id                                                                      
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_projects_affected_spec.rb[1:1:2]                 | passed  | 0.15233 seconds |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_projects_affected_spec.rb[1:2:1]                 | passed  | 0.43721 seconds |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_projects_affected_spec.rb[1:2:2]                 | passed  | 1.12 seconds    |
-./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:1:1]                 | passed  | 0.93121 seconds |
-./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:1:2]                 | passed  | 0.39388 seconds |
-./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:2:1]                 | passed  | 0.66196 seconds |
-./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:2:2]                 | passed  | 0.84579 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_for_others_spec.rb[1:1:1]      | passed  | 1.02 seconds    |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_for_others_spec.rb[1:2:1]      | passed  | 0.85905 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_for_others_spec.rb[1:2:2]      | passed  | 0.99546 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:1:1]                 | passed  | 0.98455 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:1:2]                 | passed  | 0.37634 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:2:1]                 | passed  | 0.90677 seconds |
+./spec/features/records/index/record_info/expanded_view/totals/records_index_total_records_connected_spec.rb[1:2:2]                 | passed  | 0.77217 seconds |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_time_spent_by_me_spec.rb[1:1:1]                  | passed  | 0.20189 seconds |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_time_spent_by_me_spec.rb[1:1:2]                  | passed  | 0.7449 seconds  |
 ./spec/features/records/index/record_info/expanded_view/totals/records_index_total_time_spent_by_me_spec.rb[1:1:3]                  | passed  | 0.12306 seconds |
