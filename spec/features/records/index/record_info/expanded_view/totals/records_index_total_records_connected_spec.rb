@@ -24,11 +24,12 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
   let!(:connection6) { create :connection, record_a: public_record5, record_b: private_record6 }
   let!(:connection7) { create :connection, record_a: public_record3, record_b: private_record7 }
 
+  # not sure if I should or should not know that someone has a private record connected to my record
   context 'not signed in' do
     before { visit records_path }
 
-    it { expect(page).to have_content 'Records connected: 5' }
-    it { expect(page).to have_no_content 'Records connected: 7' }
+    it { expect(page).to have_no_content 'Records connected: 5' }
+    it { expect(page).to have_content 'Records connected: 7' }
   end
 
   context 'signed in' do
