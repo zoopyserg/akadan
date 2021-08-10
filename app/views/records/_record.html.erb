@@ -87,6 +87,9 @@
             <p class="mb-0">Other people's records connected: <strong><%= Record.all_tree_records_of_record(record).where.not(user: current_user).count %></strong></p>
           <% end %>
 
+          <p class="mb-0">Unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(record).count %></strong></p>
+          <p class="mb-0">Solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(record).count %></strong></p>
+
           <div class="accordioncollapse card mb-0">
             <div role="tab" class="card-header">
               <h6 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1">Attachments</a></h6>
@@ -166,19 +169,19 @@
             <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>
             <i class="fa fa-repeat mx-1"></i>Repeated
           <% end %>
-          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: solution_connection_type.id, record_type_id: solution_record_type.id), class: "btn btn-light btn-block" do %>
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: ConnectionType.solution_connection_type.id, record_type_id: RecordType.solution_record_type.id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-check mx-1"></i>Solve
           <% end %>
-          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: subsystem_connection_type.id, record_type_id: subsystem_record_type.id), class: "btn btn-light btn-block" do %>
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: ConnectionType.subsystem_connection_type.id, record_type_id: RecordType.subsystem_record_type.id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-puzzle-piece mx-1"></i>Create / Connect Subrecords
           <% end %>
-          <%= link_to into_separate_project_record_connection_type_connections_path(record, extracted_to_connection_type), method: :post, class: "btn btn-light btn-block" do %>
+          <%= link_to into_separate_project_record_connection_type_connections_path(record, ConnectionType.extracted_to_connection_type), method: :post, class: "btn btn-light btn-block" do %>
             <i class="fa fa-angle-double-up mx-1"></i>Extract Into Separate Project
           <% end %>
           <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsmodal">
             <i class="fa fa-lock"></i>Permissions
           </button>
-          <%= link_to new_record_connection_type_connection_path(record, irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
+          <%= link_to new_record_connection_type_connection_path(record, ConnectionType.irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
             <i class="fa fa-close mx-1"></i>Irrelevant
           <% end %>
         </div>

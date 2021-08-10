@@ -25,6 +25,7 @@ class Record < ApplicationRecord
 
   scope :all_parents_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_parent_ids(record)).pluck('id')).without_source(record) }
   scope :all_tree_records_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_tree_record_ids(record)).pluck('id')).without_source(record) }
+
   scope :deep_siblings, -> (record) { all_tree_records_of_record(record).where.not(id: Record.all_parents_of_record(record)).without_source(record) }
   scope :root, -> (record) { all_tree_records_of_record(record).where.not(id: all_tree_records_of_record(record).joins(:connections_as_target).joins(:connections_as_target)).without_source(record) }
   scope :parents_specific_type, -> (record, _type) { all_parents_of_record(record).where(record_type: _type).without_source(record) }
@@ -36,6 +37,9 @@ class Record < ApplicationRecord
 
   scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')) }
   scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
+
+  scope :all_unsolved_tree_records_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_unsolved_tree_record_ids(record)).pluck('id')) }
+  scope :all_solved_tree_records_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_solved_tree_record_ids(record)).pluck('id')) }
 
   def self.all_parent_ids(record)
     <<-SQL
@@ -71,6 +75,77 @@ class Record < ApplicationRecord
       SELECT id FROM search_tree ORDER BY path
     SQL
     # todo: interpolation
+  end
+
+  def self.all_solved_tree_record_ids(record)
+    <<-SQL
+      WITH RECURSIVE solution_connection_type AS (#{ ConnectionType.where(name: 'Is Solved By...').limit(1).to_sql }),
+                     all_tree_nodes(id, path) AS (
+                         SELECT id, ARRAY[id]
+                         FROM records
+                         WHERE id = #{record.id}
+                       UNION
+                         SELECT records.id, path || records.id
+                         FROM all_tree_nodes
+                         JOIN connections ON (connections.record_b_id = all_tree_nodes.id OR connections.record_a_id = all_tree_nodes.id)
+                         JOIN records ON (records.id = connections.record_a_id OR records.id = connections.record_b_id)
+                         WHERE NOT records.id = ANY(path)
+                     ),
+                     solved_records_ids(record_a_id) AS (SELECT record_a_id FROM connections WHERE connection_type_id = (SELECT id FROM solution_connection_type) ),
+                     solved_record_ids_in_this_tree(id) AS (SELECT id FROM all_tree_nodes INNER JOIN solved_records_ids ON all_tree_nodes.id = solved_records_ids.record_a_id),
+                     solutions_ids(id) AS ( SELECT record_b_id FROM connections WHERE connection_type_id = (SELECT id FROM solution_connection_type) ),
+                     solved_nodes_in_tree(id, path) AS (
+                         SELECT id, ARRAY[id]
+                         FROM records
+                         WHERE id IN (SELECT id FROM solved_record_ids_in_this_tree)
+                       UNION
+                         SELECT parents.id, path || parents.id
+                         FROM solved_nodes_in_tree
+                         JOIN connections parent_connections ON (parent_connections.record_b_id = solved_nodes_in_tree.id)
+                         JOIN connection_types parent_connection_types ON (parent_connections.connection_type_id = parent_connection_types.id AND parent_connection_types.destructive = TRUE)
+                         JOIN records parents ON (parents.id = parent_connections.record_a_id)
+                         JOIN connections children_connections ON (children_connections.record_a_id = parents.id )
+                         JOIN connection_types children_connection_types ON (children_connections.connection_type_id = children_connection_types.id AND children_connection_types.destructive = TRUE)
+                         JOIN records children ON (children.id = children_connections.record_b_id)
+                         WHERE (NOT parents.id = ANY(path))
+                     ),
+                     unsolved_nodes_in_tree(id) AS (SELECT * FROM all_tree_nodes WHERE all_tree_nodes.id NOT IN (SELECT id FROM solved_nodes_in_tree) )
+      SELECT id FROM solved_nodes_in_tree ORDER BY path
+    SQL
+  end
+
+  def self.all_unsolved_tree_record_ids(record)
+    <<-SQL
+      WITH RECURSIVE solution_connection_type AS (#{ ConnectionType.where(name: 'Is Solved By...').limit(1).to_sql }),
+                     all_tree_nodes(id, path) AS (
+                         SELECT id, ARRAY[id]
+                         FROM records
+                         WHERE id = #{record.id}
+                       UNION
+                         SELECT records.id, path || records.id
+                         FROM all_tree_nodes
+                         JOIN connections ON (connections.record_b_id = all_tree_nodes.id OR connections.record_a_id = all_tree_nodes.id)
+                         JOIN records ON (records.id = connections.record_a_id OR records.id = connections.record_b_id)
+                         WHERE NOT records.id = ANY(path)
+                     ),
+                     solved_records_ids(record_a_id) AS (SELECT record_a_id FROM connections WHERE connection_type_id = (SELECT id FROM solution_connection_type) ),
+                     solved_record_ids_in_this_tree(id) AS (SELECT id FROM all_tree_nodes INNER JOIN solved_records_ids ON all_tree_nodes.id = solved_records_ids.record_a_id),
+                     solutions_ids(id) AS ( SELECT record_b_id FROM connections WHERE connection_type_id = (SELECT id FROM solution_connection_type) ),
+                     solved_nodes_in_tree(id, path) AS (
+                         SELECT id, ARRAY[id]
+                         FROM records
+                         WHERE id IN (SELECT id FROM solved_record_ids_in_this_tree)
+                       UNION
+                         SELECT records.id, path || records.id
+                         FROM solved_nodes_in_tree
+                         JOIN connections ON (connections.record_b_id = solved_nodes_in_tree.id)
+                         JOIN connection_types ON (connections.connection_type_id = connection_types.id AND connection_types.destructive = TRUE)
+                         JOIN records ON (records.id = connections.record_a_id)
+                         WHERE NOT records.id = ANY(path)
+                     ),
+                     unsolved_nodes_in_tree(id) AS (SELECT * FROM all_tree_nodes WHERE all_tree_nodes.id NOT IN (SELECT id FROM solved_nodes_in_tree) )
+      SELECT id FROM unsolved_nodes_in_tree
+    SQL
   end
 
   def self.all_child_ids(record)

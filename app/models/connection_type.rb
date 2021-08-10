@@ -7,6 +7,22 @@ class ConnectionType < ApplicationRecord
   validates :target_hierarchy, inclusion: { in: %w(all all_roots deep_siblings siblings) }
   validates :target_type, inclusion: { in: %w(any same_as_source specific_type specific_subtype) }
 
+  def self.subsystem_connection_type
+    @@subsystem_connection_type ||= find_by(name: 'Subsystem')
+  end
+
+  def self.solution_connection_type
+    @@solution_connection_type ||= find_by(name: 'Is Solved By...')
+  end
+
+  def self.extracted_to_connection_type
+    @@extracted_to_connection_type ||= find_by(name: 'Extracted To...')
+  end
+
+  def self.irrelevant_because_connection_type
+    @@irrelevant_because_connection_type ||= find_by(name: 'Irrelevant Because...')
+  end
+
   def any_target_type?
     target_type == 'any'
   end
