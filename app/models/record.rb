@@ -118,7 +118,24 @@ class Record < ApplicationRecord
                                                 )
                                               )
                                             AND (
-                                                  SELECT BOOL_AND(is_solved)
+                                                  SELECT BOOL_AND(is_solved) AND (
+                                                                                   (
+                                                                                     FALSE NOT IN (
+                                                                                       SELECT ct.destructive
+                                                                                       FROM connections co
+                                                                                       JOIN connection_types ct
+                                                                                         ON co.connection_type_id = ct.id
+                                                                                       WHERE co.record_a_id = connections.record_a_id
+                                                                                     )
+                                                                                   )
+                                                                                   OR
+                                                                                   (
+                                                                                     connections.record_a_id IN (
+                                                                                       SELECT record_a_id
+                                                                                       FROM solved_records_ids
+                                                                                     )
+                                                                                   )
+                                                                                 )
                                                   FROM (
                                                     SELECT (
                                                       EXISTS (
@@ -151,7 +168,8 @@ class Record < ApplicationRecord
                          SELECT id, ARRAY[id]
                          FROM records
                          WHERE id = #{record.id}
-                       UNION SELECT records.id, path || records.id
+                       UNION
+                         SELECT records.id, path || records.id
                          FROM all_tree_nodes
                          JOIN connections ON (connections.record_b_id = all_tree_nodes.id OR connections.record_a_id = all_tree_nodes.id)
                          JOIN records ON (records.id = connections.record_a_id OR records.id = connections.record_b_id)
@@ -163,14 +181,64 @@ class Record < ApplicationRecord
                      solved_nodes_in_tree(id, path) AS (
                          SELECT id, ARRAY[id]
                          FROM records
-                         WHERE id IN (SELECT id FROM solved_record_ids_in_this_tree)
+                         WHERE id IN (
+                             SELECT id
+                             FROM solved_record_ids_in_this_tree
+                           )
                        UNION
-                         SELECT records.id, path || records.id
-                         FROM solved_nodes_in_tree
-                         JOIN connections ON (connections.record_b_id = solved_nodes_in_tree.id)
-                         JOIN connection_types ON (connections.connection_type_id = connection_types.id AND connection_types.destructive = TRUE)
-                         JOIN records ON (records.id = connections.record_a_id)
-                         WHERE NOT records.id = ANY(path)
+                         SELECT * FROM (
+                           WITH solved_nodes_in_tree_inner AS (
+                             SELECT * FROM solved_nodes_in_tree
+                           )
+                           SELECT parents.id, path || parents.id
+                           FROM solved_nodes_in_tree_inner solved_nodes_in_tree
+
+                           JOIN connections ON (connections.record_b_id = solved_nodes_in_tree.id)
+                                            AND (
+                                                TRUE IN (
+                                                  SELECT destructive
+                                                  FROM connection_types
+                                                  WHERE connections.connection_type_id = connection_types.id
+                                                )
+                                              )
+                                            AND (
+                                                  SELECT BOOL_AND(is_solved) AND (
+                                                                                   (
+                                                                                     FALSE NOT IN (
+                                                                                       SELECT ct.destructive
+                                                                                       FROM connections co
+                                                                                       JOIN connection_types ct
+                                                                                         ON co.connection_type_id = ct.id
+                                                                                       WHERE co.record_a_id = connections.record_a_id
+                                                                                     )
+                                                                                   )
+                                                                                   OR
+                                                                                   (
+                                                                                     connections.record_a_id IN (
+                                                                                       SELECT record_a_id
+                                                                                       FROM solved_records_ids
+                                                                                     )
+                                                                                   )
+                                                                                 )
+                                                  FROM (
+                                                    SELECT (
+                                                      EXISTS (
+                                                        SELECT *
+                                                        FROM solved_nodes_in_tree_inner
+                                                        WHERE solved_nodes_in_tree_inner.id = children.id
+                                                      )
+                                                    ) is_solved
+                                                    FROM records children
+                                                    WHERE children.id IN (
+                                                      SELECT record_b_id
+                                                      FROM connections c
+                                                      WHERE c.record_a_id = connections.record_a_id
+                                                    )
+                                                  ) q
+                                                )
+                           JOIN records parents ON (parents.id = connections.record_a_id)
+                           WHERE (NOT parents.id = ANY(path))
+                         ) t
                      ),
                      unsolved_nodes_in_tree(id) AS (SELECT * FROM all_tree_nodes WHERE all_tree_nodes.id NOT IN (SELECT id FROM solved_nodes_in_tree) )
       SELECT id FROM unsolved_nodes_in_tree

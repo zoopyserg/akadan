@@ -222,7 +222,7 @@ RSpec.describe Record, type: :model do
       end
     end
 
-    describe 'scopes for selecting solved records in the tree' do
+    describe 'scope for selecting solved records in the tree' do
       let!(:user1) { create :user, :confirmed, email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
       let!(:solution_connection_type) { create :connection_type, name: 'Is Solved By...' }
       let(:solved_records) { Record.all_solved_tree_records_of_record(record1) }
@@ -329,6 +329,115 @@ RSpec.describe Record, type: :model do
       end
 
     end
+
+    describe 'scope for selecting unsolved records in the tree' do
+      let!(:user1) { create :user, :confirmed, email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
+      let!(:solution_connection_type) { create :connection_type, name: 'Is Solved By...' }
+      let(:unsolved_records) { Record.all_unsolved_tree_records_of_record(record1) }
+
+      context 'single unsolved record' do
+        let!(:record1) { create :record, user: user1, is_public: true }
+
+        it { expect(unsolved_records).to include record1 }
+      end
+
+      context 'single solved record' do
+        let!(:record1) { create :record, user: user1, is_public: true }
+        let!(:solution) { create :record, user: user1, is_public: true }
+        let!(:solution_connection) { create :connection, record_a: record1, record_b: solution, connection_type: solution_connection_type }
+
+        it { expect(unsolved_records).not_to include record1 }
+        it { expect(unsolved_records).to include solution }
+      end
+
+      context 'two destructive subrecords, one solved' do
+        let!(:record1) { create :record, user: user1, is_public: true }
+        let!(:record2) { create :record, user: user1, is_public: true }
+        let!(:record3) { create :record, user: user1, is_public: true }
+        let!(:record4) { create :record, user: user1, is_public: true }
+
+        let!(:subsystem_connection_type) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: true }
+
+        let!(:connection1) { create :connection, connection_type: subsystem_connection_type, record_a: record1, record_b: record2 }
+        let!(:connection2) { create :connection, connection_type: subsystem_connection_type, record_a: record1, record_b: record3 }
+
+        let!(:solution_connection) { create :connection, record_a: record3, record_b: record4, connection_type: solution_connection_type }
+
+        it { expect(unsolved_records).not_to include record3 }
+        it { expect(unsolved_records).to include record1 }
+        it { expect(unsolved_records).to include record2 }
+        it { expect(unsolved_records).to include record4 }
+      end
+
+      context 'two destructive subrecords, both solved' do
+        let!(:record1) { create :record, user: user1, is_public: true }
+        let!(:record2) { create :record, user: user1, is_public: true }
+        let!(:record3) { create :record, user: user1, is_public: true }
+        let!(:record4) { create :record, user: user1, is_public: true }
+        let!(:record5) { create :record, user: user1, is_public: true }
+
+        let!(:subsystem_connection_type) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: true }
+
+        let!(:connection1) { create :connection, connection_type: subsystem_connection_type, record_a: record1, record_b: record2 }
+        let!(:connection2) { create :connection, connection_type: subsystem_connection_type, record_a: record1, record_b: record3 }
+
+        let!(:solution_connection1) { create :connection, record_a: record3, record_b: record4, connection_type: solution_connection_type }
+        let!(:solution_connection2) { create :connection, record_a: record2, record_b: record5, connection_type: solution_connection_type }
+
+        it { expect(unsolved_records).not_to include record1 }
+        it { expect(unsolved_records).not_to include record2 }
+        it { expect(unsolved_records).not_to include record3 }
+        it { expect(unsolved_records).to include record4 }
+        it { expect(unsolved_records).to include record5 }
+      end
+
+      context 'two non-destructive subrecords, both solved' do
+        let!(:record1) { create :record, user: user1, is_public: true }
+        let!(:record2) { create :record, user: user1, is_public: true }
+        let!(:record3) { create :record, user: user1, is_public: true }
+        let!(:record4) { create :record, user: user1, is_public: true }
+        let!(:record5) { create :record, user: user1, is_public: true }
+
+        let!(:subsystem_connection_type) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: false }
+
+        let!(:connection1) { create :connection, connection_type: subsystem_connection_type, record_a: record1, record_b: record2 }
+        let!(:connection2) { create :connection, connection_type: subsystem_connection_type, record_a: record1, record_b: record3 }
+
+        let!(:solution_connection1) { create :connection, record_a: record3, record_b: record4, connection_type: solution_connection_type }
+        let!(:solution_connection2) { create :connection, record_a: record2, record_b: record5, connection_type: solution_connection_type }
+
+        it { expect(unsolved_records).to include record1 }
+        it { expect(unsolved_records).not_to include record2 }
+        it { expect(unsolved_records).not_to include record3 }
+        it { expect(unsolved_records).to include record4 }
+        it { expect(unsolved_records).to include record5 }
+      end
+
+      context 'two subrecords, one destructive, one non-destructive, both solved' do
+        let!(:record1) { create :record, user: user1, is_public: true }
+        let!(:record2) { create :record, user: user1, is_public: true }
+        let!(:record3) { create :record, user: user1, is_public: true }
+        let!(:record4) { create :record, user: user1, is_public: true }
+        let!(:record5) { create :record, user: user1, is_public: true }
+
+        let!(:subsystem_connection_type1) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: false }
+        let!(:subsystem_connection_type2) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: true }
+
+        let!(:connection1) { create :connection, connection_type: subsystem_connection_type1, record_a: record1, record_b: record2 }
+        let!(:connection2) { create :connection, connection_type: subsystem_connection_type2, record_a: record1, record_b: record3 }
+
+        let!(:solution_connection1) { create :connection, record_a: record3, record_b: record4, connection_type: solution_connection_type }
+        let!(:solution_connection2) { create :connection, record_a: record2, record_b: record5, connection_type: solution_connection_type }
+
+        it { expect(unsolved_records).to include record1 } # right now it gets included, and it (probably?) shouldn't. what's going on? think about it.
+        it { expect(unsolved_records).not_to include record2 }
+        it { expect(unsolved_records).not_to include record3 }
+        it { expect(unsolved_records).to include record4 }
+        it { expect(unsolved_records).to include record5 }
+      end
+
+    end
+
 
     # todo:
     # having a "closest" one does not even make any sense now
