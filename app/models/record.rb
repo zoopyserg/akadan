@@ -94,23 +94,49 @@ class Record < ApplicationRecord
                      solved_records_ids(record_a_id) AS (SELECT record_a_id FROM connections WHERE connection_type_id = (SELECT id FROM solution_connection_type) ),
                      solved_record_ids_in_this_tree(id) AS (SELECT id FROM all_tree_nodes INNER JOIN solved_records_ids ON all_tree_nodes.id = solved_records_ids.record_a_id),
                      solutions_ids(id) AS ( SELECT record_b_id FROM connections WHERE connection_type_id = (SELECT id FROM solution_connection_type) ),
-                     solved_nodes_in_tree(id, path, children, all_children_solved) AS (
-                         SELECT id, ARRAY[id], ARRAY[]::bigint[], TRUE
+                     solved_nodes_in_tree(id, path) AS (
+                         SELECT id, ARRAY[id]
                          FROM records
-                         WHERE id IN (SELECT id FROM solved_record_ids_in_this_tree)
+                         WHERE id IN (
+                             SELECT id
+                             FROM solved_record_ids_in_this_tree
+                           )
                        UNION
                          SELECT * FROM (
                            WITH solved_nodes_in_tree_inner AS (
                              SELECT * FROM solved_nodes_in_tree
                            )
-                           SELECT parents.id, ARRAY_AGG(path || parents.id), ARRAY_AGG(children.id), BOOL_AND( EXISTS(SELECT * FROM solved_nodes_in_tree_inner WHERE solved_nodes_in_tree_inner.id = children.id ) )
+                           SELECT parents.id, path || parents.id
                            FROM solved_nodes_in_tree_inner solved_nodes_in_tree
 
-                           JOIN connections parent_connections ON (parent_connections.record_b_id = solved_nodes_in_tree.id AND ( (SELECT COUNT(*) FROM solved_nodes_in_tree ) = 0 - a dummy request to test for DB limitations, in reality here should be a subquery that tests if all children of record_a are present in solved_nodes_in_tree. but it does not work because subquery of a recursive function can't mention the table solved_record_ids_in_this_tree ) )
-                           JOIN connection_types parent_connection_types ON (parent_connections.connection_type_id = parent_connection_types.id AND parent_connection_types.destructive = TRUE)
-                           JOIN records parents ON (parents.id = parent_connections.record_a_id)
-                           WHERE (NOT parents.id = ANY(path)) AND all_children_solved = TRUE AND parents.id IN (SELECT id FROM all_tree_nodes) AND parents.id NOT IN (SELECT id FROM solved_record_ids_in_this_tree)
-                           GROUP BY parents.id
+                           JOIN connections ON (connections.record_b_id = solved_nodes_in_tree.id)
+                                            AND (
+                                                TRUE IN (
+                                                  SELECT destructive
+                                                  FROM connection_types
+                                                  WHERE connections.connection_type_id = connection_types.id
+                                                )
+                                              )
+                                            AND (
+                                                  SELECT BOOL_AND(is_solved)
+                                                  FROM (
+                                                    SELECT (
+                                                      EXISTS (
+                                                        SELECT *
+                                                        FROM solved_nodes_in_tree_inner
+                                                        WHERE solved_nodes_in_tree_inner.id = children.id
+                                                      )
+                                                    ) is_solved
+                                                    FROM records children
+                                                    WHERE children.id IN (
+                                                      SELECT record_b_id
+                                                      FROM connections c
+                                                      WHERE c.record_a_id = connections.record_a_id
+                                                    )
+                                                  ) q
+                                                )
+                           JOIN records parents ON (parents.id = connections.record_a_id)
+                           WHERE (NOT parents.id = ANY(path))
                          ) t
                      ),
                      unsolved_nodes_in_tree(id) AS (SELECT * FROM all_tree_nodes WHERE all_tree_nodes.id NOT IN (SELECT id FROM solved_nodes_in_tree) )
@@ -125,8 +151,7 @@ class Record < ApplicationRecord
                          SELECT id, ARRAY[id]
                          FROM records
                          WHERE id = #{record.id}
-                       UNION
-                         SELECT records.id, path || records.id
+                       UNION SELECT records.id, path || records.id
                          FROM all_tree_nodes
                          JOIN connections ON (connections.record_b_id = all_tree_nodes.id OR connections.record_a_id = all_tree_nodes.id)
                          JOIN records ON (records.id = connections.record_a_id OR records.id = connections.record_b_id)

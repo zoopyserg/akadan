@@ -17,7 +17,7 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
     let!(:public_record) { create :record, user: user1, is_public: true }
     let!(:public_solution) { create :record, user: user1, is_public: true }
 
-    let!(:solution_connection) { create :connection, record_a: public_record, record_b: public_solution, connection_type_id: ConnectionType.solution_connection_type.id }
+    let!(:solution_connection) { create :connection, record_a: public_record, record_b: public_solution, connection_type_id: solution_connection_type_id }
 
     before { visit records_path }
 
@@ -90,7 +90,6 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
     let!(:public_record1) { create :record, user: user1, is_public: true }
     let!(:public_record2) { create :record, user: user1, is_public: true }
     let!(:public_record3) { create :record, user: user1, is_public: true }
-
     let!(:public_record4) { create :record, user: user1, is_public: true }
     let!(:public_record5) { create :record, user: user1, is_public: true }
 
