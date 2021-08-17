@@ -30,9 +30,5 @@ RSpec.describe RecordTypesController, type: :routing do
     it "routes to #update via PATCH" do
       expect(patch: "/record_types/1").to route_to("record_types#update", id: "1")
     end
-
-    it "routes to #destroy" do
-      expect(delete: "/record_types/1").to route_to("record_types#destroy", id: "1")
-    end
   end
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe SeminarsController, type: :routing do
-  describe "routing" do
+  xdescribe "routing" do
     it "routes to #index" do
       expect(get: "/seminars").to route_to("seminars#index")
     end

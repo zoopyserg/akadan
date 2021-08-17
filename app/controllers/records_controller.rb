@@ -32,12 +32,13 @@ class RecordsController < ApplicationController
     @record = current_user.records.new(record_params)
     @record.separate_project = true
     @record.dots.each do |dot|
+      dot.duration ||= 1
       dot.user = current_user
       dot.project = @record
     end
 
     respond_to do |format|
-      if @record.save
+      if @record.save!
         format.html { redirect_to @record, notice: "Record was successfully created." }
         format.json { render :show, status: :created, location: @record }
       else

@@ -30,9 +30,5 @@ RSpec.describe ConnectionTypesController, type: :routing do
     it "routes to #update via PATCH" do
       expect(patch: "/connection_types/1").to route_to("connection_types#update", id: "1")
     end
-
-    it "routes to #destroy" do
-      expect(delete: "/connection_types/1").to route_to("connection_types#destroy", id: "1")
-    end
   end
 end

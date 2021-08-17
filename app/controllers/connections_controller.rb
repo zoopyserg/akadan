@@ -102,15 +102,6 @@ class ConnectionsController < ApplicationController
     end
   end
 
-  # DELETE
-  def destroy
-    @connection.destroy
-    respond_to do |format|
-      format.html { redirect_to connections_url, notice: "Connection was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
   def set_connection
     if signed_in?

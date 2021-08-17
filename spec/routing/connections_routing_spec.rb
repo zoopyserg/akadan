@@ -7,7 +7,7 @@ RSpec.describe ConnectionsController, type: :routing do
     end
 
     it "routes to #new" do
-      expect(get: "/connections/new").to route_to("connections#new")
+      expect(get: "/records/1/connection_types/2/connections/new").to route_to("connections#new", record_id: '1', connection_type_id: '2' )
     end
 
     it "routes to #show" do
@@ -15,24 +15,19 @@ RSpec.describe ConnectionsController, type: :routing do
     end
 
     it "routes to #edit" do
-      expect(get: "/connections/1/edit").to route_to("connections#edit", id: "1")
+      expect(get: "/records/1/connection_types/2/connections/3/edit").to route_to("connections#edit", id: "3", record_id: '1', connection_type_id: '2' )
     end
 
-
     it "routes to #create" do
-      expect(post: "/connections").to route_to("connections#create")
+      expect(post: "/records/1/connection_types/2/connections").to route_to("connections#create", record_id: '1', connection_type_id: '2' )
     end
 
     it "routes to #update via PUT" do
-      expect(put: "/connections/1").to route_to("connections#update", id: "1")
+      expect(put: "/records/1/connection_types/2/connections/3").to route_to("connections#update", id: "3", record_id: '1', connection_type_id: '2' )
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/connections/1").to route_to("connections#update", id: "1")
-    end
-
-    it "routes to #destroy" do
-      expect(delete: "/connections/1").to route_to("connections#destroy", id: "1")
+      expect(patch: "/records/1/connection_types/2/connections/3").to route_to("connections#update", id: "3", record_id: '1', connection_type_id: '2' )
     end
   end
 end
