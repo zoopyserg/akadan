@@ -12,8 +12,8 @@
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/seminars", type: :request do
-  
+RSpec.xdescribe "/seminars", type: :request do
+
   # Seminar. As you add validations to Seminar, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {

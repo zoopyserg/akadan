@@ -12,8 +12,8 @@
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/notifications", type: :request do
-  
+RSpec.xdescribe "/notifications", type: :request do
+
   # Notification. As you add validations to Notification, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {

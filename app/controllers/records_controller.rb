@@ -38,7 +38,7 @@ class RecordsController < ApplicationController
     end
 
     respond_to do |format|
-      if @record.save!
+      if @record.save
         format.html { redirect_to @record, notice: "Record was successfully created." }
         format.json { render :show, status: :created, location: @record }
       else
