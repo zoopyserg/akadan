@@ -4,22 +4,9 @@ class DotsController < ApplicationController
   before_action :set_projects, only: %i[ new ]
   before_action :redirect_to_records_path, unless: :record_present?
 
-  # GET /dots or /dots.json
-  def index
-    @dots = @record.dots.all
-  end
-
-  # GET /dots/1 or /dots/1.json
-  def show
-  end
-
   # GET /dots/new
   def new
     @dot = @record.dots.new
-  end
-
-  # GET /dots/1/edit
-  def edit
   end
 
   # POST /dots or /dots.json
@@ -28,35 +15,14 @@ class DotsController < ApplicationController
     @dot.user = current_user
 
     respond_to do |format|
-      if @dot.save!
+      if @dot.save
         format.html { redirect_to @record, notice: "Dot was successfully created." }
         format.json { render :show, status: :created, location: @record }
       else
+        set_projects
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @dot.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /dots/1 or /dots/1.json
-  def update
-    respond_to do |format|
-      if @dot.update(dot_params)
-        format.html { redirect_to @dot, notice: "Dot was successfully updated." }
-        format.json { render :show, status: :ok, location: @dot }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @dot.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /dots/1 or /dots/1.json
-  def destroy
-    @dot.destroy
-    respond_to do |format|
-      format.html { redirect_to dots_url, notice: "Dot was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

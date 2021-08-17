@@ -1,7 +1,8 @@
 class ConnectionsController < ApplicationController
-  before_action :authenticate_user!, except: :index
-  before_action :set_connection_type
-  before_action :set_record
+  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :set_connection_type, except: :index
+  before_action :set_record_a, except: %i[index show]
+  before_action :set_record_b, only: %i[create update]
   before_action :redirect_to_connections_path, unless: :both_connection_type_and_record_a_present?, only: %i[ new edit ]
   before_action :set_connection, only: %i[ show edit update destroy ]
   before_action :set_connection_types, only: %i[ new edit ]
@@ -35,6 +36,9 @@ class ConnectionsController < ApplicationController
   # POST
   def create
     @connection = current_user.connections.new(connection_params)
+    @connection.record_a = @record_a
+    @connection.record_b = @record_b
+    @connection.connection_type = @connection_type
 
     if @connection.valid? && params[:button] == "swap_direction"
       redirect_to new_record_connection_type_connection_path(@connection.record_b, @connection.connection_type)
@@ -46,7 +50,7 @@ class ConnectionsController < ApplicationController
         else
           format.html do
             set_connection_type
-            set_record
+            set_record_a
             set_connection_types
             set_records_a
             set_records_b
@@ -87,7 +91,7 @@ class ConnectionsController < ApplicationController
       else
         format.html do
           set_connection_type
-          set_record
+          set_record_a
           set_connection_types
           set_records_a
           set_records_b
@@ -109,7 +113,11 @@ class ConnectionsController < ApplicationController
 
   private
   def set_connection
-    @connection = current_user.connections.find(params[:id])
+    if signed_in?
+      @connection = Connection.where(is_public: true).or(Connection.where(user: current_user)).find(params[:id])
+    else
+      @connection = Connection.where(is_public: true).find(params[:id])
+    end
   end
 
   # Only allow a list of trusted parameters through.
@@ -121,8 +129,12 @@ class ConnectionsController < ApplicationController
     @connection_type = ConnectionType.where(is_public: true).or(ConnectionType.where(user: current_user)).find_by(id: params[:connection_type_id]) if params[:connection_type_id].present?
   end
 
-  def set_record
+  def set_record_a
     @record_a = Record.where(is_public: true).or(Record.where(user: current_user)).find_by(id: params[:record_id]) if params[:record_id].present?
+  end
+
+  def set_record_b
+    @record_b = Record.where(is_public: true).or(Record.where(user: current_user)).find_by(id: connection_params[:record_b_id]) if connection_params[:record_b_id].present?
   end
 
   def set_connection_types

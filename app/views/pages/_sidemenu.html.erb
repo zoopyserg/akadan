@@ -60,14 +60,6 @@
         </li>
         <% if user_signed_in? %>
             <li>
-                <%= link_to new_connection_path do %>
-                    <i class="zmdi zmdi-plus-square"></i>
-                    <span>Add a New Connection</span>
-                <% end %>
-            </li>
-        <% end %>
-        <% if user_signed_in? %>
-            <li>
                 <%= link_to friends_path do %>
                     <i class="zmdi zmdi-accounts-alt"></i>
                     <span>Friends</span>
@@ -139,12 +131,6 @@
             <%= link_to seminars_path do %>
                 <i class="zmdi zmdi-calendar"></i>
                 <span>Seminars &amp; Courses</span>
-            <% end %>
-        </li>
-        <li>
-            <%= link_to events_path do %>
-                <i class="zmdi zmdi-calendar-note"></i>
-                <span>Events</span>
             <% end %>
         </li>
         <li>

@@ -6,7 +6,7 @@ RSpec.feature "Record Created By", type: :feature do
   let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
   let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
 
-  context 'not signed in', :focus do
+  context 'not signed in' do
     before { visit records_path }
 
     it 'should say who created one record' do

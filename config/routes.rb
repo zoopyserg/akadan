@@ -3,17 +3,17 @@ Rails.application.routes.draw do
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
   resources :record_types, except: [:destroy]
-  resources :connections, except: [:destroy]
+  resources :connections, only: [:index, :show]
   resources :connection_types, except: [:destroy]
 
-  resources :conversations do
-    resources :messages
-    resources :participations
+  resources :conversations, only: [:index, :show, :new, :create] do
+    resources :messages, only: [:index, :create]
+    resources :participations, only: [:index, :new, :create, :destroy]
   end
 
-  resources :users, only: [:show, :edit]
+  resources :users, only: [:show, :edit, :update]
   resources :seminars
-  resources :events
+  # resources :events
   resources :notifications
   resources :sensors
 
@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   resources :friends, only: :index do
     resources :friend_requests, only: [:create] do
       collection do
-        post :send, as: :send
         post :accept, as: :accept
         delete :reject, as: :reject
         delete :unfriend, as: :unfriend
@@ -36,11 +35,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :records do
+  resources :records, except: [:destroy] do
     resources :dots, only: [:new, :create] # maybe do Index too. 'cause it's a scaffold baby
     resources :bookmarks, only: [:create, :destroy]
     resources :connection_types do
-      resources :connections do
+      resources :connections, only: [:new, :edit, :create, :update] do
         collection do
           post :into_separate_project
         end

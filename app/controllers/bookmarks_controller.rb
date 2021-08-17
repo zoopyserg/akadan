@@ -1,8 +1,8 @@
 class BookmarksController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :set_record
-
-  before_action :set_bookmark, only: %i[ destroy ]
+  before_action :set_bookmark
+  before_action :redirect_to_records_path, only: :create, if: :bookmark_present?
 
   # POST /bookmarks or /bookmarks.json
   def create
@@ -30,9 +30,16 @@ class BookmarksController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+  def redirect_to_records_path
+    redirect_to records_path
+  end
+
+  def bookmark_present?
+    @bookmark.present?
+  end
+
   def set_bookmark
-    @bookmark = current_user.bookmarks.find_by(record: @record, id: params[:id])
+    @bookmark = current_user.bookmarks.find_by(record: @record)
   end
 
   def set_record

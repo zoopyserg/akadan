@@ -1,4 +1,6 @@
 class ConversationStartsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @participant1 = current_user
     @participant2 = User.find_by(id: params[:person_id]) if params[:person_id]

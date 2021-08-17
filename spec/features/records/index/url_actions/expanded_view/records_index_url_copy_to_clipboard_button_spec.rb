@@ -1,4 +1,4 @@
-gtgtrequire 'rails_helper'
+require 'rails_helper'
 
 RSpec.feature "Record Created By", type: :feature do
   let!(:user1) { create :user, :confirmed, :free, first_name: 'John', last_name: 'Smith', username: 'something1', email: 'jacky.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }

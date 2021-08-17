@@ -40,6 +40,7 @@ class ConnectionTypesController < ApplicationController
         format.html { redirect_to @connection_type, notice: "Connection type was successfully created." }
         format.json { render :show, status: :created, location: @connection_type }
       else
+        set_target_record_types
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @connection_type.errors, status: :unprocessable_entity }
       end
@@ -53,20 +54,12 @@ class ConnectionTypesController < ApplicationController
         format.html { redirect_to @connection_type, notice: "Connection type was successfully updated." }
         format.json { render :show, status: :ok, location: @connection_type }
       else
+        set_target_record_types
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @connection_type.errors, status: :unprocessable_entity }
       end
     end
   end
-
-  # DELETE /connection_types/1 or /connection_types/1.json
-  # def destroy
-  #   @connection_type.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to connection_types_url, notice: "Connection type was successfully destroyed." }
-  #     format.json { head :no_content }
-  #   end
-  # end
 
   private
   # Use callbacks to share common setup or constraints between actions.

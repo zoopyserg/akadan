@@ -1,10 +1,9 @@
 class RecordTypesController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_record_type, only: %i[ show edit update destroy ]
 
   # GET /record_types or /record_types.json
   def index
-    @record_types = RecordType.all
     if signed_in?
       @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user)).order(created_at: :desc).page(params[:page])
     else
@@ -53,19 +52,14 @@ class RecordTypesController < ApplicationController
     end
   end
 
-  # DELETE /record_types/1 or /record_types/1.json
-  # def destroy
-  #   @record_type.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to record_types_url, notice: "Record type was successfully destroyed." }
-  #     format.json { head :no_content }
-  #   end
-  # end
-
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_record_type
-    @record_type = current_user.record_types.find(params[:id])
+    if signed_in?
+      @record_type = RecordType.where(is_public: true).or(RecordType.where(user: current_user)).find(params[:id])
+    else
+      @record_type = RecordType.where(is_public: true).find(params[:id])
+    end
   end
 
   # Only allow a list of trusted parameters through.

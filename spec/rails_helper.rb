@@ -20,4 +20,5 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # config.filter_gems_from_backtrace("gem name")
   config.include ::Rails::Controller::Testing::TestProcess, :type => :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
 end

@@ -4,6 +4,9 @@ RSpec.describe Record, type: :model do
   it { should belong_to :user }
   it { should belong_to :record_type }
   it { should have_many(:dots).dependent(:destroy) }
+  it { should have_many(:bookmarks).dependent(:destroy) }
+
+  it { should validate_presence_of(:name) }
 
   describe 'type selection scopes' do
     let!(:project) { create :record, separate_project: true }

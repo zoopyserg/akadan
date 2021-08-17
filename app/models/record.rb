@@ -3,9 +3,13 @@ class Record < ApplicationRecord
   belongs_to :record_type
   has_many :dots, dependent: :destroy
   has_many :project_dots, class_name: 'Dot', foreign_key: :project_id
+  has_many :bookmarks, dependent: :destroy
 
   has_many :connections_as_source, class_name: 'Connection', foreign_key: :record_a_id
   has_many :connections_as_target, class_name: 'Connection', foreign_key: :record_b_id
+
+  validates :name, presence: true
+
   accepts_nested_attributes_for :dots
 
   scope :projects, -> { where(separate_project: true) }
@@ -38,8 +42,13 @@ class Record < ApplicationRecord
   scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')) }
   scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
 
-  scope :all_unsolved_tree_records_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_unsolved_tree_record_ids(record)).pluck('id')) }
-  scope :all_solved_tree_records_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_solved_tree_record_ids(record)).pluck('id')) }
+  def self.all_unsolved_tree_records_of_record(record)
+    @@all_unsolved_tree_records_of_record = Record.where(id: ActiveRecord::Base.connection.execute(all_unsolved_tree_record_ids(record)).pluck('id'))
+  end
+
+  def self.all_solved_tree_records_of_record(record)
+    @@all_solved_tree_records_of_record = Record.where(id: ActiveRecord::Base.connection.execute(all_solved_tree_record_ids(record)).pluck('id'))
+  end
 
   def self.all_parent_ids(record)
     <<-SQL

@@ -6,6 +6,8 @@ RSpec.describe Message, type: :model do
   it { should have_many(:readings).dependent(:destroy) }
   it { should have_many(:users).through(:readings) }
 
+  it { should validate_presense_of(:body) }
+
   describe 'scopes' do
     describe '::latest_first' do
       let!(:message1) { create :message, created_at: 2.days.ago }

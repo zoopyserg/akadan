@@ -5,5 +5,5 @@
   <%= @connection.name %>
 </p>
 
-<%= link_to 'Edit', edit_connection_path(@connection) %> |
+<%= link_to 'Edit', edit_record_connection_type_connection_path(@connection.record_a, @connection.connection_type, @connection) %> |
 <%= link_to 'Back', connections_path %>

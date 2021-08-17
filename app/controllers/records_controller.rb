@@ -66,15 +66,6 @@ class RecordsController < ApplicationController
     end
   end
 
-  # DELETE /records/1 or /records/1.json
-  # def destroy
-  #   @record.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to records_url, notice: "Record was successfully destroyed." }
-  #     format.json { head :no_content }
-  #   end
-  # end
-
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_record

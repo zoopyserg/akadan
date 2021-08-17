@@ -1,6 +1,8 @@
 class RecordType < ApplicationRecord
   belongs_to :user
 
+  validates :name, presence: true
+
   def self.subsystem_record_type
     @@subsystem_record_type ||= find_by(name: 'Subsystem')
   end
