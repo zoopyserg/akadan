@@ -41,6 +41,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
         expect(page).to have_link 'Irrelevant', count: 2
       end
 
+      # sometimes failes when there is a lot of records
       it 'should let me create subrecords' do
         click_on 'Irrelevant', match: :first
 

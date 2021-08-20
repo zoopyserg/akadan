@@ -40,6 +40,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
         expect(page).to have_link 'Create / Connect Subrecords'
       end
 
+      # sometimes failes when there is a lot of records
       it 'should let me create subrecords' do
         click_on 'Create / Connect Subrecords'
 
@@ -90,6 +91,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
           expect(page).to have_link 'Create / Connect Subrecords'
         end
 
+        # sometimes failes when there is a lot of records
         it 'should let me create subrecords' do
           click_on 'Create / Connect Subrecords'
 

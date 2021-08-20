@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.feature "Record Created By", type: :feature do
+RSpec.xfeature "Record Created By", type: :feature do
   let!(:user1) { create :user, :confirmed, :free, first_name: 'John', last_name: 'Smith', username: 'something1', email: 'jacky.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, first_name: 'Bob', last_name: 'Smith', username: 'something2', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
-  let!(:public_record) { create :record, description: 'Public Description', user: user1, is_public: true }
-  let!(:private_record) { create :record, description: 'Private Description', user: user2, is_public: false }
+  let!(:public_record) { create :record, user: user1, is_public: true }
+  let!(:private_record) { create :record, user: user2, is_public: false }
 
   # good point.
   # this is #1 goal for this project.

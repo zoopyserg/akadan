@@ -66,6 +66,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
           expect(page).to have_link 'Extract Into Separate Project'
         end
 
+        # sometimes failes when there is a lot of records
         it 'should let me create subrecords' do
           expect{
             click_on 'Extract Into Separate Project'

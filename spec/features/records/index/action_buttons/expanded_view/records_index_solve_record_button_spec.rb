@@ -42,6 +42,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
         expect(page).to have_link 'Solve'
       end
 
+      # sometimes failes when there is a lot of records
       it 'should let me create subrecords' do
         click_on 'Solve'
 
@@ -92,6 +93,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
           expect(page).to have_link 'Solve'
         end
 
+        # sometimes failes when there is a lot of records
         it 'should let me create subrecords' do
           click_on 'Solve'
 
