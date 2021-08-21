@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  before_action :authenticate_user!, except: %i[ index show only_solved only_unsolved ]
+  before_action :authenticate_user!, except: %i[ index show only_solved only_unsolved only_record_type ]
   before_action :set_record, only: %i[ show edit update ]
   before_action :set_record_types, only: %i[ new edit ]
   before_action :redirect_to_records_path, only: %i[ show edit update ], unless: :record_present?
@@ -27,6 +27,20 @@ class RecordsController < ApplicationController
       @records = Record.where(is_public: true).or(Record.where(user: current_user)).only_unsolved
     else
       @records = Record.where(is_public: true).only_unsolved
+    end
+    render :index
+  end
+
+  def only_record_type
+    @record_type = RecordType.find_by(id: params[:record_type_id])
+    if @record_type
+      if signed_in?
+        @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(record_type: @record_type)
+      else
+        @records = Record.where(is_public: true).where(record_type: @record_type)
+      end
+    else
+      @records = []
     end
     render :index
   end

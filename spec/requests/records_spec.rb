@@ -41,6 +41,15 @@ RSpec.describe "/records", :records_index, type: :request do
       end
     end
 
+    describe "GET /only_record_type/:record_type_id" do
+      it "renders a successful response" do
+        user.records.create! valid_attributes
+        get only_record_type_records_path(1)
+        expect(response).to be_successful
+        expect(response).to render_template :index
+      end
+    end
+
     describe "GET /show" do
       it "renders a successful response" do
         record = user.records.create! valid_attributes
