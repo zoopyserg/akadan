@@ -23,6 +23,24 @@ RSpec.describe "/records", :records_index, type: :request do
       end
     end
 
+    describe "GET /only_solved" do
+      it "renders a successful response" do
+        user.records.create! valid_attributes
+        get only_solved_records_url
+        expect(response).to be_successful
+        expect(response).to render_template :index
+      end
+    end
+
+    describe "GET /only_unsolved" do
+      it "renders a successful response" do
+        user.records.create! valid_attributes
+        get only_unsolved_records_url
+        expect(response).to be_successful
+        expect(response).to render_template :index
+      end
+    end
+
     describe "GET /show" do
       it "renders a successful response" do
         record = user.records.create! valid_attributes

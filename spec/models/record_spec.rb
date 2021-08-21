@@ -16,6 +16,73 @@ RSpec.describe Record, type: :model do
     it { expect(Record.projects).not_to include non_project }
   end
 
+  describe 'selection of only solved records' do
+    let!(:record1) { create :record, name: 'Record 1', is_public: true }
+    let!(:record2) { create :record, name: 'Record 2', is_public: true }
+    let!(:record3) { create :record, name: 'Record 3', is_public: false }
+    let!(:record4) { create :record, name: 'Record 4', is_public: false }
+
+    let!(:solution1) { create :record, name: 'Solution 1' }
+    let!(:solution2) { create :record, name: 'Solution 1' }
+
+    let!(:solution_connection_type) { create :connection_type, name: 'Is Solved By...' }
+
+    let!(:connection1) { create :connection, record_a: record2, record_b: solution1, connection_type_id: solution_connection_type.id }
+    let!(:connection2) { create :connection, record_a: record4, record_b: solution2, connection_type_id: solution_connection_type.id }
+
+    describe 'generic work' do
+      it { expect(Record.only_solved).to include record2 }
+      it { expect(Record.only_solved).to include record4 }
+      it { expect(Record.only_solved).not_to include record1 }
+      it { expect(Record.only_solved).not_to include record3 }
+      it { expect(Record.only_solved).not_to include solution1 }
+      it { expect(Record.only_solved).not_to include solution2 }
+    end
+
+    describe 'applying to scope' do
+      it { expect(Record.where(id: record2.id).only_solved).to include record2 }
+      it { expect(Record.where(id: record2.id).only_solved).not_to include record4 }
+      it { expect(Record.where(id: record2.id).only_solved).not_to include record1 }
+      it { expect(Record.where(id: record2.id).only_solved).not_to include record3 }
+      it { expect(Record.where(id: record2.id).only_solved).not_to include solution1 }
+      it { expect(Record.where(id: record2.id).only_solved).not_to include solution2 }
+    end
+  end
+
+  describe 'selection of only unsolved records' do
+    let!(:record1) { create :record, name: 'Record 1', is_public: true }
+    let!(:record2) { create :record, name: 'Record 2', is_public: true }
+    let!(:record3) { create :record, name: 'Record 3', is_public: false }
+    let!(:record4) { create :record, name: 'Record 4', is_public: false }
+
+    let!(:solution1) { create :record, name: 'Solution 1' }
+    let!(:solution2) { create :record, name: 'Solution 1' }
+
+    let!(:solution_connection_type) { create :connection_type, name: 'Is Solved By...' }
+
+    let!(:connection1) { create :connection, record_a: record2, record_b: solution1, connection_type_id: solution_connection_type.id }
+    let!(:connection2) { create :connection, record_a: record4, record_b: solution2, connection_type_id: solution_connection_type.id }
+
+    describe 'generic work' do
+      it { expect(Record.only_unsolved).not_to include record2 }
+      it { expect(Record.only_unsolved).not_to include record4 }
+      it { expect(Record.only_unsolved).to include record1 }
+      it { expect(Record.only_unsolved).to include record3 }
+      it { expect(Record.only_unsolved).to include solution1 }
+      it { expect(Record.only_unsolved).to include solution2 }
+    end
+
+    describe 'applying to scope' do
+      it { expect(Record.where(id: record1.id).only_unsolved).not_to include record2 }
+      it { expect(Record.where(id: record1.id).only_unsolved).not_to include record4 }
+      it { expect(Record.where(id: record1.id).only_unsolved).to include record1 }
+      it { expect(Record.where(id: record1.id).only_unsolved).not_to include record3 }
+      it { expect(Record.where(id: record1.id).only_unsolved).not_to include solution1 }
+      it { expect(Record.where(id: record1.id).only_unsolved).not_to include solution2 }
+    end
+
+  end
+
   describe 'parentship scopes' do
     let!(:user) { create :user }
     let!(:record_type_1) { create :record_type, user: user }

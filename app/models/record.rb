@@ -42,6 +42,18 @@ class Record < ApplicationRecord
   scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')) }
   scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
 
+  def self.only_solved
+    all.select do |record|
+      Record.all_solved_tree_records_of_record(record).pluck(:id).include? record.id
+    end
+  end
+
+  def self.only_unsolved
+    all.select do |record|
+      Record.all_unsolved_tree_records_of_record(record).pluck(:id).include? record.id
+    end
+  end
+
   def self.all_unsolved_tree_records_of_record(record)
     @@all_unsolved_tree_records_of_record = Record.where(id: ActiveRecord::Base.connection.execute(all_unsolved_tree_record_ids(record)).pluck('id'))
   end

@@ -36,6 +36,11 @@ Rails.application.routes.draw do
   end
 
   resources :records, except: [:destroy] do
+    collection do
+      get :only_solved
+      get :only_unsolved
+    end
+
     resources :dots, only: [:new, :create] # maybe do Index too. 'cause it's a scaffold baby
     resources :bookmarks, only: [:create, :destroy]
     resources :connection_types do
