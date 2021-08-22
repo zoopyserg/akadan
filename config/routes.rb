@@ -36,11 +36,11 @@ Rails.application.routes.draw do
   end
 
   resources :records, except: [:destroy] do
-    collection do
-      get :only_solved
-      get :only_unsolved
-      get 'only_record_type/*record_type_id' => 'records#only_record_type', as: :only_record_type
-    end
+    # collection do
+    #   get :only_solved
+    #   get :only_unsolved
+    #   get 'only_record_type/*record_type_id' => 'records#only_record_type', as: :only_record_type
+    # end
 
     resources :dots, only: [:new, :create] # maybe do Index too. 'cause it's a scaffold baby
     resources :bookmarks, only: [:create, :destroy]
