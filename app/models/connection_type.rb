@@ -9,6 +9,8 @@ class ConnectionType < ApplicationRecord
   validates :target_hierarchy, inclusion: { in: %w(all all_roots deep_siblings siblings) }
   validates :target_type, inclusion: { in: %w(any same_as_source specific_type specific_subtype) }
 
+  # todo: URGENT forbid creating types with system names ("is solved by" etc).
+
   def self.subsystem_connection_type
     @@subsystem_connection_type ||= find_by(name: 'Subsystem')
   end
