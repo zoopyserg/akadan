@@ -80,6 +80,44 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
         end
       end
     end
+
+    describe 'through filter form' do
+      context 'not signed in', :focus do
+        before do
+          visit '/records'
+          check 'Only Solved'
+          within '.recordscolumn form' do
+            click_on 'Show'
+          end
+        end
+
+        it 'should have no button' do
+          expect(page).to have_no_content 'Record 1'
+          expect(page).to have_content 'Record 2'
+          expect(page).to have_no_content 'Record 3'
+          expect(page).to have_no_content 'Record 4'
+        end
+      end
+
+      context 'signed in' do
+        before do
+          visit connection_types_path
+          sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
+          visit '/records'
+          check 'Only Solved'
+          within '.recordscolumn form' do
+            click_on 'Show'
+          end
+        end
+
+        it 'should have all' do
+          expect(page).to have_no_content 'Record 1'
+          expect(page).to have_content 'Record 2'
+          expect(page).to have_no_content 'Record 3'
+          expect(page).to have_content 'Record 4'
+        end
+      end
+    end
   end
 
   context 'showing only unsolved records' do
@@ -98,7 +136,41 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
 
     describe 'raw URL visit' do
       context 'not signed in' do
-        before { visit '/records?only_unsolved=true' }
+        before { visit '/records?only_unsolved=true&record_type_id=&commit=Show' }
+
+        it 'should have no button' do
+          expect(page).to have_content 'Record 1'
+          expect(page).to have_no_content 'Record 2'
+          expect(page).to have_no_content 'Record 3'
+          expect(page).to have_no_content 'Record 4'
+        end
+      end
+
+      context 'signed in' do
+        before do
+          visit connection_types_path
+          sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
+          visit '/records?only_unsolved=true&record_type_id=&commit=Show'
+        end
+
+        it 'should have all' do
+          expect(page).to have_content 'Record 1'
+          expect(page).to have_no_content 'Record 2'
+          expect(page).to have_content 'Record 3'
+          expect(page).to have_no_content 'Record 4'
+        end
+      end
+    end
+
+    describe 'through filter form' do
+      context 'not signed in' do
+        before do
+          visit '/records'
+          check 'Only Unsolved'
+          within '.recordscolumn form' do
+            click_on 'Show'
+          end
+        end
 
         it 'should have no button' do
           expect(page).to have_content 'Record 1'
@@ -223,6 +295,84 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
             expect(page).to have_no_content 'Record 2'
             expect(page).to have_no_content 'Record 3'
             expect(page).to have_no_content 'Record 4'
+          end
+        end
+      end
+    end
+
+    describe 'through filter form' do
+      context 'record type 1' do
+        context 'not signed in' do
+          before do
+            visit '/records'
+            select record_type1.name, from: 'Record Type'
+            within '.recordscolumn form' do
+              click_on 'Show'
+            end
+          end
+
+          it 'should have no button' do
+            expect(page).to have_content 'Record 1'
+            expect(page).to have_no_content 'Record 2'
+            expect(page).to have_no_content 'Record 3'
+            expect(page).to have_no_content 'Record 4'
+          end
+        end
+
+        context 'signed in' do
+          before do
+            visit connection_types_path
+            sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
+            visit '/records'
+            select record_type1.name, from: 'Record Type'
+            within '.recordscolumn form' do
+              click_on 'Show'
+            end
+          end
+
+          it 'should have all' do
+            expect(page).to have_content 'Record 1'
+            expect(page).to have_no_content 'Record 2'
+            expect(page).to have_content 'Record 3'
+            expect(page).to have_no_content 'Record 4'
+          end
+        end
+      end
+
+      context 'record type 2' do
+        context 'not signed in' do
+          before do
+            visit '/records'
+            select record_type2.name, from: 'Record Type'
+            within '.recordscolumn form' do
+              click_on 'Show'
+            end
+          end
+
+          it 'should have no button' do
+            expect(page).to have_no_content 'Record 1'
+            expect(page).to have_content 'Record 2'
+            expect(page).to have_no_content 'Record 3'
+            expect(page).to have_no_content 'Record 4'
+          end
+        end
+
+        context 'signed in' do
+          before do
+            visit connection_types_path
+            sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
+            visit '/records'
+            select record_type2.name, from: 'Record Type'
+            within '.recordscolumn form' do
+              click_on 'Show'
+            end
+          end
+
+          it 'should have all' do
+            expect(page).to have_no_content 'Record 1'
+            expect(page).to have_content 'Record 2'
+            expect(page).to have_no_content 'Record 3'
+            expect(page).to have_content 'Record 4'
           end
         end
       end

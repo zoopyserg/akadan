@@ -1,5 +1,5 @@
 <div class="card" data-pgc-define="jr.recordColumn" data-pgc-define-name="Records Column" data-pgc-section="Page components">
-  <div class="card-body px-0 px-sm-3 py-1">
+  <div class="card-body px-0 px-sm-3 py-1 recordscolumn">
     <div class="px-3 row">
       <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
         <div class="align-items-center d-flex">
@@ -22,42 +22,81 @@
         </div>
       </div>
     </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <div class="form-check custom-control custom-switch">
-              <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
-              <label class="custom-control-label form-check-label" for="customSwitch1">Split Into Solved and Not-Solved</label>
+    <%= form_tag records_path, method: :get do |form| %>
+      <div class="px-3 row">
+        <div class="col-lg-12 d-flex justify-content-between">
+          <div class="align-items-center d-flex">
+            <div>
+              <div class="form-check custom-control custom-switch">
+                <%= check_box_tag 'only_solved', 'true', params['only_solved'].present?, class: "form-check-input custom-control-input" %>
+                <%= label_tag 'only_solved', 'Only Solved', class: 'custom-control-label form-check-label' %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <div class="align-middle custom-control custom-switch d-flex form-check">
-              <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
-              <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Show Not Only Direct Children But Also Their Deep nested Children of this type</label>
+      <div class="px-3 row">
+        <div class="col-lg-12 d-flex justify-content-between">
+          <div class="align-items-center d-flex">
+            <div>
+              <div class="form-check custom-control custom-switch">
+                <%= check_box_tag 'only_unsolved', 'true', params['only_unsolved'].present?, class: "form-check-input custom-control-input" %>
+                <%= label_tag 'only_unsolved', 'Only Unsolved', class: 'custom-control-label form-check-label' %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <div class="align-middle custom-control custom-switch d-flex form-check">
-              <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
-              <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Collapsed view</label>
+      <div class="px-3 row">
+        <div class="col-lg-12 d-flex justify-content-between">
+          <div class="align-items-center d-flex">
+            <div>
+
+              <!-- label class="d-flex justify-content-between">Record Type</label -->
+              <%= label_tag 'record_type_id', 'Record Type', class: 'd-flex justify-content-between' %>
+              <div class="dropdown" data-pgc="jr.dropdown">
+                <%= select_tag 'record_type_id', options_from_collection_for_select(@record_types, :id, :name, params[:record_type_id]), include_blank: true, class: "btn btn-light dropdown-toggle px-5" %>
+              </div>
+
+
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div class="px-3 row">
+        <div class="col-lg-12 d-flex justify-content-between">
+          <div class="align-items-center d-flex">
+            <div>
+              <div class="align-middle custom-control custom-switch d-flex form-check">
+                <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Show Not Only Direct Children But Also Their Deep nested Children of this type</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="px-3 row">
+        <div class="col-lg-12 d-flex justify-content-between">
+          <div class="align-items-center d-flex">
+            <div>
+              <div class="align-middle custom-control custom-switch d-flex form-check">
+                <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
+                <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Collapsed view</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="px-3 row">
+        <div class="col-lg-12 d-flex justify-content-between">
+          <div class="align-items-center d-flex">
+            <div>
+              <%= submit_tag 'Show', class: 'btn btn-light' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <div class="px-3 row">
       <div class="col-lg-12">
         <p class="mb-0">123 direct records of this type</p>

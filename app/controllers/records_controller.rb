@@ -8,11 +8,13 @@ class RecordsController < ApplicationController
   def index
     if signed_in?
       @records = Record.where(is_public: true).or(Record.where(user: current_user))
+      @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user)).order(created_at: :desc)
     else
       @records = Record.where(is_public: true)
+      @record_types = RecordType.where(is_public: true).order(created_at: :desc)
     end
 
-    if params[:record_type_id]
+    if params[:record_type_id].present?
       @record_type = RecordType.find_by(id: params[:record_type_id])
 
       if @record_type
