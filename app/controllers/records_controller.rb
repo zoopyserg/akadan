@@ -1,21 +1,19 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_record, only: %i[ show edit update ]
-  before_action :set_record_types, only: %i[ new edit ]
+  before_action :set_record_types, only: %i[ new edit index show ]
   before_action :redirect_to_records_path, only: %i[ show edit update ], unless: :record_present?
 
   # GET /records or /records.json
   def index
     if signed_in?
       @records = Record.where(is_public: true).or(Record.where(user: current_user))
-      @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user)).order(created_at: :desc)
     else
       @records = Record.where(is_public: true)
-      @record_types = RecordType.where(is_public: true).order(created_at: :desc)
     end
 
     if params[:record_type_id].present?
-      @record_type = RecordType.find_by(id: params[:record_type_id])
+      @record_type = @record_types.find_by(id: params[:record_type_id])
 
       if @record_type
         @records = @records.where(record_type: @record_type)
@@ -32,6 +30,29 @@ class RecordsController < ApplicationController
   end
 
   def show
+    @record_children_ids = Record.all_children_of_record(@record).without_source(@record).pluck(:id)
+
+    if signed_in?
+      @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids)
+    else
+      @records = Record.where(is_public: true).where(id: @record_children_ids)
+    end
+
+    if params[:record_type_id].present?
+      @record_type = @record_types.find_by(id: params[:record_type_id])
+
+      if @record_type
+        @records = @records.where(record_type: @record_type)
+      else
+        @records = []
+      end
+    end
+
+    if params[:only_solved]
+      @records = @records.only_solved
+    elsif params[:only_unsolved]
+      @records = @records.only_unsolved
+    end
   end
 
   # GET /records/new
@@ -108,6 +129,10 @@ class RecordsController < ApplicationController
   end
 
   def set_record_types
-    @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user))
+    if signed_in?
+      @record_types = RecordType.where(is_public: true).or(RecordType.where(user: current_user)).order(created_at: :desc)
+    else
+      @record_types = RecordType.where(is_public: true).order(created_at: :desc)
+    end
   end
 end

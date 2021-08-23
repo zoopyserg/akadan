@@ -4417,6 +4417,14 @@ example_id                                                                      
 ./spec/features/records/index/url_actions/expanded_view/records_index_url_copy_to_clipboard_button_spec.rb[1:1:2]                                    | pending | 0.00001 seconds |
 ./spec/features/records/index/url_actions/expanded_view/records_index_url_copy_to_clipboard_button_spec.rb[1:2:1]                                    | pending | 0 seconds       |
 ./spec/features/records/index/url_actions/expanded_view/records_index_url_copy_to_clipboard_button_spec.rb[1:2:2]                                    | pending | 0 seconds       |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:1:1]                                                  | passed  | 0.43251 seconds |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:1:2]                                                  | passed  | 0.42507 seconds |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:1:3]                                                  | passed  | 0.51689 seconds |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:1:4]                                                  | passed  | 1.11 seconds    |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:2:1]                                                  | passed  | 4.05 seconds    |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:2:2]                                                  | passed  | 3.95 seconds    |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:2:3]                                                  | passed  | 4.14 seconds    |
+./spec/features/records/show/subrecords/record_info/expanded_view/records_index_name_spec.rb[1:2:4]                                                  | passed  | 4.26 seconds    |
 ./spec/features/records/show/the_record/action_buttons/expanded_view/records_index_create_subrecords_button_spec.rb[1:1:1:1:1]                       | passed  | 0.18528 seconds |
 ./spec/features/records/show/the_record/action_buttons/expanded_view/records_index_create_subrecords_button_spec.rb[1:1:1:2:1]                       | passed  | 0.17407 seconds |
 ./spec/features/records/show/the_record/action_buttons/expanded_view/records_index_create_subrecords_button_spec.rb[1:1:2:1]                         | passed  | 0.43802 seconds |
