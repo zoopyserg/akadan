@@ -1,11 +1,11 @@
 def prepare_record_buttons
-  create :connection_type, name: 'Subsystem', is_public: true
-  create :connection_type, name: 'Irrelevant Because...', is_public: true
-  create :connection_type, name: 'Subsystem', is_public: true
-  create :connection_type, name: 'Is Solved By...', is_public: true
-  create :connection_type, name: 'Extracted To...', is_public: true
-  create :record_type, name: 'Subsystem', is_public: true
-  create :record_type, name: 'Solution', is_public: true
+  ConnectionType.find_or_create_by attributes_for :connection_type, name: 'Subsystem', is_public: true
+  ConnectionType.find_or_create_by attributes_for :connection_type, name: 'Irrelevant Because...', is_public: true
+  ConnectionType.find_or_create_by attributes_for :connection_type, name: 'Subsystem', is_public: true
+  ConnectionType.find_or_create_by attributes_for :connection_type, name: 'Is Solved By...', is_public: true
+  ConnectionType.find_or_create_by attributes_for :connection_type, name: 'Extracted To...', is_public: true
+  RecordType.find_or_create_by attributes_for :record_type, name: 'Subsystem', is_public: true
+  RecordType.find_or_create_by attributes_for :record_type, name: 'Solution', is_public: true
 end
 
 RSpec.configure do |config|

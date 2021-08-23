@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :store_user_location!, if: :storable_location?
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  private
   def storable_location?
     request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
   end
