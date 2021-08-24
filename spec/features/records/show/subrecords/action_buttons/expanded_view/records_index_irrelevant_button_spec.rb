@@ -8,24 +8,22 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
   let!(:connection_type) { create :connection_type, name: 'Irrelevant Because...', is_public: true }
 
+  let!(:main_record1) { create :record, user: user1, is_public: true }
+  let!(:connection1) { create :connection, record_a: main_record1, record_b: record, user: user1 }
+  let!(:connection2) { create :connection, record_a: main_record1, record_b: record2, user: user1 }
+
   context 'public someone elses record' do
     let!(:record) { create :record, name: 'Record B', user: user2, is_public: true }
     let!(:record2) { create :record, name: 'Record B', user: user2, is_public: true }
 
     context 'not signed in' do
       describe 'a button' do
-        before { visit records_path }
+        before { visit record_path(main_record1) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Irrelevant'
-        end
-      end
-
-      describe 'a path authorization' do
-        before { visit new_record_connection_type_connection_path(record, connection_type) }
-
-        it 'should have no button' do
-          expect(current_path).to eq new_user_session_path
+          within '.recordscolumn' do
+            expect(page).to have_no_link 'Irrelevant'
+          end
         end
       end
     end
@@ -34,16 +32,20 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
       before do
         visit root_path
         sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
-        visit records_path
+        visit record_path(main_record1)
       end
 
       it 'should allow to edit' do
-        expect(page).to have_link 'Irrelevant', count: 2
+        within '.recordscolumn' do
+          expect(page).to have_link 'Irrelevant', count: 2
+        end
       end
 
       # sometimes failes when there is a lot of records
       it 'should let me create subrecords' do
-        click_on 'Irrelevant', match: :first
+        within '.recordscolumn' do
+          click_on 'Irrelevant', match: :first
+        end
 
         select 'Record B', from: 'connection_record_b_id'
 
@@ -62,18 +64,12 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'not signed in' do
       describe 'a button' do
-        before { visit records_path }
+        before { visit record_path(main_record1) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Irrelevant'
-        end
-      end
-
-      describe 'a path authorization' do
-        before { visit new_record_connection_type_connection_path(record, connection_type) }
-
-        it 'should have no button' do
-          expect(current_path).to eq new_user_session_path
+          within '.recordscolumn' do
+            expect(page).to have_no_link 'Irrelevant'
+          end
         end
       end
     end
@@ -82,31 +78,21 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
       before do
         visit root_path
         sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
-        visit records_path
+        visit record_path(main_record1)
       end
 
       describe 'a button' do
         it 'should allow to edit' do
-          expect(page).to have_link 'Irrelevant'
+          within '.recordscolumn' do
+            expect(page).to have_link 'Irrelevant'
+          end
         end
 
         it 'should let me create subrecords' do
-          click_on 'Irrelevant', match: :first
+          within '.recordscolumn' do
+            click_on 'Irrelevant', match: :first
+          end
 
-          select 'Record B', from: 'connection_record_b_id'
-
-          expect{
-            click_on 'Create'
-          }.to change{
-            record.children.count
-          }.by(1)
-        end
-      end
-
-      describe 'a path' do
-        before { visit new_record_connection_type_connection_path(record, connection_type) }
-
-        it 'should let me create subrecords' do
           select 'Record B', from: 'connection_record_b_id'
 
           expect{
@@ -125,18 +111,12 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'not signed in' do
       describe 'a button' do
-        before { visit records_path }
+        before { visit record_path(main_record1) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Irrelevant'
-        end
-      end
-
-      describe 'a path authorization' do
-        before { visit new_record_connection_type_connection_path(record, connection_type) }
-
-        it 'should have no button' do
-          expect(current_path).to eq new_user_session_path
+          within '.recordscolumn' do
+            expect(page).to have_no_link 'Irrelevant'
+          end
         end
       end
     end
@@ -145,22 +125,16 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
       before do
         visit root_path
         sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
-        visit records_path
+        visit record_path(main_record1)
       end
 
       describe 'a button' do
-        before { visit records_path }
+        before { visit record_path(main_record1) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Irrelevant'
-        end
-      end
-
-      describe 'a path authorization' do
-        before { visit new_record_connection_type_connection_path(record, connection_type) }
-
-        it 'should have no button' do
-          expect(current_path).to eq connections_path
+          within '.recordscolumn' do
+            expect(page).to have_no_link 'Irrelevant'
+          end
         end
       end
     end

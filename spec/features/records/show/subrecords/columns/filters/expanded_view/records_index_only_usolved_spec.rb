@@ -4,6 +4,8 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
   let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
+  let!(:main_record1) { create :record, user: user1, is_public: true }
+
   let!(:connection_type) { create :connection_type, name: 'Subsystem', is_public: true }
   let!(:record_type) { create :record_type, name: 'Subsystem', is_public: true }
 
@@ -21,9 +23,14 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
     let!(:connection1) { create :connection, record_a: record2, record_b: solution1, user: user2, connection_type_id: solution_connection_type.id }
     let!(:connection2) { create :connection, record_a: record4, record_b: solution2, user: user2, connection_type_id: solution_connection_type.id }
 
+    let!(:connection3) { create :connection, record_a: main_record1, record_b: record1 }
+    let!(:connection4) { create :connection, record_a: main_record1, record_b: record2 }
+    let!(:connection5) { create :connection, record_a: main_record1, record_b: record3 }
+    let!(:connection6) { create :connection, record_a: main_record1, record_b: record4 }
+
     describe 'raw URL visit' do
       context 'not signed in' do
-        before { visit '/records?only_unsolved=true&record_type_id=&commit=Show' }
+        before { visit "/records/#{main_record1.id}?only_unsolved=true&record_type_id=&commit=Show" }
 
         it 'should have no button' do
           expect(page).to have_content 'Record 1'
@@ -37,7 +44,7 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
         before do
           visit connection_types_path
           sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
-          visit '/records?only_unsolved=true&record_type_id=&commit=Show'
+          visit "/records/#{main_record1.id}?only_unsolved=true&record_type_id=&commit=Show"
         end
 
         it 'should have all' do
@@ -52,7 +59,7 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
     describe 'through filter form' do
       context 'not signed in' do
         before do
-          visit '/records'
+          visit "/records/#{main_record1.id}?"
           check 'Only Unsolved'
           within '.recordscolumn form' do
             click_on 'Show'
@@ -71,7 +78,7 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
         before do
           visit connection_types_path
           sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
-          visit '/records'
+          visit "/records/#{main_record1.id}?"
           check 'Only Unsolved'
           within '.recordscolumn form' do
             click_on 'Show'

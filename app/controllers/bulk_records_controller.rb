@@ -34,7 +34,7 @@ class BulkRecordsController < ApplicationController
     current_user.connections.create connection_type: @connection_type, record_a: @record, record_b: @record_10 if @record_10.present?
 
     respond_to do |format|
-      format.html { redirect_to records_path, notice: "Records successfully created." }
+      format.html { redirect_to @record, notice: "Records successfully created." }
     end
   end
 

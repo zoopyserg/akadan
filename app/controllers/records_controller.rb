@@ -30,7 +30,7 @@ class RecordsController < ApplicationController
   end
 
   def show
-    @record_children_ids = Record.all_children_of_record(@record).without_source(@record).pluck(:id)
+    @record_children_ids = @record.children.pluck(:id)
 
     if signed_in?
       @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids)

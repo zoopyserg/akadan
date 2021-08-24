@@ -39,7 +39,7 @@ class Record < ApplicationRecord
   scope :all_without_cycles, -> (record) { without_potential_cycles(record).without_source(record) }
   scope :all_roots_without_cycles, -> (record) { all_roots.without_potential_cycles(record).without_source(record) }
 
-  scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')) }
+  scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')).without_source(record) }
   scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
 
   def self.only_solved
@@ -285,7 +285,7 @@ class Record < ApplicationRecord
   end
 
   def progress
-    ((1 - ( Record.last_children_of_record(self).count.to_f / Record.all_children_of_record(self).count.to_f )) * 100).to_i
+    ((1 - ( (Record.last_children_of_record(self).count.to_f + 1 ) / ( Record.all_children_of_record(self).count.to_f + 1 ) )) * 100).to_i
   end
 
   def children

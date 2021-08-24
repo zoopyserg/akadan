@@ -5,10 +5,14 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
   let!(:user2) { create :user, :confirmed, email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:solution_connection_type_id) { ConnectionType.find_or_create_by(name: 'Is Solved By...').id }
 
+  let!(:main_record1) { create :record, user: user1, is_public: true }
+
   context 'not signed in' do
     let!(:public_record) { create :record, user: user1, is_public: true }
 
-    before { visit records_path }
+    let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record, user: user1 }
+
+    before { visit record_path(main_record1) }
 
     it { expect(page).to have_no_content 'My unsolved records in tree' }
   end
@@ -17,15 +21,17 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
     before do
       visit root_path
       sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
-      visit records_path
+      visit record_path(main_record1)
     end
 
     context 'single unsolved record' do
       let!(:public_record) { create :record, user: user1, is_public: true }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record, user: user1 }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 1' }
+      before { visit record_path(main_record1) }
+
+      it { expect(page).to have_content 'My unsolved records in tree: 2' }
     end
 
     context 'single solved record' do
@@ -34,9 +40,12 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       let!(:solution_connection) { create :connection, record_a: public_record, record_b: public_solution, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_solution, user: user1 }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 1' } # because in the tree the solution is itself "unsolved"
+      before { visit record_path(main_record1) }
+
+      it { expect(page).to have_content 'My unsolved records in tree: 2' } # because in the tree the solution is itself "unsolved"
     end
 
     context 'two destructive subrecords, one solved' do
@@ -53,9 +62,14 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       let!(:solution_connection) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 3' } # because in the tree the solution is itself "unsolved"
+      before { visit record_path(main_record1) }
+
+      it { expect(page).to have_content 'My unsolved records in tree: 4' } # because in the tree the solution is itself "unsolved"
     end
 
     context 'two destructive subrecords, both solved' do
@@ -74,9 +88,15 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
       let!(:solution_connection1) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
       let!(:solution_connection2) { create :connection, record_a: public_record2, record_b: public_record5, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
+      let!(:connection5) { create :connection, record_a: main_record1, record_b: public_record5, user: user1 }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 2' } # because in the tree the solution is itself "unsolved"
+      before { visit record_path(main_record1) }
+
+      it { expect(page).to have_content 'My unsolved records in tree: 4' } # because in the tree the solution is itself "unsolved"
     end
 
     context 'two non-destructive subrecords, both solved' do
@@ -95,9 +115,15 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
       let!(:solution_connection1) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
       let!(:solution_connection2) { create :connection, record_a: public_record2, record_b: public_record5, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
+      let!(:connection5) { create :connection, record_a: main_record1, record_b: public_record5, user: user1 }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 3' } # because in the tree the solution is itself "unsolved"
+      before { visit record_path(main_record1) }
+
+      it { expect(page).to have_content 'My unsolved records in tree: 4' } # because in the tree the solution is itself "unsolved"
     end
 
     context 'two subrecords, one destructive one none-destructive, both solved' do
@@ -117,9 +143,15 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
       let!(:solution_connection1) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
       let!(:solution_connection2) { create :connection, record_a: public_record2, record_b: public_record5, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
+      let!(:connection5) { create :connection, record_a: main_record1, record_b: public_record5, user: user1 }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 3' } # because in the tree the solution is itself "unsolved"
+      before { visit record_path(main_record1) }
+
+      it { expect(page).to have_content 'My unsolved records in tree: 4' } # because in the tree the solution is itself "unsolved"
     end
   end
 
@@ -127,13 +159,15 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
     before do
       visit root_path
       sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
-      visit records_path
+      visit record_path(main_record1)
     end
 
     context 'single unsolved record' do
       let!(:public_record) { create :record, user: user1, is_public: true }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record, user: user1 }
+
+      before { visit record_path(main_record1) }
 
       it { expect(page).to have_content 'My unsolved records in tree: 0' }
     end
@@ -144,7 +178,10 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       let!(:solution_connection) { create :connection, record_a: public_record, record_b: public_solution, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_solution, user: user1 }
+
+      before { visit record_path(main_record1) }
 
       it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
     end
@@ -163,7 +200,12 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       let!(:solution_connection) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
+
+      before { visit record_path(main_record1) }
 
       it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
     end
@@ -184,7 +226,13 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
       let!(:solution_connection1) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
       let!(:solution_connection2) { create :connection, record_a: public_record2, record_b: public_record5, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
+      let!(:connection5) { create :connection, record_a: main_record1, record_b: public_record5, user: user1 }
+
+      before { visit record_path(main_record1) }
 
       it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
     end
@@ -205,7 +253,13 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
       let!(:solution_connection1) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
       let!(:solution_connection2) { create :connection, record_a: public_record2, record_b: public_record5, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
+      let!(:connection5) { create :connection, record_a: main_record1, record_b: public_record5, user: user1 }
+
+      before { visit record_path(main_record1) }
 
       it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
     end
@@ -227,7 +281,13 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
       let!(:solution_connection1) { create :connection, record_a: public_record3, record_b: public_record4, connection_type_id: solution_connection_type_id }
       let!(:solution_connection2) { create :connection, record_a: public_record2, record_b: public_record5, connection_type_id: solution_connection_type_id }
 
-      before { visit records_path }
+      let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record1, user: user1 }
+      let!(:connection2) { create :connection, record_a: main_record1, record_b: public_record2, user: user1 }
+      let!(:connection3) { create :connection, record_a: main_record1, record_b: public_record3, user: user1 }
+      let!(:connection4) { create :connection, record_a: main_record1, record_b: public_record4, user: user1 }
+      let!(:connection5) { create :connection, record_a: main_record1, record_b: public_record5, user: user1 }
+
+      before { visit record_path(main_record1) }
 
       it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
     end

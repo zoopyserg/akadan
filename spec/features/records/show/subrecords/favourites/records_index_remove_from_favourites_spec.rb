@@ -12,8 +12,12 @@ RSpec.feature "Record Remove From Favourites", :records_index, type: :feature do
   let!(:bookmark3) { create :bookmark, user: user2, record: public_record }
   let!(:bookmark4) { create :bookmark, user: user2, record: private_record }
 
+  let!(:main_record1) { create :record, user: user1, is_public: true }
+  let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record, user: user1 }
+  let!(:connection2) { create :connection, record_a: main_record1, record_b: private_record, user: user1 }
+
   context 'not signed in' do
-    before { visit records_path }
+    before { visit record_path(main_record1) }
 
     it 'should say who created one record' do
       expect(page).to have_no_content 'Remove from Favourites'
@@ -25,7 +29,7 @@ RSpec.feature "Record Remove From Favourites", :records_index, type: :feature do
       before do
         visit root_path
         sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
-        visit records_path
+        visit record_path(main_record1)
       end
 
       it 'should have a button' do
@@ -33,7 +37,9 @@ RSpec.feature "Record Remove From Favourites", :records_index, type: :feature do
       end
 
       it 'should have no button' do
-        expect(page).to have_no_content 'Add to Favourites'
+        within '.recordscolumn' do
+          expect(page).to have_no_content 'Add to Favourites'
+        end
       end
 
       it 'should add to favourites' do
@@ -46,7 +52,7 @@ RSpec.feature "Record Remove From Favourites", :records_index, type: :feature do
 
       it 'should redirect to records path' do
         click_on 'Remove from Favourites'
-        expect(current_path).to eq records_path
+        expect(current_path).to eq record_path(main_record1)
       end
     end
 
@@ -54,15 +60,19 @@ RSpec.feature "Record Remove From Favourites", :records_index, type: :feature do
       before do
         visit root_path
         sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
-        visit records_path
+        visit record_path(main_record1)
       end
 
       it 'should say who created public record' do
-        expect(page).to have_content 'Remove from Favourites', count: 2
+        within '.recordscolumn' do
+          expect(page).to have_content 'Remove from Favourites', count: 2
+        end
       end
 
       it 'should have no button' do
-        expect(page).to have_no_content 'Add to Favourites'
+        within '.recordscolumn' do
+          expect(page).to have_no_content 'Add to Favourites'
+        end
       end
     end
   end

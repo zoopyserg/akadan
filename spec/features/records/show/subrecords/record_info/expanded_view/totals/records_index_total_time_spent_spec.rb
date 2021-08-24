@@ -10,8 +10,12 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
   let!(:private_dot1) { create :dot, user: user2, duration: 33, project: private_record, record: private_record }
   let!(:private_dot2) { create :dot, user: user2, duration: 33, project: private_record, record: private_record }
 
+  let!(:main_record1) { create :record, user: user1, is_public: true }
+  let!(:connection1) { create :connection, record_a: main_record1, record_b: public_record, user: user1 }
+  let!(:connection2) { create :connection, record_a: main_record1, record_b: private_record, user: user1 }
+
   context 'not signed in' do
-    before { visit records_path }
+    before { visit record_path(main_record1) }
 
     it 'should say who created one record' do
       expect(page).to have_content '22'
@@ -26,7 +30,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit records_path
+      visit record_path(main_record1)
     end
 
     it 'should say who created public record' do
