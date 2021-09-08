@@ -19,3 +19,25 @@ I made this website available for the public mostly so that my clients can use m
 If you want you can use it too. I'm sure it will help you. Or you can contact me and we will arrange a meeting or something.
 
 
+PENDING:
+OAuth (registration etc)
+To see in header if I'm logged in or not (my name vs login button etc).
+And I wanna be able to see "only my" records etc. I not always want to see public ones.
+And staging db is not populated.
+Change Admin password to a long ENV variable
+"Repetitive Task" item is not present at all. and is not default.
+can't edit "is_public" parameter (in permissions, didn't make them at all)
+languages (I want to read/type in russian, thus I want to select russian record names etc, I wanted to make columns for every translation, didn't do it yet)
+В форме редактирования записи есть пункт "таймер точки" (да и в точках тоже). и он в формате часы минуты секунды. а в базе я сохраняю интеджер. в итоге я не могу даже это поле отредактировать потому что там маска.
+Да и дни в длительность тоже есть смысл добавить. потому что есть вещи которые повторяются которые длятся годами. "президент Путин снова президент. повторение длится 25 лет."
+Загрузка картинок, рисование дудлов и загрузка файлов в пункте не работают.
+Чекбоксы (булк экшены над записями), сенсоры, аттачменты в шоу пейдже - всё это не функционирует. Как и кнопки "построить завод", "сделано отдельное помещение" и т.п.
+Хочу иметь возможность закопипестить много пунктов сразу. Не каждый в отдельной строчке а одно поле чтоб скопировать 500 штук.
+И проблемно выбирать "дефолтный коннекшн тайп" каждый раз когда создаю подпункты.
+10 подпунктов мало. надо возможность добавлять сколько мне надо. или же делать таки одно поле на все.
+поиск по пунктам не работает.
+проблемно искать нужную страницу (где там "все мои пункты" и т.д.)
+all user input is error. а здесь даже я почти ошибся когда кликнуть криейт хотел но не выбрал что это подзадача.
+create/connect subrecords переименуй в create subrecords (потому что коннекшены к существующим я не создаю)
+20 пунктов сабмитует секунд 3-5. даже на локалхосте. это долго.
+комментарии к пунктам не работают

@@ -29,6 +29,9 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'spring'
+end
+
+group :development, :staging do
   gem "letter_opener"
 end
 
