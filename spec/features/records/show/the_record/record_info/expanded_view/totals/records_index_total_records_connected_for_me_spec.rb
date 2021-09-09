@@ -33,7 +33,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
     context 'public record' do
       before { visit record_path(public_record) }
 
-      it { expect(page).to have_no_content 'My records connected' }
+      it { expect(page).to have_no_content 'My records in tree' }
     end
   end
 
@@ -46,13 +46,13 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
     context 'public record' do
       before { visit record_path(public_record) }
 
-      it { expect(page).to have_content 'My records connected: 5' }
+      it { expect(page).to have_content 'My records in tree: 5' }
     end
 
     context 'private record' do
       before { visit record_path(public_record) }
 
-      it { expect(page).to have_no_content 'My records connected: 7' }
+      it { expect(page).to have_no_content 'My records in tree: 7' }
     end
   end
 end

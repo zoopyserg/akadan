@@ -4,10 +4,10 @@ class RecordType < ApplicationRecord
   validates :name, presence: true
 
   def self.subsystem_record_type
-    @@subsystem_record_type ||= find_by(name: 'Subsystem')
+    find_by(name: 'Subsystem')
   end
 
   def self.solution_record_type
-    @@solution_record_type ||= find_by(name: 'Solution')
+    find_by(name: 'Solution')
   end
 end

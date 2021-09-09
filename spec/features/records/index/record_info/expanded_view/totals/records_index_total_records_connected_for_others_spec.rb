@@ -31,7 +31,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
   context 'not signed in' do
     before { visit records_path }
 
-    it { expect(page).to have_no_content 'Other people\'s records connected:' }
+    it { expect(page).to have_no_content 'Other people\'s records in tree:' }
   end
 
   context 'signed in' do
@@ -41,7 +41,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
       visit records_path
     end
 
-    it { expect(page).to have_content 'Other people\'s records connected: 2' }
-    it { expect(page).to have_no_content 'Other people\'s records connected: 7' }
+    it { expect(page).to have_content 'Other people\'s records in tree: 3' }
+    it { expect(page).to have_no_content 'Other people\'s records in tree: 7' }
   end
 end

@@ -19,6 +19,7 @@ gem 'devise'
 gem 'carrierwave'
 gem 'kaminari'
 gem 'cancancan'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

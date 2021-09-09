@@ -12,19 +12,19 @@ class ConnectionType < ApplicationRecord
   # todo: URGENT forbid creating types with system names ("is solved by" etc).
 
   def self.subsystem_connection_type
-    @@subsystem_connection_type ||= find_by(name: 'Subsystem')
+    find_by(name: 'Subsystem')
   end
 
   def self.solution_connection_type
-    @@solution_connection_type ||= find_by(name: 'Is Solved By...')
+    find_by(name: 'Is Solved By...')
   end
 
   def self.extracted_to_connection_type
-    @@extracted_to_connection_type ||= find_by(name: 'Extracted To...')
+    find_by(name: 'Extracted To...')
   end
 
   def self.irrelevant_because_connection_type
-    @@irrelevant_because_connection_type ||= find_by(name: 'Irrelevant Because...')
+    find_by(name: 'Irrelevant Because...')
   end
 
   def any_target_type?

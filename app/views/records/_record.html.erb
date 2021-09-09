@@ -56,9 +56,9 @@
           <p><%= dot.description %></p>
         <% end %>
         <% # pending dots count (for all records in the list or for records that repeated within this separate project %>
-        <h6>Completed (<%= record.progress %>%):</h6>
+        <h6>Completed (<%= record.progress_cached %>%):</h6>
         <div class="progress">
-          <div class="progress-bar" aria-valuenow="<%= record.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= record.progress %>%;"></div>
+          <div class="progress-bar" aria-valuenow="<%= record.progress_cached %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= record.progress %>%;"></div>
         </div>
         <p class="mb-0"><strong class="mr-1">Type:</strong><%= record.record_type.name %><i class="fa fa-edit mx-1"></i></p>
         <div role="tablist" id="accordion-1">
@@ -80,21 +80,21 @@
             <p class="mb-0">Other people's projects affected: <strong><%= record.dots.where.not(user: current_user).pluck(:project_id).uniq.count %></strong></p>
           <% end %>
 
-          <p class="mb-0">Records connected: <strong><%= Record.all_tree_records_of_record(record).count %></strong></p>
+          <p class="mb-0">Records in tree: <strong><%= record.records_connected_cached %></strong></p>
 
           <% if user_signed_in? %>
-            <p class="mb-0">My records connected: <strong><%= Record.all_tree_records_of_record(record).where(user: current_user).count %></strong></p>
-            <p class="mb-0">Other people's records connected: <strong><%= Record.all_tree_records_of_record(record).where.not(user: current_user).count %></strong></p>
+            <p class="mb-0">My records in tree: <strong><%= Record.all_tree_records_of_record(record).where(user: current_user).count %></strong></p>
+            <p class="mb-0">Other people's records in tree: <strong><%= Record.all_tree_records_of_record(record).where.not(user: current_user).count %></strong></p>
           <% end %>
 
-          <p class="mb-0">Unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(record).count %></strong></p>
+          <p class="mb-0">Unsolved records in tree: <strong><%= record.unsolved_records_connected_cached %></strong></p>
 
           <% if user_signed_in? %>
             <p class="mb-0">My unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(record).where(user: current_user).count %></strong></p>
             <p class="mb-0">Other people's unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(record).where.not(user: current_user).count %></strong></p>
           <% end %>
 
-          <p class="mb-0">Solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(record).count %></strong></p>
+          <p class="mb-0">Solved records in tree: <strong><%= record.solved_records_connected_cached %></strong></p>
 
           <% if user_signed_in? %>
             <p class="mb-0">My solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(record).where(user: current_user).count %></strong></p>
@@ -180,19 +180,19 @@
             <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>
             <i class="fa fa-repeat mx-1"></i>Repeated
           <% end %>
-          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: ConnectionType.solution_connection_type.id, record_type_id: RecordType.solution_record_type.id), class: "btn btn-light btn-block" do %>
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: @solution_connection_type_id, record_type_id: @solution_record_type_id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-check mx-1"></i>Solve
           <% end %>
-          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: ConnectionType.subsystem_connection_type.id, record_type_id: RecordType.subsystem_record_type.id), class: "btn btn-light btn-block" do %>
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: @subsystem_connection_type_id, record_type_id: @subsystem_record_type_id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-puzzle-piece mx-1"></i>Create / Connect Subrecords
           <% end %>
-          <%= link_to into_separate_project_record_connection_type_connections_path(record, ConnectionType.extracted_to_connection_type), method: :post, class: "btn btn-light btn-block" do %>
+          <%= link_to into_separate_project_record_connection_type_connections_path(record, @extracted_to_connection_type), method: :post, class: "btn btn-light btn-block" do %>
             <i class="fa fa-angle-double-up mx-1"></i>Extract Into Separate Project
           <% end %>
           <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsmodal">
             <i class="fa fa-lock"></i>Permissions
           </button>
-          <%= link_to new_record_connection_type_connection_path(record, ConnectionType.irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
+          <%= link_to new_record_connection_type_connection_path(record, @irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
             <i class="fa fa-close mx-1"></i>Irrelevant
           <% end %>
         </div>

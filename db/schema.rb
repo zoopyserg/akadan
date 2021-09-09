@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_002648) do
+ActiveRecord::Schema.define(version: 2021_09_09_084337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,10 @@ ActiveRecord::Schema.define(version: 2021_08_17_002648) do
     t.boolean "is_public"
     t.bigint "record_type_id", null: false
     t.boolean "separate_project", default: false
+    t.integer "records_connected_cached", default: 0
+    t.integer "solved_records_connected_cached", default: 0
+    t.integer "unsolved_records_connected_cached", default: 0
+    t.integer "progress_cached", default: 0
     t.index ["record_type_id"], name: "index_records_on_record_type_id"
     t.index ["user_id"], name: "index_records_on_user_id"
   end

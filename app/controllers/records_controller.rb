@@ -3,6 +3,7 @@ class RecordsController < ApplicationController
   before_action :set_record, only: %i[ show edit update ]
   before_action :set_record_types, only: %i[ new edit index show ]
   before_action :redirect_to_records_path, only: %i[ show edit update ], unless: :record_present?
+  before_action :set_link_data, only: %i[ index show ]
 
   # GET /records or /records.json
   def index
@@ -106,7 +107,15 @@ class RecordsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+  def set_link_data
+    @solution_connection_type_id = ConnectionType.solution_connection_type.id
+    @solution_record_type_id = RecordType.solution_record_type.id
+    @subsystem_connection_type_id = ConnectionType.subsystem_connection_type.id
+    @subsystem_record_type_id = RecordType.subsystem_record_type.id
+    @extracted_to_connection_type = ConnectionType.extracted_to_connection_type
+    @irrelevant_because_connection_type = ConnectionType.irrelevant_because_connection_type
+  end
+
   def set_record
     if signed_in?
       @record = Record.where(is_public: true).or(Record.where(user: current_user)).find_by(id: params[:id])

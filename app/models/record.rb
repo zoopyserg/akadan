@@ -28,7 +28,7 @@ class Record < ApplicationRecord
   scope :parents, -> (record_a) { Connection.where(record_b_id: record_a.id).pluck(:record_a_id) }
 
   scope :all_parents_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_parent_ids(record)).pluck('id')).without_source(record) }
-  scope :all_tree_records_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_tree_record_ids(record)).pluck('id')).without_source(record) }
+  scope :all_tree_records_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_tree_record_ids(record)).pluck('id')) }
 
   scope :deep_siblings, -> (record) { all_tree_records_of_record(record).where.not(id: Record.all_parents_of_record(record)).without_source(record) }
   scope :root, -> (record) { all_tree_records_of_record(record).where.not(id: all_tree_records_of_record(record).joins(:connections_as_target).joins(:connections_as_target)).without_source(record) }
@@ -41,6 +41,8 @@ class Record < ApplicationRecord
 
   scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')).without_source(record) }
   scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
+
+  after_create :recalculate_cached_tree_counters
 
   def self.only_solved
     all.select do |record|
@@ -55,11 +57,11 @@ class Record < ApplicationRecord
   end
 
   def self.all_unsolved_tree_records_of_record(record)
-    @@all_unsolved_tree_records_of_record = Record.where(id: ActiveRecord::Base.connection.execute(all_unsolved_tree_record_ids(record)).pluck('id'))
+    Record.where(id: ActiveRecord::Base.connection.execute(all_unsolved_tree_record_ids(record)).pluck('id'))
   end
 
   def self.all_solved_tree_records_of_record(record)
-    @@all_solved_tree_records_of_record = Record.where(id: ActiveRecord::Base.connection.execute(all_solved_tree_record_ids(record)).pluck('id'))
+    Record.where(id: ActiveRecord::Base.connection.execute(all_solved_tree_record_ids(record)).pluck('id'))
   end
 
   def self.all_parent_ids(record)
@@ -285,10 +287,14 @@ class Record < ApplicationRecord
   end
 
   def progress
-    ((1 - ( (Record.last_children_of_record(self).count.to_f + 1 ) / ( Record.all_children_of_record(self).count.to_f + 1 ) )) * 100).to_i
+    ((1 - ( (Record.last_children_of_record(self).count.to_f) / ( Record.all_children_of_record(self).count.to_f + 1 ) )) * 100).to_i
   end
 
   def children
     Record.where(id: Record.children(self.id))
+  end
+
+  def recalculate_cached_tree_counters
+    CountersUpdateWorker.perform_async(self.reload.id)
   end
 end

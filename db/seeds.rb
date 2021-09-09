@@ -49,6 +49,30 @@ if Rails.env.development?
     end
   end
 
+  # heavy record
+  record = FactoryBot.create :record, user: user1, name: 'Heavy Record', is_public: Faker::Boolean.boolean
+  sub_record = nil
+  sub_sub_record = nil
+  sub_sub_sub_record = nil
+
+  sub_connection = nil
+  sub_sub_connection = nil
+  sub_sub_sub_connection = nil
+
+  10.times do
+    sub_record = FactoryBot.create :record, user: user1, is_public: Faker::Boolean.boolean
+    sub_connection = FactoryBot.create :connection, user: user1, record_a: record, record_b: sub_record
+  end
+
+  10.times do
+    sub_sub_record = FactoryBot.create :record, user: user1, is_public: Faker::Boolean.boolean
+    sub_sub_connection = FactoryBot.create :connection, user: user1, record_a: sub_record, record_b: sub_sub_record
+  end
+
+  10.times do
+    sub_sub_sub_record = FactoryBot.create :record, user: user1, is_public: Faker::Boolean.boolean
+    sub_sub_sub_connection = FactoryBot.create :connection, user: user1, record_a: sub_sub_record, record_b: sub_sub_sub_record
+  end
 
   # a bunch of random users
   Faker::Number.digit.times do
