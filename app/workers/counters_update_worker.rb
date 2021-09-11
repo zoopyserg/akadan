@@ -3,32 +3,43 @@ class CountersUpdateWorker
 
   def perform(record_id)
     record = Record.find(record_id)
-    all_tree_records = Record.all_tree_records_of_record(record)
-    all_solved_records = Record.all_solved_tree_records_of_record(record)
-    all_unsolved_records = Record.all_unsolved_tree_records_of_record(record) # does not work. why? perhaps "except record" is the reason?
 
-    all_tree_records.each do |the_record|
-      the_record.records_connected_cached = all_tree_records.count
-      the_record.solved_records_connected_cached = all_solved_records.count
-      the_record.unsolved_records_connected_cached = all_unsolved_records.count
+    all_tree_records = Record.all_tree_records_of_record(record)
+    record_ids = all_tree_records.pluck(:id)
+
+    all_tree_records_loaded = all_tree_records.all
+
+    all_solved_records_loaded = Record.all_solved_tree_records_of_record(record).all
+    all_unsolved_records_loaded = Record.all_unsolved_tree_records_of_record(record).all
+
+    Record.where(id: record_ids).update_all(records_connected_cached: all_tree_records_loaded.count, solved_records_connected_cached: all_solved_records_loaded.count, unsolved_records_connected_cached: all_unsolved_records_loaded.count)
+
+    UserRecordStat.where(record_id: record_ids).delete_all
+
+    array_of_hashes = []
+
+    all_tree_records_loaded.each do |the_record|
       the_record.progress_cached = the_record.progress
       the_record.save
     end
 
+    all_tree_records_loaded.each do |the_record|
+      User.all.each do |the_user|
+        array_of_hashes << {
+          record_id: the_record.id,
+          user_id: the_user.id,
+          records_connected_for_me_cached: all_tree_records_loaded.select{ |rec| rec.user_id == the_user.id }.count,
+          records_connected_for_others_cached: all_tree_records_loaded.select{ |rec| rec.user_id != the_user.id}.count,
+          solved_records_connected_for_me_cached: all_solved_records_loaded.select{ |rec| rec.user_id == the_user.id }.count,
+          solved_records_connected_for_others_cached: all_solved_records_loaded.select{ |rec| rec.user_id != the_user.id}.count,
+          unsolved_records_connected_for_me_cached: all_unsolved_records_loaded.select{ |rec| rec.user_id == the_user.id }.count,
+          unsolved_records_connected_for_others_cached: all_unsolved_records_loaded.select{ |rec| rec.user_id != the_user.id}.count,
+          created_at: Time.now,
+          updated_at: Time.now
+        }
+      end
+    end
 
-    # <% if user_signed_in? %>
-    #   <p class="mb-0">My records connected: <strong><%= Record.all_tree_records_of_record(record).where(user: current_user).count %></strong></p>
-    #   <p class="mb-0">Other people's records connected: <strong><%= Record.all_tree_records_of_record(record).where.not(user: current_user).count %></strong></p>
-    # <% end %>
-
-    # <% if user_signed_in? %>
-    #   <p class="mb-0">My unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(record).where(user: current_user).count %></strong></p>
-    #   <p class="mb-0">Other people's unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(record).where.not(user: current_user).count %></strong></p>
-    # <% end %>
-
-    # <% if user_signed_in? %>
-    #   <p class="mb-0">My solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(record).where(user: current_user).count %></strong></p>
-    #   <p class="mb-0">Other people's solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(record).where.not(user: current_user).count %></strong></p>
-    # <% end %>
+    UserRecordStat.insert_all(array_of_hashes)
   end
 end

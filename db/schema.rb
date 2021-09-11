@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_084337) do
+ActiveRecord::Schema.define(version: 2021_09_09_162133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,21 @@ ActiveRecord::Schema.define(version: 2021_09_09_084337) do
     t.index ["user_id"], name: "index_sensors_on_user_id"
   end
 
+  create_table "user_record_stats", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "record_id", null: false
+    t.integer "records_connected_for_me_cached", default: 0
+    t.integer "records_connected_for_others_cached", default: 0
+    t.integer "solved_records_connected_for_me_cached", default: 0
+    t.integer "solved_records_connected_for_others_cached", default: 0
+    t.integer "unsolved_records_connected_for_me_cached", default: 0
+    t.integer "unsolved_records_connected_for_others_cached", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_id"], name: "index_user_record_stats_on_record_id"
+    t.index ["user_id"], name: "index_user_record_stats_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -237,4 +252,6 @@ ActiveRecord::Schema.define(version: 2021_09_09_084337) do
   add_foreign_key "records", "record_types"
   add_foreign_key "records", "users"
   add_foreign_key "sensors", "users"
+  add_foreign_key "user_record_stats", "records"
+  add_foreign_key "user_record_stats", "users"
 end

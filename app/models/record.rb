@@ -8,6 +8,8 @@ class Record < ApplicationRecord
   has_many :connections_as_source, class_name: 'Connection', foreign_key: :record_a_id
   has_many :connections_as_target, class_name: 'Connection', foreign_key: :record_b_id
 
+  has_many :user_record_stats, dependent: :destroy
+
   validates :name, presence: true
 
   accepts_nested_attributes_for :dots
@@ -79,7 +81,6 @@ class Record < ApplicationRecord
       )
       SELECT id FROM search_tree ORDER BY path
     SQL
-    # todo: interpolation
   end
 
   def self.all_tree_record_ids(record)
@@ -97,7 +98,6 @@ class Record < ApplicationRecord
       )
       SELECT id FROM search_tree ORDER BY path
     SQL
-    # todo: interpolation
   end
 
   def self.all_solved_tree_record_ids(record)
@@ -283,7 +283,6 @@ class Record < ApplicationRecord
       )
       SELECT id FROM search_tree ORDER BY path
     SQL
-    # todo: interpolation
   end
 
   def progress

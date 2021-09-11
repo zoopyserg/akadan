@@ -6,6 +6,7 @@ RSpec.describe Record, type: :model do
     it { should belong_to :record_type }
     it { should have_many(:dots).dependent(:destroy) }
     it { should have_many(:bookmarks).dependent(:destroy) }
+    it { should have_many(:user_record_stats).dependent(:destroy) }
   end
 
   describe 'validations' do

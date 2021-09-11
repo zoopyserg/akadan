@@ -30,6 +30,8 @@ class User < ApplicationRecord
   has_many :blockings, dependent: :destroy
   has_many :blocked_users, through: :blockings, class_name: 'User', foreign_key: 'blocked_user_id'
 
+  has_many :user_record_stats, dependent: :destroy
+
   validates :first_name, presence: true, only_international_letters: true
   validates :last_name, presence: true, only_international_letters: true
 

@@ -98,7 +98,7 @@ RSpec.feature "Solved Tree Records Counter For Me", :records_index, type: :featu
 
       before { visit records_path }
 
-      it { expect(page).to have_content "Other people's solved records in tree: 2" } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content "Other people's solved records in tree: 2" }
     end
 
     context 'two subrecords, one destructive, one non-destructive, both solved' do

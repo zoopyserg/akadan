@@ -36,7 +36,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 1' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 1' }
     end
 
     context 'two destructive subrecords, one solved' do
@@ -55,7 +55,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 3' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 3' }
     end
 
     context 'two destructive subrecords, both solved' do
@@ -76,7 +76,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 2' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 2' }
     end
 
     context 'two non-destructive subrecords, both solved' do
@@ -97,7 +97,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 3' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 3' }
     end
 
     context 'two subrecords, one destructive one none-destructive, both solved' do
@@ -119,7 +119,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 3' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 3' }
     end
   end
 
@@ -146,7 +146,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 0' }
     end
 
     context 'two destructive subrecords, one solved' do
@@ -165,7 +165,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 0' }
     end
 
     context 'two destructive subrecords, both solved' do
@@ -186,7 +186,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 0' } # it works, it sees that 2 records aren't solved, and those 2 records are the solutions (record4 and record 5). the test is wrong.
     end
 
     context 'two non-destructive subrecords, both solved' do
@@ -207,7 +207,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 0' }
     end
 
     context 'two subrecords, one destructive one none-destructive, both solved' do
@@ -229,7 +229,7 @@ RSpec.feature "Unsolved Tree Records Counter for me", :records_index, type: :fea
 
       before { visit records_path }
 
-      it { expect(page).to have_content 'My unsolved records in tree: 0' } # because in the tree the solution is itself "unsolved"
+      it { expect(page).to have_content 'My unsolved records in tree: 0' }
     end
   end
 end
