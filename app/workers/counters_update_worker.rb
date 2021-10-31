@@ -14,8 +14,6 @@ class CountersUpdateWorker
 
     Record.where(id: record_ids).update_all(records_connected_cached: all_tree_records_loaded.count, solved_records_connected_cached: all_solved_records_loaded.count, unsolved_records_connected_cached: all_unsolved_records_loaded.count)
 
-    UserRecordStat.where(record_id: record_ids).delete_all
-
     array_of_hashes = []
 
     all_tree_records_loaded.each do |the_record|
@@ -40,6 +38,7 @@ class CountersUpdateWorker
       end
     end
 
+    UserRecordStat.where(record_id: record_ids).delete_all
     UserRecordStat.insert_all(array_of_hashes)
   end
 end
