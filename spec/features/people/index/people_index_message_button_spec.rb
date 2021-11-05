@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "People Index Message Button", type: :feature do
+RSpec.feature "People Index Message Button", :records_index, type: :feature do
   let!(:user1) do
     create :user, :confirmed, :free, username: 'something',
       first_name: 'John',

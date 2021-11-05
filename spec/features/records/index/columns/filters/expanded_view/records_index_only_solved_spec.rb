@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Decising which records to show", :records_index, :focus, type: :feature do
+RSpec.feature "Decising which records to show", :records_index, type: :feature do
   let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
@@ -50,7 +50,7 @@ RSpec.feature "Decising which records to show", :records_index, :focus, type: :f
     end
 
     describe 'through filter form' do
-      context 'not signed in', :focus do
+      context 'not signed in' do
         before do
           visit '/records'
           check 'Only Solved'
