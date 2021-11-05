@@ -1,5 +1,7 @@
 # README
 
+Former "Journal of Repetitions" project.
+
 This project works like this:
 You enter repetitive problems, repetitive things you encounter in life.
 Enter the connections between them.
