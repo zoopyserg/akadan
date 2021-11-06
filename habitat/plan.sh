@@ -116,9 +116,9 @@ pkg_build_deps=(core/make core/gcc)
 
 # Optional.
 # Same as `pkg_binds` but these represent optional services to connect to.
-# pkg_binds_optional=(
-#   [storage]="port host"
-# )
+pkg_binds_optional=(
+  [storage]="port host"
+)
 
 # Optional.
 # An array of interpreters used in shebang lines for scripts. Specify the
@@ -235,6 +235,8 @@ do_prepare() {
 # build and install as part of building your package.
 do_build() {
   do_default_build
+  bundle install --jobs 2 --retry 5 --path vendor/bundle --binstubs
+  bundle exec bin/rake assets:precompile
 }
 
 # The default implementation runs nothing during post-compile. An example of a

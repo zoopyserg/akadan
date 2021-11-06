@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    environment:
+      - HAB_LICENSE=accept-no-persist
+    image: core/postgresql
+    volumes:
+      - "./habitat/default.toml:/default.toml"
+  railsapp:
+    environment:
+      - HAB_LICENSE=accept-no-persist
+    image: serge_server/akadan
+    ports:
+      - 8000:8000
+    links:
+    - db
+    command: --peer db --bind database:postgresql.default

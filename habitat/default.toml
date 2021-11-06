@@ -1,3 +1,12 @@
 # Use this file to templatize your application's native configuration files.
 # See the docs at https://www.habitat.sh/docs/create-packages-configure/.
 # You can safely delete this file if you don't need it.
+
+secret_key_base = "f7d42ba31fec076c47a95c7ec3f09f1107072668906055eae6789b767204987c9b5c627c213bcb64bc3b80cf344c386033b8d4a1f0e853e7f6d76c5f02854431"
+rails_env = 'production'
+
+[db]
+user = "admin"
+password = "admin"
+name="akadan_production"
+lag_health_threshold=1048576
