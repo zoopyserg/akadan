@@ -3,7 +3,7 @@ services:
   db:
     environment:
       - HAB_LICENSE=accept-no-persist
-    image: core/postgresql13
+    image: core/postgresql
     volumes:
       - "./habitat/default.toml:/default.toml"
   railsapp:

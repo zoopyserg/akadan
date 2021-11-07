@@ -1,0 +1,22 @@
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bcrypt-3.1.16/ext/mri
+/hab/pkgs/core/ruby/3.0.2/20211019144421/bin/ruby -I /hab/pkgs/core/ruby/3.0.2/20211019144421/lib/ruby/3.0.0 -r ./siteconf20211106-12666-ei0hm4.rb extconf.rb
+creating Makefile
+
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bcrypt-3.1.16/ext/mri
+make DESTDIR\= clean
+
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bcrypt-3.1.16/ext/mri
+make DESTDIR\=
+compiling bcrypt_ext.c
+compiling crypt_blowfish.c
+gcc  -D__SKIP_GNU -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include    -c -o x86.o x86.S
+compiling crypt_gensalt.c
+compiling wrapper.c
+wrapper.c:182:60: warning: 'struct crypt_data' declared inside parameter list will not be visible outside of this definition or declaration
+  182 | char *crypt_r(const char *key, const char *setting, struct crypt_data *data)
+      |                                                            ^~~~~~~~~~
+linking shared-object bcrypt_ext.so
+
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bcrypt-3.1.16/ext/mri
+make DESTDIR\= install
+/hab/pkgs/core/coreutils/8.32/20210826054709/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20211106-12666-mzkjs0

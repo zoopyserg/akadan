@@ -1,0 +1,313 @@
+"pkg-config --exists openssl"
+package configuration for openssl is not found
+have_library: checking for BIO_read() in -lcrypto... -------------------- yes
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic     -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby  -lm   -lc"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return !!argv[argc];
+6: }
+/* end */
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic     -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lcrypto  -lm   -lc"
+conftest.c: In function 't':
+conftest.c:14:57: error: 'BIO_read' undeclared (first use in this function)
+   14 | int t(void) { void ((*volatile p)()); p = (void ((*)()))BIO_read; return !p; }
+      |                                                         ^~~~~~~~
+conftest.c:14:57: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))BIO_read; return !p; }
+/* end */
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic     -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lcrypto  -lm   -lc"
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void BIO_read();
+15: int t(void) { BIO_read(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for SSL_CTX_new() in -lssl... -------------------- yes
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+conftest.c: In function 't':
+conftest.c:14:57: error: 'SSL_CTX_new' undeclared (first use in this function)
+   14 | int t(void) { void ((*volatile p)()); p = (void ((*)()))SSL_CTX_new; return !p; }
+      |                                                         ^~~~~~~~~~~
+conftest.c:14:57: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))SSL_CTX_new; return !p; }
+/* end */
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void SSL_CTX_new();
+15: int t(void) { SSL_CTX_new(); return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for openssl/bio.h... -------------------- yes
+
+"gcc -E -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <openssl/bio.h>
+/* end */
+
+--------------------
+
+have_func: checking for DTLS_method() in openssl/ssl.h... -------------------- yes
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lssl -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <openssl/ssl.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     int (* volatile tp)(void)=(int (*)(void))&t;
+11:     printf("%d", (*tp)());
+12:   }
+13: 
+14:   return !!argv[argc];
+15: }
+16: int t(void) { void ((*volatile p)()); p = (void ((*)()))DTLS_method; return !p; }
+/* end */
+
+--------------------
+
+have_func: checking for TLS_server_method() in openssl/ssl.h... -------------------- no
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lssl -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+conftest.c: In function 't':
+conftest.c:16:57: error: 'TLS_server_method' undeclared (first use in this function); did you mean 'DTLS_server_method'?
+   16 | int t(void) { void ((*volatile p)()); p = (void ((*)()))TLS_server_method; return !p; }
+      |                                                         ^~~~~~~~~~~~~~~~~
+      |                                                         DTLS_server_method
+conftest.c:16:57: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <openssl/ssl.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     int (* volatile tp)(void)=(int (*)(void))&t;
+11:     printf("%d", (*tp)());
+12:   }
+13: 
+14:   return !!argv[argc];
+15: }
+16: int t(void) { void ((*volatile p)()); p = (void ((*)()))TLS_server_method; return !p; }
+/* end */
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lssl -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+/hab/pkgs/core/binutils/2.36.1/20210826050955/bin/ld.bfd.real: /tmp/ccqf7BTc.o: in function `t':
+/src/vendor/bundle/ruby/3.0.0/gems/puma-5.5.2/ext/puma_http11/conftest.c:17: undefined reference to `TLS_server_method'
+collect2: error: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <openssl/ssl.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     int (* volatile tp)(void)=(int (*)(void))&t;
+11:     printf("%d", (*tp)());
+12:   }
+13: 
+14:   return !!argv[argc];
+15: }
+16: extern void TLS_server_method();
+17: int t(void) { TLS_server_method(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for SSL_CTX_set_min_proto_version(NULL, 0) in openssl/ssl.h... -------------------- no
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lssl -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+conftest.c: In function 't':
+conftest.c:17:15: warning: implicit declaration of function 'SSL_CTX_set_min_proto_version'; did you mean 'SSL_CTX_set_ssl_version'? [-Wimplicit-function-declaration]
+   17 | int t(void) { SSL_CTX_set_min_proto_version(NULL, 0); return 0; }
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |               SSL_CTX_set_ssl_version
+/hab/pkgs/core/binutils/2.36.1/20210826050955/bin/ld.bfd.real: /tmp/cchyns5K.o: in function `t':
+/src/vendor/bundle/ruby/3.0.0/gems/puma-5.5.2/ext/puma_http11/conftest.c:17: undefined reference to `SSL_CTX_set_min_proto_version'
+collect2: error: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <openssl/ssl.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     int (* volatile tp)(void)=(int (*)(void))&t;
+11:     printf("%d", (*tp)());
+12:   }
+13: 
+14:   return !!argv[argc];
+15: }
+16: 
+17: int t(void) { SSL_CTX_set_min_proto_version(NULL, 0); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for X509_STORE_up_ref()... -------------------- no
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lssl -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+conftest.c: In function 't':
+conftest.c:14:57: error: 'X509_STORE_up_ref' undeclared (first use in this function)
+   14 | int t(void) { void ((*volatile p)()); p = (void ((*)()))X509_STORE_up_ref; return !p; }
+      |                                                         ^~~~~~~~~~~~~~~~~
+conftest.c:14:57: note: each undeclared identifier is reported only once for each function it appears in
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: int t(void) { void ((*volatile p)()); p = (void ((*)()))X509_STORE_up_ref; return !p; }
+/* end */
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lssl -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+/hab/pkgs/core/binutils/2.36.1/20210826050955/bin/ld.bfd.real: /tmp/cctHVm9a.o: in function `t':
+/src/vendor/bundle/ruby/3.0.0/gems/puma-5.5.2/ext/puma_http11/conftest.c:15: undefined reference to `X509_STORE_up_ref'
+collect2: error: ld returned 1 exit status
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     int (* volatile tp)(void)=(int (*)(void))&t;
+ 9:     printf("%d", (*tp)());
+10:   }
+11: 
+12:   return !!argv[argc];
+13: }
+14: extern void X509_STORE_up_ref();
+15: int t(void) { X509_STORE_up_ref(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for SSL_CTX_set_ecdh_auto(NULL, 0) in openssl/ssl.h... -------------------- yes
+
+"gcc -o conftest -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/x86_64-linux -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0/ruby/backward -I/hab/pkgs/core/ruby/3.0.2/20211019144421/include/ruby-3.0.0 -I. -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include   -I/hab/pkgs/core/make/4.3/20210826060457/include -I/hab/pkgs/core/gcc/9.3.0/20210826051400/include -I/hab/pkgs/core/glibc/2.33/20210826050111/include -I/hab/pkgs/core/ncurses/6.2/20210826054317/include -I/hab/pkgs/core/zlib/1.2.11/20210826050912/include -I/hab/pkgs/core/openssl/1.0.2zb/20211016150910/include -I/hab/pkgs/core/libyaml/0.2.5/20210826234948/include -I/hab/pkgs/core/libffi/3.3/20210826063232/include -I/hab/pkgs/core/readline/8.1/20210826055049/include -O3 -g -pipe -fPIC conftest.c  -L. -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -Wl,-rpath,/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L. -L/hab/pkgs/core/gcc/9.3.0/20210826051400/lib -L/hab/pkgs/core/glibc/2.33/20210826050111/lib -L/hab/pkgs/core/ncurses/6.2/20210826054317/lib -L/hab/pkgs/core/zlib/1.2.11/20210826050912/lib -L/hab/pkgs/core/openssl/1.0.2zb/20211016150910/lib -L/hab/pkgs/core/libyaml/0.2.5/20210826234948/lib -L/hab/pkgs/core/libffi/3.3/20210826063232/lib -L/hab/pkgs/core/readline/8.1/20210826055049/lib -L/hab/pkgs/core/nss-myhostname/0.3/20210826190135/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic    -lssl -lcrypto  -Wl,-rpath,/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -L/hab/pkgs/core/ruby/3.0.2/20211019144421/lib -lruby -lssl -lcrypto  -lm   -lc"
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <openssl/ssl.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     int (* volatile tp)(void)=(int (*)(void))&t;
+11:     printf("%d", (*tp)());
+12:   }
+13: 
+14:   return !!argv[argc];
+15: }
+16: 
+17: int t(void) { SSL_CTX_set_ecdh_auto(NULL, 0); return 0; }
+/* end */
+
+--------------------
+

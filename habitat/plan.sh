@@ -53,7 +53,7 @@ pkg_shasum="TODO"
 # An array of package dependencies needed at runtime. You can refer to packages
 # at three levels of specificity: `origin/package`, `origin/package/version`, or
 # `origin/package/version/release`.
-pkg_deps=( core/glibc core/sassc core/imagemagick core/redis core/postgresql13)
+pkg_deps=( core/glibc core/sassc core/imagemagick core/redis)
 # Optional.
 # An array of the package dependencies needed only at build time.
 pkg_build_deps=(core/make core/gcc)
@@ -235,8 +235,8 @@ do_prepare() {
 # build and install as part of building your package.
 do_build() {
   do_default_build
-  bundle install --jobs 2 --retry 5 --path vendor/bundle --binstubs
-  bundle exec bin/rake assets:precompile
+  #bundle install --jobs 2 --retry 5 --path vendor/bundle --binstubs
+  #bundle exec bin/rake assets:precompile
 }
 
 # The default implementation runs nothing during post-compile. An example of a

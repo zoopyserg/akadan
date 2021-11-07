@@ -2,11 +2,9 @@
 # See the docs at https://www.habitat.sh/docs/create-packages-configure/.
 # You can safely delete this file if you don't need it.
 
-secret_key_base = "f7d42ba31fec076c47a95c7ec3f09f1107072668906055eae6789b767204987c9b5c627c213bcb64bc3b80cf344c386033b8d4a1f0e853e7f6d76c5f02854431"
+secret_key_base = "1c025206ab2afbf066b9de0fa1dbc214d8281102f7e06a5d4654ceb18d08a7f8cfa48f261ea060f15205892ccc9011f5cfd31dba42a703acc07dec8ce5eeec78"
 rails_env = 'production'
 
 [db]
 user = "admin"
 password = "admin"
-name="akadan_production"
-lag_health_threshold=1048576

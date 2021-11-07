@@ -1,0 +1,15 @@
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+/hab/pkgs/core/ruby/3.0.2/20211019144421/bin/ruby -I /hab/pkgs/core/ruby/3.0.2/20211019144421/lib/ruby/3.0.0 -r ./siteconf20211106-12666-jmdl7l.rb extconf.rb
+creating Makefile
+
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+make DESTDIR\= clean
+
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+make DESTDIR\=
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: /src/vendor/bundle/ruby/3.0.0/gems/bootsnap-1.9.1/ext/bootsnap
+make DESTDIR\= install
+/hab/pkgs/core/coreutils/8.32/20210826054709/bin/install -c -m 0755 bootsnap.so ./.gem.20211106-12666-uv4vo5/bootsnap
