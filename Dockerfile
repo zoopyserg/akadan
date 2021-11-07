@@ -1,10 +1,12 @@
 # syntax=docker/dockerfile:1
 FROM ruby:3.0.2
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs npm redis-server postgresql-client
+RUN npm install --global yarn
 RUN mkdir /akadan
 WORKDIR /akadan
 COPY . /akadan
 RUN bundle install
+RUN ./bin/webpack
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/

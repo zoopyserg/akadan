@@ -1,5 +1,11 @@
 version: "3.9"
 services:
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - redis:/data
+    command: redis-server
   db:
     image: postgres
     restart: always
@@ -22,6 +28,26 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - redis
+  sidekiq:
+    depends_on:
+      - db
+      - redis
+    build: .
+    command: sidekiq -C ./sidekiq.yml
+    volumes:
+      - .:/akadan
+  cable:
+    depends_on:
+      - redis
+    build: .
+    command: puma -p 28080
+    ports:
+      - '28080:28080'
+    volumes:
+      - .:/akadan
+
 volumes:
   postgres:
   bundler_gems:
+  redis:
