@@ -1,17 +1,23 @@
-version: '3'
+version: "3.9"
 services:
   db:
-    environment:
-      - HAB_LICENSE=accept-no-persist
-    image: core/postgresql
+    image: postgres
+    restart: always
     volumes:
-      - "./habitat/default.toml:/default.toml"
-  railsapp:
+      - ./tmp/db:/var/lib/postgresql/data
     environment:
-      - HAB_LICENSE=accept-no-persist
-    image: serge_server/akadan
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 112223
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 112223
+    restart: always
+    volumes:
+      - .:/akadan
     ports:
-      - 8000:8000
-    links:
-    - db
-    command: --peer db --bind database:postgresql.default
+      - "3000:3000"
+    depends_on:
+      - db
