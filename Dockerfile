@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM ruby:3.0.2
-RUN apt-get update -qq && apt-get install -y nodejs npm redis-server postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs npm redis-server postgresql-client apt-transport-https
 RUN npm install --global yarn
 RUN mkdir /akadan
 WORKDIR /akadan
