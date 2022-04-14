@@ -33,7 +33,7 @@ services:
       - redis
       - webpack
     environment:
-      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_SERVE_STATIC_FILES=false
   webpack:
     command: ./bin/webpack-dev-server
     build: .
