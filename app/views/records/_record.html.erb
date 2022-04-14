@@ -83,22 +83,22 @@
           <p class="mb-0">Records in tree: <strong><%= record.records_connected_cached %></strong></p>
 
           <% if user_signed_in? %>
-            <p class="mb-0">My records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).records_connected_for_me_cached  %></strong></p>
-            <p class="mb-0">Other people's records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).records_connected_for_others_cached %></strong></p>
+            <p class="mb-0">My records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).try(:records_connected_for_me_cached)  %></strong></p>
+            <p class="mb-0">Other people's records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).try(:records_connected_for_others_cached) %></strong></p>
           <% end %>
 
           <p class="mb-0">Unsolved records in tree: <strong><%= record.unsolved_records_connected_cached %></strong></p>
 
           <% if user_signed_in? %>
-            <p class="mb-0">My unsolved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).unsolved_records_connected_for_me_cached %></strong></p>
-            <p class="mb-0">Other people's unsolved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).unsolved_records_connected_for_others_cached %></strong></p>
+            <p class="mb-0">My unsolved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).try(:unsolved_records_connected_for_me_cached) %></strong></p>
+            <p class="mb-0">Other people's unsolved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).try(:unsolved_records_connected_for_others_cached) %></strong></p>
           <% end %>
 
           <p class="mb-0">Solved records in tree: <strong><%= record.solved_records_connected_cached %></strong></p>
 
           <% if user_signed_in? %>
-            <p class="mb-0">My solved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).solved_records_connected_for_me_cached %></strong></p>
-            <p class="mb-0">Other people's solved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).solved_records_connected_for_others_cached %></strong></p>
+            <p class="mb-0">My solved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).try(:solved_records_connected_for_me_cached) %></strong></p>
+            <p class="mb-0">Other people's solved records in tree: <strong><%= record.user_record_stats.find_by(user: current_user).try(:solved_records_connected_for_others_cached) %></strong></p>
           <% end %>
 
           <div class="accordioncollapse card mb-0">
