@@ -1,8 +1,7 @@
 require 'factory_bot_rails'
 require 'faker'
 
-if Rails.env.development?
-
+if Rails.env.development? && !ENV['REAL']
   user1 = FactoryBot.build :user, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678'
   user2 = FactoryBot.build :user
 
@@ -87,20 +86,44 @@ if Rails.env.development?
     end
   end
 
-elsif Rails.env.staging? || Rails.env.production?
-  admin = FactoryBot.build :user, email: 'admin@akadan.com', password: '12345678', password_confirmation: '12345678', first_name: 'Serge', last_name: 'Vinogradoff' # todo: change password
+elsif Rails.env.staging? || Rails.env.production? || ENV['REAL']
+  admin = FactoryBot.build :user, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678', first_name: 'Serge', last_name: 'Vinogradoff' # todo: change password
+  admin.skip_confirmation!
+  admin.save!
 
-  FactoryBot.create :connection_type, name: 'Subsystem', user: admin, is_public: true
-  FactoryBot.create :connection_type, name: 'Irrelevant Because...', user: admin, is_public: true
-  FactoryBot.create :connection_type, name: 'Is Solved By...', user: admin, is_public: true
-  FactoryBot.create :connection_type, name: 'Extracted To...', user: admin, is_public: true
+  # English
+  FactoryBot.create :connection_type, name: 'Subsystem', user: admin, is_public: true, description: 'Task A is a subsystem of task B.'
+  FactoryBot.create :connection_type, name: 'Irrelevant Because...', user: admin, is_public: true, description: 'Task A is irrelevant because it was planned to solve task B.'
+  FactoryBot.create :connection_type, name: 'Is Solved By...', user: admin, is_public: true, description: 'Task A gets solved by task B.'
+  FactoryBot.create :connection_type, name: 'Extracted To...', user: admin, is_public: true, description: 'Task A was transfered as a part of task B.'
 
-  FactoryBot.create :connection_type, name: 'Repetitive Problem', user: admin, target_hierarchy: 'all', target_type: 'any', is_public: true
-  FactoryBot.create :connection_type, name: 'Repetitive Task', user: admin, target_hierarchy: 'all', target_type: 'any', is_public: true
+  FactoryBot.create :connection_type, name: 'Repetitive Problem', user: admin, target_hierarchy: 'all', target_type: 'any', is_public: true, description: 'Task A is a repetitive problem in context of system B'
+  FactoryBot.create :connection_type, name: 'Repetitive Task', user: admin, target_hierarchy: 'all', target_type: 'any', is_public: true, description: 'Task A repeats in the context of system B.'
 
-  FactoryBot.create :record_type, name: 'Subsystem', user: admin, is_public: true
-  FactoryBot.create :record_type, name: 'Solution', user: admin, is_public: true
+  FactoryBot.create :record_type, name: 'Subsystem', user: admin, is_public: true, description: 'A part of another system that gets periodically turned on.'
+  FactoryBot.create :record_type, name: 'Solution', user: admin, is_public: true, description: 'A solution of certain tasks.'
 
-  FactoryBot.create :record_type, name: 'Repetitive Task', user: admin, is_public: true
-  FactoryBot.create :record_type, name: 'Repetitive Problem', user: admin, is_public: true
+  FactoryBot.create :record_type, name: 'Repetitive Task', user: admin, is_public: true, description: 'A repetitive taask (at work, etc.)'
+  FactoryBot.create :record_type, name: 'Repetitive Problem', user: admin, is_public: true, description: 'A repetitive situation that does not let you grow.'
+  FactoryBot.create :record_type, name: 'Repetition', user: admin, is_public: true, description: 'Any repetition.'
+  FactoryBot.create :record_type, name: 'Pleasant Repetition', user: admin, is_public: true, description: 'A repetition that gives strength and meaning of life.'
+  FactoryBot.create :record_type, name: 'Harmful Repetition', user: admin, is_public: true, description: 'A repetition that takes time and resources and brings harm.'
+
+  # Ukrainian
+  FactoryBot.create :connection_type, name: 'Підсистема', user: admin, is_public: true, description: 'Задача А є підсистемою задачі Б'
+  FactoryBot.create :connection_type, name: 'Несуттєво через...', user: admin, is_public: true, description: 'Задача А несуттєва, бо вже заплановано вирішити задачу Б'
+  FactoryBot.create :connection_type, name: 'Вирішується пунктом...', user: admin, is_public: true, description: 'Задача А вирішується задачею Б'
+  FactoryBot.create :connection_type, name: 'Винесено в...', user: admin, is_public: true, description: 'Задачу А перенесено як частину задачі Б'
+
+  FactoryBot.create :connection_type, name: 'Повторювана Проблема', user: admin, target_hierarchy: 'all', target_type: 'any', is_public: true, description: 'Задача А є повторюваною проблемою в контексті системи Б'
+  FactoryBot.create :connection_type, name: 'Повторювана Задача', user: admin, target_hierarchy: 'all', target_type: 'any', is_public: true, description: 'Задача А повторюється в контексті системи Б'
+
+  FactoryBot.create :record_type, name: 'Підсистема', user: admin, is_public: true, description: 'Частина іншої системи яка періодично включається'
+  FactoryBot.create :record_type, name: 'Рішення', user: admin, is_public: true, description: 'Рішення певних повторюваних задач'
+
+  FactoryBot.create :record_type, name: 'Повторювана Задача', user: admin, is_public: true, description: 'Повторюване завдання (по роботі і т.д.)'
+  FactoryBot.create :record_type, name: 'Повторювана Проблема', user: admin, is_public: true, description: 'Повторювана ситуація яка не дає розвиватись'
+  FactoryBot.create :record_type, name: 'Повторення', user: admin, is_public: true, description: 'Будь яке повторення.'
+  FactoryBot.create :record_type, name: 'Приємне повторення', user: admin, is_public: true, description: 'Повторення, яке додає сил і змісту в житті.'
+  FactoryBot.create :record_type, name: 'Шкідливе повторення', user: admin, is_public: true, description: 'Повторення яке забирає час, сили і приносить шкоду.'
 end
