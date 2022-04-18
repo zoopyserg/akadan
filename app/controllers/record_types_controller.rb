@@ -17,7 +17,7 @@ class RecordTypesController < ApplicationController
 
   # GET /record_types/new
   def new
-    @record_type = current_user.record_types.new
+    @record_type = current_user.record_types.new(is_public: true)
   end
 
   # GET /record_types/1/edit
@@ -64,6 +64,6 @@ class RecordTypesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def record_type_params
-    params.require(:record_type).permit(:name, :description)
+    params.require(:record_type).permit(:name, :description, :is_public)
   end
 end

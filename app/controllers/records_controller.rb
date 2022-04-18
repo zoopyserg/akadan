@@ -58,7 +58,7 @@ class RecordsController < ApplicationController
 
   # GET /records/new
   def new
-    @record = current_user.records.new
+    @record = current_user.records.new(is_public: true)
     @record.dots.build
   end
 
@@ -134,7 +134,7 @@ class RecordsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def record_params
-    params.require(:record).permit(:name, :record_type_id, dots_attributes: [ :id, :description, :duration ])
+    params.require(:record).permit(:name, :is_public, :record_type_id, dots_attributes: [ :id, :description, :duration ])
   end
 
   def set_record_types

@@ -19,7 +19,7 @@ class ConnectionTypesController < ApplicationController
 
   # GET /connection_types/new
   def new
-    @connection_type = current_user.connection_types.new
+    @connection_type = current_user.connection_types.new(is_public: true)
     @connection_type.destructive = true
     @connection_type.directional = true
     @connection_type.one_to_many = true
@@ -73,7 +73,7 @@ class ConnectionTypesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def connection_type_params
-    params.require(:connection_type).permit(:name, :description, :directional, :destructive, :one_to_many, :target_type, :target_hierarchy, :target_record_type_id, :target_record_subtype_id, :closest_parent_type_id)
+    params.require(:connection_type).permit(:name, :is_public, :description, :directional, :destructive, :one_to_many, :target_type, :target_hierarchy, :target_record_type_id, :target_record_subtype_id, :closest_parent_type_id)
     # todo: check via can-can-can that I can't hack it and can't pick IDs for these fields if they are not accessible to me:
     # :target_record_type_id
     # :target_record_subtype_id
