@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
-  resources :record_types, except: [:destroy]
+  resources :record_types, except: [:destroy, :show]
   resources :connections, only: [:index, :show]
   resources :connection_types, except: [:destroy]
 

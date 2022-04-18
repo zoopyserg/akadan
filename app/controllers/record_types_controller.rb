@@ -30,7 +30,7 @@ class RecordTypesController < ApplicationController
 
     respond_to do |format|
       if @record_type.save
-        format.html { redirect_to @record_type, notice: "Record type was successfully created." }
+        format.html { redirect_to record_types_path, notice: "Record type was successfully created." }
         format.json { render :show, status: :created, location: @record_type }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class RecordTypesController < ApplicationController
   def update
     respond_to do |format|
       if @record_type.update(record_type_params)
-        format.html { redirect_to @record_type, notice: "Record type was successfully updated." }
+        format.html { redirect_to record_types_path, notice: "Record type was successfully updated." }
         format.json { render :show, status: :ok, location: @record_type }
       else
         format.html { render :edit, status: :unprocessable_entity }

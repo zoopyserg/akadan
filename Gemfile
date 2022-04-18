@@ -49,6 +49,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'selenium-webdriver'
   gem 'rexml'
   gem 'webdrivers'

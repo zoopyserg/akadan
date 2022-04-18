@@ -7,12 +7,11 @@
         <%= render "shared/created_by", user: record_type.user %>
       </div>
       <div class="col-md-4">
-        <button type="button" class="btn btn-light btn-block">
-          <i class="fa fa-edit"></i>&nbsp;Edit
-        </button>
-        <button type="button" class="btn btn-light btn-block">
-          <i class="fa fa-close"></i>&nbsp;Delete
-        </button>
+        <% if can? :update, record_type %>
+          <%= link_to edit_record_type_path(record_type), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-edit"></i>&nbsp;Edit
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

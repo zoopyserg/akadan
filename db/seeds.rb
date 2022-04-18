@@ -2,7 +2,7 @@ require 'factory_bot_rails'
 require 'faker'
 
 if Rails.env.development? && !ENV['REAL']
-  user1 = FactoryBot.build :user, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678'
+  user1 = FactoryBot.build :user, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678', first_name: 'Serge', last_name: 'Vinogradoff'
   user2 = FactoryBot.build :user
 
   user1.skip_confirmation!

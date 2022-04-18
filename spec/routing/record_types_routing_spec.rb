@@ -10,9 +10,9 @@ RSpec.describe RecordTypesController, type: :routing do
       expect(get: "/record_types/new").to route_to("record_types#new")
     end
 
-    it "routes to #show" do
-      expect(get: "/record_types/1").to route_to("record_types#show", id: "1")
-    end
+    # it "routes to #show" do
+    #   expect(get: "/record_types/1").to route_to("record_types#show", id: "1")
+    # end
 
     it "routes to #edit" do
       expect(get: "/record_types/1/edit").to route_to("record_types#edit", id: "1")
