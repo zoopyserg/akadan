@@ -5,5 +5,6 @@ class Ability
 
   def initialize(user)
     can :update, RecordType, user: user if user.present?
+    can :update, ConnectionType, user: user if user.present?
   end
 end

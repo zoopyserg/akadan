@@ -300,6 +300,9 @@ example_id                                                                      
 ./spec/features/blacklist/index/blacklist_index_unblock_spec.rb[1:2:11:2]                                                                                      | passed  | 0.29473 seconds |
 ./spec/features/blacklist/index/blacklist_index_unblock_spec.rb[1:2:11:3]                                                                                      | passed  | 0.47506 seconds |
 ./spec/features/blacklist/index/blacklist_index_unblock_spec.rb[1:2:11:4]                                                                                      | passed  | 0.36884 seconds |
+./spec/features/buttons/edit_connection_type_button_on_connectiontypes_index_page_spec.rb[1:1:1:1]                                                             | passed  | 0.07544 seconds |
+./spec/features/buttons/edit_connection_type_button_on_connectiontypes_index_page_spec.rb[1:1:2:1]                                                             | passed  | 0.35123 seconds |
+./spec/features/buttons/edit_connection_type_button_on_connectiontypes_index_page_spec.rb[1:2:1]                                                               | passed  | 0.07262 seconds |
 ./spec/features/connection_types/creation/connection_type_creation_cancel_button_spec.rb[1:2:1]                                                                | passed  | 0.26562 seconds |
 ./spec/features/connection_types/creation/connection_type_creation_cancel_button_spec.rb[1:2:2]                                                                | passed  | 0.25859 seconds |
 ./spec/features/connection_types/creation/connection_type_creation_spec.rb[1:1:1]                                                                              | passed  | 0.14485 seconds |
