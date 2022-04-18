@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
   resources :record_types, except: [:destroy, :show]
-  resources :connections, only: [:index, :show]
-  resources :connection_types, except: [:destroy]
+  resources :connections, only: [:index]
+  resources :connection_types, except: [:show, :destroy]
 
   resources :conversations, only: [:index, :show, :new, :create] do
     resources :messages, only: [:index, :create]

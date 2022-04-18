@@ -10,9 +10,9 @@ RSpec.describe ConnectionsController, type: :routing do
       expect(get: "/records/1/connection_types/2/connections/new").to route_to("connections#new", record_id: '1', connection_type_id: '2' )
     end
 
-    it "routes to #show" do
-      expect(get: "/connections/1").to route_to("connections#show", id: "1")
-    end
+    # it "routes to #show" do
+    #   expect(get: "/connections/1").to route_to("connections#show", id: "1")
+    # end
 
     it "routes to #edit" do
       expect(get: "/records/1/connection_types/2/connections/3/edit").to route_to("connections#edit", id: "3", record_id: '1', connection_type_id: '2' )

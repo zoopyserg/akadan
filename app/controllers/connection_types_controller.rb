@@ -37,7 +37,7 @@ class ConnectionTypesController < ApplicationController
 
     respond_to do |format|
       if @connection_type.save
-        format.html { redirect_to @connection_type, notice: "Connection type was successfully created." }
+        format.html { redirect_to connection_types_path, notice: "Connection type was successfully created." }
         format.json { render :show, status: :created, location: @connection_type }
       else
         set_target_record_types
@@ -51,7 +51,7 @@ class ConnectionTypesController < ApplicationController
   def update
     respond_to do |format|
       if @connection_type.update(connection_type_params)
-        format.html { redirect_to @connection_type, notice: "Connection type was successfully updated." }
+        format.html { redirect_to connection_types_path, notice: "Connection type was successfully updated." }
         format.json { render :show, status: :ok, location: @connection_type }
       else
         set_target_record_types

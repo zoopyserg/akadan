@@ -10,9 +10,9 @@ RSpec.describe ConnectionTypesController, type: :routing do
       expect(get: "/connection_types/new").to route_to("connection_types#new")
     end
 
-    it "routes to #show" do
-      expect(get: "/connection_types/1").to route_to("connection_types#show", id: "1")
-    end
+    # it "routes to #show" do
+    #   expect(get: "/connection_types/1").to route_to("connection_types#show", id: "1")
+    # end
 
     it "routes to #edit" do
       expect(get: "/connection_types/1/edit").to route_to("connection_types#edit", id: "1")
