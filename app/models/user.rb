@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :confirmable
-
+  ### INCLUDES
+  ### DEFAULT SCOPE
+  ### CONSTANTS
+  ### ATTR ACCESSORS
+  ### ENUMS
+  ### RELATIONS (belongs to, has_many, has_many through)
   has_many :records, dependent: :destroy
   has_many :record_types, dependent: :destroy
   has_many :connection_types, dependent: :destroy
@@ -31,7 +31,7 @@ class User < ApplicationRecord
   has_many :blocked_users, through: :blockings, class_name: 'User', foreign_key: 'blocked_user_id'
 
   has_many :user_record_stats, dependent: :destroy
-
+  ### VALIDATIONS (validates, validate)
   validates :first_name, presence: true, only_international_letters: true
   validates :last_name, presence: true, only_international_letters: true
 
@@ -39,6 +39,9 @@ class User < ApplicationRecord
 
   validates :accept_terms, inclusion: { in: [true], message: 'Please accept the Terms.' }
 
+  ### CALLBACKS
+  ### NESTED ATTRIBUTES
+  ### SCOPES
   scope :all_public_ids, -> { where(is_public: true).pluck(:id) }
   scope :blocked_users_ids, -> (instance) { Blocking.where(user: instance).pluck(:blocked_user_id) }
   scope :blocked_by_users_ids, -> (instance) { Blocking.where(blocked_user: instance).pluck(:user_id) }
@@ -51,9 +54,18 @@ class User < ApplicationRecord
   scope :visible_users_for, -> (instance) { where(id: ((all_public_ids + mutual_friend_ids(instance)) - [instance.id, blocked_users_ids(instance), blocked_by_users_ids(instance)].flatten )) }
 
   scope :visible_friends_for, -> (instance) { where(id: (mutual_friend_ids(instance) + for_who_i_am_a_friend_ids(instance))) }
-
+  ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
+  # Include default devise modules. Others available are:
+  # :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :confirmable
   mount_uploader :avatar, AvatarUploader
+  acts_as_voter
 
+  ### CLASS METHODS
+  ### PRIVATE CLASS METHODS
+  ### INSTANCE METHODS
   def name
     "#{first_name} #{last_name}"
   end
@@ -81,4 +93,5 @@ class User < ApplicationRecord
   def bookmarked?(_record)
     bookmarks.where(record: _record).exists?
   end
+  ### PRIVATE METHODS
 end

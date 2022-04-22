@@ -13,7 +13,7 @@ development:
 
 test:
   <<: *default
-  database: akadan_test
+  database: akadan_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 production:
   <<: *default

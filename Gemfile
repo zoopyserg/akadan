@@ -23,6 +23,7 @@ gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'parallel_tests'
 end
 
 group :development do

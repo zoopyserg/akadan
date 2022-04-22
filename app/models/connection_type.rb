@@ -1,16 +1,26 @@
 class ConnectionType < ApplicationRecord
+  ### INCLUDES
+  ### DEFAULT SCOPE
+  ### CONSTANTS
+  ### ATTR ACCESSORS
+  ### ENUMS
+  ### RELATIONS (belongs to, has_many, has_many through)
   belongs_to :user
   belongs_to :target_record_type, class_name: 'RecordType', optional: true
   belongs_to :target_record_subtype, class_name: 'RecordType', optional: true
   belongs_to :closest_parent_type, class_name: 'RecordType', optional: true
 
+  ### VALIDATIONS (validates, validate)
   validates :name, presence: true
-
   validates :target_hierarchy, inclusion: { in: %w(all all_roots deep_siblings siblings) }
   validates :target_type, inclusion: { in: %w(any same_as_source specific_type specific_subtype) }
-
   # todo: URGENT forbid creating types with system names ("is solved by" etc).
 
+  ### CALLBACKS
+  ### NESTED ATTRIBUTES
+  ### SCOPES
+  ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
+  ### CLASS METHODS
   def self.subsystem_connection_type
     find_by(name: 'Subsystem')
   end
@@ -27,6 +37,8 @@ class ConnectionType < ApplicationRecord
     find_by(name: 'Irrelevant Because...')
   end
 
+  ### PRIVATE CLASS METHODS
+  ### INSTANCE METHODS
   def any_target_type?
     target_type == 'any'
   end
@@ -103,4 +115,5 @@ class ConnectionType < ApplicationRecord
     end
   end
 
+  ### PRIVATE METHODS
 end

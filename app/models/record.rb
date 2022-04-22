@@ -1,4 +1,10 @@
 class Record < ApplicationRecord
+  ### INCLUDES
+  ### DEFAULT SCOPE
+  ### CONSTANTS
+  ### ATTR ACCESSORS
+  ### ENUMS
+  ### RELATIONS (belongs to, has_many, has_many through)
   belongs_to :user
   belongs_to :record_type
   has_many :dots, dependent: :destroy
@@ -9,11 +15,14 @@ class Record < ApplicationRecord
   has_many :connections_as_target, class_name: 'Connection', foreign_key: :record_b_id
 
   has_many :user_record_stats, dependent: :destroy
-
+  ### VALIDATIONS (validates, validate)
   validates :name, presence: true
+  ### CALLBACKS
+  after_create :recalculate_cached_tree_counters
 
+  ### NESTED ATTRIBUTES
   accepts_nested_attributes_for :dots
-
+  ### SCOPES
   scope :projects, -> { where(separate_project: true) }
 
   scope :visible_to_user, -> (user) { where(is_public: true).or(where(user: user)) }
@@ -44,7 +53,13 @@ class Record < ApplicationRecord
   scope :all_children_of_record, -> (record) { where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')).without_source(record) }
   scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
 
-  after_create :recalculate_cached_tree_counters
+  ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
+  acts_as_commentable
+
+  ### CLASS METHODS
+  ### PRIVATE CLASS METHODS
+  ### INSTANCE METHODS
+  ### PRIVATE METHODS
 
   def self.only_solved
     all.select do |record|
