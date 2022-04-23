@@ -1,0 +1,4 @@
+$('#comment_<%= @commentable.id %> .reply-form-container').html('');
+var new_subcomments = "<%= escape_javascript( render 'comments/comment_list', commentable: @commentable ) %>";
+
+$('#comment_<%= @commentable.id %> .subcomments').html(new_subcomments);

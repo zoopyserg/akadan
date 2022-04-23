@@ -298,4 +298,22 @@ module FeaturesHelper
     expect(page).not_to have_css ".semiTable:nth-of-type(1) .btn [data-icon='#{the_button}']"
     expect(page).not_to have_css ".semiTable:nth-of-type(2) .btn [data-icon='#{the_button}']"
   end
+
+  def expect_content_within_comments(content, count: 1)
+    within '#comments' do
+      expect(page).to have_content(content, count: count)
+    end
+  end
+
+  def expect_no_content_within_comments(content)
+    within '#comments' do
+      expect(page).to have_no_content(content)
+    end
+  end
+
+  def submit_reply_for_comment(comment)
+    within "#comment_#{comment.id} form" do
+      click_on 'Reply'
+    end
+  end
 end

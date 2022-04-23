@@ -32,6 +32,8 @@ class RecordsController < ApplicationController
 
   def show
     @record_children_ids = @record.children.pluck(:id)
+    @new_comment = @record.comments.new
+    @comments = @record.comments.order(created_at: :desc)
 
     if signed_in?
       @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids)

@@ -103,7 +103,7 @@ RSpec.describe User, type: :model do
     describe '#name' do
       let!(:user) { create :user, first_name: 'John', last_name: 'Wick' }
 
-      it { expect(user.name).to eq 'John Wick' }
+      it { expect(user.full_name).to eq 'John Wick' }
     end
   end
 end

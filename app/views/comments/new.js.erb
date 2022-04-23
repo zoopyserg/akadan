@@ -1,0 +1,3 @@
+var new_reply_form = "<%= escape_javascript( render 'comments/form', comment: @comment, record: @commentable ) %>";
+
+$('#comment_<%= @commentable.id %> > .col .reply-form-container').html(new_reply_form);

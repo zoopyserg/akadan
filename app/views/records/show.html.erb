@@ -296,272 +296,18 @@
           <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
             <h5 class="card-title" data-pgc-field="title">Comments</h5>
           </div>
+
           <div class="col-lg-12">
+            <div class="row" id="new_comment_form_container">
+              <div class="col-lg-12 px-0 px-sm-3">
+                <%= render 'comments/form', comment: @new_comment, record: @record %>
+              </div>
+            </div>
+
             <div class="row" id="comments">
-              <div class="col-lg-12 mb-4" data-pgc-define="jr.commentgroup" data-pgc-define-name="Comment Group" data-pgc-define-description="Several Replies" data-pgc-section="Page Components">
-                <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc-define="jr.comment" data-pgc-define-name="Comment" data-pgc-section="Page Components">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex">
-                        <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                          <i class="fa fa-chevron-up"></i>
-                          <p class="mb-0">1</p>
-                          <i class="fa fa-chevron-down"></i>
-                        </div>
-                        <div>
-                          <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                          <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                          <button class="btn btn-light btn-sm mr-1 p-1">
-                            <i class="fa fa-edit mx-1"></i>edit
-                          </button>
-                          <button class="btn btn-light btn-sm mr-1 p-1">
-                            <i class="fa fa-reply mx-1"></i>Reply
-                          </button>
-                        </div>
-                      </div>
-                      <div class="align-items-end d-flex flex-column">
-                        <i class="fa fa-close"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col offset-1">
-                    <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                          <div class="d-flex">
-                            <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                              <i class="fa fa-chevron-up"></i>
-                              <p class="mb-0">1</p>
-                              <i class="fa fa-chevron-down"></i>
-                            </div>
-                            <div>
-                              <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                              <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                              <button class="btn btn-light btn-sm mr-1 p-1">
-                                <i class="fa fa-edit mx-1"></i>edit
-                              </button>
-                              <button class="btn btn-light btn-sm mr-1 p-1">
-                                <i class="fa fa-reply mx-1"></i>Reply
-                              </button>
-                            </div>
-                          </div>
-                          <div class="align-items-end d-flex flex-column">
-                            <i class="fa fa-close"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col offset-1">
-                        <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                          <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex">
-                                <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                                  <i class="fa fa-chevron-up"></i>
-                                  <p class="mb-0">1</p>
-                                  <i class="fa fa-chevron-down"></i>
-                                </div>
-                                <div>
-                                  <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                                  <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                                  <button class="btn btn-light btn-sm mr-1 p-1">
-                                    <i class="fa fa-edit mx-1"></i>edit
-                                  </button>
-                                  <button class="btn btn-light btn-sm mr-1 p-1">
-                                    <i class="fa fa-reply mx-1"></i>Reply
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="align-items-end d-flex flex-column">
-                                <i class="fa fa-close"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-12 mb-4" data-pgc="jr.commentgroup">
-                <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex">
-                        <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                          <i class="fa fa-chevron-up"></i>
-                          <p class="mb-0">1</p>
-                          <i class="fa fa-chevron-down"></i>
-                        </div>
-                        <div>
-                          <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                          <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                          <button class="btn btn-light btn-sm mr-1 p-1">
-                            <i class="fa fa-edit mx-1"></i>edit
-                          </button>
-                          <button class="btn btn-light btn-sm mr-1 p-1">
-                            <i class="fa fa-reply mx-1"></i>Reply
-                          </button>
-                        </div>
-                      </div>
-                      <div class="align-items-end d-flex flex-column">
-                        <i class="fa fa-close"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col offset-1">
-                    <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                          <div class="d-flex">
-                            <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                              <i class="fa fa-chevron-up"></i>
-                              <p class="mb-0">1</p>
-                              <i class="fa fa-chevron-down"></i>
-                            </div>
-                            <div>
-                              <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                              <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                              <button class="btn btn-light btn-sm mr-1 p-1">
-                                <i class="fa fa-edit mx-1"></i>edit
-                              </button>
-                              <button class="btn btn-light btn-sm mr-1 p-1">
-                                <i class="fa fa-reply mx-1"></i>Reply
-                              </button>
-                            </div>
-                          </div>
-                          <div class="align-items-end d-flex flex-column">
-                            <i class="fa fa-close"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col offset-1">
-                        <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                          <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex">
-                                <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                                  <i class="fa fa-chevron-up"></i>
-                                  <p class="mb-0">1</p>
-                                  <i class="fa fa-chevron-down"></i>
-                                </div>
-                                <div>
-                                  <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                                  <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                                  <button class="btn btn-light btn-sm mr-1 p-1">
-                                    <i class="fa fa-edit mx-1"></i>edit
-                                  </button>
-                                  <button class="btn btn-light btn-sm mr-1 p-1">
-                                    <i class="fa fa-reply mx-1"></i>Reply
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="align-items-end d-flex flex-column">
-                                <i class="fa fa-close"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-12 mb-4" data-pgc="jr.commentgroup">
-                <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex">
-                        <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                          <i class="fa fa-chevron-up"></i>
-                          <p class="mb-0">1</p>
-                          <i class="fa fa-chevron-down"></i>
-                        </div>
-                        <div>
-                          <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                          <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                          <button class="btn btn-light btn-sm mr-1 p-1">
-                            <i class="fa fa-edit mx-1"></i>edit
-                          </button>
-                          <button class="btn btn-light btn-sm mr-1 p-1">
-                            <i class="fa fa-reply mx-1"></i>Reply
-                          </button>
-                        </div>
-                      </div>
-                      <div class="align-items-end d-flex flex-column">
-                        <i class="fa fa-close"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col offset-1">
-                    <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                          <div class="d-flex">
-                            <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                              <i class="fa fa-chevron-up"></i>
-                              <p class="mb-0">1</p>
-                              <i class="fa fa-chevron-down"></i>
-                            </div>
-                            <div>
-                              <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                              <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                              <button class="btn btn-light btn-sm mr-1 p-1">
-                                <i class="fa fa-edit mx-1"></i>edit
-                              </button>
-                              <button class="btn btn-light btn-sm mr-1 p-1">
-                                <i class="fa fa-reply mx-1"></i>Reply
-                              </button>
-                            </div>
-                          </div>
-                          <div class="align-items-end d-flex flex-column">
-                            <i class="fa fa-close"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col offset-1">
-                        <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc="jr.comment">
-                          <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex">
-                                <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
-                                  <i class="fa fa-chevron-up"></i>
-                                  <p class="mb-0">1</p>
-                                  <i class="fa fa-chevron-down"></i>
-                                </div>
-                                <div>
-                                  <h6>Lorem Ipsum Комментарий. Всё хуйня. Всё сделают компы.</h6>
-                                  <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name">Serge Vinogradoff</a></strong></p>
-                                  <button class="btn btn-light btn-sm mr-1 p-1">
-                                    <i class="fa fa-edit mx-1"></i>edit
-                                  </button>
-                                  <button class="btn btn-light btn-sm mr-1 p-1">
-                                    <i class="fa fa-reply mx-1"></i>Reply
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="align-items-end d-flex flex-column">
-                                <i class="fa fa-close"></i>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <% @comments.each do |comment| %>
+                <%= render 'comments/comment', comment: comment, offset: false %>
+              <% end %>
             </div>
           </div>
         </div>
@@ -580,14 +326,6 @@
                 <div class="dropdown" data-pgc="jr.dropdown">
                   <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
                     <i class="icon-lock"></i>&nbsp;Add A Column
-
-
-
-
-
-
-
-
                   </button>
                   <div class="dropdown-menu" x-placement='bottom start'>
                     <a class="dropdown-item" href='#'>Link</a>
@@ -601,14 +339,6 @@
                 <div class="dropdown" data-pgc="jr.dropdown">
                   <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
                     <i class="icon-lock"></i>&nbsp;Actions on Selected Records
-
-
-
-
-
-
-
-
                   </button>
                   <div class="dropdown-menu" x-placement='bottom start'>
                     <a class="dropdown-item" href='#'>Link</a>

@@ -7,6 +7,7 @@ RSpec.describe Record, type: :model do
     it { should have_many(:dots).dependent(:destroy) }
     it { should have_many(:bookmarks).dependent(:destroy) }
     it { should have_many(:user_record_stats).dependent(:destroy) }
+    it { should have_many(:comments).as(:commentable).dependent(:destroy) }
   end
 
   describe 'validations' do

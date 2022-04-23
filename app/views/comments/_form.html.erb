@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: [record, comment], format: commentable_form_url_format(record), local: is_record_comment(record) ) do |form| %>
+      <% if comment.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+          <ul>
+            <% comment.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.text_area :body, class: "form-control", placeholder: "Enter a #{ commentable_comment_name(record).downcase }"  %>
+      </div>
+
+      <div class="form-group d-flex d-sm-flex justify-content-between">
+        <%= form.submit commentable_comment_name(record), class: 'btn btn-light px-5' %>
+      </div>
+    <% end %>
+  </div>
+</div>

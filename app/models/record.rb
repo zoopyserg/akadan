@@ -14,6 +14,8 @@ class Record < ApplicationRecord
   has_many :connections_as_source, class_name: 'Connection', foreign_key: :record_a_id
   has_many :connections_as_target, class_name: 'Connection', foreign_key: :record_b_id
 
+  has_many :comments, as: :commentable, dependent: :destroy
+
   has_many :user_record_stats, dependent: :destroy
   ### VALIDATIONS (validates, validate)
   validates :name, presence: true
@@ -54,8 +56,6 @@ class Record < ApplicationRecord
   scope :last_children_of_record, -> (record) { all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
 
   ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
-  acts_as_commentable
-
   ### CLASS METHODS
   ### PRIVATE CLASS METHODS
   ### INSTANCE METHODS

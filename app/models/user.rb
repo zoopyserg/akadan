@@ -66,7 +66,7 @@ class User < ApplicationRecord
   ### CLASS METHODS
   ### PRIVATE CLASS METHODS
   ### INSTANCE METHODS
-  def name
+  def full_name
     "#{first_name} #{last_name}"
   end
 

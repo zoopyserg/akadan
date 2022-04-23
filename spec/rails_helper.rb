@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'devise'
 require 'sidekiq/testing'
 # require 'capybara-screenshot/rspec'
+require "rspec/wait"
 Sidekiq::Testing.inline!
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
@@ -20,6 +21,7 @@ end
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Rails.application.routes.url_helpers
 
   config.include FeaturesHelper, type: :feature
   config.use_transactional_fixtures = false
@@ -28,4 +30,20 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include ::Rails::Controller::Testing::TestProcess, :type => :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include FactoryBot::Syntax::Methods
+
+  config.before(:all) do
+    # Capybara::Screenshot::Pruner.new(:keep_last_run).prune_old_screenshots
+  end
+
+  config.before(:each) do
+    # for menu, needed globally
+
+    create :connection_type, :solution_connection_type
+    create :record_type, :solution_record_type
+    create :connection_type, :subsystem_connection_type
+    create :record_type, :subsystem_record_type
+    create :connection_type, :extracted_to_connection_type
+    create :connection_type, :irrelevant_because_connection_type
+  end
 end

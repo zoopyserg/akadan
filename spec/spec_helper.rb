@@ -1,4 +1,12 @@
+require 'capybara/rspec'
+require 'rspec/retry'
+# require 'capybara-screenshot/rspec'
+require 'capybara/email/rspec'
+require_relative 'support/features_helper'
+
 RSpec.configure do |config|
+  # config.include FeaturesHelpers # it works now as well
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
@@ -15,4 +23,15 @@ RSpec.configure do |config|
   config.profile_examples = 10
   config.order = :random
   Kernel.srand config.seed
+  config.verbose_retry = true
+  config.display_try_failure_messages = true
+
+  config.retry_callback = proc do |ex|
+    if ex.metadata[:js]
+      Capybara.reset!
+    end
+  end
 end
+
+
+

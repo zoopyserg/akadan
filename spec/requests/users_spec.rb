@@ -37,7 +37,7 @@ RSpec.describe "/users", type: :request do
         it "updates the requested user" do
           patch user_url(user), params: { user: new_attributes }
           user.reload
-          expect(user.name).to eq 'John Black'
+          expect(user.full_name).to eq 'John Black'
         end
 
         it "redirects to the user" do
@@ -80,7 +80,7 @@ RSpec.describe "/users", type: :request do
         it "updates the requested user" do
           patch user_url(user), params: { user: new_attributes }
           user.reload
-          expect(user.name).to eq 'Vasia Pupkin'
+          expect(user.full_name).to eq 'Vasia Pupkin'
         end
 
         it "redirects to the user" do

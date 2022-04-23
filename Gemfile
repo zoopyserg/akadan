@@ -20,11 +20,7 @@ gem 'carrierwave'
 gem 'kaminari'
 gem 'cancancan'
 gem 'sidekiq'
-
-group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'parallel_tests'
-end
+gem 'acts_as_votable'
 
 group :development do
   gem 'web-console', '>= 4.1.0'
@@ -46,6 +42,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'parallel_tests'
 end
 
 group :test do
@@ -55,4 +53,15 @@ group :test do
   gem 'rexml'
   gem 'webdrivers'
   gem 'shoulda'
+
+  # gem 'db-query-matchers'
+  # gem 'webdrivers', '~> 4.2'
+  gem 'capybara-selenium', '~> 0.0.6'
+  gem 'capybara-email'
+  gem 'capybara-screenshot'
+  # gem 'webmock' # To test and check requests to external urls
+  gem 'rspec-wait' # rspec helper to allow easily to wait for certain conditions. Super helpful in feature tests
+  gem 'rspec-retry'
+  # gem 'nacha', git: 'https://bitbucket.org/loop2080/nacha.git'
+  gem 'database_cleaner-active_record'
 end

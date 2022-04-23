@@ -27,5 +27,21 @@ FactoryBot.define do
       closest_parent_type { create :record_type }
     end
 
+    trait :solution_connection_type do
+      name { 'Is Solved By...' }
+    end
+
+    trait :subsystem_connection_type do
+      name { 'Subsystem' }
+    end
+
+    trait :extracted_to_connection_type do
+      name { 'Extracted To...' }
+    end
+
+    trait :irrelevant_because_connection_type do
+      name { 'Irrelevant Because...' }
+    end
+
   end
 end
