@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [] do
     resources :comments, only: [:new, :create]
+    resources :votes, only: [:create]
   end
 
   resources :records, except: [:destroy] do

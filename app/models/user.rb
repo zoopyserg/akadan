@@ -31,6 +31,9 @@ class User < ApplicationRecord
   has_many :blocked_users, through: :blockings, class_name: 'User', foreign_key: 'blocked_user_id'
 
   has_many :user_record_stats, dependent: :destroy
+
+  has_many :comments # dependent: :destroy ?
+  has_many :votes # dependent: destroy ?
   ### VALIDATIONS (validates, validate)
   validates :first_name, presence: true, only_international_letters: true
   validates :last_name, presence: true, only_international_letters: true
@@ -61,7 +64,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
   mount_uploader :avatar, AvatarUploader
-  acts_as_voter
 
   ### CLASS METHODS
   ### PRIVATE CLASS METHODS

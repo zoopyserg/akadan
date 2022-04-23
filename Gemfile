@@ -20,7 +20,6 @@ gem 'carrierwave'
 gem 'kaminari'
 gem 'cancancan'
 gem 'sidekiq'
-gem 'acts_as_votable'
 
 group :development do
   gem 'web-console', '>= 4.1.0'
@@ -48,7 +47,7 @@ end
 
 group :test do
   gem 'capybara'
-  # gem 'capybara-screenshot'
+  gem 'capybara-screenshot'
   gem 'selenium-webdriver'
   gem 'rexml'
   gem 'webdrivers'

@@ -316,4 +316,22 @@ module FeaturesHelper
       click_on 'Reply'
     end
   end
+
+  def expect_comment_to_have_vote(comment, vote_number)
+    within "#comment_#{comment.id} .vote_count" do
+      expect(page).to have_content(vote_number)
+    end
+  end
+
+  def vote_comment_up(comment)
+    within "#comment_#{comment.id}" do
+      page.find('.fa-chevron-up').click
+    end
+  end
+
+  def vote_comment_down(comment)
+    within "#comment_#{comment.id}" do
+      page.find('.fa-chevron-down').click
+    end
+  end
 end

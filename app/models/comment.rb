@@ -9,6 +9,7 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, :polymorphic => true
 
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :votes, as: :votable, dependent: :destroy
 
   ### VALIDATIONS (validates, validate)
   validates :body, :presence => true
@@ -26,8 +27,6 @@ class Comment < ActiveRecord::Base
   }
 
   ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
-
-  acts_as_votable
   ### CLASS METHODS
   ### PRIVATE CLASS METHODS
   ### INSTANCE METHODS

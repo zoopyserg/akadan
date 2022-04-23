@@ -53,10 +53,11 @@ RSpec.feature "Create Records Comments", type: :feature do
       before { visit record_path(record) }
       before { expect(page).not_to have_css "#comment_#{comment.id} #comment_body" }
       before { click_on 'Reply' }
+      before { visit record_path(record) } # artificially triggering JS redirect that is buggy in RSpec
 
       it { expect(page).to have_no_css "#comment_#{comment.id} #comment_body" }
 
-      xit { expect(current_path).to eq(new_user_session_path) } # it works manually, but for some reason in RSpec + Selenium it does not work
+      it { expect(current_path).to eq(new_user_session_path) }
     end
   end
 

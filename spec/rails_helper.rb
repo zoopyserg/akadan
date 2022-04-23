@@ -5,7 +5,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'devise'
 require 'sidekiq/testing'
-# require 'capybara-screenshot/rspec'
+require 'capybara-screenshot/rspec'
 require "rspec/wait"
 Sidekiq::Testing.inline!
 
