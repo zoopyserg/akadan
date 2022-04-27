@@ -1,0 +1,91 @@
+<div class="card" data-pgc-define="jr.record" data-pgc-define-name="Record" data-pgc-section="Page components">
+  <div class="card-body">
+    <div class="row">
+      <div class="align-items-center col-lg-12 d-flex justify-content-between">
+        <div class="align-items-center d-flex">
+          <div class="d-flex flex-column">
+            <div class="icheck-material-white">
+              <input type="checkbox" id="user-checkbox1" checked=""/>
+              <label for="user-checkbox1"></label>
+            </div>
+          </div>
+          <div class="d-flex flex-column">
+            <i class="fa fa-chevron-up mx-1 my-1"></i>
+            <i class="fa fa-chevron-down mx-1 my-1"></i>
+          </div>
+          <div>
+            <h5 class="card-title mb-0 mx-1"><%= record.name %><!--i class="fa fa-edit mx-1"></i--></h5>
+            <%= render "shared/created_by", user: record.user %>
+          </div>
+        </div>
+        <div class="align-items-center d-flex">
+          <!--i class="fa fa-comment mx-1 my-1"></i-->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text">URL:</span>
+          </div>
+          <input type="text" class="form-control" value="http://myurl.com/problems/293293222">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+              <i class="fa fa-copy mr-1"></i>Copy
+            </button>
+            <%= link_to record_path(record), class: 'btn btn-primary' do %>
+              <i class="fa fa-eye mr-1"></i>Show
+            <% end %>
+          </div>
+        </div>
+        <% if user_signed_in? %>
+          <% if current_user.bookmarked?(record) %>
+            <%= link_to record_bookmark_path(record_id: record.id, id: Bookmark.find_by(user: current_user, record:record).id ), method: :delete, class: 'btn btn-link btn-sm d-flex flex-row align-items-center' do %>
+              <span><i class="fa fa-star mr-1"></i></span>
+              <span>Remove from Favourites</span>
+            <% end %>
+          <% else %>
+            <%= link_to record_bookmarks_path(record_id: record.id), method: :post, class: 'btn btn-link btn-sm d-flex flex-row align-items-center' do %>
+              <span><i class="fa fa-star-o mr-1"></i></span>
+              <span>Add to Favourites</span>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% record.dots.each do |dot| %>
+          <p><%= dot.description %></p>
+        <% end %>
+        <% # pending dots count (for all records in the list or for records that repeated within this separate project %>
+        <h6>Completed (<%= record.progress_cached %>%):</h6>
+        <div class="progress">
+          <div class="progress-bar" aria-valuenow="<%= record.progress_cached %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= record.progress %>%;"></div>
+        </div>
+        <p class="mb-0"><strong class="mr-1">Type:</strong><%= record.record_type.name %><i class="fa fa-edit mx-1"></i></p>
+      </div>
+      <% if user_signed_in? %>
+        <div class="col-lg-4">
+          <%= link_to new_record_dot_path(record_id: record.id, parent_id: nil), class: "btn btn-light btn-block" do %>
+            <% # todo: save project_id (id of project within which this thing repeated - pass the project id into the form) %>
+            <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>
+            <i class="fa fa-repeat mx-1"></i>Repeated
+          <% end %>
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: @solution_connection_type_id, record_type_id: @solution_record_type_id), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-check mx-1"></i>Solve
+          <% end %>
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: @subsystem_connection_type_id, record_type_id: @subsystem_record_type_id), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-puzzle-piece mx-1"></i>Create / Connect Subrecords
+          <% end %>
+          <%= link_to into_separate_project_record_connection_type_connections_path(record, @extracted_to_connection_type), method: :post, class: "btn btn-light btn-block" do %>
+            <i class="fa fa-angle-double-up mx-1"></i>Extract Into Separate Project
+          <% end %>
+          <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsmodal">
+            <i class="fa fa-lock"></i>Permissions
+          </button>
+          <%= link_to new_record_connection_type_connection_path(record, @irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-close mx-1"></i>Irrelevant
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

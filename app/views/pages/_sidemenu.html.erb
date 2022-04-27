@@ -110,7 +110,7 @@
                 <% end %>
             </li>
         <% end %>
-        <li>
+        <!--li>
             <a href="store.html"> <i class="zmdi zmdi-store"></i> <span>Online Store</span> </a>
         </li>
         <li>
@@ -118,7 +118,7 @@
         </li>
         <li>
             <a href="platforms.html"> <i class="zmdi zmdi-download"></i> <span>Platforms (Downloads)</span> </a>
-        </li>
+        </li-->
         <% if user_signed_in? %>
             <li>
                 <%= link_to edit_user_path(current_user) do %>
@@ -127,13 +127,13 @@
                 <% end %>
             </li>
         <% end %>
-        <li>
+        <!--li>
             <%= link_to seminars_path do %>
                 <i class="zmdi zmdi-calendar"></i>
                 <span>Seminars &amp; Courses</span>
             <% end %>
-        </li>
-        <li>
+        </li-->
+        <!--li>
             <a href="wallet.html"> <i class="zmdi zmdi-balance-wallet"></i> <span>Wallet</span> </a>
         </li>
         <li>
@@ -150,7 +150,7 @@
         </li>
         <li>
             <a href="calendar.html"> <i class="zmdi zmdi-calendar-check"></i> <span>Calendar</span> <small class="badge float-right badge-light">New</small> </a>
-        </li>
+        </li-->
         <% if user_signed_in? %>
             <li>
                 <%= link_to user_path(current_user) do %>
@@ -185,7 +185,7 @@
         <% end %>
         <li>
         </li>
-        <li class="sidebar-header">LABELS</li>
+        <!--li class="sidebar-header">LABELS</li>
         <li>
             <a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
         </li>
@@ -194,6 +194,6 @@
         </li>
         <li>
             <a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
-        </li>
+        </li-->
     </ul>
 </div>

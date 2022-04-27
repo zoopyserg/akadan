@@ -52,7 +52,7 @@ import "choices.js/src/styles/choices.scss";
 import "../src/choices/choices.scss";
 
 document.addEventListener("turbolinks:load", function() {
-    var elementIds = ['#record_type_id', '#record_record_type_id', '#connection_type_target_record_type_id', '#connection_type_target_record_subtype_id'];
+    var elementIds = ['#dot_project_id', '#record_type_id', '#record_record_type_id', '#connection_type_target_record_type_id', '#connection_type_target_record_subtype_id'];
 
     elementIds.forEach(elementId => {
         console.log(elementId);

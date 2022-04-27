@@ -7,26 +7,27 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
+    # todo: better pagination
     if signed_in?
-      @records = Record.where(is_public: true).or(Record.where(user: current_user))
+      @records = Record.where(is_public: true).or(Record.where(user: current_user)).page(params[:page])
     else
-      @records = Record.where(is_public: true)
+      @records = Record.where(is_public: true).page(params[:page])
     end
 
     if params[:record_type_id].present?
       @record_type = @record_types.find_by(id: params[:record_type_id])
 
       if @record_type
-        @records = @records.where(record_type: @record_type)
+        @records = @records.where(record_type: @record_type).page(params[:page])
       else
         @records = []
       end
     end
 
     if params[:only_solved]
-      @records = @records.only_solved
+      @records = @records.only_solved.page(params[:page])
     elsif params[:only_unsolved]
-      @records = @records.only_unsolved
+      @records = @records.only_unsolved.page(params[:page])
     end
   end
 
