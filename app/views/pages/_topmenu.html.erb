@@ -43,7 +43,7 @@
             <% end %>
             <% if user_signed_in? %>
                 <li class="nav-item">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#"> <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span> </a>
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#"> <span class="user-profile"><%= image_tag current_user.avatar_url(:thumb), class: 'img-circle', alt: "user avatar" %></span> </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li class="dropdown-item user-details">
                             <a href="javaScript:void();"> <div class="media">
