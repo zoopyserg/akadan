@@ -66,22 +66,6 @@
                 <% end %>
             </li>
         <% end %>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to blocked_users_path do %>
-                    <i class="zmdi zmdi-accounts-outline"></i>
-                    <span>Blocked Users</span>
-                <% end %>
-            </li>
-        <% end %>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to conversations_path do %>
-                    <i class="zmdi zmdi-comment-list"></i>
-                    <span>My Messages</span>
-                <% end %>
-            </li>
-        <% end %>
         <li>
             <%= link_to people_path do %>
                 <i class="zmdi zmdi-accounts-list"></i>
@@ -102,14 +86,6 @@
                 <% end %>
             </li>
         <% end %>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to notifications_path do %>
-                    <i class="zmdi zmdi-comments"></i>
-                    <span>Notifications</span>
-                <% end %>
-            </li>
-        <% end %>
         <!--li>
             <a href="store.html"> <i class="zmdi zmdi-store"></i> <span>Online Store</span> </a>
         </li>
@@ -119,14 +95,6 @@
         <li>
             <a href="platforms.html"> <i class="zmdi zmdi-download"></i> <span>Platforms (Downloads)</span> </a>
         </li-->
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to edit_user_path(current_user) do %>
-                    <i class="zmdi zmdi-settings"></i>
-                    <span>Settings</span>
-                <% end %>
-            </li>
-        <% end %>
         <!--li>
             <%= link_to seminars_path do %>
                 <i class="zmdi zmdi-calendar"></i>
@@ -151,40 +119,6 @@
         <li>
             <a href="calendar.html"> <i class="zmdi zmdi-calendar-check"></i> <span>Calendar</span> <small class="badge float-right badge-light">New</small> </a>
         </li-->
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to user_path(current_user) do %>
-                    <i class="zmdi zmdi-face"></i>
-                    <span>My Profile</span>
-                <% end %>
-            </li>
-        <% end %>
-        <% unless user_signed_in? %>
-            <li>
-                <%= link_to new_user_session_path do %>
-                    <i class="zmdi zmdi-lock"></i>
-                    <span>Login</span>
-                <% end %>
-            </li>
-        <% end %>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
-                    <i class="zmdi zmdi-lock"></i>
-                    <span>Logout</span>
-                <% end %>
-            </li>
-        <% end %>
-        <% unless user_signed_in? %>
-            <li>
-                <%= link_to new_user_registration_path do %>
-                    <i class="zmdi zmdi-account-circle"></i>
-                    <span>Registration</span>
-                <% end %>
-            </li>
-        <% end %>
-        <li>
-        </li>
         <!--li class="sidebar-header">LABELS</li>
         <li>
             <a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a>
