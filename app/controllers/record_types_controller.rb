@@ -13,6 +13,7 @@ class RecordTypesController < ApplicationController
 
   # GET /record_types/1 or /record_types/1.json
   def show
+    byebug
   end
 
   # GET /record_types/new

@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
     resources :dots, only: [:new, :create] # maybe do Index too. 'cause it's a scaffold baby
     resources :bookmarks, only: [:create, :destroy]
-    resources :connection_types do
+    resources :connection_types, except: [:destroy] do
       resources :connections, only: [:new, :edit, :create, :update] do
         collection do
           post :into_separate_project

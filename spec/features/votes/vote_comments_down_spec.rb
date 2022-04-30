@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.feature "Create Records Comments", type: :feature do
-  let!(:user1) { create(:user, first_name: 'John', last_name: 'Carter') }
+  let!(:user) { create(:user, first_name: 'John', last_name: 'Carter') }
   let!(:user2) { create(:user, first_name: 'John', last_name: 'Wick') }
 
-  let!(:record) { create(:record, user: user1, is_public: true) }
-  let!(:comment) { create(:comment, user: user1, commentable: record) }
+  let!(:record) { create(:record, user: user, is_public: true) }
+  let!(:comment) { create(:comment, user: user, commentable: record) }
 
   context "user logged in" do
     context 'user created record' do
-      before { login_as(user1, scope: :user) }
+      before { login_as(user, scope: :user) }
       before { visit record_path(record) }
       before { expect_comment_to_have_vote(comment, '0') }
       before { vote_comment_down(comment) }
@@ -69,7 +69,7 @@ RSpec.feature "Create Records Comments", type: :feature do
 
       context 'another user' do
         before { logout }
-        before { login_as(user1, scope: :user) }
+        before { login_as(user, scope: :user) }
         before { visit record_path(record) }
 
         it { expect_comment_to_have_vote(comment, '-1') }

@@ -1,9 +1,10 @@
 require 'rails_helper'
+# todo: finish
 
 RSpec.feature "NavConnections Button", type: :feature do
   let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
-  context 'non signed in' do
+  xcontext 'non signed in' do
     before do
       visit root_path
     end
@@ -17,12 +18,9 @@ RSpec.feature "NavConnections Button", type: :feature do
     end
   end
 
-  context 'signed in' do
-    before do
-      visit new_user_session_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit root_path
-    end
+  xcontext 'signed in' do
+    before { login_as(user, scope: :user) }
+    before { visit root_path }
 
     it 'should not have a sign in button' do
       within '.sidebar-menu' do

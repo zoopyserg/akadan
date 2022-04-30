@@ -4,7 +4,7 @@ class VotesController < ApplicationController
   # POST /votes or /votes.json
   def create
     if !user_signed_in?
-      render partial: 'shared/redirect_to_login'
+      render 'shared/redirect_to_login'
       return
     end
 
@@ -28,8 +28,6 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to records_path, notice: "Vote was successfully created." }
-        format.json { render :show, status: :created, location: @vote }
         format.js do
           if @vote.vote_flag
             render :up

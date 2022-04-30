@@ -14,34 +14,28 @@ RSpec.describe "/record_types", type: :request do
   context 'signed in' do
     before { sign_in user }
 
-    describe "GET /index" do
-      it "renders a successful response" do
-        user.record_types.create! valid_attributes
-        get record_types_url
-        expect(response).to be_successful
-      end
-    end
+    describe 'valid attributes' do
+      let!(:record_type) { create :record_type, user: user }
 
-    describe "GET /show" do
-      it "renders a successful response" do
-        record_type = user.record_types.create! valid_attributes
-        get record_type_url(record_type)
-        expect(response).to be_successful
+      describe "GET /index" do
+        it "renders a successful response" do
+          get record_types_url
+          expect(response).to be_successful
+        end
       end
-    end
 
-    describe "GET /new" do
-      it "renders a successful response" do
-        get new_record_type_url
-        expect(response).to be_successful
+      describe "GET /new" do
+        it "renders a successful response" do
+          get new_record_type_url
+          expect(response).to be_successful
+        end
       end
-    end
 
-    describe "GET /edit" do
-      it "render a successful response" do
-        record_type = user.record_types.create! valid_attributes
-        get edit_record_type_url(record_type)
-        expect(response).to be_successful
+      describe "GET /edit" do
+        it "render a successful response" do
+          get edit_record_type_url(record_type)
+          expect(response).to be_successful
+        end
       end
     end
 
@@ -55,7 +49,7 @@ RSpec.describe "/record_types", type: :request do
 
         it "redirects to the created record_type" do
           post record_types_url, params: { record_type: valid_attributes }
-          expect(response).to redirect_to(record_type_url(user.record_types.last))
+          expect(response).to redirect_to(record_types_url)
         end
       end
 
@@ -90,7 +84,7 @@ RSpec.describe "/record_types", type: :request do
           record_type = user.record_types.create! valid_attributes
           patch record_type_url(record_type), params: { record_type: new_attributes }
           record_type.reload
-          expect(response).to redirect_to(record_type_url(record_type))
+          expect(response).to redirect_to(record_types_url)
         end
       end
 
@@ -110,14 +104,6 @@ RSpec.describe "/record_types", type: :request do
       it "renders a successful response" do
         user.record_types.create! valid_attributes
         get record_types_url
-        expect(response).to be_successful
-      end
-    end
-
-    describe "GET /show" do
-      it "renders a successful response" do
-        record_type = user.record_types.create! valid_attributes
-        get record_type_url(record_type)
         expect(response).to be_successful
       end
     end

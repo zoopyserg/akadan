@@ -36,16 +36,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Testing
 group :development, :test do
+  gem 'faker'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'parallel_tests'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'parallel_tests'
-end
-
-group :test do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'selenium-webdriver'
@@ -61,6 +58,7 @@ group :test do
   # gem 'webmock' # To test and check requests to external urls
   gem 'rspec-wait' # rspec helper to allow easily to wait for certain conditions. Super helpful in feature tests
   gem 'rspec-retry'
+  gem 'fuubar'
   # gem 'nacha', git: 'https://bitbucket.org/loop2080/nacha.git'
   gem 'database_cleaner-active_record'
 end

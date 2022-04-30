@@ -18,11 +18,8 @@ RSpec.feature "NavSensors Button", type: :feature do
   end
 
   context 'signed in' do
-    before do
-      visit new_user_session_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
-      visit root_path
-    end
+    before { login_as(user, scope: :user) }
+    before { visit root_path }
 
     it 'should not have a sign in button' do
       within '.sidebar-menu' do

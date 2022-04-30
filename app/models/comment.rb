@@ -12,7 +12,7 @@ class Comment < ActiveRecord::Base
   has_many :votes, as: :votable, dependent: :destroy
 
   ### VALIDATIONS (validates, validate)
-  validates :body, :presence => true
+  # validates :body, :presence => true (I thought of validating it but now I don't have time to write "can't be empty" response logic).
   validates :user, :presence => true
 
   ### CALLBACKS

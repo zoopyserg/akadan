@@ -36,7 +36,7 @@ RSpec.configure do |config|
     # Capybara::Screenshot::Pruner.new(:keep_last_run).prune_old_screenshots
   end
 
-  config.before(:each) do
+  config.before(:each, type: :feature) do
     # for menu, needed globally
 
     create :connection_type, :solution_connection_type

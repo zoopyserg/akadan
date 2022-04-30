@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   protect_from_forgery except: :new
-  before_action :authenticate_user!, only: %i[create update destroy ]
+  before_action :authenticate_user!, only: %i[create update destroy]
   before_action :set_commentable, only: [:create, :new]
 
   # GET /comments/new
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
         if current_user
           render 'new'
         else
-          render partial: 'shared/redirect_to_login'
+          render 'shared/redirect_to_login'
         end
       end
     end

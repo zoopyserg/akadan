@@ -20,7 +20,7 @@ class RecordsController < ApplicationController
       if @record_type
         @records = @records.where(record_type: @record_type).page(params[:page])
       else
-        @records = []
+        @records = Record.none
       end
     end
 
@@ -37,25 +37,25 @@ class RecordsController < ApplicationController
     @comments = @record.comments.order(created_at: :desc)
 
     if signed_in?
-      @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids)
+      @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids).page(params[:page])
     else
-      @records = Record.where(is_public: true).where(id: @record_children_ids)
+      @records = Record.where(is_public: true).where(id: @record_children_ids).page(params[:page])
     end
 
     if params[:record_type_id].present?
       @record_type = @record_types.find_by(id: params[:record_type_id])
 
       if @record_type
-        @records = @records.where(record_type: @record_type)
+        @records = @records.where(record_type: @record_type).page(params[:page])
       else
-        @records = []
+        @records = Record.none
       end
     end
 
     if params[:only_solved]
-      @records = @records.only_solved
+      @records = @records.only_solved.page(params[:page])
     elsif params[:only_unsolved]
-      @records = @records.only_unsolved
+      @records = @records.only_unsolved.page(params[:page])
     end
   end
 
