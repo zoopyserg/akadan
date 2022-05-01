@@ -10,14 +10,13 @@ RSpec.feature "New Record Description", type: :feature do
     let!(:record_type) { create :record_type, name: "my type", user: user }
 
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user, scope: :user
       visit new_record_path
     end
 
     it 'should let me create' do
       expect {
-        select 'my type', from: :record_record_type_id
+        choose_record_type("my type")
         fill_in :record_name, with: 'boo'
         fill_in 'Description', with: 'boo'
         click_on 'Create!'

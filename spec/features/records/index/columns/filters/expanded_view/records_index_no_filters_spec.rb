@@ -8,9 +8,9 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
   let!(:record_type) { create :record_type, name: 'Subsystem', is_public: true }
 
   context 'showing all records' do
-    let!(:record1) { create :record, name: 'Record 1', user: user2, is_public: true }
-    let!(:record2) { create :record, name: 'Record 2', user: user2, is_public: false }
-    let!(:record3) { create :record, name: 'Record 3', user: user1, is_public: false }
+    let!(:record1) { create :record, :with_dot, name: 'Record 1', user: user2, is_public: true }
+    let!(:record2) { create :record, :with_dot, name: 'Record 2', user: user2, is_public: false }
+    let!(:record3) { create :record, :with_dot, name: 'Record 3', user: user1, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -26,9 +26,8 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
-        visit '/records'
+        login_as user2
+        visit records_path
       end
 
       it 'should have all' do

@@ -334,4 +334,17 @@ module FeaturesHelper
       page.find('.fa-chevron-down').click
     end
   end
+
+  # I know they are the same, but I want to split them
+  def choose_record_type(type)
+    find(:css, '.choices').click
+    find(:css, '.choices__item', text: type).click
+  end
+
+  def choose_project(name)
+    # sometimes it tries clicking before the page is loaded, so in the tests I do this:
+    # expect(page).to have_content 'New Fact of Repetition'
+    find(:css, '.choices').click
+    find(:css, '.choices__item', text: name).click
+  end
 end

@@ -8,7 +8,7 @@ RSpec.feature "Record Type", :records_index, type: :feature do
   let!(:record_type3) { create :record_type, name: 'Type 3', user: user2, is_public: true }
   let!(:record_type4) { create :record_type, name: 'Type 4', user: user2, is_public: false }
 
-  let!(:record) { create :record, record_type: record_type, user: user1, is_public: true }
+  let!(:record) { create :record, :with_dot, record_type: record_type, user: user1, is_public: true }
 
   context 'not signed in' do
     before { visit record_path(record) }
@@ -40,8 +40,7 @@ RSpec.feature "Record Type", :records_index, type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user1
       visit record_path(record)
     end
 

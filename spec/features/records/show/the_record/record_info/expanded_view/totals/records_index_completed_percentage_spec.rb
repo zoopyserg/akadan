@@ -6,7 +6,7 @@ RSpec.feature "Completed Percentage", type: :feature do
 
   context 'not signed in' do
     context '1 record in tree' do
-      let!(:record1) { create :record, user: user1, is_public: true }
+      let!(:record1) { create :record, :with_dot, user: user1, is_public: true }
 
       context 'record 1' do
         before { visit record_path(record1) }
@@ -16,8 +16,8 @@ RSpec.feature "Completed Percentage", type: :feature do
     end
 
     context '2 records in tree' do
-      let!(:record1) { create :record, user: user1, is_public: true }
-      let!(:record2) { create :record, user: user1, is_public: true }
+      let!(:record1) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record2) { create :record, :with_dot, user: user1, is_public: true }
 
       let!(:connection1) { create :connection, user: user1, record_a: record1, record_b: record2 }
 
@@ -35,9 +35,9 @@ RSpec.feature "Completed Percentage", type: :feature do
     end
 
     context '3 records in tree, chained' do
-      let!(:record1) { create :record, user: user1, is_public: true }
-      let!(:record2) { create :record, user: user1, is_public: true }
-      let!(:record3) { create :record, user: user1, is_public: true }
+      let!(:record1) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record2) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record3) { create :record, :with_dot, user: user1, is_public: true }
 
       let!(:connection1) { create :connection, user: user1, record_a: record1, record_b: record2 }
       let!(:connection2) { create :connection, user: user1, record_a: record2, record_b: record3 }
@@ -62,9 +62,9 @@ RSpec.feature "Completed Percentage", type: :feature do
     end
 
     context '3 records in tree, two -> one' do
-      let!(:record1) { create :record, user: user1, is_public: true }
-      let!(:record2) { create :record, user: user1, is_public: true }
-      let!(:record3) { create :record, user: user1, is_public: true }
+      let!(:record1) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record2) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record3) { create :record, :with_dot, user: user1, is_public: true }
 
       let!(:connection1) { create :connection, user: user1, record_a: record1, record_b: record3 }
       let!(:connection2) { create :connection, user: user1, record_a: record2, record_b: record3 }
@@ -89,10 +89,10 @@ RSpec.feature "Completed Percentage", type: :feature do
     end
 
     context '4 records in tree, chained' do
-      let!(:record1) { create :record, user: user1, is_public: true }
-      let!(:record2) { create :record, user: user1, is_public: true }
-      let!(:record3) { create :record, user: user1, is_public: true }
-      let!(:record4) { create :record, user: user1, is_public: true }
+      let!(:record1) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record2) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record3) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record4) { create :record, :with_dot, user: user1, is_public: true }
 
       let!(:connection1) { create :connection, user: user1, record_a: record1, record_b: record2 }
       let!(:connection2) { create :connection, user: user1, record_a: record2, record_b: record3 }
@@ -124,10 +124,10 @@ RSpec.feature "Completed Percentage", type: :feature do
     end
 
     context '4 records in tree, 3 chained & 1 into last' do
-      let!(:record1) { create :record, user: user1, is_public: true }
-      let!(:record2) { create :record, user: user1, is_public: true }
-      let!(:record3) { create :record, user: user1, is_public: true }
-      let!(:record4) { create :record, user: user1, is_public: true }
+      let!(:record1) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record2) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record3) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record4) { create :record, :with_dot, user: user1, is_public: true }
 
       let!(:connection1) { create :connection, user: user1, record_a: record1, record_b: record2 }
       let!(:connection2) { create :connection, user: user1, record_a: record2, record_b: record3 }
@@ -159,10 +159,10 @@ RSpec.feature "Completed Percentage", type: :feature do
     end
 
     context '4 records in tree, 3 chained & 1 into pre-last' do
-      let!(:record1) { create :record, user: user1, is_public: true }
-      let!(:record2) { create :record, user: user1, is_public: true }
-      let!(:record3) { create :record, user: user1, is_public: true }
-      let!(:record4) { create :record, user: user1, is_public: true }
+      let!(:record1) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record2) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record3) { create :record, :with_dot, user: user1, is_public: true }
+      let!(:record4) { create :record, :with_dot, user: user1, is_public: true }
 
       let!(:connection1) { create :connection, user: user1, record_a: record1, record_b: record2 }
       let!(:connection2) { create :connection, user: user1, record_a: record2, record_b: record3 }
@@ -198,8 +198,7 @@ RSpec.feature "Completed Percentage", type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user1
       visit record_path(record1)
     end
 

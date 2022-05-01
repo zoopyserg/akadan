@@ -20,7 +20,7 @@ class RecordsController < ApplicationController
       if @record_type
         @records = @records.where(record_type: @record_type).page(params[:page])
       else
-        @records = Record.none
+        @records = Record.none.page(params[:page])
       end
     end
 

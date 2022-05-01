@@ -9,8 +9,7 @@ RSpec.feature "RecordType Cancel", type: :feature do
     let!(:user) { create :user, :confirmed, :free, email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
     before do
-      visit record_types_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user
       visit new_record_type_path
     end
 

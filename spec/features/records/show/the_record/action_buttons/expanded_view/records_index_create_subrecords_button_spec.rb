@@ -9,7 +9,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
   let!(:record_type) { create :record_type, name: 'Subsystem', is_public: true }
 
   context 'public someone elses record' do
-    let!(:record) { create :record, user: user2, is_public: true }
+    let!(:record) { create :record, :with_dot, user: user2, is_public: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -31,8 +31,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 
@@ -59,7 +58,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
   end
 
   context 'private my record' do
-    let!(:record) { create :record, user: user1, is_public: false }
+    let!(:record) { create :record, :with_dot, user: user1, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -81,8 +80,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 
@@ -128,7 +126,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
   end
 
   context 'private someone elses record' do
-    let!(:record) { create :record, user: user2, is_public: false }
+    let!(:record) { create :record, :with_dot, user: user2, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -150,8 +148,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 

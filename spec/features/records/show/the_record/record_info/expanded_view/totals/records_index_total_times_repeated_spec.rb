@@ -17,21 +17,20 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
       before { visit record_path(public_record) }
 
       it { expect(page).to have_content '2 times' }
-      it { expect(page).to have_content '3 times' }
+      it { expect(page).to have_no_content '3 times' }
     end
 
     context 'private record' do
       before { visit record_path(private_record) }
 
-      it { expect(page).to have_content '2 times' }
+      it { expect(page).to have_no_content '2 times' }
       it { expect(page).to have_no_content '3 times' }
     end
   end
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user2
     end
 
     context 'public record' do

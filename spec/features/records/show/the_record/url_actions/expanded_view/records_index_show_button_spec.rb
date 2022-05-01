@@ -15,10 +15,9 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user2
       visit record_path(private_record)
-      click_on 'Show'
+      find(:css, 'a.btn-primary').click # selector for Show btn.
     end
 
     it 'should say who created private record' do

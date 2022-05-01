@@ -6,7 +6,7 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
   let!(:solution_connection_type_id) { ConnectionType.find_or_create_by(name: 'Is Solved By...').id }
 
   context 'single unsolved record' do
-    let!(:public_record) { create :record, user: user1, is_public: true }
+    let!(:public_record) { create :record, :with_dot, user: user1, is_public: true }
 
     before { visit record_path(public_record) }
 
@@ -14,8 +14,8 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
   end
 
   context 'single solved record' do
-    let!(:public_record) { create :record, user: user1, is_public: true }
-    let!(:public_solution) { create :record, user: user1, is_public: true }
+    let!(:public_record) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_solution) { create :record, :with_dot, user: user1, is_public: true }
 
     let!(:solution_connection) { create :connection, record_a: public_record, record_b: public_solution, connection_type_id: solution_connection_type_id }
 
@@ -25,11 +25,11 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
   end
 
   context 'two destructive subrecords, one solved' do
-    let!(:public_record1) { create :record, user: user1, is_public: true }
-    let!(:public_record2) { create :record, user: user1, is_public: true }
-    let!(:public_record3) { create :record, user: user1, is_public: true }
+    let!(:public_record1) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record2) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record3) { create :record, :with_dot, user: user1, is_public: true }
 
-    let!(:public_record4) { create :record, user: user1, is_public: true }
+    let!(:public_record4) { create :record, :with_dot, user: user1, is_public: true }
 
     let!(:subsystem_connection_type) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: true }
 
@@ -45,12 +45,12 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
   end
 
   context 'two destructive subrecords, both solved' do
-    let!(:public_record1) { create :record, user: user1, is_public: true }
-    let!(:public_record2) { create :record, user: user1, is_public: true }
-    let!(:public_record3) { create :record, user: user1, is_public: true }
+    let!(:public_record1) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record2) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record3) { create :record, :with_dot, user: user1, is_public: true }
 
-    let!(:public_record4) { create :record, user: user1, is_public: true }
-    let!(:public_record5) { create :record, user: user1, is_public: true }
+    let!(:public_record4) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record5) { create :record, :with_dot, user: user1, is_public: true }
 
     let!(:subsystem_connection_type) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: true }
 
@@ -66,12 +66,12 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
   end
 
   context 'two non-destructive subrecords, both solved' do
-    let!(:public_record1) { create :record, user: user1, is_public: true }
-    let!(:public_record2) { create :record, user: user1, is_public: true }
-    let!(:public_record3) { create :record, user: user1, is_public: true }
+    let!(:public_record1) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record2) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record3) { create :record, :with_dot, user: user1, is_public: true }
 
-    let!(:public_record4) { create :record, user: user1, is_public: true }
-    let!(:public_record5) { create :record, user: user1, is_public: true }
+    let!(:public_record4) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record5) { create :record, :with_dot, user: user1, is_public: true }
 
     let!(:subsystem_connection_type) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: false }
 
@@ -87,11 +87,11 @@ RSpec.feature "Solved Tree Records Counter", :records_index, type: :feature do
   end
 
   context 'two subrecords, one destructive, one non-destructive, both solved' do
-    let!(:public_record1) { create :record, user: user1, is_public: true }
-    let!(:public_record2) { create :record, user: user1, is_public: true }
-    let!(:public_record3) { create :record, user: user1, is_public: true }
-    let!(:public_record4) { create :record, user: user1, is_public: true }
-    let!(:public_record5) { create :record, user: user1, is_public: true }
+    let!(:public_record1) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record2) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record3) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record4) { create :record, :with_dot, user: user1, is_public: true }
+    let!(:public_record5) { create :record, :with_dot, user: user1, is_public: true }
 
     let!(:subsystem_connection_type1) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: false }
     let!(:subsystem_connection_type2) { create :connection_type, user: user1, is_public: true, name: 'subrecord', destructive: true }

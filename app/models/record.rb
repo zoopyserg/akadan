@@ -62,12 +62,20 @@ class Record < ApplicationRecord
   ### PRIVATE METHODS
 
   def self.only_solved
+    Record.where(id: only_solved_record_ids)
+  end
+
+  def self.only_solved_record_ids
     all.select do |record|
       Record.all_solved_tree_records_of_record(record).pluck(:id).include? record.id
     end
   end
 
   def self.only_unsolved
+    Record.where(id: only_unsolved_record_ids)
+  end
+
+  def self.only_unsolved_record_ids
     all.select do |record|
       Record.all_unsolved_tree_records_of_record(record).pluck(:id).include? record.id
     end

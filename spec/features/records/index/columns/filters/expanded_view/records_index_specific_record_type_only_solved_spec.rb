@@ -11,15 +11,15 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
     let!(:record_type1) { create :record_type, name: 'Record Type 1', user: user2, is_public: true }
     let!(:record_type2) { create :record_type, name: 'Record Type 2', user: user2, is_public: true }
 
-    let!(:record1) { create :record, name: 'Record 1', record_type: record_type1, user: user2, is_public: true }
-    let!(:record2) { create :record, name: 'Record 2', record_type: record_type1, user: user2, is_public: true }
-    let!(:record3) { create :record, name: 'Record 3', record_type: record_type1, user: user2, is_public: false }
-    let!(:record4) { create :record, name: 'Record 4', record_type: record_type1, user: user2, is_public: false }
+    let!(:record1) { create :record, :with_dot, name: 'Record 1', record_type: record_type1, user: user2, is_public: true }
+    let!(:record2) { create :record, :with_dot, name: 'Record 2', record_type: record_type1, user: user2, is_public: true }
+    let!(:record3) { create :record, :with_dot, name: 'Record 3', record_type: record_type1, user: user2, is_public: false }
+    let!(:record4) { create :record, :with_dot, name: 'Record 4', record_type: record_type1, user: user2, is_public: false }
 
     let!(:solution_connection_type) { ConnectionType.where(name: 'Is Solved By...').first }
 
-    let!(:solution1) { create :record, name: 'Solution 1', user: user2 }
-    let!(:solution2) { create :record, name: 'Solution 2', user: user2 }
+    let!(:solution1) { create :record, :with_dot, name: 'Solution 1', user: user2 }
+    let!(:solution2) { create :record, :with_dot, name: 'Solution 2', user: user2 }
 
     let!(:connection1) { create :connection, record_a: record2, record_b: solution1, user: user2, connection_type_id: solution_connection_type.id }
     let!(:connection2) { create :connection, record_a: record4, record_b: solution2, user: user2, connection_type_id: solution_connection_type.id }
@@ -39,8 +39,7 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
 
         context 'signed in' do
           before do
-            visit connection_types_path
-            sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
+            login_as user2
             visit "/records?only_solved=true&record_type_id=#{record_type1.id}"
           end
 
@@ -59,8 +58,8 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
         context 'not signed in' do
           before do
             visit '/records'
-            select 'Record Type 1', from: 'Record Type'
-            check 'Only Solved'
+            choose_record_type('Record Type 1')
+            find(:css, '.row:nth-child(1) .custom-switch').click
             within '.recordscolumn form' do
               click_on 'Show'
             end
@@ -76,11 +75,10 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
 
         context 'signed in' do
           before do
-            visit connection_types_path
-            sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
+            login_as user2
             visit '/records'
-            check 'Only Solved'
-            select 'Record Type 1', from: 'Record Type'
+            find(:css, '.row:nth-child(1) .custom-switch').click
+            choose_record_type('Record Type 1')
             within '.recordscolumn form' do
               click_on 'Show'
             end

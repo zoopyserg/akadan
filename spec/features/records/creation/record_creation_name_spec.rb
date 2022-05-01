@@ -6,18 +6,17 @@ RSpec.feature "ConnectionTypeCreation Description", type: :feature do
   end
 
   context 'signed in' do
-    let!(:user) { create :user, :confirmed, :free, email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
+    let!(:user) { create :user }
     let!(:record_type) { create :record_type, name: "my type", user: user }
 
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user, scope: :user
       visit new_record_path
     end
 
     it 'should let me create' do
       expect {
-        select 'my type', from: :record_record_type_id
+        choose_record_type("my type")
         fill_in :record_name, with: 'boo'
         click_on 'Create!'
       }.to change {

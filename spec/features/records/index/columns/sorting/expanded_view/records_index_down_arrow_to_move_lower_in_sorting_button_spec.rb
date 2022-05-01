@@ -12,7 +12,7 @@ RSpec.xfeature "Record Created By", type: :feature do
   # and you don't have this covered.
   # I'm thinking... Are "down" and "up" movements for non-signed-in users - likes and dislikes?
   # I thought dots are likes and dislikes, but seems like not only dots.
-  context 'not signed in' do
+  xcontext 'not signed in' do
     before { visit records_path }
 
     it 'should say who created one record' do
@@ -24,7 +24,7 @@ RSpec.xfeature "Record Created By", type: :feature do
     end
   end
 
-  context 'signed in' do
+  xcontext 'signed in' do
     before do
       visit root_path
       sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')

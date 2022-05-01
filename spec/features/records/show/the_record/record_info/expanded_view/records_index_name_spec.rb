@@ -25,8 +25,7 @@ RSpec.feature "Record Name", :records_index, type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user2
     end
 
     context 'public record' do

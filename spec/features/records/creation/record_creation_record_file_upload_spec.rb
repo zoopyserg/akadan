@@ -6,16 +6,16 @@ RSpec.feature "New Record File Upload", type: :feature do
   end
 
   xcontext 'signed in' do
-    let!(:user) { create :user, :confirmed, :free, email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
+    let!(:user) { create :user }
 
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user, scope: :user
       visit new_record_path
     end
 
     it 'should let me create' do
       expect {
+        choose_record_type("my type")
         fill_in :record_name, with: 'boo'
         fill_in :record_description, with: 'boo'
         click_on 'Create!'

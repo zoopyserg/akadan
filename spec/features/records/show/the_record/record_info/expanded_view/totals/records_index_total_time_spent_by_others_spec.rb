@@ -24,8 +24,7 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('user2@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user2
     end
 
     context 'public' do

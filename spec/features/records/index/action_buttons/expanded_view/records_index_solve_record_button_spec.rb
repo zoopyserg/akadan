@@ -11,7 +11,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   let!(:record_type) { create :record_type, name: 'Solution', is_public: true }
 
   context 'public someone elses record' do
-    let!(:record) { create :record, user: user2, is_public: true }
+    let!(:record) { create :record, :with_dot, user: user2, is_public: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -33,8 +33,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit records_path
       end
 
@@ -61,7 +60,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   end
 
   context 'private my record' do
-    let!(:record) { create :record, user: user1, is_public: false }
+    let!(:record) { create :record, :with_dot, user: user1, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -83,8 +82,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit records_path
       end
 
@@ -130,7 +128,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   end
 
   context 'private someone elses record' do
-    let!(:record) { create :record, user: user2, is_public: false }
+    let!(:record) { create :record, :with_dot, user: user2, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -152,8 +150,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit records_path
       end
 

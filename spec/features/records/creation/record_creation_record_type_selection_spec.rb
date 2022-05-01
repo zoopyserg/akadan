@@ -6,11 +6,10 @@ RSpec.feature "New Record Type Selection", type: :feature do
   end
 
   context 'signed in' do
-    let!(:user) { create :user, :confirmed, :free, email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
+    let!(:user) { create :user }
 
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user, scope: :user
     end
 
     context 'specific_subtype' do
@@ -20,12 +19,14 @@ RSpec.feature "New Record Type Selection", type: :feature do
 
         before { visit new_record_path }
 
+        before { find(:css, '.choices').click }
+
         it 'should not include someone elses private type' do
-          expect(page.all('select#record_record_type_id option').map(&:text)).not_to include('Someone Elses Private Type')
+          expect(page.all('.choices__item').map(&:text)).not_to include('Someone Elses Private Type')
         end
 
         it 'should include someone elses public type' do
-          expect(page.all('select#record_record_type_id option').map(&:text)).to include('Someone Elses Public Type')
+          expect(page.all('.choices__item').map(&:text)).to include('Someone Elses Public Type')
         end
       end
 
@@ -40,7 +41,7 @@ RSpec.feature "New Record Type Selection", type: :feature do
           it 'should let me create' do
             expect {
               fill_in :record_name, with: 'boo'
-              select 'My Type', from: :record_record_type_id
+              choose_record_type('My Type')
               click_on 'Create!'
             }.to change {
               user.records.where(record_type_id: record_type.reload.id).count
@@ -54,7 +55,7 @@ RSpec.feature "New Record Type Selection", type: :feature do
           it 'should let me create' do
             expect {
               fill_in :record_name, with: 'boo'
-              select 'My Type', from: :record_record_type_id
+              choose_record_type('My Type')
               click_on 'Create!'
             }.to change {
               user.records.where(record_type_id: record_type.reload.id).count

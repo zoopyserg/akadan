@@ -8,7 +8,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
   # see Down Error for my thoughts on likes and dislikes.
   context 'public someone elses record' do
-    let!(:record) { create :record, name: 'Record B', user: user2, is_public: true }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user2, is_public: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -22,8 +22,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit records_path
       end
 
@@ -42,7 +41,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   end
 
   context 'private my record' do
-    let!(:record) { create :record, name: 'Record B', user: user1, is_public: true }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user1, is_public: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -56,8 +55,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit records_path
       end
 
@@ -79,7 +77,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   end
 
   context 'private someone elses record' do
-    let!(:record) { create :record, name: 'Record B', user: user2, is_public: false }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user2, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -93,8 +91,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit records_path
       end
 

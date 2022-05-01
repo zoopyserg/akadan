@@ -5,8 +5,8 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
   context 'public someone elses record' do
-    let!(:record) { create :record, user: user2, is_public: true, separate_project: false }
-    let!(:project) { create :record, name: 'Some Project', user: user2, is_public: true, separate_project: true }
+    let!(:record) { create :record, :with_dot, user: user2, is_public: true, separate_project: false }
+    let!(:project) { create :record, :with_dot, name: 'Some Project', user: user2, is_public: true, separate_project: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -28,8 +28,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 
@@ -39,8 +38,9 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
       it 'should let me create subrecords' do
         click_on 'Repeated', match: :first
+        expect(page).to have_content 'New Fact of Repetition'
 
-        select 'Some Project', from: 'dot_project_id'
+        choose_project('Some Project')
         fill_in 'Description', with: 'some description'
         fill_in 'Duration', with: '12345'
 
@@ -54,8 +54,8 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   end
 
   context 'private my record' do
-    let!(:record) { create :record, user: user1, is_public: false }
-    let!(:project) { create :record, name: 'Some Project', user: user2, is_public: true, separate_project: true }
+    let!(:record) { create :record, :with_dot, user: user1, is_public: false }
+    let!(:project) { create :record, :with_dot, name: 'Some Project', user: user2, is_public: true, separate_project: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -77,8 +77,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 
@@ -89,8 +88,9 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
         it 'should let me create subrecords' do
           click_on 'Repeated', match: :first
+          expect(page).to have_content 'New Fact of Repetition'
 
-          select 'Some Project', from: 'dot_project_id'
+          choose_project('Some Project')
           fill_in 'Description', with: 'some description'
           fill_in 'Duration', with: '12345'
 
@@ -106,7 +106,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
         before { visit new_record_dot_path(record) }
 
         it 'should let me create subrecords' do
-          select 'Some Project', from: 'dot_project_id'
+          choose_project('Some Project')
           fill_in 'Description', with: 'some description'
           fill_in 'Duration', with: '12345'
 
@@ -121,7 +121,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   end
 
   context 'private someone elses record' do
-    let!(:record) { create :record, user: user2, is_public: false }
+    let!(:record) { create :record, :with_dot, user: user2, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -143,8 +143,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 

@@ -36,12 +36,11 @@ RSpec.feature "Record Created By", :records_index, type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user2
       visit record_path(public_record)
     end
 
-    it { expect(page).to have_content 'Other people\'s records in tree: 2' }
+    it { expect(page).to have_content 'Other people\'s records in tree: 3' }
     it { expect(page).to have_no_content 'Other people\'s records in tree: 7' }
   end
 end

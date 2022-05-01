@@ -9,8 +9,8 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   let!(:connection_type) { create :connection_type, name: 'Irrelevant Because...', is_public: true }
 
   context 'public someone elses record' do
-    let!(:record) { create :record, name: 'Record B', user: user2, is_public: true }
-    let!(:record2) { create :record, name: 'Record B', user: user2, is_public: true }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user2, is_public: true }
+    let!(:record2) { create :record, :with_dot, name: 'Record B', user: user2, is_public: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -32,13 +32,12 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 
       it 'should allow to edit' do
-        expect(page).to have_link 'Irrelevant', count: 2
+        expect(page).to have_link 'Irrelevant', count: 1
       end
 
       # sometimes failes when there is a lot of records
@@ -57,8 +56,8 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   end
 
   context 'private my record' do
-    let!(:record) { create :record, name: 'Record B', user: user1, is_public: true }
-    let!(:record2) { create :record, name: 'Record B', user: user1, is_public: true }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user1, is_public: true }
+    let!(:record2) { create :record, :with_dot, name: 'Record B', user: user1, is_public: true }
 
     context 'not signed in' do
       describe 'a button' do
@@ -80,8 +79,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 
@@ -121,8 +119,8 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   end
 
   context 'private someone elses record' do
-    let!(:record) { create :record, name: 'Record B', user: user2, is_public: false }
-    let!(:record2) { create :record, name: 'Record B', user: user2, is_public: false }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user2, is_public: false }
+    let!(:record2) { create :record, :with_dot, name: 'Record B', user: user2, is_public: false }
 
     context 'not signed in' do
       describe 'a button' do
@@ -144,8 +142,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
     context 'signed in' do
       before do
-        visit root_path
-        sign_in('user1@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit record_path(record)
       end
 
