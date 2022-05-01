@@ -5210,40 +5210,32 @@ example_id                                                                      
 ./spec/features/sensors/index/sensors_index_spec.rb[1:2:3]                                                                                                     | passed  | 1.37 seconds    |
 ./spec/features/settings/edit/settings_edit_cancel_unsaved_changes_spec.rb[1:2:1]                                                                              | pending | 0.00003 seconds |
 ./spec/features/settings/edit/settings_edit_cancel_unsaved_changes_spec.rb[1:2:2]                                                                              | pending | 0.00001 seconds |
-./spec/features/side nav/nav_connections_button_spec.rb[1:1:1]                                                                                                 | passed  | 1.05 seconds    |
-./spec/features/side nav/nav_connections_button_spec.rb[1:2:1]                                                                                                 | passed  | 1.05 seconds    |
-./spec/features/side nav/nav_connectiontypes_button_spec.rb[1:1:1]                                                                                             | passed  | 1.05 seconds    |
-./spec/features/side nav/nav_connectiontypes_button_spec.rb[1:2:1]                                                                                             | passed  | 0.99533 seconds |
-./spec/features/side nav/nav_import_from_google_calendar_button_spec.rb[1:1:1]                                                                                 | pending | 0.00001 seconds |
-./spec/features/side nav/nav_import_from_google_calendar_button_spec.rb[1:2:1]                                                                                 | pending | 0.00002 seconds |
-./spec/features/side nav/nav_newrecordtype_button_spec.rb[1:1:1]                                                                                               | passed  | 0.96026 seconds |
-./spec/features/side nav/nav_newrecordtype_button_spec.rb[1:2:1]                                                                                               | passed  | 2.13 seconds    |
-./spec/features/side nav/nav_online_store_button_spec.rb[1:1:1]                                                                                                | pending | 0.00001 seconds |
-./spec/features/side nav/nav_online_store_button_spec.rb[1:2:1]                                                                                                | pending | 0.00001 seconds |
-./spec/features/side nav/nav_payment_plan_button_spec.rb[1:1:1]                                                                                                | pending | 0.00001 seconds |
-./spec/features/side nav/nav_payment_plan_button_spec.rb[1:2:1]                                                                                                | pending | 0.00002 seconds |
-./spec/features/side nav/nav_people_button_spec.rb[1:1:1]                                                                                                      | passed  | 0.99405 seconds |
-./spec/features/side nav/nav_people_button_spec.rb[1:2:1]                                                                                                      | passed  | 1.02 seconds    |
-./spec/features/side nav/nav_platforms_downloads_button_spec.rb[1:1:1]                                                                                         | pending | 0.00001 seconds |
-./spec/features/side nav/nav_platforms_downloads_button_spec.rb[1:2:1]                                                                                         | pending | 0.00001 seconds |
-./spec/features/side nav/nav_records_button_spec.rb[1:1:1]                                                                                                     | passed  | 0.95828 seconds |
-./spec/features/side nav/nav_records_button_spec.rb[1:2:1]                                                                                                     | passed  | 0.95027 seconds |
-./spec/features/side nav/nav_recordtypes_button_spec.rb[1:1:1]                                                                                                 | passed  | 0.94654 seconds |
-./spec/features/side nav/nav_recordtypes_button_spec.rb[1:2:1]                                                                                                 | passed  | 0.98592 seconds |
-./spec/features/side nav/nav_sell_button_spec.rb[1:1:1]                                                                                                        | pending | 0.00001 seconds |
-./spec/features/side nav/nav_sell_button_spec.rb[1:2:1]                                                                                                        | pending | 0.00002 seconds |
-./spec/features/side nav/nav_sensors_button_spec.rb[1:1:1]                                                                                                     | passed  | 0.97696 seconds |
-./spec/features/side nav/nav_sensors_button_spec.rb[1:2:1]                                                                                                     | passed  | 1.07 seconds    |
-./spec/features/top nav/top_nav_flag_icon_spec.rb[1:1:1]                                                                                                       | pending | 0.00001 seconds |
-./spec/features/top nav/top_nav_flag_icon_spec.rb[1:2:1]                                                                                                       | pending | 0.00002 seconds |
-./spec/features/top nav/top_nav_messages_icon_spec.rb[1:1:1]                                                                                                   | pending | 0 seconds       |
-./spec/features/top nav/top_nav_messages_icon_spec.rb[1:2:1]                                                                                                   | pending | 0 seconds       |
-./spec/features/top nav/top_nav_notifications_icon_spec.rb[1:1:1]                                                                                              | pending | 0 seconds       |
-./spec/features/top nav/top_nav_notifications_icon_spec.rb[1:2:1]                                                                                              | pending | 0 seconds       |
-./spec/features/top nav/top_nav_profile_photo_spec.rb[1:1:1]                                                                                                   | pending | 0 seconds       |
-./spec/features/top nav/top_nav_profile_photo_spec.rb[1:2:1]                                                                                                   | pending | 0 seconds       |
-./spec/features/top nav/top_nav_search_spec.rb[1:1:1]                                                                                                          | pending | 0 seconds       |
-./spec/features/top nav/top_nav_search_spec.rb[1:2:1]                                                                                                          | pending | 0 seconds       |
+./spec/features/top_nav/top_nav_blocked_users_button_in_dropdown_spec.rb[1:1:1]                                                                                | passed  | 0.91888 seconds |
+./spec/features/top_nav/top_nav_blocked_users_button_in_dropdown_spec.rb[1:2:1]                                                                                | passed  | 0.94452 seconds |
+./spec/features/top_nav/top_nav_login_button_spec.rb[1:1:1]                                                                                                    | passed  | 0.85581 seconds |
+./spec/features/top_nav/top_nav_login_button_spec.rb[1:2:1]                                                                                                    | passed  | 0.85342 seconds |
+./spec/features/top_nav/top_nav_logout_button_in_dropdown_spec.rb[1:1:1]                                                                                       | passed  | 0.88859 seconds |
+./spec/features/top_nav/top_nav_logout_button_in_dropdown_spec.rb[1:2:1]                                                                                       | passed  | 0.92622 seconds |
+./spec/features/top_nav/top_nav_messages_button_in_dropdown_spec.rb[1:1:1]                                                                                     | passed  | 0.86724 seconds |
+./spec/features/top_nav/top_nav_messages_button_in_dropdown_spec.rb[1:2:1]                                                                                     | passed  | 0.90944 seconds |
+./spec/features/top_nav/top_nav_messages_envelope_button_spec.rb[1:1:1]                                                                                        | passed  | 0.88608 seconds |
+./spec/features/top_nav/top_nav_messages_envelope_button_spec.rb[1:2:1]                                                                                        | passed  | 0.88573 seconds |
+./spec/features/top_nav/top_nav_my_profile_button_in_dropdown_spec.rb[1:1:1]                                                                                   | passed  | 0.91102 seconds |
+./spec/features/top_nav/top_nav_my_profile_button_in_dropdown_spec.rb[1:2:1]                                                                                   | passed  | 0.90628 seconds |
+./spec/features/top_nav/top_nav_notifications_bell_button_spec.rb[1:1:1]                                                                                       | passed  | 0.91729 seconds |
+./spec/features/top_nav/top_nav_notifications_bell_button_spec.rb[1:2:1]                                                                                       | passed  | 0.93914 seconds |
+./spec/features/top_nav/top_nav_register_button_spec.rb[1:1:1]                                                                                                 | passed  | 0.91083 seconds |
+./spec/features/top_nav/top_nav_register_button_spec.rb[1:2:1]                                                                                                 | passed  | 0.94444 seconds |
+./spec/features/top_nav/top_nav_settings_button_in_dropdown_spec.rb[1:1:1]                                                                                     | passed  | 0.8956 seconds  |
+./spec/features/top_nav/top_nav_settings_button_in_dropdown_spec.rb[1:2:1]                                                                                     | passed  | 0.93831 seconds |
+./spec/features/top_nav/top_nav_user_email_in_dropdown_spec.rb[1:1:1]                                                                                          | passed  | 0.92509 seconds |
+./spec/features/top_nav/top_nav_user_email_in_dropdown_spec.rb[1:2:1]                                                                                          | passed  | 0.91601 seconds |
+./spec/features/top_nav/top_nav_user_name_in_dropdown_spec.rb[1:1:1]                                                                                           | passed  | 0.94748 seconds |
+./spec/features/top_nav/top_nav_user_name_in_dropdown_spec.rb[1:2:1]                                                                                           | passed  | 0.89573 seconds |
+./spec/features/top_nav/top_nav_user_photo_in_corner_spec.rb[1:1:1]                                                                                            | passed  | 0.91758 seconds |
+./spec/features/top_nav/top_nav_user_photo_in_corner_spec.rb[1:2:1]                                                                                            | passed  | 2.11 seconds    |
+./spec/features/top_nav/top_nav_user_photo_in_dropdown_spec.rb[1:1:1]                                                                                          | passed  | 0.94919 seconds |
+./spec/features/top_nav/top_nav_user_photo_in_dropdown_spec.rb[1:2:1]                                                                                          | passed  | 0.97805 seconds |
 ./spec/features/votes/vote_comments_down_spec.rb[1:1:1:1]                                                                                                      | passed  | 2.62 seconds    |
 ./spec/features/votes/vote_comments_down_spec.rb[1:1:1:2]                                                                                                      | passed  | 2.61 seconds    |
 ./spec/features/votes/vote_comments_down_spec.rb[1:1:1:3]                                                                                                      | passed  | 2.47 seconds    |
@@ -5368,29 +5360,29 @@ example_id                                                                      
 ./spec/features/votes/vote_comments_up_was_down_spec.rb[1:1:2:6:5]                                                                                             | passed  | 3.11 seconds    |
 ./spec/features/votes/vote_comments_up_was_down_spec.rb[1:2:1:1]                                                                                               | passed  | 2.01 seconds    |
 ./spec/features/votes/vote_comments_up_was_down_spec.rb[1:2:2:1]                                                                                               | passed  | 2.7 seconds     |
-./spec/helpers/blocked_users_helper_spec.rb[1:1]                                                                                                               | pending | 0.00001 seconds |
-./spec/helpers/blockings_helper_spec.rb[1:1]                                                                                                                   | pending | 0.00001 seconds |
+./spec/helpers/blocked_users_helper_spec.rb[1:1]                                                                                                               | pending | 0 seconds       |
+./spec/helpers/blockings_helper_spec.rb[1:1]                                                                                                                   | pending | 0.00002 seconds |
 ./spec/helpers/bookmarks_helper_spec.rb[1:1]                                                                                                                   | pending | 0 seconds       |
 ./spec/helpers/bulk_records_helper_spec.rb[1:1]                                                                                                                | pending | 0 seconds       |
-./spec/helpers/comments_helper_spec.rb[1:1]                                                                                                                    | pending | 0.00001 seconds |
+./spec/helpers/comments_helper_spec.rb[1:1]                                                                                                                    | pending | 0 seconds       |
 ./spec/helpers/connection_types_helper_spec.rb[1:1]                                                                                                            | pending | 0 seconds       |
 ./spec/helpers/connections_helper_spec.rb[1:1]                                                                                                                 | pending | 0 seconds       |
 ./spec/helpers/conversation_starts_helper_spec.rb[1:1]                                                                                                         | pending | 0 seconds       |
 ./spec/helpers/conversations_helper_spec.rb[1:1]                                                                                                               | pending | 0 seconds       |
 ./spec/helpers/dots_helper_spec.rb[1:1]                                                                                                                        | pending | 0 seconds       |
-./spec/helpers/events_helper_spec.rb[1:1]                                                                                                                      | pending | 0.00001 seconds |
+./spec/helpers/events_helper_spec.rb[1:1]                                                                                                                      | pending | 0 seconds       |
 ./spec/helpers/friend_requests_helper_spec.rb[1:1]                                                                                                             | pending | 0 seconds       |
-./spec/helpers/friends_helper_spec.rb[1:1]                                                                                                                     | pending | 0.00001 seconds |
-./spec/helpers/messages_helper_spec.rb[1:1]                                                                                                                    | pending | 0.00001 seconds |
-./spec/helpers/notifications_helper_spec.rb[1:1]                                                                                                               | pending | 0 seconds       |
-./spec/helpers/participations_helper_spec.rb[1:1]                                                                                                              | pending | 0.00001 seconds |
+./spec/helpers/friends_helper_spec.rb[1:1]                                                                                                                     | pending | 0 seconds       |
+./spec/helpers/messages_helper_spec.rb[1:1]                                                                                                                    | pending | 0 seconds       |
+./spec/helpers/notifications_helper_spec.rb[1:1]                                                                                                               | pending | 0.00001 seconds |
+./spec/helpers/participations_helper_spec.rb[1:1]                                                                                                              | pending | 0 seconds       |
 ./spec/helpers/people_helper_spec.rb[1:1]                                                                                                                      | pending | 0 seconds       |
 ./spec/helpers/record_types_helper_spec.rb[1:1]                                                                                                                | pending | 0 seconds       |
 ./spec/helpers/records_helper_spec.rb[1:1]                                                                                                                     | pending | 0 seconds       |
 ./spec/helpers/seminars_helper_spec.rb[1:1]                                                                                                                    | pending | 0 seconds       |
 ./spec/helpers/sensors_helper_spec.rb[1:1]                                                                                                                     | pending | 0 seconds       |
-./spec/helpers/users_helper_spec.rb[1:1]                                                                                                                       | pending | 0.00002 seconds |
-./spec/helpers/votes_helper_spec.rb[1:1]                                                                                                                       | pending | 0.00001 seconds |
+./spec/helpers/users_helper_spec.rb[1:1]                                                                                                                       | pending | 0 seconds       |
+./spec/helpers/votes_helper_spec.rb[1:1]                                                                                                                       | pending | 0 seconds       |
 ./spec/models/blocked_user_spec.rb[1:1]                                                                                                                        | pending | 0.00001 seconds |
 ./spec/models/blocking_spec.rb[1:1]                                                                                                                            | passed  | 0.03596 seconds |
 ./spec/models/blocking_spec.rb[1:2]                                                                                                                            | passed  | 0.03963 seconds |
