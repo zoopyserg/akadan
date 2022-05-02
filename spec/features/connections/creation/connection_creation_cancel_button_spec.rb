@@ -12,8 +12,7 @@ RSpec.feature "ConnectionCreations Cancel Button", type: :feature do
     let!(:record_b) { create :record, name: 'Record B', user: user }
 
     before do
-      visit connections_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user
       visit new_record_connection_type_connection_path(record_a, connection_type)
     end
 

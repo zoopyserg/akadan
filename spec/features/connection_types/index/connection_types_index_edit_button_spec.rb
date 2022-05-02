@@ -11,8 +11,7 @@ RSpec.feature "Edit Connection Types Button", type: :feature do
     let!(:connection_type) { create :connection_type, name: 'name', user: the_user, is_public: true }
 
     before do
-      visit root_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user
       visit connection_types_path
     end
 

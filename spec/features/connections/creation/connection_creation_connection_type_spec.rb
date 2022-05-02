@@ -12,12 +12,11 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
     describe 'public/private connection types' do
       context 'public' do
         let!(:connection_type) { create :connection_type, name: 'Regular Type', user: user2, is_public: true }
-        let!(:record_a) { create :record, name: 'Record A', user: user }
-        let!(:record_b) { create :record, name: 'Record B', user: user }
+        let!(:record_a) { create :record, :with_dot, name: 'Record A', user: user }
+        let!(:record_b) { create :record, :with_dot, name: 'Record B', user: user }
 
         before do
-          visit connections_path
-          sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as user
           visit new_record_connection_type_connection_path(record_a, connection_type)
         end
 
@@ -32,12 +31,11 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
 
       context 'private mine' do
         let!(:connection_type) { create :connection_type, name: 'Regular Type', user: user }
-        let!(:record_a) { create :record, name: 'Record A', user: user }
-        let!(:record_b) { create :record, name: 'Record B', user: user }
+        let!(:record_a) { create :record, :with_dot, name: 'Record A', user: user }
+        let!(:record_b) { create :record, :with_dot, name: 'Record B', user: user }
 
         before do
-          visit connections_path
-          sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as user
           visit new_record_connection_type_connection_path(record_a, connection_type)
         end
 
@@ -66,12 +64,11 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
       context 'private someone elses' do
         let!(:connection_type) { create :connection_type, name: 'Not My Type', user: user2, is_public: false }
         let!(:my_connection_type) { create :connection_type, name: 'My Type', user: user, is_public: false }
-        let!(:record_a) { create :record, name: 'Record A', user: user }
-        let!(:record_b) { create :record, name: 'Record B', user: user }
+        let!(:record_a) { create :record, :with_dot, name: 'Record A', user: user }
+        let!(:record_b) { create :record, :with_dot, name: 'Record B', user: user }
 
         before do
-          visit connections_path
-          sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as user
           visit new_record_connection_type_connection_path(record_a, my_connection_type)
         end
 

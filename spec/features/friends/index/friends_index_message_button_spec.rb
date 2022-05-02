@@ -205,8 +205,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
   context 'signed in' do
     context 'I sign in' do
       before do
-        visit root_path
-        sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit friends_path
       end
 
@@ -313,8 +312,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'stranger@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('stranger@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as stranger
         visit friends_path
       end
 
@@ -337,8 +335,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'stranger_protected@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('stranger_protected@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as stranger_protected
         visit friends_path
       end
 
@@ -361,8 +358,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend
         visit friends_path
       end
 
@@ -385,8 +381,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_without_one_to_one_without_group@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_without_one_to_one_without_group@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_without_one_to_one_without_group
         visit friends_path
       end
 
@@ -430,8 +425,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_with_one_to_one_without_group@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_with_one_to_one_without_group@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_with_one_to_one_without_group
         visit friends_path
       end
 
@@ -475,8 +469,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_without_one_to_one_with_group@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_without_one_to_one_with_group@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_without_one_to_one_with_group
         visit friends_path
       end
 
@@ -520,8 +513,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_with_one_to_one_with_group@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_with_one_to_one_with_group@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_with_one_to_one_with_group
         visit friends_path
       end
 
@@ -565,8 +557,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_private@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_private
         visit friends_path
       end
 
@@ -589,8 +580,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_request_sent_to_him@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_him@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_him
         visit friends_path
       end
 
@@ -613,8 +603,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_request_sent_to_him_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_him_private@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_him_private
         visit friends_path
       end
 
@@ -637,8 +626,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_request_sent_to_me@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_me@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_me
         visit friends_path
       end
 
@@ -661,8 +649,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'friend_request_sent_to_me_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_me_private@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_me_private
         visit friends_path
       end
 
@@ -685,8 +672,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'blacklisted@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('blacklisted@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as blacklisted
         visit friends_path
       end
 
@@ -709,8 +695,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
 
     context 'blacklisted_me@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('blacklisted_me@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as blacklisted_me
         visit friends_path
       end
 

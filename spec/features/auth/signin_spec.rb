@@ -60,7 +60,7 @@ RSpec.feature "Signins", type: :feature do
                                                      email: 'jack.daniels@gmail.com',
                                                      password: 'rediculouslycomplexpassword54321',
                                                      password_confirmation: 'rediculouslycomplexpassword54321' }
-      let!(:record) { create :record, name: 'my problem', user: user }
+      let!(:record) { create :record, :with_dot, name: 'my problem', user: user }
 
       it 'should say I signed in' do
         expect(page).to have_no_content 'Welcome. You are signed in'

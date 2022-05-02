@@ -76,8 +76,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'I sign in' do
         before do
-          visit root_path
-          sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as me
           visit conversation_messages_path(conversation1)
         end
 
@@ -97,8 +96,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'my collaborator1 signs in' do
         before do
-          visit root_path
-          sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as collaborator1
           visit conversation_messages_path(conversation1)
         end
 
@@ -118,8 +116,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'my collaborator2 signs in' do
         before do
-          visit root_path
-          sign_in('collaborator2@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as collaborator2
           visit conversation_messages_path(conversation1)
         end
 
@@ -206,8 +203,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'I sign in' do
         before do
-          visit root_path
-          sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as me
           visit conversation_messages_path(conversation1)
         end
 
@@ -230,8 +226,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'my collaborator1 signs in' do
         before do
-          visit root_path
-          sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as collaborator1
           visit conversation_messages_path(conversation1)
         end
 
@@ -322,8 +317,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'I sign in' do
         before do
-          visit root_path
-          sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as me
           visit conversation_messages_path(conversation1)
         end
 
@@ -346,8 +340,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'my collaborator1 signs in' do
         before do
-          visit root_path
-          sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as collaborator1
           visit conversation_messages_path(conversation1)
         end
 
@@ -400,8 +393,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'I sign in' do
         before do
-          visit root_path
-          sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as me
           visit conversation_messages_path(conversation1)
         end
 
@@ -416,8 +408,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
       context 'my collaborator1 signs in' do
         before do
-          visit root_path
-          sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as collaborator1
           visit conversation_messages_path(conversation1)
         end
 
@@ -463,8 +454,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -475,8 +465,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 
@@ -494,8 +483,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -506,8 +494,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 
@@ -525,8 +512,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -537,8 +523,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 
@@ -556,8 +541,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -568,8 +552,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 
@@ -589,8 +572,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -601,8 +583,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 
@@ -620,8 +601,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -632,8 +612,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 
@@ -651,8 +630,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -663,8 +641,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 
@@ -682,8 +659,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'I sign in' do
             before do
-              visit root_path
-              sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as me
               visit conversation_messages_path(conversation1)
             end
 
@@ -694,8 +670,7 @@ RSpec.feature "Conversations messages index", type: :feature do
 
           context 'my collaborator1 signs in' do
             before do
-              visit root_path
-              sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+              login_as collaborator1
               visit conversation_messages_path(conversation1)
             end
 

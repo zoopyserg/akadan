@@ -129,238 +129,227 @@ RSpec.feature "People Index Names", type: :feature do
   context 'not signed in' do
     before { visit people_path }
 
-    it { expect(page).to have_content 'John Wick' }
-    it { expect(page).to have_content 'Stranger Public' }
-    it { expect(page).to have_no_content 'Stranger Protected' }
-    it { expect(page).to have_content 'Friend Dude' }
-    it { expect(page).to have_no_content 'Friend Private' }
-    it { expect(page).to have_content 'Outgoing Friend' }
-    it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-    it { expect(page).to have_content 'Incoming Friend' }
-    it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-    it { expect(page).to have_content 'Blacklisted Dude' }
-    it { expect(page).to have_content 'Blacklisted Me' }
+    it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+    it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+    it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+    it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+    it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+    it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+    it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+    it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+    it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+    it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+    it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
   end
 
   context 'signed in' do
     context 'I sign in' do
       before do
-        visit root_path
-        sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as user1
         visit people_path
       end
 
-      it { expect(page).to have_no_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_no_content 'Blacklisted Dude' }
-      it { expect(page).to have_no_content 'Blacklisted Me' }
+      it { expect(page).to have_no_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_no_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_no_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'stranger@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('stranger@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as stranger
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_no_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_no_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'stranger_protected@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('stranger_protected@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as stranger_protected
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'friend@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_no_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_no_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'friend_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_private@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_private
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'friend_request_sent_to_him@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_him@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_him
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_no_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_no_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'friend_request_sent_to_him_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_him_private@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_him_private
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'friend_request_sent_to_me@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_me@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_me
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_no_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_no_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'friend_request_sent_to_me_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_me_private@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as friend_request_sent_to_me_private
         visit people_path
       end
 
-      it { expect(page).to have_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'blacklisted@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('blacklisted@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as blacklisted
         visit people_path
       end
 
-      it { expect(page).to have_no_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_no_content 'Blacklisted Dude' }
-      it { expect(page).to have_content 'Blacklisted Me' }
+      it { expect(page).to have_no_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_no_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
 
     context 'blacklisted_me@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('blacklisted_me@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as blacklisted_me
         visit people_path
       end
 
-      it { expect(page).to have_no_content 'John Wick' }
-      it { expect(page).to have_content 'Stranger Public' }
-      it { expect(page).to have_no_content 'Stranger Protected' }
-      it { expect(page).to have_content 'Friend Dude' }
-      it { expect(page).to have_no_content 'Friend Private' }
-      it { expect(page).to have_content 'Outgoing Friend' }
-      it { expect(page).to have_no_content 'Outgoing FriendPrivate' }
-      it { expect(page).to have_content 'Incoming Friend' }
-      it { expect(page).to have_no_content 'Incoming FriendPrivate' }
-      it { expect(page).to have_content 'Blacklisted Dude' }
-      it { expect(page).to have_no_content 'Blacklisted Me' }
+      it { expect(page).to have_no_link 'John Wick', href: user_path(user1) }
+      it { expect(page).to have_link 'Stranger Public', href: user_path(stranger) }
+      it { expect(page).to have_no_link 'Stranger Protected', href: user_path(stranger_protected) }
+      it { expect(page).to have_link 'Friend Dude', href: user_path(friend) }
+      it { expect(page).to have_no_link 'Friend Private', href: user_path(friend_private) }
+      it { expect(page).to have_link 'Outgoing Friend', href: user_path(friend_request_sent_to_him) }
+      it { expect(page).to have_no_link 'Outgoing FriendPrivate', href: user_path(friend_request_sent_to_him_private) }
+      it { expect(page).to have_link 'Incoming Friend', href: user_path(friend_request_sent_to_me) }
+      it { expect(page).to have_no_link 'Incoming FriendPrivate', href: user_path(friend_request_sent_to_me_private) }
+      it { expect(page).to have_link 'Blacklisted Dude', href: user_path(blacklisted) }
+      it { expect(page).to have_no_link 'Blacklisted Me', href: user_path(blacklisted_me) }
     end
   end
 end

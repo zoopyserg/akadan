@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature "ConnectionCreation Success", type: :feature do
   let!(:user) { create :user, :confirmed, :free, username: 'something', email: 'jack.daniels@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:connection_type) { create :connection_type, name: 'Regular Type', user: user }
-  let!(:record_a) { create :record, name: 'Record A', user: user }
-  let!(:record_b) { create :record, name: 'Record B', user: user }
+  let!(:record_a) { create :record, :with_dot, name: 'Record A', user: user }
+  let!(:record_b) { create :record, :with_dot, name: 'Record B', user: user }
 
   context 'not signed in' do
     it 'should redirect to sign in page' do
@@ -16,8 +16,7 @@ RSpec.feature "ConnectionCreation Success", type: :feature do
 
   context 'signed in' do
     before do
-      visit connections_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user
       visit new_record_connection_type_connection_path(record_a, connection_type)
     end
 

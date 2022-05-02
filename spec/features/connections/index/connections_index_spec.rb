@@ -23,8 +23,7 @@ RSpec.feature "ConnectionsIndices Permissions", type: :feature do
 
   context 'signed in' do
     before do
-      visit connections_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user
       visit connections_path
     end
 

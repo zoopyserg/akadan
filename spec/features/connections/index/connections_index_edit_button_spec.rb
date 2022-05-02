@@ -13,8 +13,7 @@ RSpec.feature "Edit Connections", type: :feature do
     let!(:connection) { create :connection, name: 'name', user: the_user, record_a: record_a, connection_type: connection_type, is_public: true }
 
     before do
-      visit connections_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user, scope: :user
       visit connections_path
     end
 

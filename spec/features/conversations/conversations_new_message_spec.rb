@@ -54,8 +54,7 @@ RSpec.feature "Conversations show", type: :feature do
 
       describe 'sending a message to the conversation' do
         before do
-          visit root_path
-          sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as me
           visit conversation_messages_path(conversation1)
           fill_in 'message_body', with: 'New Message Blah Blah good'
           click_on 'Send'
@@ -85,9 +84,8 @@ RSpec.feature "Conversations show", type: :feature do
 
         context 'the reader' do
           before do
-            click_on 'Logout'
-            visit root_path
-            sign_in('collaborator1@gmail.com', 'rediculouslycomplexpassword54321')
+            logout
+            login_as collaborator1
             visit conversation_path(conversation1)
           end
 

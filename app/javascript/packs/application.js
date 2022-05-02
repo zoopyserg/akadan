@@ -52,7 +52,15 @@ import "choices.js/src/styles/choices.scss";
 import "../src/choices/choices.scss";
 
 document.addEventListener("turbolinks:load", function() {
-    var elementIds = ['#dot_project_id', '#record_type_id', '#record_record_type_id', '#connection_type_target_record_type_id', '#connection_type_target_record_subtype_id'];
+    var elementIds = [
+        '#dot_project_id',
+        '#record_type_id',
+        '#record_record_type_id',
+        '#connection_type_target_record_type_id',
+        '#connection_type_target_record_subtype_id',
+        '#record_collection_connection_type_id',
+        '#record_collection_record_type_id'
+    ];
 
     elementIds.forEach(elementId => {
         console.log(elementId);

@@ -16,6 +16,7 @@ module FeaturesHelper
   end
 
   def sign_up(username, first_name, last_name, email, password, password_confirmation)
+    visit new_user_registration_path(locale: 'en')
     within '.card-authentication1' do
       fill_in 'user_first_name', with: first_name
       fill_in 'user_last_name', with: last_name
@@ -23,7 +24,9 @@ module FeaturesHelper
       fill_in 'user_email', with: email
       fill_in 'user_password', with: password
       fill_in 'user_password_confirmation', with: password_confirmation
-      check 'user_accept_terms'
+    end
+    find(:css, 'label[for="user_accept_terms"').click
+    within '.card-authentication1' do
       click_on 'Sign up'
     end
   end

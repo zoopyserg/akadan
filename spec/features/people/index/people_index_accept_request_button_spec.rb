@@ -330,7 +330,7 @@ RSpec.feature "People Index Accept Request Button", type: :feature do
 
     context 'blacklisted@gmail.com signs in' do
       before do
-        login_as
+        login_as blacklisted
         visit people_path
       end
 

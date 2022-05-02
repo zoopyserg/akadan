@@ -47,16 +47,14 @@ RSpec.feature "AddUsersToConversations", type: :feature do
       let!(:reading1_1) { create :reading, message: message1, user: collaborator1 }
 
       before do
-        visit root_path
-        sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+        login_as me
         visit conversation_messages_path(conversation1)
         click_on 'Participants'
         click_on 'Add a New Participant'
         fill_in 'participation_user_id', with: collaborator2.id
         click_on 'Add'
-        click_on 'Logout'
-        visit root_path
-        sign_in('collaborator2@gmail.com', 'rediculouslycomplexpassword54321')
+        logout
+        login_as collaborator2
         visit conversation_messages_path(conversation1)
       end
 

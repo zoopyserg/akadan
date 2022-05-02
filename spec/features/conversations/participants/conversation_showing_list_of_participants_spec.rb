@@ -41,8 +41,7 @@ RSpec.feature "ConversationShowingListOfParticipants", type: :feature do
 
       context 'I sign in' do
         before do
-          visit root_path
-          sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+          login_as me
         end
 
         context 'I am a part of conversation' do

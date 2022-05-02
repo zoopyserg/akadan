@@ -20,8 +20,7 @@ RSpec.feature "ConnectionsIndex Description", type: :feature do
 
   context 'signed in' do
     before do
-      visit connections_path
-      sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user1
       visit connections_path
     end
 
