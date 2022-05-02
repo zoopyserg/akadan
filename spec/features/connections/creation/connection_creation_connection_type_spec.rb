@@ -73,8 +73,8 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
         end
 
         it 'should let me create by selecting the connection type' do
-          expect_dropdown_to_contain_option('connection_connection_type_id', 'My Type')
-          expect_dropdown_not_to_contain_option('connection_connection_type_id', 'Not My Type')
+          expect_dropdown_to_contain_option('connection_connection_type_id', 'MY TYPE')
+          expect_dropdown_not_to_contain_option('connection_connection_type_id', 'NOT MY TYPE')
         end
       end
     end

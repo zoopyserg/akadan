@@ -12,7 +12,7 @@
     <% end %>
   <% end %>
   <% if current_user.blocked?(user) && (current_user != user) %>
-    <%= link_to blocked_user_blocking_path(blocked_user_id: user.id, id: current_user.blockings.find_by(blocked_user: user).id), method: :delete, class: "btn btn-light btn-block", data: { confirm: 'Are you sure?' } do %>
+    <%= link_to blocked_user_blocking_path(blocked_user_id: user.id, id: current_user.blockings.find_by(blocked_user: user).id), method: :delete, class: "btn btn-light btn-block" do %>
       <i class="fa fa-close mx-1"></i>
       Unblock
     <% end %>

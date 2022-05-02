@@ -41,23 +41,30 @@ RSpec.feature "Profile Show Name", type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
+      login_as user1
       visit people_path
     end
 
     context 'me' do
       before { visit user_path(user1) }
 
-      it { expect(page).to have_css "img[src*='me.jpg']" }
-      it { expect(page).to have_no_css "img[src*='stranger.jpg']" }
+      it do
+        within '#userShowHeader' do
+          expect(page).to have_css "img[src*='me.jpg']"
+          expect(page).to have_no_css "img[src*='stranger.jpg']"
+        end
+      end
     end
 
     context 'stranger' do
       before { visit user_path(stranger) }
 
-      it { expect(page).to have_no_css "img[src*='me.jpg']" }
-      it { expect(page).to have_css "img[src*='stranger.jpg']" }
+      it do
+        within '#userShowHeader' do
+          expect(page).to have_no_css "img[src*='me.jpg']"
+          expect(page).to have_css "img[src*='stranger.jpg']"
+        end
+      end
     end
   end
 end

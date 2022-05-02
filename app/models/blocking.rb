@@ -10,8 +10,6 @@ class Blocking < ApplicationRecord
 
   ### VALIDATIONS (validates, validate)
   ### CALLBACKS
-  before_create :destroy_friendship
-
   ### NESTED ATTRIBUTES
   ### SCOPES
   ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
@@ -19,7 +17,6 @@ class Blocking < ApplicationRecord
   ### PRIVATE CLASS METHODS
   ### INSTANCE METHODS
   ### PRIVATE METHODS
-
 
   private
   def destroy_friendship

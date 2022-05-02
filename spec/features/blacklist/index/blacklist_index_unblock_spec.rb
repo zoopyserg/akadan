@@ -145,7 +145,6 @@ RSpec.feature "Blacklist Index Unblock Button", type: :feature do
       it do
         expect{
           click_on 'Unblock'
-          page.driver.browser.switch_to.alert.accept
         }.to change{
           user1.blocked_users.count
         }.by(-1)
@@ -154,7 +153,6 @@ RSpec.feature "Blacklist Index Unblock Button", type: :feature do
       it do
         expect(page).to have_content 'Blacklisted Dude'
         click_on 'Unblock'
-        page.driver.browser.switch_to.alert.accept
         visit blocked_users_path
         expect(page).to have_no_link 'Unblock'
         expect(page).to have_no_content 'Blacklisted Dude'
@@ -254,16 +252,14 @@ RSpec.feature "Blacklist Index Unblock Button", type: :feature do
       it do
         expect{
           click_on 'Unblock'
-          page.driver.browser.switch_to.alert.accept
         }.to change{
-          blacklisted_me.blocked_users.count
+          Blocking.count
         }.by(-1)
       end
 
       it do
         expect(page).to have_content 'John Wick'
         click_on 'Unblock'
-        page.driver.browser.switch_to.alert.accept
         visit blocked_users_path
         expect(page).to have_no_link 'Unblock'
         expect(page).to have_no_content 'John Wick'

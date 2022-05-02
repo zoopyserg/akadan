@@ -6,6 +6,8 @@ RSpec.feature "Connection Types Index Directional", type: :feature do
   let!(:public_connection_type) { create :connection_type, directional: true, user: user1, is_public: true }
   let!(:private_connection) { create :connection_type, directional: false, user: user2, is_public: false }
 
+  before { ConnectionType.where.not(id: [public_connection_type.id, private_connection.id]).destroy_all }
+
   context 'not signed in' do
     before { visit connection_types_path }
 

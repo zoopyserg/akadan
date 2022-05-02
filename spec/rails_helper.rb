@@ -47,3 +47,5 @@ RSpec.configure do |config|
     create :connection_type, :irrelevant_because_connection_type
   end
 end
+
+# rspec ./spec/features/auth/signin_spec.rb:65 # Signins sign in success should say I signed in

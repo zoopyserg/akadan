@@ -349,7 +349,9 @@ RSpec.feature "Conversations messages index", type: :feature do
         end
 
         it 'should not show him his photo if he did not send anything' do
-          expect(page).to have_no_css("img[src*='collaborator1.jpg']")
+          within '#conversationMessagesList' do
+            expect(page).to have_no_css("img[src*='collaborator1.jpg']")
+          end
         end
 
         it 'should not show him photos of people with whom he talks in other conversations' do

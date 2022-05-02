@@ -6,6 +6,8 @@ RSpec.feature "Connection Types Index Destructive", type: :feature do
   let!(:public_connection_type) { create :connection_type, destructive: true, user: user1, is_public: true }
   let!(:private_connection) { create :connection_type, destructive: false, user: user2, is_public: false }
 
+  before { ConnectionType.where.not(id: [public_connection_type.id, private_connection.id]).destroy_all }
+
   context 'not signed in' do
     before { visit connection_types_path }
 

@@ -5,6 +5,8 @@ RSpec.feature "Connection Types Index Target Hierarchy", type: :feature do
   let!(:record_type) { create :record_type, name: 'My Parent Type', is_public: true }
   let!(:connection_type) { create :connection_type, target_hierarchy: hierarchy, closest_parent_type: record_type, user: user1, is_public: true }
 
+  before { ConnectionType.where.not(id: [connection_type.id]).destroy_all }
+
   describe 'Siblings' do
     before { visit connection_types_path }
 

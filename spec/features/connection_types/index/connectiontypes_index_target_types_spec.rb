@@ -7,6 +7,8 @@ RSpec.feature "Connection Types Index Target Types", type: :feature do
 
   let!(:connection_type) { create :connection_type, target_type: type, target_record_type: record_type, target_record_subtype: record_subtype, user: user1, is_public: true }
 
+  before { ConnectionType.where.not(id: connection_type.id).destroy_all }
+
   describe 'Any Type' do
     before { visit connection_types_path }
 

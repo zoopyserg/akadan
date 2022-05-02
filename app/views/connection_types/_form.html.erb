@@ -101,13 +101,13 @@
           <% end %>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" id='specificTypeContainer' >
         <label for="input-3">Выберете тип таргетов</label>
         <div class="dropdown" data-pgc-define="jr.dropdown" data-pgc-define-name="Dropdown Menu" data-pgc-section="Page components">
           <%= form.collection_select :target_record_type_id, @target_record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" id='specificSubTypeContainer'>
         <label for="input-3">Выберете тип под-таргетов</label>
         <p>* виден только если выбран &quot;подтип типов&quot;</p>
         <div class="dropdown" data-pgc="jr.dropdown">

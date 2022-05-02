@@ -396,7 +396,9 @@ RSpec.feature "Conversations Index", type: :feature do
         end
 
         it 'should not show my name in the conversation if I did not reply to anyone and did not send anything' do
-          expect(page).to have_no_css("img[src*='collaborator1.jpg']")
+          within '#conversationsList' do
+            expect(page).to have_no_css("img[src*='collaborator1.jpg']")
+          end
         end
 
         it 'should not let him see names of senders of someone elses messages' do
@@ -432,7 +434,9 @@ RSpec.feature "Conversations Index", type: :feature do
         end
 
         it 'should not let me see his name when he is a receiver' do
-          expect(page).to have_no_css("img[src*='stranger.jpg']")
+          within '#conversationsList' do
+            expect(page).to have_no_css("img[src*='stranger.jpg']")
+          end
         end
 
         it 'should not let me see names of senders of someone elses messages' do

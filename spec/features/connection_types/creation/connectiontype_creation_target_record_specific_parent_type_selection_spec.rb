@@ -20,11 +20,17 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Parent Type Se
         before { visit new_connection_type_path }
 
         it 'should not include someone elses private type' do
-          expect(page.all('select#connection_type_target_record_type_id option').map(&:text)).not_to include('Someone Elses Private Type')
+          within '#specificTypeContainer' do
+            find(:css, '.choices').click
+          end
+          expect(page.all('.choices__item').map(&:text)).not_to include('Someone Elses Private Type')
         end
 
         it 'should include someone elses public type' do
-          expect(page.all('select#connection_type_target_record_type_id option').map(&:text)).to include('Someone Elses Public Type')
+          within '#specificTypeContainer' do
+            find(:css, '.choices').click
+          end
+          expect(page.all('.choices__item').map(&:text)).to include('Someone Elses Public Type')
         end
       end
 
@@ -39,7 +45,9 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Parent Type Se
             expect {
               fill_in :connection_type_name, with: 'boo'
               choose :connection_type_target_type_specific_type
-              select 'My Type', from: :connection_type_target_record_type_id
+              within '#specificTypeContainer' do
+                choose_record_type('My Type')
+              end
               click_on 'Create!'
             }.to change {
               user.connection_types.where(target_record_type: record_type.reload.id).count
@@ -54,7 +62,9 @@ RSpec.feature "ConnectionTypeCreation Target Record Type Specific Parent Type Se
             expect {
               fill_in :connection_type_name, with: 'boo'
               choose :connection_type_target_type_specific_type
-              select 'My Type', from: :connection_type_target_record_type_id
+              within '#specificTypeContainer' do
+                choose_record_type('My Type')
+              end
               click_on 'Create!'
             }.to change {
               user.connection_types.where(target_record_type: record_type.reload.id).count
