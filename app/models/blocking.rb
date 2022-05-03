@@ -10,6 +10,8 @@ class Blocking < ApplicationRecord
 
   ### VALIDATIONS (validates, validate)
   ### CALLBACKS
+  after_create :destroy_friendship
+
   ### NESTED ATTRIBUTES
   ### SCOPES
   ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
