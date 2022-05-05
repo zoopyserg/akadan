@@ -350,4 +350,28 @@ module FeaturesHelper
     find(:css, '.choices').click
     find(:css, '.choices__item', text: name).click
   end
+
+  def should_have_no_friend(name)
+    within '#friendsContainer' do
+      expect(page).to have_no_content name
+    end
+  end
+
+  def should_have_friend(name)
+    within '#friendsContainer' do
+      expect(page).to have_content name
+    end
+  end
+
+  def should_have_friend_photo(photo)
+    within '#friendsContainer' do
+      expect(page).to have_css "img[src*='#{photo}']"
+    end
+  end
+
+  def should_have_no_friend_photo(photo)
+    within '#friendsContainer' do
+      expect(page).to have_no_css "img[src*='#{photo}']"
+    end
+  end
 end

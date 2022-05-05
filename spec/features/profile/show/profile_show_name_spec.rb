@@ -39,9 +39,7 @@ RSpec.feature "Profile Show Name", type: :feature do
 
   context 'signed in' do
     before do
-      visit root_path
-      sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-      visit people_path
+      login_as user1
     end
 
     context 'me' do

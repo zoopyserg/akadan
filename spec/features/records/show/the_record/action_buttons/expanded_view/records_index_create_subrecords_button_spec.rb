@@ -16,7 +16,7 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
         before { visit record_path(record) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Create / Connect Subrecords'
+          expect(page).to have_link 'Create / Connect Subrecords'
         end
       end
 
@@ -59,6 +59,8 @@ RSpec.feature "Records Index Create Subrecords Button", :records_index, type: :f
 
   context 'private my record' do
     let!(:record) { create :record, :with_dot, user: user1, is_public: false }
+
+    before { Record.where.not(id: record.id).destroy_all }
 
     context 'not signed in' do
       describe 'a button' do

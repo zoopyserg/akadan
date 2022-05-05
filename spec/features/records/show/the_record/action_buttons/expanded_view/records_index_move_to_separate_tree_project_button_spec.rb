@@ -15,7 +15,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
         before { visit record_path(record) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Extract Into Separate Project'
+          expect(page).to have_link 'Extract Into Separate Project'
         end
       end
     end
@@ -44,12 +44,14 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   context 'private my record' do
     let!(:record) { create :record, :with_dot, name: 'Record B', user: user1, is_public: true }
 
+    before { Record.where.not(id: record.id).destroy_all }
+
     context 'not signed in' do
       describe 'a button' do
         before { visit record_path(record) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Extract Into Separate Project'
+          expect(page).to have_link 'Extract Into Separate Project'
         end
       end
     end

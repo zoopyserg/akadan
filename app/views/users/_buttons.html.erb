@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <% if user.did_not_block?(current_user) && (current_user != user) %>
+  <% if user.did_not_block?(current_user) && !current_user.blocked?(user) && !user.blocked?(current_user) && (current_user != user) && (user.is_public? || user.mutual_friend_of?(current_user) ) %>
     <%= link_to person_conversation_starts_path(person_id: user.id), method: :post, class: "btn btn-light btn-block" do %>
       <i class="fa fa-comment mx-1"></i>
       Message
@@ -38,5 +38,14 @@
       <i class="fa fa-close mx-1"></i>
       Remove from friends
     <% end %>
+  <% end %>
+<% elsif user.is_public? %>
+  <%= link_to new_user_session_path, class: "btn btn-light btn-block" do %>
+    <i class="fa fa-comment mx-1"></i>
+    Message
+  <% end %>
+  <%= link_to new_user_session_path, class: "btn btn-light btn-block" do %>
+    <i class="fa fa-check mx-1"></i>
+    Send a Friend Request
   <% end %>
 <% end %>

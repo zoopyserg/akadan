@@ -200,9 +200,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
   context 'signed in' do
     context 'I sign in' do
       before do
-        visit root_path
-        sign_in('me@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as user1
       end
 
       context 'visit user1 page' do
@@ -290,9 +288,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'stranger@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('stranger@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as stranger
       end
 
       context 'visit user1 page' do
@@ -365,9 +361,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'stranger_protected@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('stranger_protected@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as stranger_protected
       end
 
       context 'visit user1 page' do
@@ -440,9 +434,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'friend@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as friend
       end
 
       context 'visit user1 page' do
@@ -515,9 +507,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'friend_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_private@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as friend_private
       end
 
       context 'visit user1 page' do
@@ -590,9 +580,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'friend_request_sent_to_him@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_him@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as friend_request_sent_to_him
       end
 
       context 'visit user1 page' do
@@ -665,9 +653,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'friend_request_sent_to_him_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_him_private@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as friend_request_sent_to_him_private
       end
 
       context 'visit user1 page' do
@@ -740,9 +726,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'friend_request_sent_to_me@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_me@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as friend_request_sent_to_me
       end
 
       context 'visit user1 page' do
@@ -815,9 +799,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'friend_request_sent_to_me_private@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('friend_request_sent_to_me_private@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as friend_request_sent_to_me_private
       end
 
       context 'visit user1 page' do
@@ -890,9 +872,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'blacklisted@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('blacklisted@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as blacklisted
       end
 
       context 'visit user1 page' do
@@ -965,9 +945,7 @@ RSpec.feature "People Index Unfriend the Friend Button", type: :feature do
 
     context 'blacklisted_me@gmail.com signs in' do
       before do
-        visit root_path
-        sign_in('blacklisted_me@gmail.com', 'rediculouslycomplexpassword54321')
-        visit people_path
+        login_as blacklisted_me
       end
 
       context 'visit user1 page' do

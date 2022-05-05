@@ -221,7 +221,7 @@ RSpec.feature "Friends Index Message Button", type: :feature do
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him.id)}']" }
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me.id)}']" }
-      it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: blacklisted.id)}']" }
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: blacklisted_me.id)}']" }
 

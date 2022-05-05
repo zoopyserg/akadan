@@ -18,7 +18,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
         before { visit records_path }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Solve'
+          expect(page).to have_link 'Solve'
         end
       end
 
@@ -61,6 +61,8 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
 
   context 'private my record' do
     let!(:record) { create :record, :with_dot, user: user1, is_public: false }
+
+    before { Record.where.not(id: record.id).destroy_all }
 
     context 'not signed in' do
       describe 'a button' do

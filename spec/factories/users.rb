@@ -8,6 +8,8 @@ FactoryBot.define do
     password_confirmation { '11111111' }
     accept_terms { true }
     is_public { true }
+    bio { Faker::Lorem.paragraph }
+    about { Faker::Lorem.paragraph }
 
     trait :confirmed do
       confirmation_sent_at { Time.now }

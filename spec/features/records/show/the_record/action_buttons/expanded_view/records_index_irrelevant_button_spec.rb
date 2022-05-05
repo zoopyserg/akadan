@@ -17,7 +17,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
         before { visit record_path(record) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Irrelevant'
+          expect(page).to have_link 'Irrelevant'
         end
       end
 
@@ -56,8 +56,10 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   end
 
   context 'private my record' do
-    let!(:record) { create :record, :with_dot, name: 'Record B', user: user1, is_public: true }
-    let!(:record2) { create :record, :with_dot, name: 'Record B', user: user1, is_public: true }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user1, is_public: false }
+    let!(:record2) { create :record, :with_dot, name: 'Record B', user: user1, is_public: false }
+
+    before { Record.where.not(id: [record.id, record2.id]).destroy_all }
 
     context 'not signed in' do
       describe 'a button' do

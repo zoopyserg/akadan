@@ -1,0 +1,15 @@
+<% if @show_friends_list %>
+  <div class="card-body border-top border-light" id='friendsContainer'>
+    <h5>Friends (<%= User.mutual_friends(@user).count %>)</h5>
+    <div class="row">
+      <% User.mutual_friends(@user).limit(6).each do |friend| %>
+        <%= render "users/friend_thumb", friend: friend %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <% #= link_to "View All", user_friends_path(@user), class: "btn btn-primary btn-block" %>
+      </div>
+    </div>
+  </div>
+<% end %>

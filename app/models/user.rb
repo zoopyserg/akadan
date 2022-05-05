@@ -68,6 +68,10 @@ class User < ApplicationRecord
   ### CLASS METHODS
   ### PRIVATE CLASS METHODS
   ### INSTANCE METHODS
+  def mutual_friends
+    User.mutual_friends(self)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

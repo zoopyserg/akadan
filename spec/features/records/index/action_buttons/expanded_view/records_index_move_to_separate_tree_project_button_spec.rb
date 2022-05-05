@@ -15,7 +15,8 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
         before { visit records_path }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Extract Into Separate Project'
+          click_on 'Extract Into Separate Project'
+          expect(current_path).to eq new_user_session_path
         end
       end
     end
@@ -41,14 +42,16 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   end
 
   context 'private my record' do
-    let!(:record) { create :record, :with_dot, name: 'Record B', user: user1, is_public: true }
+    let!(:record) { create :record, :with_dot, name: 'Record B', user: user1, is_public: false }
+
+    before { Record.where.not(id: record.id).destroy_all }
 
     context 'not signed in' do
       describe 'a button' do
         before { visit records_path }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Extract Into Separate Project'
+          expect(page).to_not have_link 'Extract Into Separate Project'
         end
       end
     end
@@ -78,6 +81,8 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
 
   context 'private someone elses record' do
     let!(:record) { create :record, :with_dot, name: 'Record B', user: user2, is_public: false }
+
+    before { Record.where.not(id: record.id).destroy_all }
 
     context 'not signed in' do
       describe 'a button' do

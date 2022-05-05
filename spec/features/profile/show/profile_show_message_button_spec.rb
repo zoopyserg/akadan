@@ -193,8 +193,8 @@ RSpec.feature "Profile Show Message Button", type: :feature do
   let!(:participation7) { create :participation, user: friend_without_one_to_one_with_group, conversation: group_conversation_1 }
   let!(:participation8) { create :participation, user: friend_with_one_to_one_with_group, conversation: group_conversation_2 }
 
-  let!(:participation9) { create :participation, user: friend, conversation: group_conversation_1 } # adding so that that group has 3 members
-  let!(:participation10) { create :participation, user: friend, conversation: group_conversation_2 } # adding so that that group has 3 members
+  let!(:participation9) { create :participation, user: friend, conversation: group_conversation_1 }
+  let!(:participation10) { create :participation, user: friend, conversation: group_conversation_2 }
 
   context 'not signed in' do
     before { visit people_path }
@@ -203,90 +203,105 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       before { visit user_path(user1) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: user1.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit stranger page' do
       before { visit user_path(stranger) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit stranger_protected page' do
       before { visit user_path(stranger_protected) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+      it { expect(page).to have_no_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend page' do
       before { visit user_path(friend) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_without_one_to_one_without_group page' do
       before { visit user_path(friend_without_one_to_one_without_group) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_without_one_to_one_without_group.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_with_one_to_one_without_group page' do
       before { visit user_path(friend_with_one_to_one_without_group) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_with_one_to_one_without_group.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_without_one_to_one_with_group page' do
       before { visit user_path(friend_without_one_to_one_with_group) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_without_one_to_one_with_group.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_with_one_to_one_with_group page' do
       before { visit user_path(friend_with_one_to_one_with_group) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_with_one_to_one_with_group.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_private page' do
       before { visit user_path(friend_private) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+      it { expect(page).to have_no_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_request_sent_to_him page' do
       before { visit user_path(friend_request_sent_to_him) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_request_sent_to_him_private page' do
       before { visit user_path(friend_request_sent_to_him_private) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+      it { expect(page).to have_no_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_request_sent_to_me page' do
       before { visit user_path(friend_request_sent_to_me) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit friend_request_sent_to_me_private page' do
       before { visit user_path(friend_request_sent_to_me_private) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+      it { expect(page).to have_no_link 'Message', href: new_user_session_path }
     end
 
     context 'visit blacklisted page' do
       before { visit user_path(blacklisted) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: blacklisted.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
     context 'visit blacklisted_me page' do
       before { visit user_path(blacklisted_me) }
 
       it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: blacklisted_me.id)}']" }
+      it { expect(page).to have_link 'Message', href: new_user_session_path }
     end
 
   end
@@ -314,7 +329,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -362,7 +377,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -374,13 +389,13 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
         before { visit user_path(blacklisted) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: blacklisted.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: blacklisted.id)}']" }
       end
 
       context 'visit blacklisted_me page' do
@@ -505,7 +520,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -541,7 +556,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -553,7 +568,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -565,7 +580,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -640,7 +655,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -652,7 +667,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -664,7 +679,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -703,7 +718,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -739,7 +754,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -751,7 +766,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -763,7 +778,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -802,7 +817,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -838,7 +853,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -850,7 +865,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -862,7 +877,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -923,7 +938,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -959,7 +974,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -971,7 +986,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -983,7 +998,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1045,7 +1060,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1081,7 +1096,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1093,7 +1108,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1105,7 +1120,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1167,7 +1182,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1203,7 +1218,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1215,7 +1230,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1227,7 +1242,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1289,7 +1304,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1337,7 +1352,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1349,7 +1364,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1388,7 +1403,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1424,7 +1439,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1436,7 +1451,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1448,7 +1463,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1487,7 +1502,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1523,7 +1538,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1547,7 +1562,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1586,7 +1601,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1622,7 +1637,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1634,7 +1649,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1646,7 +1661,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1685,7 +1700,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1721,7 +1736,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1733,7 +1748,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1784,7 +1799,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1820,7 +1835,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1832,7 +1847,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1844,7 +1859,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do
@@ -1871,7 +1886,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit user1 page' do
         before { visit user_path(user1) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: user1.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: user1.id)}']" }
       end
 
       context 'visit stranger page' do
@@ -1883,7 +1898,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit stranger_protected page' do
         before { visit user_path(stranger_protected) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: stranger_protected.id)}']" }
       end
 
       context 'visit friend page' do
@@ -1919,7 +1934,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_private page' do
         before { visit user_path(friend_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_him page' do
@@ -1931,7 +1946,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_him_private page' do
         before { visit user_path(friend_request_sent_to_him_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_him_private.id)}']" }
       end
 
       context 'visit friend_request_sent_to_me page' do
@@ -1943,7 +1958,7 @@ RSpec.feature "Profile Show Message Button", type: :feature do
       context 'visit friend_request_sent_to_me_private page' do
         before { visit user_path(friend_request_sent_to_me_private) }
 
-        it { expect(page).to have_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
+        it { expect(page).to have_no_css "[href='#{person_conversation_starts_path(person_id: friend_request_sent_to_me_private.id)}']" }
       end
 
       context 'visit blacklisted page' do

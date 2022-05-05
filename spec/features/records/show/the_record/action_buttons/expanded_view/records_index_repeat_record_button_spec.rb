@@ -13,7 +13,7 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
         before { visit record_path(record) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Repeated'
+          expect(page).to have_link 'Repeated'
         end
       end
 
@@ -57,12 +57,15 @@ RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
     let!(:record) { create :record, :with_dot, user: user1, is_public: false }
     let!(:project) { create :record, :with_dot, name: 'Some Project', user: user2, is_public: true, separate_project: true }
 
+
+    before { Record.where.not(id: [record.id, project.id]).destroy_all }
+
     context 'not signed in' do
       describe 'a button' do
         before { visit record_path(record) }
 
         it 'should have no button' do
-          expect(page).to have_no_link 'Repeated'
+          expect(page).to have_link 'Repeated'
         end
       end
 

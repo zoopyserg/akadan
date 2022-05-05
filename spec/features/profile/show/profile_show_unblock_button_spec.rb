@@ -126,8 +126,6 @@ RSpec.feature "Blacklist Index Unblock Button", type: :feature do
   let!(:blacklisted_connection) { create :blocking, user: user1, blocked_user: blacklisted }
   let!(:blacklisted_me_connection) { create :blocking, user: blacklisted_me, blocked_user: user1 }
 
-  before { User.where.not(id: [user1.id, stranger.id, stranger_protected.id, friend.id, friend_private.id, friend_request_sent_to_him.id, friend_request_sent_to_him_private.id, friend_request_sent_to_me.id, friend_request_sent_to_me_private.id, blacklisted.id, blacklisted_me.id]).destroy_all }
-
   context 'not signed in' do
     before { visit user_path(blacklisted) }
 

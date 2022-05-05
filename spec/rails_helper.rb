@@ -27,25 +27,22 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
-  # config.filter_gems_from_backtrace("gem name")
+
   config.include ::Rails::Controller::Testing::TestProcess, :type => :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include FactoryBot::Syntax::Methods
 
-  config.before(:all) do
-    # Capybara::Screenshot::Pruner.new(:keep_last_run).prune_old_screenshots
-  end
-
-  config.before(:each, type: :feature) do
-    # for menu, needed globally
-
-    create :connection_type, :solution_connection_type
-    create :record_type, :solution_record_type
-    create :connection_type, :subsystem_connection_type
-    create :record_type, :subsystem_record_type
-    create :connection_type, :extracted_to_connection_type
-    create :connection_type, :irrelevant_because_connection_type
+  config.before(:each, type: :feature) do |example|
+    unless example.metadata[:do_not_create_data]
+      create :record_type, :solution_record_type
+      create :record_type, :subsystem_record_type
+      create :connection_type, :subsystem_connection_type
+      create :connection_type, :solution_connection_type
+      create :connection_type, :extracted_to_connection_type
+      create :connection_type, :irrelevant_because_connection_type
+    end
   end
 end
 
-# rspec ./spec/features/auth/signin_spec.rb:65 # Signins sign in success should say I signed in
+# ./spec/features/friends/index/friends_index_message_button_spec.rb:224
+# ./spec/features/friends/index/friends_index_message_button_spec.rb:224
