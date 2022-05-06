@@ -57,6 +57,8 @@ class RecordsController < ApplicationController
     elsif params[:only_unsolved]
       @records = @records.only_unsolved.page(params[:page])
     end
+
+    @subrecords = true
   end
 
   # GET /records/new
