@@ -1,9 +1,16 @@
 FactoryBot.define do
   factory :record do
-    name { Faker::Quote.yoda }
+    name {
+      [
+        Faker::Hacker.say_something_smart,
+        Faker::GreekPhilosophers.quote,
+        Faker::Quote.yoda,
+        Faker::Hobby.activity
+      ].sample
+    }
     separate_project { true }
 
-    user { create :user }
+    user { create :user, :confirmed }
     record_type { create :record_type, user: user }
 
     trait :with_dot do

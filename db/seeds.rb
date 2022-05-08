@@ -2,14 +2,8 @@ require 'factory_bot_rails'
 require 'faker'
 
 if Rails.env.development? && !ENV['REAL']
-  user1 = FactoryBot.build :user, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678', first_name: 'Serge', last_name: 'Vinogradoff'
-  user2 = FactoryBot.build :user
-
-  user1.skip_confirmation!
-  user2.skip_confirmation!
-
-  user1.save!
-  user2.save!
+  user1 = FactoryBot.create :user, :confirmed, :with_avatar, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678', first_name: 'Serge', last_name: 'Vinogradoff'
+  user2 = FactoryBot.create :user, :confirmed, :with_avatar
 
   # needed for production
   FactoryBot.create :connection_type, name: 'Subsystem', user: user1, is_public: true
@@ -32,9 +26,7 @@ if Rails.env.development? && !ENV['REAL']
   FactoryBot.create :reading, user: user2, message: message, read: true
 
   100.times do
-    friend = FactoryBot.build :user
-    friend.skip_confirmation!
-    friend.save!
+    friend = FactoryBot.create :user, :confirmed, :with_avatar
     FactoryBot.create :friend_request, user: user1, friend: friend
     FactoryBot.create :friend_request, user: friend, friend: user1
   end
@@ -75,21 +67,21 @@ if Rails.env.development? && !ENV['REAL']
 
   # a bunch of random users
   Faker::Number.digit.times do
-    user = FactoryBot.build :user
-    user.skip_confirmation!
-    user.save!
+    some_user = FactoryBot.build :user, :confirmed, :with_avatar
 
     %i[ record connection_type record_type sensor connection ].each do |item|
       Faker::Number.digit.times do
-        FactoryBot.create item, user: user, is_public: Faker::Boolean.boolean
+        FactoryBot.create item, user: some_user, is_public: Faker::Boolean.boolean
       end
     end
   end
 
+
+  # idea for creating random friendships:
+  # 1000_000.times { User.all.sample(2).tap { |x, y| FactoryBot.create(:friend_request, user: x, friend: y); FactoryBot.create(:friend_request, user: y, friend: x); } }
+
 elsif Rails.env.staging? || Rails.env.production? || ENV['REAL']
-  admin = FactoryBot.build :user, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678', first_name: 'Serge', last_name: 'Vinogradoff' # todo: change password
-  admin.skip_confirmation!
-  admin.save!
+  admin = FactoryBot.create :user, :confirmed, :with_avatar, email: 'sergevinogradoff.personal@gmail.com', password: '12345678', password_confirmation: '12345678', first_name: 'Serge', last_name: 'Vinogradoff' # todo: change password
 
   # English
   FactoryBot.create :connection_type, name: 'Subsystem', user: admin, is_public: true, description: 'Task A is a subsystem of task B.'
