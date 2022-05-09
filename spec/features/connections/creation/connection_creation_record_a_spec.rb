@@ -31,9 +31,9 @@ RSpec.feature "ConnectionCreation Record A", type: :feature do
         expect {
           fill_in 'connection_name', with: 'some connection'
           fill_in 'connection_description', with: 'description'
-          select 'Regular Type', from: :connection_connection_type_id
+          choose_something(connection_type.name, '.connection_type_selection_section')
           # skipping Record A Selection on purpose to test autoselect
-          select 'Record B', from: :connection_record_b_id
+          choose_something('Record B', '.record_b_selection_section')
           click_on 'Create!'
         }.to change {
           user.connections.where(record_a_id: record_a.reload.id).count
@@ -52,7 +52,7 @@ RSpec.feature "ConnectionCreation Record A", type: :feature do
       end
 
       it 'should redirect me to connections path' do
-        expect(current_path).to eq connections_path
+        expect(current_path).to eq records_path
       end
     end
 
@@ -76,11 +76,12 @@ RSpec.feature "ConnectionCreation Record A", type: :feature do
 
       it 'should autoselect the record a if it was submitted via params' do
         expect {
+
           fill_in 'connection_name', with: 'some connection'
           fill_in 'connection_description', with: 'description'
-          select 'Regular Type', from: :connection_connection_type_id
+          choose_something(connection_type.name, '.connection_type_selection_section')
           # skipping Record A Selection on purpose to test autoselect
-          select 'Record B', from: :connection_record_b_id
+          choose_something('Record B', '.record_b_selection_section')
           click_on 'Create!'
         }.to change {
           user.connections.where(record_a_id: record_a.reload.id).count

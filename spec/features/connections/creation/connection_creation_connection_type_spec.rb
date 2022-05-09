@@ -52,8 +52,8 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
             fill_in 'connection_name', with: 'some connection'
             fill_in 'connection_description', with: 'description'
             # skipping type selection on purpose to check autoselect
-            select 'Record A', from: :connection_record_a_id
-            select 'Record B', from: :connection_record_b_id
+            choose_something('Record A', '.record_a_selection_section')
+            choose_something('Record B', '.record_b_selection_section')
             click_on 'Create!'
           }.to change {
             user.connections.where(connection_type: connection_type.reload.id).count
@@ -72,10 +72,8 @@ RSpec.feature "ConnectionCreations Connection Type", type: :feature do
           visit new_record_connection_type_connection_path(record_a, my_connection_type)
         end
 
-        it 'should let me create by selecting the connection type' do
-          expect_dropdown_to_contain_option('connection_connection_type_id', 'MY TYPE')
-          expect_dropdown_not_to_contain_option('connection_connection_type_id', 'NOT MY TYPE')
-        end
+        it { expect_dropdown_to_contain_option('.connection_type_selection_section', 'My Type') }
+        it { expect_dropdown_not_to_contain_option('.connection_type_selection_section', 'Not My Type') }
       end
     end
   end

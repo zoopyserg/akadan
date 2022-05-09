@@ -43,6 +43,3 @@ RSpec.configure do |config|
     end
   end
 end
-
-# ./spec/features/friends/index/friends_index_message_button_spec.rb:224
-# ./spec/features/friends/index/friends_index_message_button_spec.rb:224

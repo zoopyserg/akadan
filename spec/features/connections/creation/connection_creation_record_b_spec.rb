@@ -60,65 +60,57 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           context 'target can be any type' do
             let(:target_type) { 'any' }
 
-            it 'should have all the options for b' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B8') }
           end
 
           context 'target only same as source' do
             let(:target_type) { 'same_as_source' }
 
-            it 'should only have the records_b of the same type' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B8') }
           end
 
           context 'target can be only of specific type' do
             let(:target_type) { 'specific_type' }
 
-            it 'should only have the records_b of the required type' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B8') }
           end
 
           context 'target can be only specific subtype of specific type' do
             let(:target_type) { 'specific_subtype' }
 
-            it 'should only have the records_b of the required' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B8') }
           end
         end
 
@@ -159,74 +151,66 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           context 'target all' do
             let(:target_hierarchy) { 'all' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target root records' do
             let(:target_hierarchy) { 'all_roots' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target only siblings' do
             let(:target_hierarchy) { 'siblings' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target tree records (deep siblings)' do
             let(:target_hierarchy) { 'deep_siblings' }
             # I'm doing it as "all tree members without parents
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '10') }
           end
 
         end
@@ -267,7 +251,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
               visit new_record_connection_type_connection_path(record_a, connection_type2)
             end
 
-            it { expect(current_path).to eq connections_path }
+            it { expect(current_path).to eq records_path }
           end
 
           context 'my connection type and someone elses record a' do
@@ -278,7 +262,7 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
               visit new_record_connection_type_connection_path(record_a2, connection_type)
             end
 
-            it { expect(current_path).to eq connections_path }
+            it { expect(current_path).to eq records_path }
           end
 
           context 'my connection type and my record a' do
@@ -290,65 +274,57 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
             context 'target can be any type' do
               let(:target_type) { 'any' }
 
-              it 'should have all the options for b' do
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B6')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B8')
-              end
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B6') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B8') }
             end
 
             context 'target only same as source' do
               let(:target_type) { 'same_as_source' }
 
-              it 'should only have the records_b of the same type' do
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B6')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B8')
-              end
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B6') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B8') }
             end
 
             context 'target can be only of specific type' do
               let(:target_type) { 'specific_type' }
 
-              it 'should only have the records_b of the required type' do
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B6')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B8')
-              end
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B6') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B8') }
             end
 
             context 'target can be only specific subtype of specific type' do
               let(:target_type) { 'specific_subtype' }
 
-              it 'should only have the records_b of the required' do
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B6')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-                expect_dropdown_not_to_contain_option('connection_record_b_id', 'B8')
-              end
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B6') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+              it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B8') }
             end
           end
         end
@@ -389,74 +365,66 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           context 'target all' do
             let(:target_hierarchy) { 'all' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target root records' do
             let(:target_hierarchy) { 'all_roots' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target only siblings' do
             let(:target_hierarchy) { 'siblings' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target tree records (deep siblings)' do
             let(:target_hierarchy) { 'deep_siblings' }
             # I'm doing it as "all tree members without parents
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '10') }
           end
 
         end
@@ -493,65 +461,57 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           context 'target can be any type' do
             let(:target_type) { 'any' }
 
-            it 'should have all the options for b' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B8') }
           end
 
           context 'target only same as source' do
             let(:target_type) { 'same_as_source' }
 
-            it 'should only have the records_b of the same type' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B8') }
           end
 
           context 'target can be only of specific type' do
             let(:target_type) { 'specific_type' }
 
-            it 'should only have the records_b of the required type' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B8') }
           end
 
           context 'target can be only specific subtype of specific type' do
             let(:target_type) { 'specific_subtype' }
 
-            it 'should only have the records_b of the required' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'A1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B4')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B5')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', 'B7')
-              expect_dropdown_to_contain_option('connection_record_b_id', 'B8')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'A1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B4') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', 'B7') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', 'B8') }
           end
         end
 
@@ -591,74 +551,66 @@ RSpec.feature "ConnectionCreation Record B", type: :feature do
           context 'target all' do
             let(:target_hierarchy) { 'all' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target root records' do
             let(:target_hierarchy) { 'all_roots' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target only siblings' do
             let(:target_hierarchy) { 'siblings' }
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '10') }
           end
 
           context 'target tree records (deep siblings)' do
             let(:target_hierarchy) { 'deep_siblings' }
             # I'm doing it as "all tree members without parents
 
-            it 'should show correct probable record_bs' do
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '0')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '1')
-              expect_dropdown_to_contain_option('connection_record_b_id', '2')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '3')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '4')
-              expect_dropdown_to_contain_option('connection_record_b_id', '5')
-              expect_dropdown_to_contain_option('connection_record_b_id', '6')
-              expect_dropdown_to_contain_option('connection_record_b_id', '7')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '8')
-              expect_dropdown_to_contain_option('connection_record_b_id', '9')
-              expect_dropdown_not_to_contain_option('connection_record_b_id', '10')
-            end
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '0') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '1') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '2') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '3') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '4') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '5') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '6') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '7') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '8') }
+            it { expect_dropdown_to_contain_option('.record_b_selection_section', '9') }
+            it { expect_dropdown_not_to_contain_option('.record_b_selection_section', '10') }
           end
 
         end

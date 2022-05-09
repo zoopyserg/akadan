@@ -34,6 +34,9 @@
           </div>
         </div>
         <div class="align-items-center d-flex">
+          <%= link_to new_record_connection_type_connection_path(record_id: record.id, connection_type_id: @solution_connection_type_id) do %>
+            <i class="fa fa-arrow-circle-o-left my-1"></i>
+          <% end %>
           <%= link_to new_record_dot_path(record_id: record.id, parent_id: nil) do %>
             <i class="fa fa-repeat mx-1 my-1"></i>
           <% end %>

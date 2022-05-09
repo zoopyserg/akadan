@@ -3,7 +3,7 @@ class ConnectionsController < ApplicationController
   before_action :set_connection_type, except: :index
   before_action :set_record_a, except: %i[index show]
   before_action :set_record_b, only: %i[create update]
-  before_action :redirect_to_connections_path, unless: :both_connection_type_and_record_a_present?, only: %i[ new edit ]
+  before_action :redirect_to_records_path, unless: :both_connection_type_and_record_a_present?, only: %i[ new edit ]
   before_action :set_connection, only: %i[ show edit update destroy ]
   before_action :set_connection_types, only: %i[ new edit ]
   before_action :set_records_a, only: %i[ new edit ]
@@ -140,8 +140,8 @@ class ConnectionsController < ApplicationController
     @records_b = @connection_type.possible_records_b_for(current_user, @record_a)
   end
 
-  def redirect_to_connections_path
-    redirect_to connections_path
+  def redirect_to_records_path
+    redirect_to records_path
   end
 
   def record_a_present?

@@ -26,7 +26,7 @@ RSpec.feature "Edit Connections", type: :feature do
       let(:is_public) { true }
 
       it 'should not allow to edit' do
-        expect(current_path).to eq connections_path
+        expect(current_path).to eq records_path
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.feature "Edit Connections", type: :feature do
       before { visit edit_record_connection_type_connection_path(record_a, connection_type, connection) }
 
       it 'should not allow to edit' do
-        expect(current_path).to eq connections_path
+        expect(current_path).to eq records_path
       end
     end
 

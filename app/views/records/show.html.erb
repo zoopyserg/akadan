@@ -18,7 +18,7 @@
                 <i class="fa fa-chevron-down mx-1 my-1"></i>
               </div>
               <div>
-                <h5 class="card-title mb-0 mx-1"><%= @record.name %><i class="fa fa-edit mx-1"></i></h5>
+                <h5 class="card-title mb-0 mx-1"><%= @record.name %></h5>
                 <%= render "shared/created_by", user: @record.user %>
               </div>
             </div>
@@ -264,6 +264,9 @@
             </div>
           </div>
           <div class="col-lg-4">
+            <%= link_to new_record_connection_type_connection_path(record_id: @record.id, connection_type_id: @solution_connection_type_id), class: "btn btn-light btn-block" do %>
+              <i class="fa fa-arrow-circle-o-left mx-1"></i>Can't (or no point to) solve because of another record
+            <% end %>
             <%= link_to new_record_dot_path(record_id: @record.id, parent_id: nil), class: "btn btn-light btn-block" do %>
               <% # todo: save project_id (id of project within which this thing repeated - pass the project id into the form) %>
               <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>

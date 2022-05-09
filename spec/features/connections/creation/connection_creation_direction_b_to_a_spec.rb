@@ -14,7 +14,7 @@ RSpec.feature "ConnectionCreations Direction B to A", type: :feature do
     before do
       login_as user
       visit new_record_connection_type_connection_path(record_b, connection_type)
-      select 'Record A', from: :connection_record_b_id
+      choose_something('Record A', '.record_b_selection_section')
       click_on 'Swap Direction'
     end
 

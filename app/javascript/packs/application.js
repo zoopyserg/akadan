@@ -59,7 +59,10 @@ document.addEventListener("turbolinks:load", function() {
         '#connection_type_target_record_type_id',
         '#connection_type_target_record_subtype_id',
         '#record_collection_connection_type_id',
-        '#record_collection_record_type_id'
+        '#record_collection_record_type_id',
+        '#connection_connection_type_id',
+        '#connection_record_a_id',
+        '#connection_record_b_id'
     ];
 
     elementIds.forEach(elementId => {

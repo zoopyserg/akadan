@@ -17,30 +17,21 @@
           </ul>
         </div>
       <% end %>
-      <div class="form-group">
-        <%= form.label :connection_type_id do %>
-          Connection Type
-        <% end %>
-        <div class="dropdown" data-pgc="jr.dropdown">
-          <%= form.collection_select :connection_type_id, @connection_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
-        </div>
-      </div>
-      <div class="form-group">
-        <%= form.label :name %>
-        <p>* optional</p>
-        <%= form.text_field :name, class: "form-control", placeholder: "Enter Connection Name" %>
-      </div>
-      <div class="form-group">
-        <%= form.label :description %>
-        <p>* optional</p>
-        <%= form.text_area :description, class: "form-control", placeholder: "Enter Connection Description (for example a reason you are creating it)" %>
-      </div>
-      <div class="form-group">
+
+      <div class="form-group record_a_selection_section">
         <%= form.label :record_a_id do %>
           Record A
         <% end %>
         <div class="dropdown" data-pgc="jr.dropdown">
           <%= form.collection_select :record_a_id, @records_a, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+        </div>
+      </div>
+      <div class="form-group connection_type_selection_section">
+        <%= form.label :connection_type_id do %>
+          Connection Type
+        <% end %>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <%= form.collection_select :connection_type_id, @connection_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
       </div>
       <div class="form-group">
@@ -64,13 +55,21 @@
           </div>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group record_b_selection_section">
         <%= form.label :record_b_id do %>
           Record B
         <% end %>
         <div class="dropdown" data-pgc="jr.dropdown">
           <%= form.collection_select :record_b_id, @records_b, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
         </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :name, 'Connection Name (optional)' %>
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter Connection Name" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description, 'Connection Description (optional)' %>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter Connection Description (for example a reason you are creating it)" %>
       </div>
       <div class="form-group d-flex justify-content-between">
         <%= button_tag type: :submit, class: "btn btn-light px-5" do %>

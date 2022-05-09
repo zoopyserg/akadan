@@ -66,9 +66,9 @@ module FeaturesHelper
   def create_connection(name, description, type, record_a, record_b)
     fill_in 'connection_name', with: name
     fill_in 'connection_description', with: description
-    select type, from: :connection_connection_type_id
-    select record_a, from: :connection_record_a_id
-    select record_b, from: :connection_record_b_id
+    choose_something(type, '.connection_type_selection_section')
+    choose_something(record_a, '.record_a_selection_section')
+    choose_something(record_b, '.record_b_selection_section')
     click_on 'Create!'
   end
 
@@ -89,11 +89,19 @@ module FeaturesHelper
   end
 
   def expect_dropdown_to_contain_option(dropdown, option)
-    expect(page.all("select##{dropdown} option").map(&:text)).to include(option)
+    within(dropdown) do
+      find(:css, '.choices').click
+      expect(page).to have_css '.choices__list--dropdown .choices__item', exact_text: option
+      find(:css, '.choices').click
+    end
   end
 
   def expect_dropdown_not_to_contain_option(dropdown, option)
-    expect(page.all("select##{dropdown} option").map(&:text)).not_to include(option)
+    within(dropdown) do
+      find(:css, '.choices').click
+      expect(page).to have_no_css '.choices__list--dropdown .choices__item', exact_text: option
+      find(:css, '.choices').click
+    end
   end
 
   def toggle_tables
@@ -342,6 +350,13 @@ module FeaturesHelper
   def choose_record_type(type)
     find(:css, '.choices').click
     find(:css, '.choices__item', text: type).click
+  end
+
+  def choose_something(name, within)
+    within(within) do
+      find(:css, '.choices').click
+      find(:css, '.choices__list--dropdown .choices__item', text: name).click
+    end
   end
 
   def choose_project(name)
