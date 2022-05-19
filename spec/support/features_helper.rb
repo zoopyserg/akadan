@@ -253,22 +253,6 @@ module FeaturesHelper
     expect(page).not_to have_css '.loading-background' # oh. forgot about the wheel.
   end
 
-  # def today_button
-  #   ".btn-group-sm:nth-child(1) .btn-sm"
-  # end
-
-  # def unsolved_button
-  #   ".btn-group-sm:nth-child(2) .btn-sm"
-  # end
-
-  # def solved_button
-  #   ".btn-group-sm:nth-child(3) .btn-sm"
-  # end
-
-  # def all_button
-  #   ".btn-group-sm:nth-child(4) .btn-sm"
-  # end
-
   def expect_to_have_split_button(count=1)
     expect_to_have_button 'arrows-alt', '1', count
   end

@@ -1,2 +1,4 @@
-<%= render "records/record_list", collapsed: false %>
+<%= form_for Group.new do |group_form| %>
+  <%= render "records/record_list", collapsed: false, group_form: group_form %>
+<% end %>
 <%= render "records/modal" %>

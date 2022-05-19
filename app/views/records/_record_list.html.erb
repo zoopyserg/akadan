@@ -27,10 +27,9 @@
                     <i class="fa fa-bolt"></i>&nbsp;Actions on Selected Records
                   </button>
                   <div class="dropdown-menu" x-placement='bottom start'>
-                    <a class="dropdown-item" href='#'>Link</a>
-                    <a href="#" class="dropdown-item">Link</a>
-                    <a href="#" class="dropdown-item">Link</a>
-                    <a href="#" class="dropdown-item">Link</a>
+                    <%= group_form.submit 'Group...', class: 'dropdown-item' %>
+                    <% # link_to 'All Irrelevant because...', new_group_path, class: 'dropdown-item' %>
+                    <% # link_to 'All Solved by...', new_group_path, class: 'dropdown-item' %>
                   </div>
                 </div>
               </div>
@@ -39,6 +38,7 @@
         </div>
       </div>
     </div>
-    <%= render "records/record_column", collapsed: collapsed %>
+    <%= render "records/record_column", collapsed: collapsed, group_form: group_form %>
   </div>
 </div>
+

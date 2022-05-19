@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :connection_types, dependent: :destroy
   has_many :connections, dependent: :destroy
   has_many :sensors, dependent: :destroy
+  has_many :groups # NOT(!) dependent: :destroy
 
   has_many :bookmarks, dependent: :destroy
   has_many :favourite_records, through: :bookmarks, class_name: 'Record', foreign_key: :record_id, source: :record

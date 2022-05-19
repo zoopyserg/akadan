@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_06_112402) do
+ActiveRecord::Schema.define(version: 2022_05_20_111052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "affiliations", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "record_a_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_affiliations_on_group_id"
+    t.index ["record_a_id"], name: "index_affiliations_on_record_a_id"
+  end
 
   create_table "blocked_users", force: :cascade do |t|
     t.string "name"
@@ -81,7 +90,9 @@ ActiveRecord::Schema.define(version: 2022_05_06_112402) do
     t.bigint "record_a_id", null: false
     t.bigint "record_b_id", null: false
     t.bigint "connection_type_id", null: false
+    t.bigint "group_id"
     t.index ["connection_type_id"], name: "index_connections_on_connection_type_id"
+    t.index ["group_id"], name: "index_connections_on_group_id"
     t.index ["record_a_id"], name: "index_connections_on_record_a_id"
     t.index ["record_b_id"], name: "index_connections_on_record_b_id"
     t.index ["user_id"], name: "index_connections_on_user_id"
@@ -118,6 +129,17 @@ ActiveRecord::Schema.define(version: 2022_05_06_112402) do
     t.bigint "friend_id", null: false
     t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
     t.index ["user_id"], name: "index_friend_requests_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.bigint "record_b_id"
+    t.bigint "connection_type_id"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["connection_type_id"], name: "index_groups_on_connection_type_id"
+    t.index ["record_b_id"], name: "index_groups_on_record_b_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -249,6 +271,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_112402) do
     t.index ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type"
   end
 
+  add_foreign_key "affiliations", "records", column: "record_a_id"
   add_foreign_key "blockings", "users"
   add_foreign_key "blockings", "users", column: "blocked_user_id"
   add_foreign_key "bookmarks", "records"
@@ -258,6 +281,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_112402) do
   add_foreign_key "connection_types", "record_types", column: "target_record_type_id"
   add_foreign_key "connection_types", "users"
   add_foreign_key "connections", "connection_types"
+  add_foreign_key "connections", "groups"
   add_foreign_key "connections", "records", column: "record_a_id"
   add_foreign_key "connections", "records", column: "record_b_id"
   add_foreign_key "connections", "users"
@@ -266,6 +290,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_112402) do
   add_foreign_key "dots", "users"
   add_foreign_key "friend_requests", "users"
   add_foreign_key "friend_requests", "users", column: "friend_id"
+  add_foreign_key "groups", "records", column: "record_b_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "participations", "conversations"

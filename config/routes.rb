@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :groups, only: [:edit, :create, :update]
   mount Sidekiq::Web => "/sidekiq"
 
   devise_for :users

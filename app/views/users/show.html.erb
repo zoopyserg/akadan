@@ -74,5 +74,7 @@
   </div>
 </div>
 
-<%= render "records/record_list", collapsed: true %>
+<%= form_for Group.new do |group_form| %>
+  <%= render "records/record_list", collapsed: true, group_form: group_form %>
+<% end %>
 <%= render "records/modal" %>
