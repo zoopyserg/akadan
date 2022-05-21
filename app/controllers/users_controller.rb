@@ -32,6 +32,22 @@ class UsersController < ApplicationController
     end
 
     @show_friends_list = (@user.is_public? || @user == current_user)
+
+    if params[:columns]
+      @columns = params[:columns]
+    else
+      @columns = [Column.new]
+
+      if signed_in?
+        @design = Design.where(is_public: true).or(Design.where(user: current_user)).where(designable: @user).first
+      else
+        @design = Design.where(is_public: true).where(designable: @user).first
+      end
+
+      @columns += @design.columns if @design
+
+      redirect_to user_path(@user, columns: @columns.collect{|c| c.attributes.except('id', 'design_id', 'created_at', 'updated_at')})
+    end
   end
 
   # GET /users/1/edit

@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:connections).dependent(:destroy) }
   it { should have_many(:sensors).dependent(:destroy) }
   it { should have_many(:user_record_stats).dependent(:destroy) }
+  it { should have_many(:designs).dependent(:destroy) }
 
   it { should have_many(:sent_messages).class_name('Message').with_foreign_key('sender_id') }
 

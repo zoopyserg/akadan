@@ -38,7 +38,10 @@
         </div>
       </div>
     </div>
-    <%= render "records/record_column", collapsed: collapsed, group_form: group_form %>
+
+    <% @columns.each do |column| %>
+      <%= render "records/record_column", collapsed: column[:collapsed], group_form: group_form, column: column %>
+    <% end %>
   </div>
 </div>
 

@@ -29,12 +29,44 @@ class RecordsController < ApplicationController
     elsif params[:only_unsolved]
       @records = @records.only_unsolved.page(params[:page])
     end
+
+    if params[:columns]
+       @columns = params[:columns]
+    else
+      @columns = [Column.new]
+
+      if signed_in?
+        @design = Design.where(is_public: true).or(Design.where(user: current_user)).where(designable: nil).first
+      else
+        @design = Design.where(is_public: true).where(designable: nil).first
+      end
+
+      @columns += @design.columns if @design
+
+      redirect_to records_path(columns: @columns.collect{|c| c.attributes.except('id', 'design_id', 'created_at', 'updated_at')})
+    end
   end
 
   def show
     @record_children_ids = @record.children.pluck(:id)
     @new_comment = @record.comments.new
     @comments = @record.comments.order(created_at: :desc)
+
+    if params[:columns]
+      @columns = params[:columns]
+    else
+      @columns = [Column.new(collapsed: false)]
+
+      if signed_in?
+        @design = Design.where(is_public: true).or(Design.where(user: current_user)).where(designable: @record).first
+      else
+        @design = Design.where(is_public: true).where(designable: @record).first
+      end
+
+      @columns += @design.columns if @design
+
+      redirect_to record_path(@record, columns: @columns.collect{|c| c.attributes.except('id', 'design_id', 'created_at', 'updated_at')})
+    end
 
     if signed_in?
       @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids).page(params[:page])

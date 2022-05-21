@@ -316,7 +316,7 @@
     </div>
 
     <%= form_for Group.new do |group_form| %>
-      <%= render "records/record_list", collapsed: true, group_form: group_form %>
+      <%= render "records/record_list", collapsed: true, group_form: group_form, designable: @record %>
     <% end %>
 
   </div>
