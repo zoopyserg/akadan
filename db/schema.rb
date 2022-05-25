@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_22_204407) do
+ActiveRecord::Schema.define(version: 2022_05_25_121554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,9 @@ ActiveRecord::Schema.define(version: 2022_05_22_204407) do
     t.boolean "collapsed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "record_type_id"
     t.index ["design_id"], name: "index_columns_on_design_id"
+    t.index ["record_type_id"], name: "index_columns_on_record_type_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -305,6 +307,7 @@ ActiveRecord::Schema.define(version: 2022_05_22_204407) do
   add_foreign_key "bookmarks", "records"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "columns", "designs"
+  add_foreign_key "columns", "record_types"
   add_foreign_key "connection_types", "record_types", column: "closest_parent_type_id"
   add_foreign_key "connection_types", "record_types", column: "target_record_subtype_id"
   add_foreign_key "connection_types", "record_types", column: "target_record_type_id"

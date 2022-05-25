@@ -15,16 +15,6 @@ class UsersController < ApplicationController
       @records = Record.where(user: @user, is_public: true).page(params[:page])
     end
 
-    if params[:record_type_id].present?
-      @record_type = @record_types.find_by(id: params[:record_type_id])
-
-      if @record_type
-        @records = @records.where(record_type: @record_type).page(params[:page])
-      else
-        @records = Record.none.page(params[:page])
-      end
-    end
-
     if params[:only_solved]
       @records = @records.only_solved.page(params[:page])
     elsif params[:only_unsolved]
@@ -61,7 +51,7 @@ class UsersController < ApplicationController
     @desire.build_design
     @desire.build_group
     @columns.each do |column_data|
-      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'] })
+      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'], record_type_id: column_data['record_type_id'] })
     end
   end
 

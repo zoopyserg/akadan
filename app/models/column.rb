@@ -8,6 +8,7 @@ class Column < ApplicationRecord
   ### ENUMS
   ### RELATIONS (belongs to, has_many, has_many through)
   belongs_to :design
+  belongs_to :record_type, optional: true
 
   ### VALIDATIONS (validates, validate)
   ### CALLBACKS

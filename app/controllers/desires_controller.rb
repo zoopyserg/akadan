@@ -28,7 +28,15 @@ class DesiresController < ApplicationController
         end
       end
 
-      redirect_to controller: session[:previous_controller], action: session[:previous_action], id: session[:previous_id], columns: params['desire']['design_attributes']['columns_attributes'].values.collect{|c| { collapsed: c['collapsed'] } }
+      redirect_to controller: session[:previous_controller],
+        action: session[:previous_action],
+        id: session[:previous_id],
+        columns: params['desire']['design_attributes']['columns_attributes'].values.collect{|c|
+          {
+            collapsed: c['collapsed'],
+            record_type_id: c['record_type_id']
+          }
+        }
     elsif params['commit'] == 'Add a Basic Column'
       if current_user
         @designable = nil

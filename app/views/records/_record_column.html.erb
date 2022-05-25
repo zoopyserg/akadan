@@ -55,8 +55,8 @@
 
             <!-- label class="d-flex justify-content-between">Record Type</label -->
             <%= label_tag 'record_type_id', 'Record Type', class: 'd-flex justify-content-between' %>
-            <div class="dropdown" data-pgc="jr.dropdown">
-              <%= select_tag 'record_type_id', options_from_collection_for_select(@record_types, :id, :name, params[:record_type_id]), include_blank: true, class: "btn btn-light dropdown-toggle px-5" %>
+            <div class="dropdown column_record_type" data-pgc="jr.dropdown">
+              <%= column_fields.select :record_type_id, options_from_collection_for_select(@record_types, :id, :name, column_fields.object.record_type_id), include_blank: true, class: "btn btn-light dropdown-toggle px-5" %>
             </div>
 
 
@@ -109,7 +109,7 @@
     <div class="row">
       <div class="col-lg-12">
         <%= design_fields.fields_for :group do |group_fields| %>
-          <%= group_fields.collection_check_boxes(:record_a_ids, @records.all, :id, :name) do |group_item| %>
+          <%= group_fields.collection_check_boxes(:record_a_ids, records_for_column(@records, @record_types, column_fields.object), :id, :name) do |group_item| %>
             <% if column_fields.object.collapsed %>
               <%= render 'records/collapsed_record', record: group_item.object, group_item: group_item %>
             <% else %>

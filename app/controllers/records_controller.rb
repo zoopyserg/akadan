@@ -9,25 +9,15 @@ class RecordsController < ApplicationController
   def index
     # todo: better pagination
     if signed_in?
-      @records = Record.where(is_public: true).or(Record.where(user: current_user)).page(params[:page])
+      @records = Record.where(is_public: true).or(Record.where(user: current_user))
     else
-      @records = Record.where(is_public: true).page(params[:page])
-    end
-
-    if params[:record_type_id].present?
-      @record_type = @record_types.find_by(id: params[:record_type_id])
-
-      if @record_type
-        @records = @records.where(record_type: @record_type).page(params[:page])
-      else
-        @records = Record.none.page(params[:page])
-      end
+      @records = Record.where(is_public: true)
     end
 
     if params[:only_solved]
-      @records = @records.only_solved.page(params[:page])
+      @records = @records.only_solved
     elsif params[:only_unsolved]
-      @records = @records.only_unsolved.page(params[:page])
+      @records = @records.only_unsolved
     end
 
     if params[:columns]
@@ -58,7 +48,7 @@ class RecordsController < ApplicationController
     @desire.build_design
     @desire.build_group
     @columns.each do |column_data|
-      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'] })
+      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'], record_type_id: column_data['record_type_id'] })
     end
   end
 
@@ -88,25 +78,15 @@ class RecordsController < ApplicationController
     end
 
     if signed_in?
-      @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids).page(params[:page])
+      @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids)
     else
-      @records = Record.where(is_public: true).where(id: @record_children_ids).page(params[:page])
-    end
-
-    if params[:record_type_id].present?
-      @record_type = @record_types.find_by(id: params[:record_type_id])
-
-      if @record_type
-        @records = @records.where(record_type: @record_type).page(params[:page])
-      else
-        @records = Record.none
-      end
+      @records = Record.where(is_public: true).where(id: @record_children_ids)
     end
 
     if params[:only_solved]
-      @records = @records.only_solved.page(params[:page])
+      @records = @records.only_solved
     elsif params[:only_unsolved]
-      @records = @records.only_unsolved.page(params[:page])
+      @records = @records.only_unsolved
     end
 
     @subrecords = true
@@ -119,7 +99,7 @@ class RecordsController < ApplicationController
     @desire.build_design
     @desire.build_group
     @columns.each do |column_data|
-      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'] })
+      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'], record_type_id: column_data['record_type_id'] })
     end
   end
 
