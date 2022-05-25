@@ -15,7 +15,7 @@ module ApplicationHelper
     commentable.is_a?(Record)
   end
 
-  def records_for_column(records, record_types, column)
+  def records_for_column(records, record_types, column, record = nil)
     # filter by type
     filtered_by_type_records = records
 
@@ -39,5 +39,18 @@ module ApplicationHelper
     end
 
     filtered_by_being_separate
+
+    # filter by being deep nested
+    filtered_by_being_deep_nested = filtered_by_being_separate
+
+    if record
+      if column.only_direct_children
+        filtered_by_being_deep_nested = filtered_by_being_separate.where(id: record.children.pluck(:id))
+      else
+        filtered_by_being_deep_nested = filtered_by_being_separate.where(id: Record.all_children_of_record(record).pluck(:id))
+      end
+    end
+
+    filtered_by_being_deep_nested
   end
 end

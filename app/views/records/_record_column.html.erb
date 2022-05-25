@@ -84,10 +84,10 @@
           <div>
             <div class="align-middle custom-control custom-switch d-flex form-check">
               <% if @subrecords.present? %>
-                <%= column_fields.radio_button :only_deep_nested, 'true' %>
-                <%= column_fields.label :only_deep_nested, 'Direct & Deep Nested Subrecords', value: 'true', class: 'mx-1' %>
-                <%= column_fields.radio_button :only_deep_nested, 'false' %>
-                <%= column_fields.label :only_deep_nested, 'Only Direct Subrecords', value: 'false', class: 'mx-1' %>
+                <%= column_fields.radio_button :only_direct_children, 'true' %>
+                <%= column_fields.label :only_direct_children, 'Only Direct Subrecords', value: 'true', class: 'mx-1' %>
+                <%= column_fields.radio_button :only_direct_children, 'false' %>
+                <%= column_fields.label :only_direct_children, 'Direct & Deep Nested Subrecords', value: 'false', class: 'mx-1' %>
               <% else %>
                 <%= column_fields.radio_button :only_separate_projects, 'true' %>
                 <%= column_fields.label :only_separate_projects, 'Only Separate Projects', value: 'true', class: 'mx-1' %>
@@ -118,7 +118,7 @@
     <div class="row">
       <div class="col-lg-12">
         <%= design_fields.fields_for :group do |group_fields| %>
-          <%= group_fields.collection_check_boxes(:record_a_ids, records_for_column(@records, @record_types, column_fields.object), :id, :name) do |group_item| %>
+          <%= group_fields.collection_check_boxes(:record_a_ids, records_for_column(@records, @record_types, column_fields.object, @subrecords ? @record : nil), :id, :name) do |group_item| %>
             <% if column_fields.object.collapsed %>
               <%= render 'records/collapsed_record', record: group_item.object, group_item: group_item %>
             <% else %>

@@ -53,13 +53,12 @@ class RecordsController < ApplicationController
         collapsed: column_data['collapsed'],
         record_type_id: column_data['record_type_id'],
         only_separate_projects: column_data['only_separate_projects'],
-        only_deep_nested: column_data['only_deep_nested']
+        only_direct_children: column_data['only_direct_children']
       })
     end
   end
 
   def show
-    @record_children_ids = @record.children.pluck(:id)
     @new_comment = @record.comments.new
     @comments = @record.comments.order(created_at: :desc)
 
@@ -84,9 +83,9 @@ class RecordsController < ApplicationController
     end
 
     if signed_in?
-      @records = Record.where(is_public: true).or(Record.where(user: current_user)).where(id: @record_children_ids)
+      @records = Record.where(is_public: true).or(Record.where(user: current_user))
     else
-      @records = Record.where(is_public: true).where(id: @record_children_ids)
+      @records = Record.where(is_public: true)
     end
 
     if params[:only_solved]
@@ -110,7 +109,7 @@ class RecordsController < ApplicationController
         collapsed: column_data['collapsed'],
         record_type_id: column_data['record_type_id'],
         only_separate_projects: column_data['only_separate_projects'],
-        only_deep_nested: column_data['only_deep_nested']
+        only_direct_children: column_data['only_direct_children']
       })
     end
   end
