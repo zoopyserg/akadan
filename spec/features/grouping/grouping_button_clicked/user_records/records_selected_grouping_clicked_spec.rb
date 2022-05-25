@@ -30,8 +30,8 @@ RSpec.feature "RecordsIndices", type: :feature do
     context 'user 1 path' do
       before do
         visit user_path(user1)
-        check "group_record_a_ids_#{public_record1.id}"
-        check "group_record_a_ids_#{invisible_public_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{public_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_public_record1.id}"
         click_on 'Actions on Selected Records'
 
         expect {
@@ -47,8 +47,8 @@ RSpec.feature "RecordsIndices", type: :feature do
     context 'user 2 path' do
       before do
         visit user_path(user2)
-        check "group_record_a_ids_#{public_record2.id}"
-        check "group_record_a_ids_#{invisible_public_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{public_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_public_record2.id}"
         click_on 'Actions on Selected Records'
 
         expect {
@@ -68,10 +68,10 @@ RSpec.feature "RecordsIndices", type: :feature do
     context 'user 1 path' do
       before do
         visit user_path(user1)
-        check "group_record_a_ids_#{public_record1.id}"
-        check "group_record_a_ids_#{private_record1.id}"
-        check "group_record_a_ids_#{invisible_public_record1.id}"
-        check "group_record_a_ids_#{invisible_private_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{public_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{private_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_public_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_private_record1.id}"
         click_on 'Actions on Selected Records'
 
         expect {
@@ -99,8 +99,8 @@ RSpec.feature "RecordsIndices", type: :feature do
     context 'user 2 path' do
       before do
         visit user_path(user2)
-        check "group_record_a_ids_#{public_record2.id}"
-        check "group_record_a_ids_#{invisible_public_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{public_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_public_record2.id}"
         click_on 'Actions on Selected Records'
 
         expect {
@@ -132,8 +132,8 @@ RSpec.feature "RecordsIndices", type: :feature do
     context 'user 1 path' do
       before do
         visit user_path(user1)
-        check "group_record_a_ids_#{public_record1.id}"
-        check "group_record_a_ids_#{invisible_public_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{public_record1.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_public_record1.id}"
         click_on 'Actions on Selected Records'
 
         expect {
@@ -162,10 +162,10 @@ RSpec.feature "RecordsIndices", type: :feature do
     context 'user 2 path' do
       before do
         visit user_path(user2)
-        check "group_record_a_ids_#{public_record2.id}"
-        check "group_record_a_ids_#{private_record2.id}"
-        check "group_record_a_ids_#{invisible_public_record2.id}"
-        check "group_record_a_ids_#{invisible_private_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{public_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{private_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_public_record2.id}"
+        check "desire_design_attributes_group_record_a_ids_#{invisible_private_record2.id}"
         click_on 'Actions on Selected Records'
 
         expect {

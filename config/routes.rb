@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :groups, only: [:edit, :create, :update]
+  resources :groups, only: [:edit, :update]
   mount Sidekiq::Web => "/sidekiq"
 
   devise_for :users
@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   # resources :events
   resources :notifications
   resources :sensors
+
+  resources :desires, only: [:create]
+  resources :designs, only: [:create, :update]
 
   resources :people, only: :index do
     resources :conversation_starts, only: :create

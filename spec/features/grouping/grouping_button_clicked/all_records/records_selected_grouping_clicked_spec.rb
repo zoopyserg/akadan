@@ -11,8 +11,8 @@ RSpec.feature "RecordsIndices", type: :feature do
   context 'not signed in' do
     before do
       visit records_path
-      check "group_record_a_ids_#{public_record1.id}"
-      check "group_record_a_ids_#{public_record2.id}"
+      check "desire_design_attributes_group_record_a_ids_#{public_record1.id}"
+      check "desire_design_attributes_group_record_a_ids_#{public_record2.id}"
       click_on 'Actions on Selected Records'
 
       expect {
@@ -30,9 +30,9 @@ RSpec.feature "RecordsIndices", type: :feature do
 
     before do
       visit records_path
-      check "group_record_a_ids_#{public_record1.id}"
-      check "group_record_a_ids_#{public_record2.id}"
-      check "group_record_a_ids_#{private_record1.id}"
+      check "desire_design_attributes_group_record_a_ids_#{public_record1.id}"
+      check "desire_design_attributes_group_record_a_ids_#{public_record2.id}"
+      check "desire_design_attributes_group_record_a_ids_#{private_record1.id}"
       click_on 'Actions on Selected Records'
 
       expect {
@@ -54,9 +54,9 @@ RSpec.feature "RecordsIndices", type: :feature do
     before { login_as user2 }
     before do
       visit records_path
-      check "group_record_a_ids_#{public_record1.id}"
-      check "group_record_a_ids_#{public_record2.id}"
-      check "group_record_a_ids_#{private_record2.id}"
+      check "desire_design_attributes_group_record_a_ids_#{public_record1.id}"
+      check "desire_design_attributes_group_record_a_ids_#{public_record2.id}"
+      check "desire_design_attributes_group_record_a_ids_#{private_record2.id}"
       click_on 'Actions on Selected Records'
 
       expect {

@@ -11,21 +11,6 @@ class GroupsController < ApplicationController
   def edit
   end
 
-  # POST /groups or /groups.json
-  def create
-    @group = current_user.groups.new(group_params)
-
-    respond_to do |format|
-      if @group.save
-        format.html { redirect_to edit_group_url(@group) }
-        format.json { render :show, status: :created, location: @group }
-      else
-        format.html { redirect_to edit_group_url(@group) }
-        format.json { render json: @group.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # PATCH/PUT /groups/1 or /groups/1.json
   def update
     # adding new record B

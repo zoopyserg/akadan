@@ -36,14 +36,29 @@ class RecordsController < ApplicationController
       @columns = [Column.new]
 
       if signed_in?
-        @design = Design.where(is_public: true).or(Design.where(user: current_user)).where(designable: nil).first
+        if Design.where(user: current_user).where(designable: nil).exists?
+          @design = Design.where(user: current_user).where(designable: nil).first
+        else
+          @design = Design.where(is_public: true).where(designable: nil).first
+        end
       else
         @design = Design.where(is_public: true).where(designable: nil).first
       end
 
       @columns += @design.columns if @design
 
-      redirect_to records_path(columns: @columns.collect{|c| c.attributes.except('id', 'design_id', 'created_at', 'updated_at')})
+      redirect_to records_path(columns: @columns.collect{|c| c.attributes.except('design_id', 'created_at', 'updated_at') })
+    end
+
+    session[:previous_controller] = 'records'
+    session[:previous_action] = 'index'
+    session[:previous_id] = nil
+
+    @desire = Desire.new
+    @desire.build_design
+    @desire.build_group
+    @columns.each do |column_data|
+      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'] })
     end
   end
 
@@ -58,14 +73,18 @@ class RecordsController < ApplicationController
       @columns = [Column.new(collapsed: false)]
 
       if signed_in?
-        @design = Design.where(is_public: true).or(Design.where(user: current_user)).where(designable: @record).first
+        if Design.where(user: current_user).where(designable: @record).exists?
+          @design = Design.where(user: current_user).where(designable: @record).first
+        else
+          @design = Design.where(is_public: true).where(designable: @record).first
+        end
       else
         @design = Design.where(is_public: true).where(designable: @record).first
       end
 
       @columns += @design.columns if @design
 
-      redirect_to record_path(@record, columns: @columns.collect{|c| c.attributes.except('id', 'design_id', 'created_at', 'updated_at')})
+      redirect_to record_path(@record, columns: @columns.collect{|c| c.attributes.except('design_id', 'created_at', 'updated_at')})
     end
 
     if signed_in?
@@ -91,6 +110,17 @@ class RecordsController < ApplicationController
     end
 
     @subrecords = true
+
+    session[:previous_controller] = 'records'
+    session[:previous_action] = 'show'
+    session[:previous_id] = @record.id
+
+    @desire = Desire.new
+    @desire.build_design
+    @desire.build_group
+    @columns.each do |column_data|
+      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'] })
+    end
   end
 
   # GET /records/new

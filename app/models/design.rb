@@ -12,6 +12,8 @@ class Design < ApplicationRecord
   ### VALIDATIONS (validates, validate)
   ### CALLBACKS
   ### NESTED ATTRIBUTES
+  accepts_nested_attributes_for :columns, allow_destroy: true
+
   ### SCOPES
   ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
   ### CLASS METHODS

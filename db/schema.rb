@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_21_112724) do
+ActiveRecord::Schema.define(version: 2022_05_22_204407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(version: 2022_05_21_112724) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["designable_type", "designable_id"], name: "index_designs_on_designable"
     t.index ["user_id"], name: "index_designs_on_user_id"
+  end
+
+  create_table "desires", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "design_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["design_id"], name: "index_desires_on_design_id"
+    t.index ["group_id"], name: "index_desires_on_group_id"
   end
 
   create_table "dots", force: :cascade do |t|
@@ -305,6 +314,8 @@ ActiveRecord::Schema.define(version: 2022_05_21_112724) do
   add_foreign_key "connections", "records", column: "record_a_id"
   add_foreign_key "connections", "records", column: "record_b_id"
   add_foreign_key "connections", "users"
+  add_foreign_key "desires", "designs"
+  add_foreign_key "desires", "groups"
   add_foreign_key "dots", "records"
   add_foreign_key "dots", "records", column: "project_id"
   add_foreign_key "dots", "users"

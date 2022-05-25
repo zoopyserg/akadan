@@ -39,14 +39,29 @@ class UsersController < ApplicationController
       @columns = [Column.new]
 
       if signed_in?
-        @design = Design.where(is_public: true).or(Design.where(user: current_user)).where(designable: @user).first
+        if Design.where(user: current_user).where(designable: @user).exists?
+          @design = Design.where(user: current_user).where(designable: @user).first
+        else
+          @design = Design.where(is_public: true).where(designable: @user).first
+        end
       else
         @design = Design.where(is_public: true).where(designable: @user).first
       end
 
       @columns += @design.columns if @design
 
-      redirect_to user_path(@user, columns: @columns.collect{|c| c.attributes.except('id', 'design_id', 'created_at', 'updated_at')})
+      redirect_to user_path(@user, columns: @columns.collect{|c| c.attributes.except('design_id', 'created_at', 'updated_at')})
+    end
+
+    session[:previous_controller] = 'users'
+    session[:previous_action] = 'show'
+    session[:previous_id] = @user.id
+
+    @desire = Desire.new
+    @desire.build_design
+    @desire.build_group
+    @columns.each do |column_data|
+      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'] })
     end
   end
 

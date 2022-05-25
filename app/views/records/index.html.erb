@@ -1,4 +1,5 @@
-<%= form_for Group.new do |group_form| %>
-  <%= render "records/record_list", collapsed: false, group_form: group_form %>
+<%= form_for @desire do |desire_form| %>
+  <%= render "records/record_list", desire_form: desire_form %>
 <% end %>
+
 <%= render "records/modal" %>
