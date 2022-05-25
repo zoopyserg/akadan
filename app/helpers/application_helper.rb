@@ -16,20 +16,28 @@ module ApplicationHelper
   end
 
   def records_for_column(records, record_types, column)
-    final_records = records
+    # filter by type
+    filtered_by_type_records = records
 
     if column.record_type_id.present?
       record_type = record_types.find_by(id: column.record_type_id)
 
       if record_type
-        final_records = records.where(record_type_id: column.record_type_id)
+        filtered_by_type_records = records.where(record_type_id: column.record_type_id)
       else
-        final_records = Record.none
+        filtered_by_type_records = Record.none
       end
     else
       records
     end
 
-    final_records
+    # filter by being separate
+    filtered_by_being_separate = filtered_by_type_records
+
+    if column.only_separate_projects
+      filtered_by_being_separate = filtered_by_type_records.where(separate_project: true)
+    end
+
+    filtered_by_being_separate
   end
 end

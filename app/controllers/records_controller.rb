@@ -48,7 +48,13 @@ class RecordsController < ApplicationController
     @desire.build_design
     @desire.build_group
     @columns.each do |column_data|
-      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'], record_type_id: column_data['record_type_id'] })
+      @desire.design.columns.build({
+        id: column_data['id'],
+        collapsed: column_data['collapsed'],
+        record_type_id: column_data['record_type_id'],
+        only_separate_projects: column_data['only_separate_projects'],
+        only_deep_nested: column_data['only_deep_nested']
+      })
     end
   end
 
@@ -99,7 +105,13 @@ class RecordsController < ApplicationController
     @desire.build_design
     @desire.build_group
     @columns.each do |column_data|
-      @desire.design.columns.build({ id: column_data['id'], collapsed: column_data['collapsed'], record_type_id: column_data['record_type_id'] })
+      @desire.design.columns.build({
+        id: column_data['id'],
+        collapsed: column_data['collapsed'],
+        record_type_id: column_data['record_type_id'],
+        only_separate_projects: column_data['only_separate_projects'],
+        only_deep_nested: column_data['only_deep_nested']
+      })
     end
   end
 

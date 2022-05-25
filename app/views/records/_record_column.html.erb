@@ -83,8 +83,17 @@
         <div class="align-items-center d-flex">
           <div>
             <div class="align-middle custom-control custom-switch d-flex form-check">
-              <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch1"/>
-              <label class="align-middle custom-control-label form-check-label" for="customSwitch1">Only Separate Projects (on a Show page gets replaced with "Show Not Only Direct Children But Also Their Deep nested Children of this type")</label>
+              <% if @subrecords.present? %>
+                <%= column_fields.radio_button :only_deep_nested, 'true' %>
+                <%= column_fields.label :only_deep_nested, 'Direct & Deep Nested Subrecords', value: 'true', class: 'mx-1' %>
+                <%= column_fields.radio_button :only_deep_nested, 'false' %>
+                <%= column_fields.label :only_deep_nested, 'Only Direct Subrecords', value: 'false', class: 'mx-1' %>
+              <% else %>
+                <%= column_fields.radio_button :only_separate_projects, 'true' %>
+                <%= column_fields.label :only_separate_projects, 'Only Separate Projects', value: 'true', class: 'mx-1' %>
+                <%= column_fields.radio_button :only_separate_projects, 'false' %>
+                <%= column_fields.label :only_separate_projects, 'Any Hierarchy', value: 'false', class: 'mx-1' %>
+              <% end %>
             </div>
           </div>
         </div>

@@ -34,7 +34,9 @@ class DesiresController < ApplicationController
         columns: params['desire']['design_attributes']['columns_attributes'].values.collect{|c|
           {
             collapsed: c['collapsed'],
-            record_type_id: c['record_type_id']
+            record_type_id: c['record_type_id'],
+            only_separate_projects: c['only_separate_projects'],
+            only_deep_nested: c['only_deep_nested']
           }
         }
     elsif params['commit'] == 'Add a Basic Column'
