@@ -1,16 +1,6 @@
 class DesiresController < ApplicationController
   # POST /desires
   def create
-    # {"authenticity_token"=>"[FILTERED]", "commit"=>"Group...",
-    #  "desire"=>{
-    #    "design_attributes"=>{
-    #      "columns_attributes"=>{"0"=>{"id"=>"", "collapsed"=>"true"} },
-    #      "group"=>{
-    #        "record_a_ids"=>["", "1", "2"]
-    #      }
-    #    }
-    #  },
-    #  "record_type_id"=>"", "search_terms"=>""}
     if params['commit'] == 'Group...'
       if current_user
        @group = current_user.groups.new(record_a_ids: params['desire']['design_attributes']['group']['record_a_ids'])
@@ -38,29 +28,29 @@ class DesiresController < ApplicationController
         end
       end
 
-      # todo: do column id in params too, as I'm updating them
       redirect_to controller: session[:previous_controller], action: session[:previous_action], id: session[:previous_id], columns: params['desire']['design_attributes']['columns_attributes'].values.collect{|c| { collapsed: c['collapsed'] } }
+    elsif params['commit'] == 'Add a Basic Column'
+      if current_user
+        @designable = nil
+        if session[:previous_controller] == 'records' && session[:previous_action] == 'show' && session[:previous_id].present?
+          @designable = Record.find_by_id(session[:previous_id])
+        elsif session[:previous_controller] == 'users' && session[:previous_action] == 'show' && session[:previous_id].present?
+          @designable = User.find_by_id(session[:previous_id])
+        end
 
-      # {
-      #   "authenticity_token"=>"[FILTERED]",
-      #   "desire"=>{
-      #     "design_attributes"=>{
-      #       "columns_attributes"=>{
-      #         "0"=>{"id"=>"", "collapsed"=>"true"}
-      #       },
-      #       "group"=>{
-      #         "record_a_ids"=>[""]
-      #       }
-      #     }
-      #   },
-      #   "record_type_id"=>"",
-      #   "search_terms"=>"",
-      #   "commit"=>"Update Column Filters"}
+        @design = current_user.designs.find_by(designable: @designable)
+        if !@design
+          @design = current_user.designs.create(designable: @designable, is_public: false)
+        end
+        @column = @design.columns.new(collapsed: false)
+        @column.save
+        redirect_to controller: session[:previous_controller], action: session[:previous_action], id: session[:previous_id]
+      else
+        respond_to do |format|
+          format.html { redirect_to new_user_session_url }
+        end
+      end
     end
   end
-
-  # def desire_params
-  #   params.require(:desire).permit(design_attributes: { column_attributes: [], group: { record_a_ids: [] } })
-  # end
 
 end
