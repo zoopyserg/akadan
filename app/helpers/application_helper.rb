@@ -52,5 +52,15 @@ module ApplicationHelper
     end
 
     filtered_by_being_deep_nested
+
+    filtered_by_solved_status = filtered_by_being_deep_nested
+
+    if column.filter_solved_status == 'solved'
+      filtered_by_solved_status = filtered_by_being_deep_nested.only_solved
+    elsif column.filter_solved_status == 'unsolved'
+      filtered_by_solved_status = filtered_by_being_deep_nested.only_unsolved
+    end
+
+    filtered_by_solved_status
   end
 end

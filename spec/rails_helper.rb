@@ -32,7 +32,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include FactoryBot::Syntax::Methods
 
-  config.before(:each, type: :feature) do |example|
+  config.before(:each) do |example|
     unless example.metadata[:do_not_create_data]
       create :record_type, :solution_record_type
       create :record_type, :subsystem_record_type

@@ -28,21 +28,13 @@
       <div class="col-lg-12 d-flex justify-content-between">
         <div class="align-items-center d-flex">
           <div>
-            <div class="form-check custom-control custom-switch">
-              <%= check_box_tag 'only_solved', 'true', params['only_solved'].present?, class: "form-check-input custom-control-input" %>
-              <%= label_tag 'only_solved', 'Only Solved', class: 'custom-control-label form-check-label' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <div class="form-check custom-control custom-switch">
-              <%= check_box_tag 'only_unsolved', 'true', params['only_unsolved'].present?, class: "form-check-input custom-control-input" %>
-              <%= label_tag 'only_unsolved', 'Only Unsolved', class: 'custom-control-label form-check-label' %>
+            <div class="align-middle form-check custom-control d-flex py-0 px-0">
+              <%= column_fields.radio_button :filter_solved_status, 'any' %>
+              <%= column_fields.label :filter_solved_status, 'Any', value: 'any', class: 'mx-1' %>
+              <%= column_fields.radio_button :filter_solved_status, 'solved' %>
+              <%= column_fields.label :filter_solved_status, 'Only Solved', value: 'solved', class: 'mx-1' %>
+              <%= column_fields.radio_button :filter_solved_status, 'unsolved' %>
+              <%= column_fields.label :filter_solved_status, 'Only Unsolved', value: 'unsolved', class: 'mx-1' %>
             </div>
           </div>
         </div>
@@ -82,7 +74,7 @@
       <div class="col-lg-12 d-flex justify-content-between">
         <div class="align-items-center d-flex">
           <div>
-            <div class="align-middle custom-control custom-switch d-flex form-check">
+            <div class="align-middle custom-control d-flex form-check py-0 px-0">
               <% if @subrecords.present? %>
                 <%= column_fields.radio_button :only_direct_children, 'true' %>
                 <%= column_fields.label :only_direct_children, 'Only Direct Subrecords', value: 'true', class: 'mx-1' %>

@@ -2,6 +2,11 @@ class ConnectionType < ApplicationRecord
   ### INCLUDES
   ### DEFAULT SCOPE
   ### CONSTANTS
+  SUBSYSTEM_NAME = 'Subsystem'
+  IS_SOLVED_BY_NAME = 'Is Solved By...'
+  EXTRACTED_TO_NAME = 'Extracted To...'
+  IRRELEVANT_BECAUSE_NAME = 'Irrelevant Because...'
+
   ### ATTR ACCESSORS
   ### ENUMS
   ### RELATIONS (belongs to, has_many, has_many through)
@@ -14,7 +19,7 @@ class ConnectionType < ApplicationRecord
   validates :name, presence: true
   validates :target_hierarchy, inclusion: { in: %w(all all_roots deep_siblings siblings) }
   validates :target_type, inclusion: { in: %w(any same_as_source specific_type specific_subtype) }
-  # todo: URGENT forbid creating types with system names ("is solved by" etc).
+  validate :skip_creation_of_system_columns
 
   ### CALLBACKS
   ### NESTED ATTRIBUTES
@@ -22,19 +27,19 @@ class ConnectionType < ApplicationRecord
   ### ACTS_AS..., GEOCODED_BY, AUTOSTRIP_ATTRIBUTES, ATTACHED FILES and other non-standard special keywords
   ### CLASS METHODS
   def self.subsystem_connection_type
-    find_by(name: 'Subsystem')
+    find_by(name: SUBSYSTEM_NAME)
   end
 
   def self.solution_connection_type
-    find_by(name: 'Is Solved By...')
+    find_by(name: IS_SOLVED_BY_NAME)
   end
 
   def self.extracted_to_connection_type
-    find_by(name: 'Extracted To...')
+    find_by(name: EXTRACTED_TO_NAME)
   end
 
   def self.irrelevant_because_connection_type
-    find_by(name: 'Irrelevant Because...')
+    find_by(name: IRRELEVANT_BECAUSE_NAME)
   end
 
   ### PRIVATE CLASS METHODS
@@ -116,4 +121,15 @@ class ConnectionType < ApplicationRecord
   end
 
   ### PRIVATE METHODS
+
+  private
+  def skip_creation_of_system_columns
+    if (name == SUBSYSTEM_NAME && ConnectionType.where(name: SUBSYSTEM_NAME).exists?) ||
+       (name == IS_SOLVED_BY_NAME && ConnectionType.where(name: IS_SOLVED_BY_NAME).exists?) ||
+       (name == EXTRACTED_TO_NAME && ConnectionType.where(name: EXTRACTED_TO_NAME).exists?) ||
+       (name == IRRELEVANT_BECAUSE_NAME && ConnectionType.where(name: IRRELEVANT_BECAUSE_NAME).exists?)
+      errors.add(:base, "This is a system name that is already taken")
+      return false
+    end
+  end
 end

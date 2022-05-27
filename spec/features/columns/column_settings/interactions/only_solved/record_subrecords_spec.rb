@@ -3,95 +3,194 @@ require 'rails_helper'
 RSpec.feature "RecordsIndices", type: :feature do
   let!(:user1) { create :user, :confirmed }
   let!(:user2) { create :user, :confirmed }
+
+  let!(:public_record0) { create :record, :with_dot, name: 'Public Record 0', user: user1, is_public: true }
   let!(:public_record1) { create :record, :with_dot, name: 'Public Record 1', user: user1, is_public: true }
-  let!(:public_record2) { create :record, :with_dot, name: 'Public Record 2', user: user1, is_public: true }
-  let!(:public_record3) { create :record, :with_dot, name: 'Public Record 2', user: user1, is_public: true }
+  let!(:public_record2) { create :record, :with_dot, name: 'Public Record 2', user: user1, is_public: true, record_type: RecordType.solution_record_type }
+  let!(:public_record3) { create :record, :with_dot, name: 'Public Record 3', user: user1, is_public: true }
+  let!(:public_record4) { create :record, :with_dot, name: 'Public Record 4', user: user1, is_public: true }
 
-  let!(:connection1) { create :connection, record_b: public_record2, record_a: public_record1 }
-  let!(:connection2) { create :connection, record_b: public_record3, record_a: public_record1 }
-
-  let!(:collapsed_column_params) { [ { collapsed: true } ] }
-  let!(:semicollapsed_column_params) { [ { collapsed: false } ] }
+  let!(:connection0) { create :connection, record_b: public_record1, record_a: public_record0 } # should be displayed
+  let!(:connection1) { create :connection, record_b: public_record2, record_a: public_record1 } # solved
+  let!(:connection2) { create :connection, record_b: public_record3, record_a: public_record1 } # not solved
+  let!(:connection3) { create :connection, record_a: public_record2, record_b: public_record4, connection_type: ConnectionType.solution_connection_type }
 
   context 'not signed in' do
-    context 'collapsed' do
+    context 'solved' do
       before do
-        visit record_path(public_record1, columns: collapsed_column_params)
-        find(:css, '#desire_design_attributes_columns_attributes_0_collapsed_false').click
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_solved').click
         click_on 'Update Column Filters'
         expect(current_path).to eq record_path(public_record1)
       end
 
-      it { expect(page).to have_css '.record_semicollapsed', count: 2 }
-      it { expect(page).to have_no_css '.record_collapsed' }
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_content 'Public Record 2' }
+      it { expect(page).to have_no_content 'Public Record 3' }
+      it { expect(page).to have_no_content 'Public Record 4' }
     end
 
-    context 'semicollapsed' do
+    context 'unsolved' do
       before do
-        visit record_path(public_record1, columns: semicollapsed_column_params)
-        find(:css, '#desire_design_attributes_columns_attributes_0_collapsed_true').click
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_unsolved').click
         click_on 'Update Column Filters'
         expect(current_path).to eq record_path(public_record1)
       end
 
-      it { expect(page).to have_css '.record_collapsed', count: 2 }
-      it { expect(page).to have_no_css '.record_semicollapsed' }
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_no_content 'Public Record 2' }
+      it { expect(page).to have_content 'Public Record 3' }
+      it { expect(page).to have_content 'Public Record 4' }
+    end
+
+    context 'any' do
+      before do
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_any').click
+        click_on 'Update Column Filters'
+        expect(current_path).to eq record_path(public_record1)
+      end
+
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_content 'Public Record 2' }
+      it { expect(page).to have_content 'Public Record 3' }
+      it { expect(page).to have_content 'Public Record 4' }
     end
   end
 
   context 'user1 signed in' do
     before { login_as user1 }
 
-    context 'collapsed' do
+    context 'solved' do
       before do
-        visit record_path(public_record1, columns: collapsed_column_params)
-        find(:css, '#desire_design_attributes_columns_attributes_0_collapsed_false').click
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_solved').click
         click_on 'Update Column Filters'
         expect(current_path).to eq record_path(public_record1)
       end
 
-      it { expect(page).to have_css '.record_semicollapsed', count: 2 }
-      it { expect(page).to have_no_css '.record_collapsed' }
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_content 'Public Record 2' }
+      it { expect(page).to have_no_content 'Public Record 3' }
+      it { expect(page).to have_no_content 'Public Record 4' }
     end
 
-    context 'semicollapsed' do
+    context 'unsolved' do
       before do
-        visit record_path(public_record1, columns: semicollapsed_column_params)
-        find(:css, '#desire_design_attributes_columns_attributes_0_collapsed_true').click
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_unsolved').click
         click_on 'Update Column Filters'
         expect(current_path).to eq record_path(public_record1)
       end
 
-      it { expect(page).to have_css '.record_collapsed', count: 2 }
-      it { expect(page).to have_no_css '.record_semicollapsed' }
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_no_content 'Public Record 2' }
+      it { expect(page).to have_content 'Public Record 3' }
+      it { expect(page).to have_content 'Public Record 4' }
+    end
+
+    context 'any' do
+      before do
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_any').click
+        click_on 'Update Column Filters'
+        expect(current_path).to eq record_path(public_record1)
+      end
+
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_content 'Public Record 2' }
+      it { expect(page).to have_content 'Public Record 3' }
+      it { expect(page).to have_content 'Public Record 4' }
     end
   end
 
   context 'user2 signed in' do
     before { login_as user2 }
 
-    context 'collapsed' do
+    context 'solved' do
       before do
-        visit record_path(public_record1, columns: collapsed_column_params)
-        find(:css, '#desire_design_attributes_columns_attributes_0_collapsed_false').click
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_solved').click
         click_on 'Update Column Filters'
         expect(current_path).to eq record_path(public_record1)
+        logout
+        visit record_path(public_record1)
       end
 
-      it { expect(page).to have_css '.record_semicollapsed', count: 2 }
-      it { expect(page).to have_no_css '.record_collapsed' }
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_content 'Public Record 2' }
+      it { expect(page).to have_content 'Public Record 3' }
+      it { expect(page).to have_content 'Public Record 4' }
     end
 
-    context 'semicollapsed' do
+    context 'unsolved' do
       before do
-        visit record_path(public_record1, columns: semicollapsed_column_params)
-        find(:css, '#desire_design_attributes_columns_attributes_0_collapsed_true').click
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_unsolved').click
         click_on 'Update Column Filters'
         expect(current_path).to eq record_path(public_record1)
+        logout
+        visit record_path(public_record1)
       end
 
-      it { expect(page).to have_css '.record_collapsed', count: 2 }
-      it { expect(page).to have_no_css '.record_semicollapsed' }
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_content 'Public Record 2' }
+      it { expect(page).to have_content 'Public Record 3' }
+      it { expect(page).to have_content 'Public Record 4' }
+    end
+
+    context 'any' do
+      before do
+        visit record_path(public_record1)
+        expect(page).to have_content 'Public Record 1'
+        expect(page).to have_content 'Public Record 2'
+        expect(page).to have_content 'Public Record 3'
+        expect(page).to have_content 'Public Record 4'
+        find(:css, '#desire_design_attributes_columns_attributes_0_filter_solved_status_any').click
+        click_on 'Update Column Filters'
+        expect(current_path).to eq record_path(public_record1)
+        logout
+        visit record_path(public_record1)
+      end
+
+      it { expect(page).to have_no_content 'Public Record 0' }
+      it { expect(page).to have_content 'Public Record 1', count: 1 }
+      it { expect(page).to have_content 'Public Record 2' }
+      it { expect(page).to have_content 'Public Record 3' }
+      it { expect(page).to have_content 'Public Record 4' }
     end
   end
 end

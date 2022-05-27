@@ -14,12 +14,6 @@ class RecordsController < ApplicationController
       @records = Record.where(is_public: true)
     end
 
-    if params[:only_solved]
-      @records = @records.only_solved
-    elsif params[:only_unsolved]
-      @records = @records.only_unsolved
-    end
-
     if params[:columns]
        @columns = params[:columns]
     else
@@ -53,7 +47,8 @@ class RecordsController < ApplicationController
         collapsed: column_data['collapsed'],
         record_type_id: column_data['record_type_id'],
         only_separate_projects: column_data['only_separate_projects'],
-        only_direct_children: column_data['only_direct_children']
+        only_direct_children: column_data['only_direct_children'],
+        filter_solved_status: column_data['filter_solved_status']
       })
     end
   end
@@ -109,7 +104,8 @@ class RecordsController < ApplicationController
         collapsed: column_data['collapsed'],
         record_type_id: column_data['record_type_id'],
         only_separate_projects: column_data['only_separate_projects'],
-        only_direct_children: column_data['only_direct_children']
+        only_direct_children: column_data['only_direct_children'],
+        filter_solved_status: column_data['filter_solved_status']
       })
     end
   end

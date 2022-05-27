@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_25_152105) do
+ActiveRecord::Schema.define(version: 2022_05_26_072155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_05_25_152105) do
     t.bigint "record_type_id"
     t.boolean "only_separate_projects", default: false
     t.boolean "only_direct_children", default: false
+    t.integer "filter_solved_status_id", default: 0
     t.index ["design_id"], name: "index_columns_on_design_id"
     t.index ["record_type_id"], name: "index_columns_on_record_type_id"
   end

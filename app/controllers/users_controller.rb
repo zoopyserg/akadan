@@ -15,12 +15,6 @@ class UsersController < ApplicationController
       @records = Record.where(user: @user, is_public: true).page(params[:page])
     end
 
-    if params[:only_solved]
-      @records = @records.only_solved.page(params[:page])
-    elsif params[:only_unsolved]
-      @records = @records.only_unsolved.page(params[:page])
-    end
-
     @show_friends_list = (@user.is_public? || @user == current_user)
 
     if params[:columns]
@@ -56,7 +50,8 @@ class UsersController < ApplicationController
         collapsed: column_data['collapsed'],
         record_type_id: column_data['record_type_id'],
         only_separate_projects: column_data['only_separate_projects'],
-        only_deep_nested: column_data['only_deep_nested']
+        only_direct_children: column_data['only_direct_children'],
+        filter_solved_status: column_data['filter_solved_status']
       })
     end
   end

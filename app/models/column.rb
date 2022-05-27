@@ -6,6 +6,12 @@ class Column < ApplicationRecord
   attr_accessor :persisted_column_id
 
   ### ENUMS
+  enum filter_solved_status: {
+    any: 0,
+    solved: 1,
+    unsolved: 2
+  }
+
   ### RELATIONS (belongs to, has_many, has_many through)
   belongs_to :design
   belongs_to :record_type, optional: true
