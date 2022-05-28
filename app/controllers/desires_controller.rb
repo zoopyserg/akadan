@@ -37,7 +37,8 @@ class DesiresController < ApplicationController
             record_type_id: c['record_type_id'],
             only_separate_projects: c['only_separate_projects'],
             only_direct_children: c['only_direct_children'],
-            filter_solved_status: c['filter_solved_status']
+            filter_solved_status: c['filter_solved_status'],
+            page: 1
           }
         }
     elsif params['commit'] == 'Add a Basic Column'

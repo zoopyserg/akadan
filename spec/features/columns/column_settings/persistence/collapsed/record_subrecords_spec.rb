@@ -26,8 +26,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
 
       context 'semicollapsed' do
@@ -38,8 +38,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
     end
 
@@ -52,8 +52,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
 
       context 'semicollapsed' do
@@ -64,8 +64,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
     end
   end
@@ -82,8 +82,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
 
       context 'semicollapsed' do
@@ -94,8 +94,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
     end
 
@@ -108,8 +108,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
 
       context 'semicollapsed' do
@@ -120,8 +120,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_collapsed', count: 2 }
-        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 4 }
+        it { expect(page).to have_no_css '.record_semicollapsed' }
       end
     end
   end
@@ -138,8 +138,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
 
       context 'semicollapsed' do
@@ -150,8 +150,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
     end
 
@@ -164,8 +164,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_semicollapsed', count: 4 }
-        it { expect(page).to have_no_css '.record_collapsed' }
+        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 2 }
       end
 
       context 'semicollapsed' do
@@ -176,8 +176,8 @@ RSpec.feature "RecordsIndices", type: :feature do
           visit record_path(public_record1)
         end
 
-        it { expect(page).to have_css '.record_collapsed', count: 2 }
-        it { expect(page).to have_css '.record_semicollapsed', count: 2 }
+        it { expect(page).to have_css '.record_collapsed', count: 4 }
+        it { expect(page).to have_no_css '.record_semicollapsed' }
       end
     end
   end

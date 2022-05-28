@@ -4,7 +4,7 @@ RSpec.feature "Records Index Irrelevant Button", :records_index, type: :feature 
   let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
-  let!(:connection_type) { create :connection_type, name: 'Extracted To...', is_public: true }
+  let!(:connection_type) { ConnectionType.extracted_to_connection_type }
 
   # see Down Error for my thoughts on likes and dislikes.
   context 'public someone elses record' do

@@ -43,7 +43,7 @@ RSpec.feature "Create Records Comments", type: :feature do
       end
 
       context 'no user' do
-        before { login_as nil, scope: :user }
+        before { logout }
         before { visit record_path(record) }
 
         it { expect_comment_to_have_vote(comment, '1') }

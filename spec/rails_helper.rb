@@ -34,12 +34,12 @@ RSpec.configure do |config|
 
   config.before(:each) do |example|
     unless example.metadata[:do_not_create_data]
-      create :record_type, :solution_record_type
-      create :record_type, :subsystem_record_type
-      create :connection_type, :subsystem_connection_type
-      create :connection_type, :solution_connection_type
-      create :connection_type, :extracted_to_connection_type
-      create :connection_type, :irrelevant_because_connection_type
+      create :record_type, :solution_record_type, is_public: true
+      create :record_type, :subsystem_record_type, is_public: true
+      create :connection_type, :subsystem_connection_type, is_public: true
+      create :connection_type, :solution_connection_type, is_public: true
+      create :connection_type, :extracted_to_connection_type, is_public: true
+      create :connection_type, :irrelevant_because_connection_type, is_public: true
     end
   end
 end

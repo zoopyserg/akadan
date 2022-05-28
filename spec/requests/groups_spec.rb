@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/groups", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Group. As you add validations to Group, be sure to
   # adjust the attributes here as well.
@@ -25,62 +25,11 @@ RSpec.describe "/groups", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      Group.create! valid_attributes
-      get groups_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      group = Group.create! valid_attributes
-      get group_url(group)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_group_url
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET /edit" do
     it "renders a successful response" do
       group = Group.create! valid_attributes
       get edit_group_url(group)
       expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Group" do
-        expect {
-          post groups_url, params: { group: valid_attributes }
-        }.to change(Group, :count).by(1)
-      end
-
-      it "redirects to the created group" do
-        post groups_url, params: { group: valid_attributes }
-        expect(response).to redirect_to(group_url(Group.last))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "does not create a new Group" do
-        expect {
-          post groups_url, params: { group: invalid_attributes }
-        }.to change(Group, :count).by(0)
-      end
-
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post groups_url, params: { group: invalid_attributes }
-        expect(response).to be_successful
-      end
     end
   end
 
@@ -111,21 +60,6 @@ RSpec.describe "/groups", type: :request do
         patch group_url(group), params: { group: invalid_attributes }
         expect(response).to be_successful
       end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested group" do
-      group = Group.create! valid_attributes
-      expect {
-        delete group_url(group)
-      }.to change(Group, :count).by(-1)
-    end
-
-    it "redirects to the groups list" do
-      group = Group.create! valid_attributes
-      delete group_url(group)
-      expect(response).to redirect_to(groups_url)
     end
   end
 end

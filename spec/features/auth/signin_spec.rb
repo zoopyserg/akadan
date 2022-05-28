@@ -67,7 +67,7 @@ RSpec.feature "Signins", type: :feature do
 
         sign_in('jack.daniels@gmail.com', 'rediculouslycomplexpassword54321')
 
-        expect(current_path).to eq root_path
+        expect(current_path).to eq records_path
 
         expect(page).to have_content 'Welcome. You are signed in'
       end

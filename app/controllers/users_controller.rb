@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include DesignableController
+
   before_action :authenticate_user!, except: %i[ show ]
   before_action :set_user_to_show, only: %i[ show ]
   before_action :recorect_to_people_path, unless: :user_signed_in?, only: %i[ edit update ]
@@ -8,52 +10,17 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    # todo: better pagination
+    store_current_path_globally('users', 'show', @user.id, @user, true)
+
     if signed_in? && (@user == current_user)
-      @records = Record.where(user: @user).page(params[:page])
+      @records = Record.where(user: @user)
     else
-      @records = Record.where(user: @user, is_public: true).page(params[:page])
+      @records = Record.where(user: @user, is_public: true)
     end
 
     @show_friends_list = (@user.is_public? || @user == current_user)
 
-    if params[:columns]
-      @columns = params[:columns]
-    else
-      @columns = [Column.new]
-
-      if signed_in?
-        if Design.where(user: current_user).where(designable: @user).exists?
-          @design = Design.where(user: current_user).where(designable: @user).first
-        else
-          @design = Design.where(is_public: true).where(designable: @user).first
-        end
-      else
-        @design = Design.where(is_public: true).where(designable: @user).first
-      end
-
-      @columns += @design.columns if @design
-
-      redirect_to user_path(@user, columns: @columns.collect{|c| c.attributes.except('design_id', 'created_at', 'updated_at')})
-    end
-
-    session[:previous_controller] = 'users'
-    session[:previous_action] = 'show'
-    session[:previous_id] = @user.id
-
-    @desire = Desire.new
-    @desire.build_design
-    @desire.build_group
-    @columns.each do |column_data|
-      @desire.design.columns.build({
-        id: column_data['id'],
-        collapsed: column_data['collapsed'],
-        record_type_id: column_data['record_type_id'],
-        only_separate_projects: column_data['only_separate_projects'],
-        only_direct_children: column_data['only_direct_children'],
-        filter_solved_status: column_data['filter_solved_status']
-      })
-    end
+    process_request_data
   end
 
   # GET /users/1/edit

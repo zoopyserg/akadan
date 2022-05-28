@@ -119,7 +119,7 @@
           <% end %>
         <% end %>
 
-        <%# @records.paginate %>
+        <%= paginate records_for_column(@records, @record_types, column_fields.object, @subrecords ? @record : nil), param_name: "desire[design_attributes][columns_attributes][#{column_fields.options[:child_index]}][page]" %>
       </div>
     </div>
   </div>

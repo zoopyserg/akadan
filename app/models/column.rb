@@ -2,14 +2,19 @@ class Column < ApplicationRecord
   ### INCLUDES
   ### DEFAULT SCOPE
   ### CONSTANTS
+  ANY_SOLVED_STATUS = 'any'
+  SOLVED_STATUS = 'solved'
+  UNSOLVED_STATUS = 'unsolved'
+
   ### ATTR ACCESSORS
   attr_accessor :persisted_column_id
+  attr_accessor :page
 
   ### ENUMS
   enum filter_solved_status: {
-    any: 0,
-    solved: 1,
-    unsolved: 2
+    ANY_SOLVED_STATUS => 0,
+    SOLVED_STATUS => 1,
+    UNSOLVED_STATUS => 2
   }
 
   ### RELATIONS (belongs to, has_many, has_many through)

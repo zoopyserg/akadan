@@ -1,4 +1,6 @@
 class RecordsController < ApplicationController
+  include DesignableController
+
   before_action :authenticate_user!, except: %i[ index show ]
   before_action :set_record, only: %i[ show edit update ]
   before_action :set_record_types, only: %i[ new edit index show ]
@@ -7,107 +9,32 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    # todo: better pagination
+    store_current_path_globally('records', 'index', nil, nil, false)
+
     if signed_in?
       @records = Record.where(is_public: true).or(Record.where(user: current_user))
     else
       @records = Record.where(is_public: true)
     end
 
-    if params[:columns]
-       @columns = params[:columns]
-    else
-      @columns = [Column.new]
-
-      if signed_in?
-        if Design.where(user: current_user).where(designable: nil).exists?
-          @design = Design.where(user: current_user).where(designable: nil).first
-        else
-          @design = Design.where(is_public: true).where(designable: nil).first
-        end
-      else
-        @design = Design.where(is_public: true).where(designable: nil).first
-      end
-
-      @columns += @design.columns if @design
-
-      redirect_to records_path(columns: @columns.collect{|c| c.attributes.except('design_id', 'created_at', 'updated_at') })
-    end
-
-    session[:previous_controller] = 'records'
-    session[:previous_action] = 'index'
-    session[:previous_id] = nil
-
-    @desire = Desire.new
-    @desire.build_design
-    @desire.build_group
-    @columns.each do |column_data|
-      @desire.design.columns.build({
-        id: column_data['id'],
-        collapsed: column_data['collapsed'],
-        record_type_id: column_data['record_type_id'],
-        only_separate_projects: column_data['only_separate_projects'],
-        only_direct_children: column_data['only_direct_children'],
-        filter_solved_status: column_data['filter_solved_status']
-      })
-    end
+    process_request_data
   end
 
   def show
+    store_current_path_globally('records', 'show', @record.id, @record, true)
+
     @new_comment = @record.comments.new
     @comments = @record.comments.order(created_at: :desc)
-
-    if params[:columns]
-      @columns = params[:columns]
-    else
-      @columns = [Column.new(collapsed: false)]
-
-      if signed_in?
-        if Design.where(user: current_user).where(designable: @record).exists?
-          @design = Design.where(user: current_user).where(designable: @record).first
-        else
-          @design = Design.where(is_public: true).where(designable: @record).first
-        end
-      else
-        @design = Design.where(is_public: true).where(designable: @record).first
-      end
-
-      @columns += @design.columns if @design
-
-      redirect_to record_path(@record, columns: @columns.collect{|c| c.attributes.except('design_id', 'created_at', 'updated_at')})
-    end
 
     if signed_in?
       @records = Record.where(is_public: true).or(Record.where(user: current_user))
     else
       @records = Record.where(is_public: true)
-    end
-
-    if params[:only_solved]
-      @records = @records.only_solved
-    elsif params[:only_unsolved]
-      @records = @records.only_unsolved
     end
 
     @subrecords = true
 
-    session[:previous_controller] = 'records'
-    session[:previous_action] = 'show'
-    session[:previous_id] = @record.id
-
-    @desire = Desire.new
-    @desire.build_design
-    @desire.build_group
-    @columns.each do |column_data|
-      @desire.design.columns.build({
-        id: column_data['id'],
-        collapsed: column_data['collapsed'],
-        record_type_id: column_data['record_type_id'],
-        only_separate_projects: column_data['only_separate_projects'],
-        only_direct_children: column_data['only_direct_children'],
-        filter_solved_status: column_data['filter_solved_status']
-      })
-    end
+    process_request_data
   end
 
   # GET /records/new

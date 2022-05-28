@@ -17,7 +17,7 @@ RSpec.describe "/users", type: :request do
     describe "GET /show" do
       it "renders a successful response" do
         get user_url(user)
-        expect(response).to be_successful
+        expect(response).to be_redirect
       end
     end
 
@@ -60,7 +60,7 @@ RSpec.describe "/users", type: :request do
     describe "GET /show" do
       it "renders a successful response" do
         get user_url(user)
-        expect(response).to be_successful
+        expect(response).to be_redirect
       end
     end
 

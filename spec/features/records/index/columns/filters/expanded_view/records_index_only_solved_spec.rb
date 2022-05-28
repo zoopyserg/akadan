@@ -4,8 +4,8 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
   let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
 
-  let!(:connection_type) { create :connection_type, name: 'Subsystem', is_public: true }
-  let!(:record_type) { create :record_type, name: 'Subsystem', is_public: true }
+  let!(:connection_type) { ConnectionType.subsystem_connection_type }
+  let!(:record_type) { RecordType.subsystem_record_type }
 
   context 'showing only solved records' do
     let!(:record1) { create :record, :with_dot, name: 'Record 1', user: user2, is_public: true }
@@ -13,7 +13,7 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
     let!(:record3) { create :record, :with_dot, name: 'Record 3', user: user2, is_public: false }
     let!(:record4) { create :record, :with_dot, name: 'Record 4', user: user2, is_public: false }
 
-    let!(:solution_connection_type) { ConnectionType.where(name: 'Is Solved By...').first }
+    let!(:solution_connection_type) { ConnectionType.solution_connection_type }
 
     let!(:solution1) { create :record, :with_dot, name: 'Solution 1', user: user2 }
     let!(:solution2) { create :record, :with_dot, name: 'Solution 2', user: user2 }
@@ -23,7 +23,7 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
 
     describe 'raw URL visit' do
       context 'not signed in' do
-        before { visit '/records?only_solved=true' }
+        before {  visit root_path(columns: [{ record_type_id: nil, collapsed: false, only_separate_projects: false, only_direct_children: false, filter_solved_status: 'solved', page: 1 }]) }
 
         it 'should have no button' do
           expect(page).to have_no_content 'Record 1'
@@ -36,7 +36,7 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
       context 'signed in' do
         before do
           login_as user2
-          visit '/records?only_solved=true'
+          visit root_path(columns: [{ record_type_id: nil, collapsed: false, only_separate_projects: false, only_direct_children: false, filter_solved_status: 'solved', page: 1 }])
         end
 
         it 'should have all' do
@@ -48,41 +48,6 @@ RSpec.feature "Decising which records to show", :records_index, type: :feature d
       end
     end
 
-    describe 'through filter form' do
-      context 'not signed in' do
-        before do
-          visit '/records'
-          find(:css, '.row:nth-child(1) .custom-switch').click
-          within '.recordscolumn form' do
-            click_on 'Show'
-          end
-        end
-
-        it 'should have no button' do
-          expect(page).to have_no_content 'Record 1'
-          expect(page).to have_content 'Record 2'
-          expect(page).to have_no_content 'Record 3'
-          expect(page).to have_no_content 'Record 4'
-        end
-      end
-
-      context 'signed in' do
-        before do
-          login_as user2
-          visit '/records'
-          find(:css, '.row:nth-child(1) .custom-switch').click
-          within '.recordscolumn form' do
-            click_on 'Show'
-          end
-        end
-
-        it 'should have all' do
-          expect(page).to have_no_content 'Record 1'
-          expect(page).to have_content 'Record 2'
-          expect(page).to have_no_content 'Record 3'
-          expect(page).to have_content 'Record 4'
-        end
-      end
-    end
+    # buttons tested separately
   end
 end

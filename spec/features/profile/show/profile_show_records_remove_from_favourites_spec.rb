@@ -3,19 +3,19 @@ require 'rails_helper'
 RSpec.feature "User Show Records Repeat Button", :records_index, type: :feature do
   let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
-  let!(:connection_type_for_other_buttons1) { ConnectionType.find_by(name: 'Irrelevant Because...') }
-  let!(:connection_type_for_other_buttons2) { ConnectionType.find_by(name: 'Subsystem') }
-  let!(:record_type_for_other_buttons) { RecordType.find_by(name: 'Subsystem') }
+  let!(:connection_type_for_other_buttons1) { ConnectionType.irrelevant_because_connection_type }
+  let!(:connection_type_for_other_buttons2) { ConnectionType.subsystem_connection_type }
+  let!(:record_type_for_other_buttons) { RecordType.subsystem_record_type }
 
-  let!(:connection_type) { ConnectionType.find_by(name: 'Is Solved By...') }
-  let!(:record_type) { RecordType.find_by(name: 'Solution') }
+  let!(:connection_type) { ConnectionType.solution_connection_type }
+  let!(:record_type) { RecordType.solution_record_type }
 
   let!(:record_bookmark_url) { record_bookmark_path(record_id: record.id, id: bookmark.id) }
 
   let!(:bookmark1) { create :bookmark, user: user1, record: record }
   let!(:bookmark2) { create :bookmark, user: user2, record: record }
 
-  context 'public someone elses record', :do_not_create_data do
+  context 'public someone elses record' do
     let!(:record) { create :record, :with_dot, user: user2, is_public: true }
 
     context 'not signed in' do

@@ -145,7 +145,7 @@ RSpec.feature "Signups", type: :feature do
 
         expect(page).to have_content 'signed up successfully'
 
-        expect(current_path).to eq root_path
+        expect(current_path).to eq records_path
       end
 
       it "should send a confirmation email" do

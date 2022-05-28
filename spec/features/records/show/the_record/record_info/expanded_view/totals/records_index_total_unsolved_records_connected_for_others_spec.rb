@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Unsolved Tree Records Counter for others", :records_index, type: :feature do
   let!(:user1) { create :user, :confirmed, email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
-  let!(:solution_connection_type_id) { ConnectionType.find_or_create_by(name: 'Is Solved By...').id }
+  let!(:solution_connection_type_id) { ConnectionType.solution_connection_type.id }
 
   context 'not signed in' do
     let!(:public_record) { create :record, :with_dot, user: user1, is_public: true }

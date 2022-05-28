@@ -19,7 +19,7 @@ RSpec.describe "/records", :records_index, type: :request do
       it "renders a successful response" do
         user.records.create! valid_attributes
         get records_url
-        expect(response).to be_successful
+        expect(response).to be_redirect
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe "/records", :records_index, type: :request do
       it "renders a successful response" do
         record = user.records.create! valid_attributes
         get record_url(record)
-        expect(response).to be_successful
+        expect(response).to be_redirect
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe "/records", :records_index, type: :request do
       it "renders a successful response" do
         user.records.create! valid_attributes
         get records_url
-        expect(response).to be_successful
+        expect(response).to be_redirect
       end
     end
 
@@ -119,7 +119,7 @@ RSpec.describe "/records", :records_index, type: :request do
       it "renders a successful response" do
         record = user.records.create! valid_attributes
         get record_url(record)
-        expect(response).to be_successful
+        expect(response).to be_redirect
       end
     end
 

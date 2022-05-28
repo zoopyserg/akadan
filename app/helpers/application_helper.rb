@@ -61,6 +61,6 @@ module ApplicationHelper
       filtered_by_solved_status = filtered_by_being_deep_nested.only_unsolved
     end
 
-    filtered_by_solved_status
+    filtered_by_solved_status.page(column.page)
   end
 end

@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.feature "Records Index Solve Button", :records_index, type: :feature do
   let!(:user1) { create :user, :confirmed, :free, username: 'something1', email: 'user1@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
   let!(:user2) { create :user, :confirmed, :free, username: 'something2', email: 'user2@gmail.com', password: 'rediculouslycomplexpassword54321', password_confirmation: 'rediculouslycomplexpassword54321' }
-  let!(:connection_type_for_other_buttons1) { create :connection_type, name: 'Irrelevant Because...', is_public: true }
-  let!(:connection_type_for_other_buttons2) { create :connection_type, name: 'Subsystem', is_public: true }
-  let!(:record_type_for_other_buttons) { create :record_type, name: 'Subsystem', is_public: true }
+  let!(:connection_type_for_other_buttons1) { ConnectionType.irrelevant_because_connection_type }
+  let!(:connection_type_for_other_buttons2) { ConnectionType.subsystem_connection_type }
+  let!(:record_type_for_other_buttons) { RecordType.subsystem_record_type }
 
-  let!(:connection_type) { create :connection_type, name: 'Is Solved By...', is_public: true }
-  let!(:record_type) { create :record_type, name: 'Solution', is_public: true }
+  let!(:connection_type) { ConnectionType.solution_connection_type }
+  let!(:record_type) { RecordType.solution_record_type }
 
   context 'public someone elses record' do
     let!(:record) { create :record, :with_dot, user: user2, is_public: true }
