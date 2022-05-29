@@ -52,8 +52,11 @@ import "choices.js/src/styles/choices.scss";
 import "../src/choices/choices.scss";
 
 document.addEventListener("turbolinks:load", function() {
+    console.log('adding choices')
     $('select').each(function(i, element) {
         var elementId = $(element).prop('id');
+
+        console.log('adding choices for element: ' + elementId)
 
         if (element) {
             // Passing options (with default options)
