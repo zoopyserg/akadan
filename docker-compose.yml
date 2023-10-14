@@ -28,12 +28,11 @@ services:
       - "80:3000"
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack
+      - RAILS_SERVE_STATIC_FILES=false
     depends_on:
       - db
       - redis
       - webpack
-    environment:
-      - RAILS_SERVE_STATIC_FILES=false
   webpack:
     command: ./bin/webpack-dev-server
     build: .

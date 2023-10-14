@@ -1,5 +1,14 @@
 # README
 
+# STARTING
+install node, imagemagic, proper ruby, bundle, npm, yarn etc
+bundle
+docker-compose up
+docker-compose run web rake db:{create,migrate,seed}
+docker-compose run web rails webpacker:compile
+
+# DESCRIPTION
+
 Former "Journal of Repetitions" project.
 
 This project works like this:
