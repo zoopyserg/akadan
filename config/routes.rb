@@ -1,10 +1,75 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :groups, only: [:edit, :update]
+  mount Sidekiq::Web => "/sidekiq"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  devise_for :users
+  get "/pages/*id" => 'pages#show', as: :page, format: false
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  resources :record_types, except: [:destroy, :show]
+  resources :connections, only: [:index]
+  resources :connection_types, except: [:show, :destroy]
+
+  resources :conversations, only: [:index, :show, :new, :create] do
+    resources :messages, only: [:index, :create]
+    resources :participations, only: [:index, :new, :create, :destroy]
+  end
+
+  resources :users, only: [:show, :edit, :update]
+  resources :seminars
+  # resources :events
+  resources :notifications
+  resources :sensors
+
+  resources :desires, only: [:create]
+  resources :designs, only: [:create, :update]
+
+  resources :people, only: :index do
+    resources :conversation_starts, only: :create
+  end
+
+  resources :blocked_users, only: :index do
+    resources :blockings, only: [:create, :destroy]
+  end
+
+  resources :friends, only: :index do
+    resources :friend_requests, only: [:create] do
+      collection do
+        post :accept, as: :accept
+        delete :reject, as: :reject
+        delete :unfriend, as: :unfriend
+      end
+    end
+  end
+
+  resources :comments, only: [] do
+    resources :comments, only: [:new, :create]
+    resources :votes, only: [:create]
+  end
+
+  resources :records, except: [:destroy] do
+    # collection do
+    #   get :only_solved
+    #   get :only_unsolved
+    #   get 'only_record_type/*record_type_id' => 'records#only_record_type', as: :only_record_type
+    # end
+
+    resources :comments, only: [:new, :create]
+
+    resources :dots, only: [:new, :create] # maybe do Index too. 'cause it's a scaffold baby
+    resources :bookmarks, only: [:create, :destroy]
+    resources :connection_types, except: [:destroy] do
+      resources :connections, only: [:new, :edit, :create, :update] do
+        collection do
+          post :into_separate_project
+        end
+      end
+      resources :record_types, only: [] do
+        resources :bulk_records, only: [:new, :create]
+      end
+    end
+  end
+
+  root to: "records#index"
 end
