@@ -10,10 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_26_010312) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "affiliations", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "record_a_id", null: false
+    t.bigint "group_id"
+    t.bigint "record_a_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_affiliations_on_group_id"
@@ -27,8 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "blockings", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "blocked_user_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "blocked_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["blocked_user_id"], name: "index_blockings_on_blocked_user_id"
@@ -36,8 +67,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "record_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["record_id"], name: "index_bookmarks_on_record_id"
@@ -45,11 +76,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "columns", force: :cascade do |t|
-    t.integer "design_id", null: false
+    t.bigint "design_id", null: false
     t.boolean "collapsed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "record_type_id"
+    t.bigint "record_type_id"
     t.boolean "only_separate_projects", default: false
     t.boolean "only_direct_children", default: false
     t.integer "filter_solved_status_id", default: 0
@@ -73,15 +104,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "is_public"
     t.boolean "directional"
     t.boolean "destructive"
     t.string "target_type"
-    t.integer "target_record_type_id"
-    t.integer "target_record_subtype_id"
+    t.bigint "target_record_type_id"
+    t.bigint "target_record_subtype_id"
     t.string "target_hierarchy"
-    t.integer "closest_parent_type_id"
+    t.bigint "closest_parent_type_id"
     t.boolean "one_to_many"
     t.index ["closest_parent_type_id"], name: "index_connection_types_on_closest_parent_type_id"
     t.index ["target_record_subtype_id"], name: "index_connection_types_on_target_record_subtype_id"
@@ -94,12 +125,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "is_public"
-    t.integer "record_a_id", null: false
-    t.integer "record_b_id", null: false
-    t.integer "connection_type_id", null: false
-    t.integer "group_id"
+    t.bigint "record_a_id", null: false
+    t.bigint "record_b_id", null: false
+    t.bigint "connection_type_id", null: false
+    t.bigint "group_id"
     t.index ["connection_type_id"], name: "index_connections_on_connection_type_id"
     t.index ["group_id"], name: "index_connections_on_group_id"
     t.index ["record_a_id"], name: "index_connections_on_record_a_id"
@@ -113,9 +144,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "designs", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "designable_type"
-    t.integer "designable_id"
+    t.bigint "designable_id"
     t.boolean "is_public", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -124,8 +155,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "desires", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "design_id"
+    t.bigint "group_id"
+    t.bigint "design_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["design_id"], name: "index_desires_on_design_id"
@@ -133,13 +164,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "dots", force: :cascade do |t|
-    t.integer "record_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "user_id", null: false
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.integer "project_id", null: false
+    t.bigint "project_id", null: false
     t.index ["project_id"], name: "index_dots_on_project_id"
     t.index ["record_id"], name: "index_dots_on_record_id"
     t.index ["user_id"], name: "index_dots_on_user_id"
@@ -154,16 +185,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   create_table "friend_requests", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.integer "friend_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
     t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
     t.index ["user_id"], name: "index_friend_requests_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
-    t.integer "record_b_id"
-    t.integer "connection_type_id"
-    t.integer "user_id", null: false
+    t.bigint "record_b_id"
+    t.bigint "connection_type_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["connection_type_id"], name: "index_groups_on_connection_type_id"
@@ -175,9 +206,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "sender_id", null: false
+    t.bigint "sender_id", null: false
     t.text "body"
-    t.integer "conversation_id", null: false
+    t.bigint "conversation_id", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
@@ -189,8 +220,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "participations", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_participations_on_conversation_id"
@@ -198,8 +229,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
   end
 
   create_table "readings", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "message_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "message_id", null: false
     t.boolean "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -212,7 +243,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "is_public"
     t.index ["user_id"], name: "index_record_types_on_user_id"
   end
@@ -221,9 +252,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.boolean "is_public"
-    t.integer "record_type_id", null: false
+    t.bigint "record_type_id", null: false
     t.boolean "separate_project", default: false
     t.integer "records_connected_cached", default: 0
     t.integer "solved_records_connected_cached", default: 0
@@ -243,15 +274,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.text "description"
     t.boolean "is_public"
     t.index ["user_id"], name: "index_sensors_on_user_id"
   end
 
   create_table "user_record_stats", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "record_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "record_id", null: false
     t.integer "records_connected_for_me_cached", default: 0
     t.integer "records_connected_for_others_cached", default: 0
     t.integer "solved_records_connected_for_me_cached", default: 0
@@ -300,6 +331,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_000835) do
     t.index ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "affiliations", "records", column: "record_a_id"
   add_foreign_key "blockings", "users"
   add_foreign_key "blockings", "users", column: "blocked_user_id"

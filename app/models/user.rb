@@ -65,7 +65,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
-  mount_uploader :avatar, AvatarUploader
+  has_one_attached :avatar
 
   ### CLASS METHODS
   ### PRIVATE CLASS METHODS
