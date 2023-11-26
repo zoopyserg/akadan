@@ -1,4 +1,18 @@
 class User < ApplicationRecord
+  # todo in views:
+  # <%= image_tag user.avatar.variant(resize_to_fill: [100, 100]) %>
+  # <%= image_tag user.avatar.variant(resize_to_fill: [100, 100]).processed %>
+  # <% if user.avatar.attached? %>
+  #   <%= image_tag user.avatar.variant(resize_to_fill: [100, 100]) %>
+  # <% else %>
+  #   <%= image_tag "default_avatar.png" %>
+  # <% end %>
+  #
+  # <%= form_with model: @user, local: true do |form| %>
+  #   <%= form.file_field :avatar %>
+  #   <%= form.submit %>
+  # <% end %>
+
   ### INCLUDES
   ### DEFAULT SCOPE
   ### CONSTANTS
