@@ -34,12 +34,29 @@ RSpec.configure do |config|
 
   config.before(:each) do |example|
     unless example.metadata[:do_not_create_data]
-      create :record_type, :solution_record_type, is_public: true
-      create :record_type, :subsystem_record_type, is_public: true
-      create :connection_type, :subsystem_connection_type, is_public: true
-      create :connection_type, :solution_connection_type, is_public: true
-      create :connection_type, :extracted_to_connection_type, is_public: true
-      create :connection_type, :irrelevant_because_connection_type, is_public: true
+      if RecordType.where(name: 'Solution').empty?
+        create :record_type, :solution_record_type, is_public: true
+      end
+
+      if RecordType.where(name: 'Subsystem').empty?
+        create :record_type, :subsystem_record_type, is_public: true
+      end
+
+      if ConnectionType.where(name: 'Subsystem').empty?
+        create :connection_type, :subsystem_connection_type, is_public: true
+      end
+
+      if ConnectionType.where(name: 'Is Solved By...').empty?
+        create :connection_type, :solution_connection_type, is_public: true
+      end
+
+      if ConnectionType.where(name: 'Extracted To...').empty?
+        create :connection_type, :extracted_to_connection_type, is_public: true
+      end
+
+      if ConnectionType.where(name: 'Irrelevant Because...').empty?
+        create :connection_type, :irrelevant_because_connection_type, is_public: true
+      end
     end
   end
 end

@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_26_010312) do
     t.bigint "record_type_id"
     t.boolean "only_separate_projects", default: false
     t.boolean "only_direct_children", default: false
-    t.integer "filter_solved_status_id", default: 0
+    t.integer "filter_solved_status", default: 0
     t.index ["design_id"], name: "index_columns_on_design_id"
     t.index ["record_type_id"], name: "index_columns_on_record_type_id"
   end
