@@ -1,0 +1,26 @@
+<div class="card" data-pgc-define="jr.connectiontype" data-pgc-define-name="Connection Type" data-pgc-section="Page components">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h5><%= connection_type.name %></h5>
+        <p><%= connection_type.description %></p>
+        <%= render "shared/created_by", user: connection_type.user %>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <%= render "connection_types/directional_badge", connection_type: connection_type %>
+          <%= render "connection_types/destructive_badge", connection_type: connection_type %>
+          <%= render "connection_types/target_type_badge", connection_type: connection_type %>
+          <%= render "connection_types/target_hierarchy", connection_type: connection_type  %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <% if can? :update, connection_type %>
+          <%= link_to edit_connection_type_path(connection_type), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-edit"></i>&nbsp;Edit
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

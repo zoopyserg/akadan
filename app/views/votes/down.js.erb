@@ -1,0 +1,13 @@
+$('#comment_<%= @comment.id %> > .col .fa-chevron-up').removeClass('text-success');
+$('#comment_<%= @comment.id %> > .col .fa-chevron-down').addClass('text-success');
+
+var old_count = $('#comment_<%= @comment.id %> > .col .vote_count').html();
+
+<% if @user_voted_opposite %>
+    var vote_count_change = 2;
+<% else %>
+    var vote_count_change = 1;
+<% end %>
+
+var new_count = parseInt(old_count) - vote_count_change;
+$('#comment_<%= @comment.id %> > .col .vote_count').html(new_count);

@@ -1,0 +1,18 @@
+<div class="card" data-pgc-define="jr.recordtype" data-pgc-define-name="Record Type" data-pgc-section="Page components">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-8">
+        <h5><%= record_type.name %> </h5>
+        <p><%= record_type.description %></p>
+        <%= render "shared/created_by", user: record_type.user %>
+      </div>
+      <div class="col-md-4">
+        <% if can? :update, record_type %>
+          <%= link_to edit_record_type_path(record_type), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-edit"></i>&nbsp;Edit
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

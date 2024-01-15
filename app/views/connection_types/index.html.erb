@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body">
+        <h5 class="card-title mb-0" data-pgc-field="title">Types of Connections Between Repetitive Records</h5>
+      </div>
+    </div>
+
+    <% @connection_types.each do |connection_type| %>
+      <%= render "connection_types/connection_type", connection_type: connection_type %>
+    <% end %>
+
+    <%= paginate @connection_types %>
+  </div>
+</div>

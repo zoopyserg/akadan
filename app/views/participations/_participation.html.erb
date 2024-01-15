@@ -1,0 +1,23 @@
+<div class="card" data-pgc="jr.message">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-md-8">
+        <div class="row">
+          <div class="align-items-center col-md-4 d-flex flex-column">
+            <%= image_tag participation.user.avatar_url(:thumb), class: "rounded-circle", width: "100px", 'data-pgc-edit' => "image[src, no_content]", height: "100px" %>
+            <p data-pgc-field="name"><%= participation.user.full_name %></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="row">
+          <div class="col-md-12" data-pgc-field="buttons">
+            <button type="button" class="btn btn-light btn-block">
+              <i class="fa fa-close"></i>Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

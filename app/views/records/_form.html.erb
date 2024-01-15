@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: record) do |form| %>
+      <% if record.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+          <ul>
+            <% record.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <label class="d-flex justify-content-between">Type</label>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <%= form.collection_select :record_type_id, @record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :name, class: "d-flex justify-content-between" do %>
+          <span> Name / Title </span>
+          <i class="fa fa-microphone"></i>
+        <% end %>
+
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+      </div>
+      <%= form.fields_for :dots do |builder|  %>
+        <%= render "records/dot_fields", form: builder %>
+      <% end %>
+      <div class="form-group">
+        <label class="d-flex justify-content-between">Draw</label>
+        <div id="bcPaint"></div>
+      </div>
+      <div class="form-group files color" id="picsuploadjs">
+        <label>Pictures</label>
+        <input type="file" class="form-control-file" multiple name="files"/>
+      </div>
+      <div class="form-group">
+        <%= form.label :is_public %>
+        <%= form.check_box :is_public %>
+      </div>
+      <div class="form-group d-flex d-sm-flex justify-content-between">
+        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+          <i class="fa fa-check mx-1"></i><%= submit_name %>
+        <% end %>
+        <%= link_to records_path, class: 'btn btn-light px-5' do %>
+          <i class="fa fa-close mx-1"></i>Cancel
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<div class="row" id='userShowHeader'>
+  <div class="col-md-12">
+    <div class="card mb-3">
+      <div class="card-body text-center shadow">
+        <%= image_tag @user.avatar_url(:thumb), class: "rounded-circle mb-3 mt-4", width: "160px", 'data-pgc-edit' => "image[src, no_content]", height: "160px" %>
+        <div class="mb-3">
+          <h5 class="card-title"><%= @user.full_name %></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-lg-4">
+    <div class="card profile-card-2">
+      <div class="card-body pt-5">
+        <div class="col-sm-12" data-pgc-field="buttons">
+          <%= render "users/buttons", user: @user %>
+        </div>
+        <hr/>
+        <h6>Bio</h6>
+        <p><%= @user.bio %></p>
+        <h6>About</h6>
+        <p><%= @user.about %></p>
+        <div class="icon-block">
+          <a href="javascript:void();"><i class="fa fa-facebook bg-facebook text-white"></i></a>
+          <a href="javascript:void();"> <i class="fa fa-twitter bg-twitter text-white"></i></a>
+          <a href="javascript:void();"> <i class="fa fa-google-plus bg-google-plus text-white"></i></a>
+        </div>
+      </div>
+      <%= render "users/friends_list" %>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+          <li class="nav-item">
+            <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+          </li>
+        </ul>
+        <div class="tab-content p-3">
+          <div class="tab-pane active" id="profile">
+            <div class="row">
+              <div class="col-md-12">
+                <h6>Stats</h6>
+                <span class="badge badge-primary"><i class="fa fa-user"></i> <%= FriendRequest.where(friend_id: @user).where.not(user_id: User.mutual_friend_ids(@user)).count %> Followers</span>
+                <span class="badge badge-success"><i class="fa fa-cog"></i> <%= User.mutual_friend_ids(@user).count %> Friends</span>
+                <span class="badge badge-secondary"><i class="fa fa-eye"></i><%= @user.records.projects.count %> Projects</span>
+                <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.connections.count %> Associations</span>
+                <!-- span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span -->
+                <hr>
+                <h6>Badges</h6>
+                <% # todo: test badges and come up with a good list of badges that increase desire of using the website %>
+                <% # todo: show progress (how much is left until the badge) %>
+                <%= render "users/badges/friendly" %>
+                <%= render "users/badges/proactive" %>
+                <%= render "users/badges/observant" %>
+                <hr>
+              </div>
+              <div class="col-md-12">
+                <h6 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h6>
+                <div class="row">
+                  <%= render "users/recent_activity" %>
+                </div>
+              </div>
+            </div>
+            <!--/row-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= form_for @desire do |desire_form| %>
+  <%= render "records/record_list", desire_form: desire_form %>
+<% end %>
+
+<%= render "records/modal" %>

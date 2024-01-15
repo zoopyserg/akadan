@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Journal</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>Dedu - Deduction Wiki Social Network</title>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+        <% stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <% # javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <% # stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
-  </body>
+        <% #= favicon_pack_tag 'favicon.ico'  %>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8635246703820382" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-theme bg-theme1">
+        <%= render "pages/loader" %>
+        <!-- Start wrapper-->
+        <div id="wrapper">
+            <%= render "pages/sidemenu" %>
+            <%= render "pages/topmenu" %>
+            <div class="clearfix"></div>
+            <div class="content-wrapper">
+                <div class="container-fluid px-0 px-sm-3">
+                    <p class="notice"><%= notice %></p>
+                    <p class="alert"><%= alert %></p>
+                    <%= yield %>
+                    <div class="overlay toggle-menu"></div>
+                </div>
+            </div>
+            <%= render "pages/backtotopbutton" %>
+            <%= render "pages/footer" %>
+            <%= render "pages/backgroundswitcher" %>
+        </div>
+    </body>
 </html>

@@ -1,0 +1,126 @@
+<%= form_with(model: group) do |form| %>
+  <% if group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+        <% group.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group record_b_selection_section">
+    <%= form.label :record_b_id do %>
+      Select Record B (Grouping Record)
+    <% end %>
+    <div class="dropdown" data-pgc="jr.dropdown">
+      <%= form.collection_select :record_b_id, @record_bs, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save Record B', class: "btn btn-light px-5" %>
+  </div>
+
+  <hr/>
+  <label> Or </label>
+  <hr/>
+
+  <label>Create New Record B (Grouping Record)</label>
+  <div class="form-group new_record_b_name_section">
+    <%= form.label :new_record_b_name do %>
+      New Record B Name
+    <% end %>
+    <div class="dropdown" data-pgc="jr.dropdown">
+      <%= form.text_field :new_record_b_name, class: 'form-control', placeholder: "Enter New Group Record Name" %>
+    </div>
+  </div>
+
+  <div class="form-group new_record_b_record_type_section">
+    <%= form.label :new_record_b_record_type do %>
+      Create New Record B (Grouping Record)
+    <% end %>
+    <div class="dropdown" data-pgc="jr.dropdown">
+      <%= form.collection_select :new_record_b_record_type_id, @record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Record B', class: "btn btn-light px-5" %>
+  </div>
+
+  <hr/>
+  <label> Select Connection Type </label>
+  <hr/>
+
+  <div class="form-group connection_type_selection_section">
+    <%= form.label :connection_type_id do %>
+      Connection Type (for this group's connections between Record B and Record A's)
+    <% end %>
+    <div class="dropdown" data-pgc="jr.dropdown">
+      <%= form.collection_select :connection_type_id, @connection_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+    </div>
+  </div>
+
+  <p><label>RECORD A'S (RECORDS THAT GET GROUPED)</label> </p>
+  <div class="record_as_selection_section">
+    <div class="card" data-pgc-define="jr.recordColumn" data-pgc-define-name="Records Column" data-pgc-section="Page components">
+      <div class="card-body px-0 px-sm-3 py-1 recordscolumn">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= form.collection_check_boxes(:record_a_ids, group.record_as.all, :id, :name) do |group_item| %>
+              <% if collapsed %>
+                <%= render 'records/collapsed_record', record: group_item.object, group_item: group_item %>
+              <% else %>
+                <%= render "records/semi_collapsed_record", record: group_item.object, group_item: group_item %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <label>Add Existing Record to Record A's list (Make it Part of the Group)</label>
+  <div class="form-group add_existing_record_a_selection_section">
+    <%= form.label :add_existing_record_a_id do %>
+      Select Existing Record B To Add
+    <% end %>
+    <div class="dropdown" data-pgc="jr.dropdown">
+      <%= form.collection_select :add_existing_record_a_id, @record_as, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+    </div>
+  </div>
+
+  <div class="actions my-1">
+    <%= form.submit 'Add Record To The Group', class: "btn btn-light px-5" %>
+  </div>
+
+  <label>Create New Record A (Part of the Group)</label>
+  <div class="form-group new_record_a_name_section">
+    <%= form.label :new_record_a_name do %>
+      New Record B Name
+    <% end %>
+    <div class="dropdown" data-pgc="jr.dropdown">
+      <%= form.text_field :new_record_a_name, class: 'form-control', placeholder: "Enter New Group Record Name" %>
+    </div>
+  </div>
+
+  <div class="form-group new_record_a_record_type_section">
+    <%= form.label :new_record_a_record_type do %>
+      Create New Record B (Grouping Record)
+    <% end %>
+    <div class="dropdown" data-pgc="jr.dropdown">
+      <%= form.collection_select :new_record_a_record_type_id, @record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+    </div>
+  </div>
+
+  <div class="actions my-1">
+    <%= form.submit 'Add Record A', class: "btn btn-light px-5" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save Everything', class: "btn btn-light px-5" %>
+  </div>
+<% end %>

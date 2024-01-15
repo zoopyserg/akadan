@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
+            <h5 id='recordsListHeading' class="card-title mb-0" data-pgc-field="title">Repetitive Records</h5>
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-12 col-lg-12 col-md-12 col-sm-6 col-xl-5 d-flex d-md-flex d-sm-flex justify-content-md-end justify-content-sm-start justify-content-start">
+                <div class="dropdown" data-pgc="jr.dropdown">
+                  <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
+                    <i class="fa fa-plus"></i>&nbsp;Add a Column
+                  </button>
+                  <div class="dropdown-menu" x-placement='bottom start'>
+                    <%= desire_form.submit 'Add a Basic Column', class: 'dropdown-item' %>
+                    <% #a href="#" class="dropdown-item">Link</a %>
+                    <% #a href="#" class="dropdown-item">Link</a %>
+                    <% #a href="#" class="dropdown-item">Link</a %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-12 col-md-12 col-sm-6 col-xl-7 d-flex d-md-flex d-sm-flex justify-content-md-end justify-content-sm-start justify-content-start">
+                <div class="dropdown" data-pgc="jr.dropdown">
+                  <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
+                    <i class="fa fa-bolt"></i>&nbsp;Actions on Selected Records
+                  </button>
+                  <div class="dropdown-menu" x-placement='bottom start'>
+                    <%= desire_form.submit 'Group...', class: 'dropdown-item' %>
+                    <% # link_to 'All Irrelevant because...', new_group_path, class: 'dropdown-item' %>
+                    <% # link_to 'All Solved by...', new_group_path, class: 'dropdown-item' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= desire_form.fields_for :design do |design_fields| %>
+      <%= design_fields.fields_for :columns do |column_fields| %>
+        <%= render "records/record_column", desire_form: desire_form, design_fields: design_fields, column_fields: column_fields %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
+

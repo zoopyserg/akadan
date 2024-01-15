@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body">
+        <h5 class="card-title mb-0" data-pgc-field="title">Connections Between Repetitive Records</h5>
+      </div>
+    </div>
+
+    <% @connections.each do |connection| %>
+      <%= render "connections/connection", connection: connection %>
+    <% end %>
+
+    <%= paginate @connections %>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="card mb-0 record_collapsed" data-pgc="jr.record_collapsed">
+  <div class="card-body py-0">
+    <div class="row">
+      <div class="align-items-center col-lg-12 d-flex justify-content-between">
+        <div class="align-items-center d-flex">
+          <div class="d-flex flex-column">
+            <div class="icheck-material-white">
+              <%= group_item.check_box %>
+            </div>
+          </div>
+          <div class="align-items-center d-flex flex-column">
+            <i class="fa fa-chevron-up mx-1 my-1"></i>
+            <% if user_signed_in? %>
+              <% if current_user.bookmarked?(record) %>
+                <%= link_to record_bookmark_path(record_id: record.id, id: Bookmark.find_by(user: current_user, record:record).id ), method: :delete do %>
+                  <i class="fa fa-star"></i>
+                <% end %>
+              <% else %>
+                <%= link_to record_bookmarks_path(record_id: record.id), method: :post do %>
+                  <i class="fa fa-star-o"></i>
+                <% end %>
+              <% end %>
+            <% else %>
+              <%= link_to record_bookmarks_path(record_id: record.id) do %>
+                <i class="fa fa-star-o"></i>
+              <% end %>
+            <% end %>
+            <i class="fa fa-chevron-down mx-1 my-1"></i>
+          </div>
+          <div>
+            <h5 class="card-title mb-0 mx-1"><%= link_to record.name, record_path(record) %></h5>
+            <%= render "shared/created_by", user: record.user %>
+          </div>
+        </div>
+        <div class="align-items-center d-flex">
+          <%= link_to new_record_connection_type_connection_path(record_id: record.id, connection_type_id: @solution_connection_type_id) do %>
+            <i class="fa fa-arrow-circle-o-left my-1"></i>
+          <% end %>
+          <%= link_to new_record_dot_path(record_id: record.id, parent_id: nil) do %>
+            <i class="fa fa-repeat mx-1 my-1"></i>
+          <% end %>
+          <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: @solution_connection_type_id, record_type_id: @solution_record_type_id) do %>
+            <i class="fa fa-check mx-1 my-1"></i>
+          <% end %>
+          <%= link_to record_path(record), class: 'record_show_icon_button' do %>
+            <i class="fa fa-eye mx-1 my-1"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

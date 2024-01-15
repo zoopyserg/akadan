@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body">
+        <h5 class="card-title mb-0" data-pgc-field="title">Sensors</h5>
+      </div>
+    </div>
+    <% @sensors.each do |sensor| %>
+      <%= render "sensors/sensor", sensor: sensor %>
+    <% end %>
+
+    <%= paginate @sensors %>
+  </div>
+</div>

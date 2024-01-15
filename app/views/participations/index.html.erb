@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body align-items-center d-flex justify-content-between">
+        <h5 class="card-title mb-0" data-pgc-field="title">Participants</h5>
+        <%= link_to conversation_path(@conversation), class: 'btn btn-light' do %>
+          <i class="fa fa-arrow-left"></i>&nbsp;Back
+        <% end %>
+      </div>
+    </div>
+
+    <% @conversation.participations.each do |participation| %>
+      <%= render "participations/participation", participation: participation %>
+    <% end %>
+
+    <div class="d-flex justify-content-center" data-pgc="jr.pagination">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#">Previous</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <%= link_to 'Add a New Participant', new_conversation_participation_path(@conversation) %>
+      </div>
+    </div>
+  </div>
+</div>

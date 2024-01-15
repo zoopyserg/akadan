@@ -1,0 +1,10 @@
+<div class="col-md-4 col-sm-4">
+  <div class="card nobackground" data-pgc-define="jr.friend" data-pgc-define-name="Friend" data-pgc-section="Page Components">
+    <%= link_to user_path(friend) do %>
+      <%= image_tag friend.avatar_url(:thumb), class: "border mb-0 rounded-circle w-100", 'data-pgc-edit' => "image[src, no_content]" %>
+    <% end %>
+    <div class="card-body d-flex justify-content-center pb-0 pt-1 text-center">
+      <p class="mb-0" data-pgc-edit="name"><%= link_to friend.full_name, user_path(friend) %></p>
+    </div>
+  </div>
+</div>

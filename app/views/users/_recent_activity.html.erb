@@ -1,0 +1,7 @@
+<% @user.connections.limit(5).each do |connection| %>
+  <% if connection.record_a.is_public? && connection.record_b.is_public? %>
+    <div class="col-lg-12">
+      <p>Claimed that&nbsp;<strong>`<%= link_to connection.record_a.name, record_path(connection.record_a) %>`</strong>&nbsp;is related to record `<b><%= link_to connection.record_b.name, record_path(connection.record_b) %></b>` through a connection of type&nbsp;<strong>`<%= connection.connection_type.name %>`</strong></p>
+    </div>
+  <% end %>
+<% end %>

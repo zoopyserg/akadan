@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Record:</strong>
+  <%= @dot.record_id %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @dot.start_date %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @dot.start_time %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @dot.end_date %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @dot.end_time %>
+</p>
+
+<p>
+  <strong>Income:</strong>
+  <%= @dot.income %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @dot.duration %>
+</p>
+
+<%= link_to 'Edit', edit_dot_path(@dot) %> |
+<%= link_to 'Back', dots_path %>

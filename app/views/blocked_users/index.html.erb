@@ -1,0 +1,14 @@
+<div class="row" id='blockedUsersList'>
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body">
+        <h5 class="card-title mb-0" data-pgc-field="title">Blocked Users (<%= @blocked_users.total_count %>)</h5>
+      </div>
+    </div>
+    <% @blocked_users.each do |blocked_user| %>
+      <%= render "users/user", user: blocked_user %>
+    <% end %>
+
+    <%= paginate @blocked_users %>
+  </div>
+</div>

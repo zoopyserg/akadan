@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: sensor) do |form| %>
+      <% if sensor.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(sensor.errors.count, "error") %> prohibited this sensor from being saved:</h2>
+
+          <ul>
+            <% sensor.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <p class="hint">A Sensor is a piece of hardware (an arduino board, a phone, an AI camera, an AI device, a computer, a button, or any other IoT device, or even a person) that submits repetitive events as records on its own through JSON API.</p>
+        <a href="sensors_learn_more.html">Learn more about sensors.</a>
+      </div>
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter Sensor Name" %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description %>
+        <%= form.text_area :description, class: "form-control", placeholder: "Enter Sensor Description" %>
+      </div>
+      <div class="form-group">
+        <label>Belongs to a record / a project</label>
+        <p class="hint">You can (optionally) set a record under which it will be adding subrecords. If record is not set, repetitions will go into your general list. If it&#39;s set, they will go after the record you select here.</p>
+        <div class="dropdown" data-pgc="jr.dropdown">
+          <button type="submit" class="btn btn-light dropdown-toggle px-5" data-toggle='dropdown' data-pgc-field="ButtonName">
+            &nbsp;Select
+          </button>
+          <div class="dropdown-menu" x-placement='bottom start'>
+            <a class="dropdown-item" href='#'>Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+            <a href="#" class="dropdown-item">Link</a>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>API Key</label>
+        <div class="d-flex">
+          <p class="mb-0" style="font-size: 12px;">s6d5f1v6sd5fv6sd5fv4sds</p>
+          <i class="fa fa-copy mx-1"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>API Secret</label>
+        <div class="d-flex">
+          <p class="mb-0" style="font-size: 12px;">61$5564$$&amp;*@@#R@JHBJjhbjs9d(*&amp;(*&amp;6465465#@@#</p>
+          <i class="fa fa-copy mx-1"></i>
+        </div>
+      </div>
+      <div class="form-group d-flex d-sm-flex justify-content-between">
+        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+          <i class="fa fa-check mx-1"></i><%= submit_name %>
+        <% end %>
+        <%= link_to sensors_path, class: 'btn btn-light px-5' do %>
+          <i class="fa fa-close mx-1"></i>Cancel
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

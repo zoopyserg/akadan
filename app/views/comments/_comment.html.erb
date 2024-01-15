@@ -1,0 +1,36 @@
+<div id="comment_<%= comment.id %>" class="col-lg-12 mb-4" data-pgc-define="jr.commentgroup" data-pgc-define-name="Comment Group" data-pgc-define-description="Several Replies" data-pgc-section="Page Components">
+  <div class="col">
+    <div class="card mb-1 shadow" style="box-shadow: 0px 0px;" data-pgc-define="jr.comment" data-pgc-define-name="Comment" data-pgc-section="Page Components">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+            <div class="align-items-sm-center d-flex flex-column justify-content-sm-start px-1 votingarrows">
+              <%= link_to comment_votes_path(comment, format: :js, vote_flag: true), method: :post, remote: true, id: "comment_vote_up_#{comment.id}" do %>
+                <i class="fa fa-chevron-up <%= 'text-success' if comment.votes.where(user: current_user, vote_flag: true).any? %>"></i>
+              <% end %>
+              <p class="mb-0 vote_count"><%= comment.votes.where(vote_flag: true).count - comment.votes.where(vote_flag: false).count %></p>
+              <%= link_to comment_votes_path(comment, format: :js, vote_flag: false), method: :post, remote: true, id: "comment_vote_down_#{comment.id}" do %>
+                <i class="fa fa-chevron-down <%= 'text-success' if comment.votes.where(user: current_user, vote_flag: false).any? %>"></i>
+              <% end %>
+            </div>
+
+            <div>
+              <h6><%= comment.body %></h6>
+              <p class="small" data-pgc="jr.author">Created by:<strong class="mx-1"><a href="profile.html" data-pgc-field="name"><%= comment.user.full_name %></a></strong></p>
+              <%= link_to new_comment_comment_path(comment, format: :js), class: 'btn btn-light btn-sm p-1', remote: true do %>
+                <i class="fa fa-reply mx-1"></i>Reply
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+        <div class='reply-form-container mt-2'>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='subcomments'>
+    <%= render "comments/comment_list", commentable: comment %>
+  </div>
+</div>

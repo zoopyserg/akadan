@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-12 px-0 px-sm-3">
+    <div class="card" data-pgc="jr.pagename">
+      <div class="card-body">
+        <h5 class="card-title mb-0" data-pgc-field="title">Record Types</h5>
+      </div>
+    </div>
+    <% @record_types.each do |record_type| %>
+      <%= render "record_types/record_type", record_type: record_type %>
+    <% end %>
+
+    <%= paginate @record_types %>
+  </div>
+</div>

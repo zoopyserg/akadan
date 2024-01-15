@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: [@conversation, @message]) do |form| %>
+      <% if @message.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @message.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+      </div>
+      <div class="form-group">
+        <%= form.label :body, 'Message' %>
+        <%= form.text_area :body, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+          <i class="fa fa-check mx-1"></i>Send
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
