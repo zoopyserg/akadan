@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Head content remains the same -->
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content=""/>
         <meta name="author" content=""/>
         <title>Dedu - Deduction Wiki Social Network</title>
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
 
-        <% stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'tailwind', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <script src="https://kit.fontawesome.com/e8c0ee3389.js" crossorigin="anonymous"></script>
         <% # javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
         <% # stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
         <% #= favicon_pack_tag 'favicon.ico'  %>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8635246703820382" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-theme bg-theme1">
+    <body class="bg-gray-100 flex">
         <%= render "pages/loader" %>
-        <!-- Start wrapper-->
-        <div id="wrapper">
-            <%= render "pages/sidemenu" %>
+        <!-- Sidebar -->
+        <%= render "pages/sidemenu" %> <!-- Make sure this has a fixed width -->
+
+        <!-- Content wrapper -->
+        <div class="flex-1" style="margin-left: 16rem;"> <!-- Adjust margin-left to match the sidebar width -->
             <%= render "pages/topmenu" %>
-            <div class="clearfix"></div>
+
+            <!-- Main content -->
             <div class="content-wrapper">
-                <div class="container-fluid px-0 px-sm-3">
+                <div class="container mx-auto px-4 sm:px-6"> <!-- Adjust container sizes and padding as needed -->
                     <p class="notice"><%= notice %></p>
                     <p class="alert"><%= alert %></p>
                     <%= yield %>
                     <div class="overlay toggle-menu"></div>
                 </div>
             </div>
+
             <%= render "pages/backtotopbutton" %>
             <%= render "pages/footer" %>
             <%= render "pages/backgroundswitcher" %>

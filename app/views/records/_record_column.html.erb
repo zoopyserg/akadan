@@ -1,126 +1,72 @@
 <%= column_fields.hidden_field :id %>
 
-<div class="card" data-pgc-define="jr.recordColumn" data-pgc-define-name="Records Column" data-pgc-section="Page components">
-  <div class="card-body px-0 px-sm-3 py-1 recordscolumn">
-    <div class="px-3 row">
-      <div class="align-items-center col-lg-12 d-flex justify-content-between px-3">
-        <div class="align-items-center d-flex">
-          <div class="d-flex flex-column">
-            <div class="icheck-material-white">
-              <input type="checkbox" id="user-checkbox1" checked=""/>
-              <label for="user-checkbox1"></label>
-            </div>
-          </div>
-          <div class="d-flex flex-column">
-            <i class="fa fa-chevron-up mx-1 my-1"></i>
-            <i class="fa fa-chevron-down mx-1 my-1"></i>
-          </div>
-          <div>
-            <h5 class="card-title mb-0 mx-1" data-pgc-edit="columnname"><%= @subrecords.present? ? 'Sub Records' : 'Repetitive Records' %></h5>
-          </div>
-        </div>
-        <div class="align-items-center d-flex">
-          <i class="fa fa-close mx-1 my-1"></i>
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+  <div class="p-4 space-y-4">
+    <!-- Column header with collapse and delete icons -->
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="user-checkbox1" checked class="form-checkbox text-indigo-600 h-5 w-5"/>
+        <label for="user-checkbox1"></label>
+        <div>
+          <h5 class="text-lg font-semibold text-gray-800"><%= @subrecords.present? ? 'Sub Records' : 'Repetitive Records' %></h5>
         </div>
       </div>
-    </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <div class="align-middle form-check custom-control d-flex py-0 px-0">
-              <%= column_fields.radio_button :filter_solved_status, 'any' %>
-              <%= column_fields.label :filter_solved_status, 'Any', value: 'any', class: 'mx-1' %>
-              <%= column_fields.radio_button :filter_solved_status, 'solved' %>
-              <%= column_fields.label :filter_solved_status, 'Only Solved', value: 'solved', class: 'mx-1' %>
-              <%= column_fields.radio_button :filter_solved_status, 'unsolved' %>
-              <%= column_fields.label :filter_solved_status, 'Only Unsolved', value: 'unsolved', class: 'mx-1' %>
-            </div>
-          </div>
-        </div>
+      <div class="flex space-x-2">
+        <button type="button" class="p-1 rounded-full text-gray-400 hover:text-gray-600 focus:outline-none">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+        <button type="button" class="p-1 rounded-full text-gray-400 hover:text-gray-600 focus:outline-none">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
     </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
 
-            <!-- label class="d-flex justify-content-between">Record Type</label -->
-            <%= label_tag 'record_type_id', 'Record Type', class: 'd-flex justify-content-between' %>
-            <div class="dropdown column_record_type" data-pgc="jr.dropdown">
-              <%= column_fields.select :record_type_id, options_from_collection_for_select(@record_types, :id, :name, column_fields.object.record_type_id), include_blank: true, class: "btn btn-light dropdown-toggle px-5" %>
-            </div>
+    <!-- Radio Button Group for filter solved status -->
+    <div class="flex items-center space-x-4">
+      <%= column_fields.radio_button :filter_solved_status, 'any', class: "form-radio text-indigo-600 h-5 w-5" %>
+      <%= column_fields.label :filter_solved_status, 'Any', value: 'any', class: 'text-gray-700' %>
+      <%= column_fields.radio_button :filter_solved_status, 'solved', class: "form-radio text-indigo-600 h-5 w-5" %>
+      <%= column_fields.label :filter_solved_status, 'Only Solved', value: 'solved', class: 'text-gray-700' %>
+      <%= column_fields.radio_button :filter_solved_status, 'unsolved', class: "form-radio text-indigo-600 h-5 w-5" %>
+      <%= column_fields.label :filter_solved_status, 'Only Unsolved', value: 'unsolved', class: 'text-gray-700' %>
+    </div>
+    <!-- Record Type Selector -->
+    <div>
+      <%= label_tag 'record_type_id', 'Record Type', class: 'block text-sm font-medium text-gray-700' %>
+      <div class="relative">
+        <%= column_fields.select :record_type_id, options_from_collection_for_select(@record_types, :id, :name, column_fields.object.record_type_id), { include_blank: true }, { class: "block appearance-none w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" } %>
+      </div>
+    </div>
 
+    <!-- View Options for collapsed state -->
+    <div class="flex items-center space-x-4">
+      <%= column_fields.radio_button :collapsed, 'true', class: "form-radio text-indigo-600 h-5 w-5" %>
+      <%= column_fields.label :collapsed, 'Collapsed View', value: 'true', class: 'text-gray-700' %>
+      <%= column_fields.radio_button :collapsed, 'false', class: "form-radio text-indigo-600 h-5 w-5" %>
+      <%= column_fields.label :collapsed, 'Full View', value: 'false', class: 'text-gray-700' %>
+    </div>
 
-          </div>
-        </div>
-      </div>
+    <!-- Update Column Filters Button -->
+    <div class="text-right">
+      <%= desire_form.submit 'Update Column Filters', class: 'inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
     </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <div class="align-middle custom-control d-flex form-check px-0 py-2">
-              <%= column_fields.radio_button :collapsed, 'true' %>
-              <%= column_fields.label :collapsed, 'Collapsed View', value: 'true', class: 'mx-1' %>
-              <%= column_fields.radio_button :collapsed, 'false' %>
-              <%= column_fields.label :collapsed, 'Full View', value: 'false', class: 'mx-1' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <div class="align-middle custom-control d-flex form-check py-0 px-0">
-              <% if @subrecords.present? %>
-                <%= column_fields.radio_button :only_direct_children, 'true' %>
-                <%= column_fields.label :only_direct_children, 'Only Direct Subrecords', value: 'true', class: 'mx-1' %>
-                <%= column_fields.radio_button :only_direct_children, 'false' %>
-                <%= column_fields.label :only_direct_children, 'Direct & Deep Nested Subrecords', value: 'false', class: 'mx-1' %>
-              <% else %>
-                <%= column_fields.radio_button :only_separate_projects, 'true' %>
-                <%= column_fields.label :only_separate_projects, 'Only Separate Projects', value: 'true', class: 'mx-1' %>
-                <%= column_fields.radio_button :only_separate_projects, 'false' %>
-                <%= column_fields.label :only_separate_projects, 'Any Hierarchy', value: 'false', class: 'mx-1' %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="px-3 row">
-      <div class="col-lg-12 d-flex justify-content-between">
-        <div class="align-items-center d-flex">
-          <div>
-            <%= desire_form.submit 'Update Column Filters', class: 'btn btn-light' %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="px-3 row">
-      <div class="col-lg-12">
-        <p class="mb-0">123 direct records of this type</p>
-        <p class="mb-0">1230 deeply found records of this type</p>
-        <p class="mb-0">1353 records of this type total</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <%= design_fields.fields_for :group do |group_fields| %>
-          <%= group_fields.collection_check_boxes(:record_a_ids, records_for_column(@records, @record_types, column_fields.object, @subrecords ? @record : nil), :id, :name) do |group_item| %>
-            <% if column_fields.object.collapsed %>
-              <%= render 'records/collapsed_record', record: group_item.object, group_item: group_item %>
-            <% else %>
-              <%= render "records/semi_collapsed_record", record: group_item.object, group_item: group_item %>
-            <% end %>
+
+    <!-- Display records; this will call partials for each record based on the collapsed state -->
+    <div>
+      <%= design_fields.fields_for :group do |group_fields| %>
+        <%= group_fields.collection_check_boxes(:record_a_ids, records_for_column(@records, @record_types, column_fields.object, @subrecords ? @record : nil), :id, :name) do |group_item| %>
+          <% if column_fields.object.collapsed %>
+            <%= render 'records/collapsed_record', record: group_item.object, group_item: group_item %>
+          <% else %>
+            <%= render "records/semi_collapsed_record", record: group_item.object, group_item: group_item %>
           <% end %>
         <% end %>
+      <% end %>
+    </div>
 
-        <%= paginate records_for_column(@records, @record_types, column_fields.object, @subrecords ? @record : nil), param_name: "desire[design_attributes][columns_attributes][#{column_fields.options[:child_index]}][page]" %>
-      </div>
+    <!-- Pagination if necessary -->
+    <div class="mt-4">
+      <%= paginate records_for_column(@records, @record_types, column_fields.object, @subrecords ? @record : nil), param_name: "desire[design_attributes][columns_attributes][#{column_fields.options[:child_index]}][page]" %>
     </div>
   </div>
 </div>

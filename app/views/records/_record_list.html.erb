@@ -1,35 +1,32 @@
-<div class="row">
-  <div class="col-lg-12 px-0 px-sm-3">
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
-            <h5 id='recordsListHeading' class="card-title mb-0" data-pgc-field="title">Repetitive Records</h5>
+<div class="flex flex-wrap -mx-3">
+  <div class="w-full px-3">
+    <div class="bg-white shadow rounded">
+      <div class="p-4">
+        <div class="flex flex-wrap items-center justify-between">
+          <div class="w-full md:w-1/2 flex justify-center md:justify-start">
+            <h5 id='recordsListHeading' class="text-lg font-semibold mb-0" data-pgc-field="title">Repetitive Records</h5>
           </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-12 col-lg-12 col-md-12 col-sm-6 col-xl-5 d-flex d-md-flex d-sm-flex justify-content-md-end justify-content-sm-start justify-content-start">
-                <div class="dropdown" data-pgc="jr.dropdown">
+          <div class="w-full md:w-1/2">
+            <div class="flex flex-wrap">
+              <div class="w-full xl:w-5/12 flex justify-end">
+                <div class="relative" data-pgc="jr.dropdown">
                   <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
                     <i class="fa fa-plus"></i>&nbsp;Add a Column
                   </button>
-                  <div class="dropdown-menu" x-placement='bottom start'>
-                    <%= desire_form.submit 'Add a Basic Column', class: 'dropdown-item' %>
-                    <% #a href="#" class="dropdown-item">Link</a %>
-                    <% #a href="#" class="dropdown-item">Link</a %>
-                    <% #a href="#" class="dropdown-item">Link</a %>
+                  <div class="absolute mt-1 w-56 bg-white border border-gray-200 rounded shadow-lg z-50">
+                    <%= desire_form.submit 'Add a Basic Column', class: 'dropdown-item w-full text-left px-4 py-2 text-sm hover:bg-gray-100' %>
+                    <% # Other links would go here %>
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-lg-12 col-md-12 col-sm-6 col-xl-7 d-flex d-md-flex d-sm-flex justify-content-md-end justify-content-sm-start justify-content-start">
-                <div class="dropdown" data-pgc="jr.dropdown">
+              <div class="w-full xl:w-7/12 flex justify-end mt-4 xl:mt-0">
+                <div class="relative" data-pgc="jr.dropdown">
                   <button type="submit" class="btn btn-light dropdown-toggle px-1" data-toggle='dropdown' data-pgc-field="ButtonName">
-                    <i class="fa fa-bolt"></i>&nbsp;Actions on Selected Records
+                    <i class="fa fa-bolt"></i> Actions on Selected Records
                   </button>
-                  <div class="dropdown-menu" x-placement='bottom start'>
-                    <%= desire_form.submit 'Group...', class: 'dropdown-item' %>
-                    <% # link_to 'All Irrelevant because...', new_group_path, class: 'dropdown-item' %>
-                    <% # link_to 'All Solved by...', new_group_path, class: 'dropdown-item' %>
+                  <div class="absolute mt-1 w-56 bg-white border border-gray-200 rounded shadow-lg z-50">
+                    <%= desire_form.submit 'Group...', class: 'dropdown-item w-full text-left px-4 py-2 text-sm hover:bg-gray-100' %>
+                    <% # Other links would go here %>
                   </div>
                 </div>
               </div>
@@ -38,13 +35,10 @@
         </div>
       </div>
     </div>
-
     <%= desire_form.fields_for :design do |design_fields| %>
       <%= design_fields.fields_for :columns do |column_fields| %>
         <%= render "records/record_column", desire_form: desire_form, design_fields: design_fields, column_fields: column_fields %>
       <% end %>
     <% end %>
-
   </div>
 </div>
-
