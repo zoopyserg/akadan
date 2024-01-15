@@ -1,56 +1,49 @@
-<div class="row">
-  <div class="col-lg-12 px-0 px-sm-3">
-    <div class="card">
+<div class="flex flex-col lg:flex-row">
+  <div class="w-full lg:w-12/12 lg:px-0 lg:px-3 mb-4 lg:mb-0">
+    <div class="bg-white shadow-md rounded-lg p-4">
     </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="align-items-center col-lg-12 d-flex justify-content-between">
-            <div class="align-items-center d-flex">
-              <div class="d-flex flex-column">
-                <div class="icheck-material-white">
-                  <input type="checkbox" id="user-checkbox1" checked=""/>
-                  <label for="user-checkbox1"></label>
-                </div>
-              </div>
-              <div class="d-flex flex-column">
-                <i class="fa fa-chevron-up mx-1 my-1"></i>
-                <i class="fa fa-chevron-down mx-1 my-1"></i>
-              </div>
-              <div>
-                <h5 class="card-title mb-0 mx-1"><%= @record.name %></h5>
-                <%= render "shared/created_by", user: @record.user %>
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <div class="bg-white border border-gray-200 rounded-lg p-4">
+        <div class="flex items-center justify-between lg:justify-between">
+          <div class="flex items-center">
+            <div class="flex flex-col">
+              <div class="inline-block align-middle mr-1">
+                <input type="checkbox" id="user-checkbox1" checked class="form-checkbox h-5 w-5 text-primary"/>
               </div>
             </div>
-            <div class="align-items-center d-flex">
-              <i class="fa fa-comment mx-1 my-1"></i>
+            <div class="flex flex-col">
+              <i class="fa fa-chevron-up mx-1 my-1"></i>
+              <i class="fa fa-chevron-down mx-1 my-1"></i>
+            </div>
+            <div>
+              <h5 class="card-title mb-0 mx-1"><%= @record.name %></h5>
+              <%= render "shared/created_by", user: @record.user %>
             </div>
           </div>
+          <div class="flex items-center">
+            <i class="fa fa-comment mx-1 my-1"></i>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="input-group input-group-sm">
-              <div class="input-group-prepend">
-                <span class="input-group-text">URL:</span>
-              </div>
-              <input type="text" class="form-control" value="<%= record_url(@record) %>">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-copy mr-1"></i>Copy
-                </button>
-                <%= link_to record_path(@record), class: "btn btn-primary", type: "button" do %>
-                  <i class="fa fa-eye mr-1"></i>Show
-                <% end %>
-              </div>
+        <div class="flex flex-col lg:flex-row">
+          <div class="lg:w-8/12">
+            <div class="flex items-center mb-2 sm:mb-0">
+              <span class="inline-block w-12 sm:w-auto">URL:</span>
+              <input type="text" class="form-input flex-1" value="<%= record_url(@record) %>">
+              <button class="btn btn-primary ml-2">
+                <i class="fa fa-copy mr-1"></i>Copy
+              </button>
+              <%= link_to record_path(@record), class: "btn btn-primary ml-2" do %>
+                <i class="fa fa-eye mr-1"></i>Show
+              <% end %>
             </div>
             <% if user_signed_in? %>
               <% if current_user.bookmarked?(@record) %>
-                <%= link_to record_bookmark_path(record_id: @record.id, id: Bookmark.find_by(user: current_user, record: @record).id ), method: :delete, class: 'btn btn-link btn-sm d-flex flex-row align-items-center' do %>
+                <%= link_to record_bookmark_path(record_id: @record.id, id: Bookmark.find_by(user: current_user, record: @record).id ), method: :delete, class: 'btn btn-link btn-sm flex items-center' do %>
                   <span><i class="fa fa-star mr-1"></i></span>
                   <span>Remove from Favourites</span>
                 <% end %>
               <% else %>
-                <%= link_to record_bookmarks_path(record_id: @record.id), method: :post, class: 'btn btn-link btn-sm d-flex flex-row align-items-center' do %>
+                <%= link_to record_bookmarks_path(record_id: @record.id), method: :post, class: 'btn btn-link btn-sm flex items-center' do %>
                   <span><i class="fa fa-star-o mr-1"></i></span>
                   <span>Add to Favourites</span>
                 <% end %>
@@ -60,265 +53,167 @@
               <p><%= dot.description %></p>
             <% end %>
             <h6>Completed (<%= @record.progress_cached %>%):</h6>
-            <div class="progress">
-              <div class="progress-bar" aria-valuenow="<%= @record.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @record.progress %>%;"></div>
+            <div class="relative pt-1">
+              <div class="flex mb-2 items-center justify-between">
+                <div>
+                  <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary bg-primary-100">
+                    In Progress
+                  </span>
+                </div>
+                <div class="text-right">
+                  <%= @record.progress %>%
+                </div>
+              </div>
+              <div class="flex mb-2 items-center justify-between">
+                <div>
+                  <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-primary bg-primary-100">
+                    Completed
+                  </span>
+                </div>
+                <div class="text-right">
+                  <%= 100 - @record.progress %>%
+                </div>
+              </div>
             </div>
-            <!-- todo: display what records I need to solve to improve my progress in this task. it is more useful than subrecords. -->
             <p class="mb-0"><strong class="mr-1">Type:</strong><%= @record.record_type.name %><i class="fa fa-edit mx-1"></i></p>
-            <div role="tablist" id="accordion-1">
-              <p class="mb-0">Total time spent: <strong><%= @record.dots.sum(:duration) %></strong> on this</p>
+            <div>
+              <p class="mb-0">Total time spent: <strong><%= @record.dots.sum(:duration) %></strong> on this</p>
               <% if user_signed_in? %>
-                <p class="mb-0">Total time spent by me: <strong><%= @record.dots.where(user: current_user).sum(:duration) %></strong> on this</p>
-                <p class="mb-0">Total time spent by others: <strong><%= @record.dots.where.not(user: current_user).sum(:duration) %></strong> on this</p>
+                <p class="mb-0">Total time spent by me: <strong><%= @record.dots.where(user: current_user).sum(:duration) %></strong> on this</p>
+                <p class="mb-0">Total time spent by others: <strong><%= @record.dots.where.not(user: current_user).sum(:duration) %></strong> on this</p>
               <% end %>
-
-              <p class="mb-0">Repeated: <strong><%= @record.dots.count %></strong> times</p>
+              <p class="mb-0">Repeated: <strong><%= @record.dots.count %></strong> times</p>
               <% if user_signed_in? %>
-                <p class="mb-0">Repeated for me: <strong><%= @record.dots.where(user: current_user).count %></strong> times</p>
-                <p class="mb-0">Repeated for others: <strong><%= @record.dots.where.not(user: current_user).count %></strong> times</p>
+                <p class="mb-0">Repeated for me: <strong><%= @record.dots.where(user: current_user).count %></strong> times</p>
+                <p class="mb-0">Repeated for others: <strong><%= @record.dots.where.not(user: current_user).count %></strong> times</p>
               <% end %>
-
-              <p class="mb-0">Projects affected: <strong><%= @record.dots.pluck(:project_id).uniq.count %></strong></p>
+              <p class="mb-0">Projects affected: <strong><%= @record.dots.pluck(:project_id).uniq.count %></strong></p>
               <% if user_signed_in? %>
-                <p class="mb-0">My projects affected: <strong><%= @record.dots.where(user: current_user).pluck(:project_id).uniq.count %></strong></p>
-                <p class="mb-0">Other people's projects affected: <strong><%= @record.dots.where.not(user: current_user).pluck(:project_id).uniq.count %></strong></p>
+                <p class="mb-0">My projects affected: <strong><%= @record.dots.where(user: current_user).pluck(:project_id).uniq.count %></strong></p>
+                <p class="mb-0">Other people's projects affected: <strong><%= @record.dots.where.not(user: current_user).pluck(:project_id).uniq.count %></strong></p>
               <% end %>
-
-              <p class="mb-0">Records in tree: <strong><%= @record.records_connected_cached %></strong></p>
-
+              <p class="mb-0">Records in tree: <strong><%= @record.records_connected_cached %></strong></p>
               <% if user_signed_in? %>
-                <p class="mb-0">My records in tree: <strong><%= Record.all_tree_records_of_record(@record).where(user: current_user).count %></strong></p>
-                <p class="mb-0">Other people's records in tree: <strong><%= Record.all_tree_records_of_record(@record).where.not(user: current_user).count %></strong></p>
+                <p class="mb-0">My records in tree: <strong><%= Record.all_tree_records_of_record(@record).where(user: current_user).count %></strong></p>
+                <p class="mb-0">Other people's records in tree: <strong><%= Record.all_tree_records_of_record(@record).where.not(user: current_user).count %></strong></p>
               <% end %>
-
               <p class="mb-0">Unsolved records in tree: <strong><%= @record.unsolved_records_connected_cached %></strong></p>
-
               <% if user_signed_in? %>
-                <p class="mb-0">My unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(@record).where(user: current_user).count %></strong></p>
-                <p class="mb-0">Other people's unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(@record).where.not(user: current_user).count %></strong></p>
+                <p class="mb-0">My unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(@record).where(user: current_user).count %></strong></p>
+                <p class="mb-0">Other people's unsolved records in tree: <strong><%= Record.all_unsolved_tree_records_of_record(@record).where.not(user: current_user).count %></strong></p>
               <% end %>
-
               <p class="mb-0">Solved records in tree: <strong><%= @record.solved_records_connected_cached %></strong></p>
-
               <% if user_signed_in? %>
-                <p class="mb-0">My solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(@record).where(user: current_user).count %></strong></p>
-                <p class="mb-0">Other people's solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(@record).where.not(user: current_user).count %></strong></p>
+                <p class="mb-0">My solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(@record).where(user: current_user).count %></strong></p>
+                <p class="mb-0">Other people's solved records in tree: <strong><%= Record.all_solved_tree_records_of_record(@record).where.not(user: current_user).count %></strong></p>
               <% end %>
-
-              <div class="accordioncollapse card mb-0">
-                <div role="tab" class="card-header">
-                  <h6 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1">Attachments</a></h6>
-                </div>
-                <div role="tabpanel" data-parent="#accordion-1" class="collapse item-1">
-                  <div class="card-body">
-                    <div class="row row-cols-1">
-                      <div class="col-lg-12">
-                        <div class="row row-cols-1">
-                          <% # pending dot.attachments %>
-                          <div class="col-lg-12">
-                            <a href="#">Attachment File 1.pdf</a>
-                          </div>
-                          <div class="col-lg-12">
-                            <a href="#">Attachment File 2.cad</a>
-                          </div>
-                          <div class="col-lg-12">
-                            <a href="#">Attachment File 3.exe</a>
-                          </div>
-                          <div class="col-lg-12">
-                            <a href="#">Attachment File 4.zip</a>
-                          </div>
-                          <div class="col-lg-12">
-                            <button class="btn btn-primary btn-sm" type="button">Add Attachment</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 mt-4">
+              <div class="flex justify-between">
+                <h6 class="mb-0">Attachments</h6>
+                <i class="fa fa-angle-down"></i>
               </div>
-              <div class="accordioncollapse card mb-0">
-                <div role="tab" class="card-header">
-                  <h6 class="mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-2">Sensors</a></h6>
-                </div>
-                <div role="tabpanel" data-parent="#accordion-1" class="collapse item-2">
-                  <div class="card-body">
-                    <div class="row row-cols-1">
-                      <div class="col-lg-12">
-                      </div>
-                      <div class="col-lg-12">
-                      </div>
-                      <div class="col-lg-12">
-                        <div class="row row-cols-1">
-                          <div class="col-lg-12">
-                            <div class="row">
-                              <div class="col">
-                                <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
-                                <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
-                                <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
-                                <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
-                                <span class="badge badge-primary mr-1"><a class="sensorshowlink" href="#">Sensor 12334</a><i class="fa fa-remove mx-1"></i></span>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-lg-12">
-                                <a href="#">Add a New Sensor</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="accordioncollapse card mb-0">
-                <div role="tabpanel" data-parent="#accordion-1" class="collapse item-3">
-                </div>
+              <div class="mt-2">
+                <a href="#" class="block mb-2">Attachment File 1.pdf</a>
+                <a href="#" class="block mb-2">Attachment File 2.cad</a>
+                <a href="#" class="block mb-2">Attachment File 3.exe</a>
+                <a href="#" class="block mb-2">Attachment File 4.zip</a>
+                <button class="btn btn-primary btn-sm mt-2">
+                  <i class="fa fa-plus mr-1"></i>Add Attachment
+                </button>
               </div>
             </div>
-            <div role="tablist" id="accordion-1">
-              <div class="row row-cols-1">
-                <div class="col-12">
-                  <h6>Print a Report</h6>
-                </div>
-                <div class="col-12">
-                  <div class="row">
-                    <div class="align-items-center col-sm-6 d-flex">
-                      <p class="mb-0">Download PDF</p>
-                      <i class="fa fa-file-pdf-o mx-1"></i>
-                    </div>
-                    <div class="align-items-center col-sm-6 d-flex">
-                      <p class="mb-0">Print</p>
-                      <i class="fa fa-print mx-1"></i>
-                    </div>
-                  </div>
-                </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 mt-4">
+              <div class="flex justify-between">
+                <h6 class="mb-0">Sensors</h6>
+                <i class="fa fa-angle-down"></i>
               </div>
-              <div class="row row-cols-1">
-                <div class="col-12">
-                  <h6>Sharing</h6>
-                </div>
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-12">
-                      <iframe src="https://platform.twitter.com/widgets/tweet_button.html?via=BootstrapStudio&amp;text=Text" frameborder="0" scrolling="no" allowtransparency="true" width="80" height="20"></iframe>
-                    </div>
-                    <div class="col-12">
-                      <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fbootstrapstudio.io%2F&amp;layout=button&amp;action=like&amp;size=small&amp;share=true" scrolling="no" frameborder="0" allow="encrypted-media" allowtransparency="true" height="20" width="200px"></iframe>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row row-cols-1">
-                <div class="col-12">
-                  <h6>Separate Room</h6>
-                </div>
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <p>Выдели под этот проект/систему/подсистему отдельное помещение (ради избавления от путаницы и модульности) </p>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-check custom-control custom-switch">
-                        <input type="checkbox" class="form-check-input custom-control-input" id="customSwitch-1"/>
-                        <label class="form-check-label custom-control-label" for="customSwitch1">Сделано</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row row-cols-1">
-                <div class="col-12">
-                  <h6>Apply For Partnership</h6>
-                </div>
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="button">Apply for review / partnership / funding (we will fund 100%, help to set it up, and take 14% of your profit once you have it).</button>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="button">Start Crowdfunding Campaign (visible for owner after 100% solved, and probably after 100% of factory is planned, makes it public)</button>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="button">Donate (visible to everyone if Crowdfunding was approved)</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row row-cols-1">
-                <div class="col-12">
-                  <h6>Turn Into A Factory</h6>
-                </div>
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="button">Turn Into a Factory (visible after problem is close to 100% solved).</button>
-                    </div>
-                  </div>
+              <div class="mt-2">
+                <span class="badge badge-primary mr-1">
+                  <a class="sensorshowlink" href="#">Sensor 12334</a>
+                  <i class="fa fa-remove mx-1"></i>
+                </span>
+                <span class="badge badge-primary mr-1">
+                  <a class="sensorshowlink" href="#">Sensor 12334</a>
+                  <i class="fa fa-remove mx-1"></i>
+                </span>
+                <span class="badge badge-primary mr-1">
+                  <a class="sensorshowlink" href="#">Sensor 12334</a>
+                  <i class="fa fa-remove mx-1"></i>
+                </span>
+                <span class="badge badge-primary mr-1">
+                  <a class="sensorshowlink" href="#">Sensor 12334</a>
+                  <i class="fa fa-remove mx-1"></i>
+                </span>
+                <span class="badge badge-primary mr-1">
+                  <a class="sensorshowlink" href="#">Sensor 12334</a>
+                  <i class="fa fa-remove mx-1"></i>
+                </span>
+                <div class="mt-2">
+                  <a href="#" class="block">Add a New Sensor</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <%= link_to new_record_connection_type_connection_path(record_id: @record.id, connection_type_id: @solution_connection_type_id), class: "btn btn-light btn-block" do %>
-              <i class="fa fa-arrow-circle-o-left mx-1"></i>Can't (or no point to) solve because of another record
-            <% end %>
-            <%= link_to new_record_dot_path(record_id: @record.id, parent_id: nil), class: "btn btn-light btn-block" do %>
-              <% # todo: save project_id (id of project within which this thing repeated - pass the project id into the form) %>
-              <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>
-              <i class="fa fa-repeat mx-1"></i>Repeated
-            <% end %>
-            <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: @record.id, connection_type_id: @solution_connection_type_id, record_type_id: @solution_record_type_id), class: "btn btn-light btn-block" do %>
-              <i class="fa fa-check mx-1"></i>Solve
-            <% end %>
-            <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: @record.id, connection_type_id: @subsystem_connection_type_id, record_type_id: @subsystem_record_type_id), class: "btn btn-light btn-block" do %>
-              <i class="fa fa-puzzle-piece mx-1"></i>Create / Connect Subrecords
-            <% end %>
-            <%= link_to into_separate_project_record_connection_type_connections_path(@record, @extracted_to_connection_type), method: :post, class: "btn btn-light btn-block" do %>
-              <i class="fa fa-angle-double-up mx-1"></i>Extract Into Separate Project
-            <% end %>
-            <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsmodal">
-              <i class="fa fa-lock"></i>Permissions
-            </button>
-            <%= link_to new_record_connection_type_connection_path(@record, @irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
-              <i class="fa fa-close mx-1"></i>Irrelevant
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="align-items-center align-items-md-center align-items-sm-center col-md-6 d-flex d-sm-flex justify-content-center justify-content-sm-start">
-            <h5 class="card-title" data-pgc-field="title">Comments</h5>
-          </div>
-
-          <div class="col-lg-12">
-            <div class="row" id="new_comment_form_container">
-              <div class="col-lg-12 px-0 px-sm-3">
-                <%= render 'comments/form', comment: @new_comment, record: @record %>
-              </div>
+          <div class="lg:w-4/12 mt-4 lg:mt-0">
+            <div class="mb-2">
+              <%= link_to new_record_connection_type_connection_path(record_id: @record.id, connection_type_id: @solution_connection_type_id), class: "btn custom-button-style btn-block" do %>
+                <i class="fa fa-arrow-circle-o-left mx-1"></i>Can't (or no point to) solve because of another record
+              <% end %>
             </div>
-
-            <div class="row" id="comments">
-              <% @comments.each do |comment| %>
-                <%= render 'comments/comment', comment: comment, offset: false %>
+            <div class="mb-2">
+              <%= link_to new_record_dot_path(record_id: @record.id, parent_id: nil), class: "btn btn-light custom-button-style btn-block" do %>
+                <% # todo: save project_id (id of project within which this thing repeated - pass the project id into the form) %>
+                <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>
+                <i class="fa fa-repeat mx-1"></i>Repeated
+              <% end %>
+            </div>
+            <div class="mb-2">
+              <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: @record.id, connection_type_id: @solution_connection_type_id, record_type_id: @solution_record_type_id), class: "btn btn-light custom-button-style btn-block" do %>
+                <i class="fa fa-check mx-1"></i>Solve
+              <% end %>
+            </div>
+            <div class="mb-2">
+              <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: @record.id, connection_type_id: @subsystem_connection_type_id, record_type_id: @subsystem_record_type_id), class: "btn btn-light custom-button-style btn-block" do %>
+                <i class="fa fa-puzzle-piece mx-1"></i>Create / Connect Subrecords
+              <% end %>
+            </div>
+            <div class="mb-2">
+              <%= link_to into_separate_project_record_connection_type_connections_path(@record, @extracted_to_connection_type), method: :post, class: "btn btn-light custom-button-style btn-block" do %>
+                <i class="fa fa-angle-double-up mx-1"></i>Extract Into Separate Project
+              <% end %>
+            </div>
+            <div class="mb-2">
+              <button type="button" class="btn btn-light custom-button-style btn-block" data-toggle="modal" data-target="#permissionsmodal">
+                <i class="fa fa-lock"></i>Permissions
+              </button>
+            </div>
+            <div>
+              <%= link_to new_record_connection_type_connection_path(@record, @irrelevant_because_connection_type), class: "btn btn-light custom-button-style btn-block" do %>
+                <i class="fa fa-close mx-1"></i>Irrelevant
               <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+    <div class="bg-white shadow-md rounded-lg p-4">
+      <div class="bg-white border border-gray-200 rounded-lg p-4">
+        <div class="flex justify-between items-center mb-4">
+          <h5 class="card-title" data-pgc-field="title">Comments</h5>
+        </div>
+        <div class="lg:px-0 lg:px-3">
+          <%= render 'comments/form', comment: @new_comment, record: @record %>
+        </div>
+        <div class="mt-4" id="comments">
+          <% @comments.each do |comment| %>
+            <%= render 'comments/comment', comment: comment, offset: false %>
+          <% end %>
+        </div>
+      </div>
+    </div>
     <%= form_for @desire do |desire_form| %>
       <%= render "records/record_list", desire_form: desire_form %>
     <% end %>
-
   </div>
 </div>
-
