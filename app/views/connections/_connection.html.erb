@@ -1,32 +1,32 @@
-<div class="card" data-pgc-define="jr.connection" data-pgc-define-name="Connection" data-pgc-section="Page components">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-lg-12">
-        <h5><%= connection.name %></h4>
+<div class="bg-white shadow-md rounded overflow-hidden" data-pgc-define="jr.connection" data-pgc-define-name="Connection" data-pgc-section="Page components">
+  <div class="p-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <h5 class="text-lg font-semibold"><%= connection.name %></h5>
         <p><%= connection.description %></p>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-8">
-        <div class="d-sm-flex justify-content-between align-items-sm-center">
-          <p><%= connection.record_a.name %></p>
-          <div class="connection-qualities flex-shrink-0" style="margin: 10px;">
-            <% if connection.connection_type.destructive? %>
-              <i class="zmdi zmdi-close"></i>
-            <% end %>
-            <i class="fa fa-long-arrow-right"></i>
-          </div>
-          <p><%= connection.record_b.name %></p>
-        </div>
-        <%= render "shared/created_by", user: connection.user %>
-      </div>
-      <div class="col-lg-4">
+      <div>
         <% if connection.user == current_user %>
-          <%= link_to edit_record_connection_type_connection_path(connection.record_a, connection.connection_type, connection), class: "btn btn-light btn-block" do %>
+          <%= link_to edit_record_connection_type_connection_path(connection.record_a, connection.connection_type, connection), class: "bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" do %>
             <i class="fa fa-edit mx-1"></i>Edit
           <% end %>
         <% end %>
       </div>
     </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 mt-4">
+      <div class="col-span-1">
+        <p><%= connection.record_a.name %></p>
+      </div>
+      <div class="col-span-1 connection-qualities flex-shrink-0 mx-2.5">
+        <% if connection.connection_type.destructive? %>
+          <i class="zmdi zmdi-close"></i>
+        <% end %>
+        <i class="fa fa-long-arrow-right"></i>
+      </div>
+      <div class="col-span-1">
+        <p><%= connection.record_b.name %></p>
+      </div>
+    </div>
+    <%= render "shared/created_by", user: connection.user %>
   </div>
 </div>

@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @record_type.name %>
-</p>
+<div class="p-4 border rounded-lg">
+  <p>
+    <strong class="font-semibold">Name:</strong>
+    <%= @record_type.name %>
+  </p>
+</div>
 
-<%= link_to 'Edit', edit_record_type_path(@record_type) %> |
-<%= link_to 'Back', record_types_path %>
+<div class="mt-4">
+  <%= link_to 'Edit', edit_record_type_path(@record_type), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
+  |
+  <%= link_to 'Back', record_types_path, class: "bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-gray active:bg-gray-500" %>
+</div>

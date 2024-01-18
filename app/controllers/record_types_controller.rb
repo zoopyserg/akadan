@@ -52,6 +52,9 @@ class RecordTypesController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_record_type

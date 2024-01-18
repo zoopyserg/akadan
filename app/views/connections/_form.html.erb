@@ -1,16 +1,16 @@
-<div class="card">
+<div class="bg-white shadow-md rounded overflow-hidden">
   <% # todo: dot fields %>
-  <div class="card-body">
+  <div class="p-4">
     <%= form_with(model: connection, url: [@record_a, @connection_type, connection]) do |form| %>
       <% if connection.errors.any? %>
         <div id="error_explanation">
-          <h2>
+          <h2 class="text-red-600">
             <%= pluralize(connection.errors.count, "error") %>
             prohibited this connection from being saved:
           </h2>
-          <ul>
+          <ul class="list-disc ml-8">
             <% connection.errors.each do |error| %>
-              <li>
+              <li class="text-red-600">
                 <%= error.full_message %>
               </li>
             <% end %>
@@ -18,26 +18,22 @@
         </div>
       <% end %>
 
-      <div class="form-group record_a_selection_section">
-        <%= form.label :record_a_id do %>
-          Record A
-        <% end %>
-        <div class="dropdown" data-pgc="jr.dropdown">
-          <%= form.collection_select :record_a_id, @records_a, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+      <div class="mb-4">
+        <%= form.label :record_a_id, "Record A", class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <div class="relative">
+          <%= form.collection_select :record_a_id, @records_a, :id, :name, { include_blank: true }, { class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline" } %>
         </div>
       </div>
-      <div class="form-group connection_type_selection_section">
-        <%= form.label :connection_type_id do %>
-          Connection Type
-        <% end %>
-        <div class="dropdown" data-pgc="jr.dropdown">
-          <%= form.collection_select :connection_type_id, @connection_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+      <div class="mb-4">
+        <%= form.label :connection_type_id, "Connection Type", class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <div class="relative">
+          <%= form.collection_select :connection_type_id, @connection_types, :id, :name, { include_blank: true }, { class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline" } %>
         </div>
       </div>
-      <div class="form-group">
-        <label for="input-1">Preview</label>
+      <div class="mb-4">
+        <%= form.label :preview, "Preview", class: "block text-gray-700 text-sm font-bold mb-2" %>
         <div class="text-center">
-          <div class="d-flex justify-content-between">
+          <div class="flex justify-between">
             <div>
               <div id="destructive-preview">
                 <% if @connection_type.destructive? %>
@@ -55,32 +51,30 @@
           </div>
         </div>
       </div>
-      <div class="form-group record_b_selection_section">
-        <%= form.label :record_b_id do %>
-          Record B
-        <% end %>
-        <div class="dropdown" data-pgc="jr.dropdown">
-          <%= form.collection_select :record_b_id, @records_b, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+      <div class="mb-4">
+        <%= form.label :record_b_id, "Record B", class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <div class="relative">
+          <%= form.collection_select :record_b_id, @records_b, :id, :name, { include_blank: true }, { class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline" } %>
         </div>
       </div>
-      <div class="form-group">
-        <%= form.label :name, 'Connection Name (optional)' %>
-        <%= form.text_field :name, class: "form-control", placeholder: "Enter Connection Name" %>
+      <div class="mb-4">
+        <%= form.label :name, "Connection Name (optional)", class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "Enter Connection Name" %>
       </div>
-      <div class="form-group">
-        <%= form.label :description, 'Connection Description (optional)' %>
-        <%= form.text_area :description, class: "form-control", placeholder: "Enter Connection Description (for example a reason you are creating it)" %>
+      <div class="mb-4">
+        <%= form.label :description, "Connection Description (optional)", class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.text_area :description, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "Enter Connection Description (for example a reason you are creating it)" %>
       </div>
-      <div class="form-group d-flex justify-content-between">
-        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+      <div class="flex justify-between mb-4">
+        <%= button_tag type: :submit, class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" do %>
           <i class="fa fa-check mx-1"></i>
           <%= submit_name %>
         <% end %>
-        <%= button_tag type: :submit, value: 'swap_direction', class: "btn btn-light px-5" do %>
-          <i class="fa fa-check mx-1"></i>
+        <%= button_tag type: :submit, value: 'swap_direction', class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" do %>
+          <i class="fa fa-exchange mx-1"></i>
           Swap Direction
         <% end %>
-        <%= link_to connections_path, class: "btn btn-light px-5" do %>
+        <%= link_to connections_path, class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" do %>
           <i class="fa fa-close mx-1"></i>
           Cancel
         <% end %>

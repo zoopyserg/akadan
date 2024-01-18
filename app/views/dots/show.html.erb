@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<p id="notice" class="mb-4"><%= notice %></p>
 
-<p>
-  <strong>Record:</strong>
+<div class="mb-4">
+  <strong class="font-semibold">Record:</strong>
   <%= @dot.record_id %>
-</p>
+</div>
 
-<p>
-  <strong>Start date:</strong>
+<div class="mb-4">
+  <strong class="font-semibold">Start date:</strong>
   <%= @dot.start_date %>
-</p>
+</div>
 
-<p>
-  <strong>Start time:</strong>
+<div class="mb-4">
+  <strong class="font-semibold">Start time:</strong>
   <%= @dot.start_time %>
-</p>
+</div>
 
-<p>
-  <strong>End date:</strong>
+<div class="mb-4">
+  <strong class="font-semibold">End date:</strong>
   <%= @dot.end_date %>
-</p>
+</div>
 
-<p>
-  <strong>End time:</strong>
+<div class="mb-4">
+  <strong class="font-semibold">End time:</strong>
   <%= @dot.end_time %>
-</p>
+</div>
 
-<p>
-  <strong>Income:</strong>
+<div class="mb-4">
+  <strong class="font-semibold">Income:</strong>
   <%= @dot.income %>
-</p>
+</div>
 
-<p>
-  <strong>Duration:</strong>
+<div class="mb-4">
+  <strong class="font-semibold">Duration:</strong>
   <%= @dot.duration %>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_dot_path(@dot) %> |
-<%= link_to 'Back', dots_path %>
+<div class="mt-4">
+  <%= link_to 'Edit', edit_dot_path(@dot), class: "btn btn-primary mr-2" %> |
+  <%= link_to 'Back', dots_path, class: "btn btn-secondary" %>
+</div>

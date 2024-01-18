@@ -1,36 +1,37 @@
-<div class="card">
-  <div class="card-body">
+<div class="bg-white shadow-md rounded overflow-hidden">
+  <div class="p-4">
     <%= form_with(model: record_type) do |form| %>
       <% if record_type.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(record_type.errors.count, "error") %> prohibited this record_type from being saved:</h2>
-
-          <ul>
+        <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <h2 class="font-bold">
+            <%= pluralize(record_type.errors.count, "error") %> prohibited this record_type from being saved:
+          </h2>
+          <ul class="list-disc pl-5">
             <% record_type.errors.each do |error| %>
               <li><%= error.full_message %></li>
             <% end %>
           </ul>
         </div>
       <% end %>
-      <div class="form-group">
-        <%= form.label :name %>
-        <%= form.text_field :name, class: 'form-control', placeholder: "Enter Record Type Name" %>
+      <div class="mb-4">
+        <%= form.label :name, class: 'block text-sm font-medium text-gray-700' %>
+        <%= form.text_field :name, class: 'form-input mt-1 block w-full', placeholder: "Enter Record Type Name" %>
       </div>
-      <div class="form-group">
-        <%= form.label :description %>
-        <%= form.text_area :description, class: 'form-control', placeholder: "Enter Description" %>
+      <div class="mb-4">
+        <%= form.label :description, class: 'block text-sm font-medium text-gray-700' %>
+        <%= form.text_area :description, class: 'form-input mt-1 block w-full', placeholder: "Enter Description" %>
       </div>
-      <div class="form-group">
-        <%= form.label :is_public %>
-        <%= form.check_box :is_public %>
+      <div class="mb-4">
+        <%= form.label :is_public, class: 'block text-sm font-medium text-gray-700' %>
+        <%= form.check_box :is_public, class: 'form-checkbox' %>
       </div>
-      <div class="form-group py-2">
+      <div class="py-2">
       </div>
-      <div class="form-group d-flex d-sm-flex justify-content-between">
-        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+      <div class="flex justify-between">
+        <%= button_tag type: :submit, class: "px-5 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-300" do %>
           <i class="fa fa-check mx-1"></i><%= submit_name %>
         <% end %>
-        <%= link_to record_types_path, class: 'btn btn-light px-5' do %>
+        <%= link_to record_types_path, class: 'px-5 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:bg-gray-300' do %>
           <i class="fa fa-close mx-1"></i>Cancel
         <% end %>
       </div>

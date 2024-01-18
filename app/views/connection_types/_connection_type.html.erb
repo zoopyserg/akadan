@@ -1,26 +1,26 @@
-<div class="card" data-pgc-define="jr.connectiontype" data-pgc-define-name="Connection Type" data-pgc-section="Page components">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-4">
-        <h5><%= connection_type.name %></h5>
-        <p><%= connection_type.description %></p>
+<div class="bg-white shadow-md rounded overflow-hidden" data-pgc-define="jr.connectiontype" data-pgc-define-name="Connection Type" data-pgc-section="Page components">
+  <div class="p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div class="mb-4 md:col-span-1 lg:col-span-2">
+        <h5 class="text-lg font-semibold"><%= connection_type.name %></h5>
+        <p class="mt-2"><%= connection_type.description %></p>
         <%= render "shared/created_by", user: connection_type.user %>
       </div>
-      <div class="col-md-4">
-        <div class="row">
+      <div class="md:col-span-1 lg:col-span-1">
+        <div class="grid grid-cols-2 gap-4">
           <%= render "connection_types/directional_badge", connection_type: connection_type %>
           <%= render "connection_types/destructive_badge", connection_type: connection_type %>
           <%= render "connection_types/target_type_badge", connection_type: connection_type %>
           <%= render "connection_types/target_hierarchy", connection_type: connection_type  %>
         </div>
       </div>
-      <div class="col-md-4">
-        <% if can? :update, connection_type %>
-          <%= link_to edit_connection_type_path(connection_type), class: "btn btn-light btn-block" do %>
-            <i class="fa fa-edit"></i>&nbsp;Edit
-          <% end %>
+    </div>
+    <% if can? :update, connection_type %>
+      <div class="mt-4">
+        <%= link_to edit_connection_type_path(connection_type), class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800 block w-full text-center" do %>
+          <i class="fa fa-edit mr-2"></i>Edit
         <% end %>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

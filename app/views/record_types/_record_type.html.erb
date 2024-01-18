@@ -1,15 +1,15 @@
-<div class="card" data-pgc-define="jr.recordtype" data-pgc-define-name="Record Type" data-pgc-section="Page components">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-8">
-        <h5><%= record_type.name %> </h5>
-        <p><%= record_type.description %></p>
+<div class="bg-white shadow-md rounded overflow-hidden" data-pgc-define="jr.recordtype" data-pgc-define-name="Record Type" data-pgc-section="Page components">
+  <div class="p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="col-span-1">
+        <h5 class="text-xl font-semibold mb-2"><%= record_type.name %></h5>
+        <p class="text-gray-600"><%= record_type.description %></p>
         <%= render "shared/created_by", user: record_type.user %>
       </div>
-      <div class="col-md-4">
+      <div class="col-span-1 text-right">
         <% if can? :update, record_type %>
-          <%= link_to edit_record_type_path(record_type), class: "btn btn-light btn-block" do %>
-            <i class="fa fa-edit"></i>&nbsp;Edit
+          <%= link_to edit_record_type_path(record_type), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" do %>
+            <i class="fa fa-edit mr-1"></i>Edit
           <% end %>
         <% end %>
       </div>

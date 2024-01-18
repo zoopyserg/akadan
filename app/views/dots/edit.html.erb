@@ -1,6 +1,8 @@
-<h1>Editing Dot</h1>
+<h1 class="text-2xl font-semibold mb-4">Editing Dot</h1>
 
 <%= render 'form', dot: @dot %>
 
-<%= link_to 'Show', @dot %> |
-<%= link_to 'Back', dots_path %>
+<div class="mt-4">
+  <%= link_to 'Show', @dot, class: "btn btn-primary" %> |
+  <%= link_to 'Back', dots_path, class: "btn btn-secondary" %>
+</div>

@@ -1,51 +1,58 @@
-<div class="card">
-  <div class="card-body">
+<div class="bg-white shadow-md rounded overflow-hidden">
+  <div class="p-4">
     <%= form_with(model: record) do |form| %>
       <% if record.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:</h2>
-
-          <ul>
+        <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+          <h2 class="font-bold">
+            <%= pluralize(record.errors.count, "error") %> prohibited this record from being saved:
+          </h2>
+          <ul class="list-disc pl-5">
             <% record.errors.each do |error| %>
               <li><%= error.full_message %></li>
             <% end %>
           </ul>
         </div>
       <% end %>
-      <div class="form-group">
-        <label class="d-flex justify-content-between">Type</label>
-        <div class="dropdown" data-pgc="jr.dropdown">
-          <%= form.collection_select :record_type_id, @record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
+
+      <div class="mb-4">
+        <label class="flex justify-between">Type</label>
+        <div class="relative">
+          <%= form.collection_select :record_type_id, @record_types, :id, :name, { include_blank: true }, { class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline" } %>
         </div>
       </div>
-      <div class="form-group">
-        <%= form.label :name, class: "d-flex justify-content-between" do %>
+
+      <div class="mb-4">
+        <%= form.label :name, class: "flex justify-between" do %>
           <span> Name / Title </span>
           <i class="fa fa-microphone"></i>
         <% end %>
-
-        <%= form.text_field :name, class: "form-control", placeholder: "Enter a repetitive problem" %>
+        <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "Enter a repetitive problem" %>
       </div>
+
       <%= form.fields_for :dots do |builder|  %>
         <%= render "records/dot_fields", form: builder %>
       <% end %>
-      <div class="form-group">
-        <label class="d-flex justify-content-between">Draw</label>
+
+      <div class="mb-4">
+        <label class="flex justify-between">Draw</label>
         <div id="bcPaint"></div>
       </div>
-      <div class="form-group files color" id="picsuploadjs">
+
+      <div class="mb-4 files color" id="picsuploadjs">
         <label>Pictures</label>
         <input type="file" class="form-control-file" multiple name="files"/>
       </div>
-      <div class="form-group">
+
+      <div class="mb-4">
         <%= form.label :is_public %>
-        <%= form.check_box :is_public %>
+        <%= form.check_box :is_public, class: "form-checkbox h-5 w-5 text-gray-600" %>
       </div>
-      <div class="form-group d-flex d-sm-flex justify-content-between">
-        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
+
+      <div class="flex justify-between">
+        <%= button_tag type: :submit, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" do %>
           <i class="fa fa-check mx-1"></i><%= submit_name %>
         <% end %>
-        <%= link_to records_path, class: 'btn btn-light px-5' do %>
+        <%= link_to records_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' do %>
           <i class="fa fa-close mx-1"></i>Cancel
         <% end %>
       </div>

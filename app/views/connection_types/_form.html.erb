@@ -1,161 +1,169 @@
-<div class="card">
-  <div class="card-body">
-    <%= form_with(model: connection_type) do |form| %>
-      <% if connection_type.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(connection_type.errors.count, "error") %> prohibited this connection_type from being saved:</h2>
-
-          <ul>
-            <% connection_type.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <div class="form-group">
-        <%= form.label :name %>
-        <%= form.text_field :name, class: "form-control", placeholder: "Enter Connection Type Name" %>
-      </div>
-      <div class="form-group">
-        <%= form.label :name %>
-        <%= form.text_area :description, class: "form-control", placeholder: "Enter Description" %>
-      </div>
-      <div class="form-group">
-        <label for="input-3">Directional</label>
-        <p>Once you know you have two records (A and B) that are connected, will this mean that once you solve one of them, the other will go away on its own?</p>
-        <div class="icheck-material-white">
-          <%= form.radio_button :directional, true %>
-          <%= form.label :directional, value: true do %>
-            Yes (directional, A becomes irrelevant once I solve B or vise versa)
-          <% end%>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :directional, false %>
-          <%= form.label :directional, value: false do %>
-            No (non-directional, both A and B need to be solved individually dispite the fact that they are connected)
+<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <%= form_with(model: connection_type) do |form| %>
+    <% if connection_type.errors.any? %>
+      <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold"><%= pluralize(connection_type.errors.count, "error") %></strong> prohibited this connection_type from being saved:
+        <ul class="list-disc pl-5">
+          <% connection_type.errors.each do |error| %>
+            <li><%= error.full_message %></li>
           <% end %>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="input-3">Destructive</label>
-        <p>* visible only if &quot;directional&quot; is chosen.</p>
-        <p>If you have two records (A and B), and say you need to summarize their progress, will progress in A mean that B received progress too? Or progress in A won&apos;t matter for progress of B?</p>
-        <div class="icheck-material-white">
-          <%= form.radio_button :destructive, true %>
-          <%= form.label :destructive, value: true do %>
-            Yes (destructive, progress of A means progress of B grows too)
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :destructive, false %>
-          <%= form.label :destructive, value: false do %>
-            No (non-destructive, progress of A does not affect progress of B, they are separate in terms of values or properties)
-          <% end %>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="input-3">How many such connections can a record have</label>
-        <p>* visible for both &quot;directional&quot; and &quot;non-directional&quot;</p>
-        <div class="icheck-material-white">
-          <%= form.radio_button :one_to_many, false %>
-          <%= form.label :one_to_many, value: false do %>
-            <p> One-To-One </p>
-            <p> (if it is directional, a record for this type of connection can be mentioned not more than once as A and not more than once as B), One a record has such connection as A, an option to connect it as A with some other record will be disabled (the record will be excluded from the list. If the connection is directional, a record can have at most two such connections). </p>
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :one_to_many, true %>
-          <%= form.label :one_to_many, value: true do %>
-            <p> One-To-Many </p>
-            <p> (you can mention some record as A - source - for this type of connection only once, but that same record can be mentioed many times as B - target - with this type of connection, to any number of records, an example would be &quot;a system has many subsystems, but a subsystem belongs to only one system&quot;) </p>
-          <% end %>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="input-3">Records of what type can be selected as a target</label>
-        <p>* as B (for connections A -&gt; B)</p>
-        <p></p>
-        <p>* as A (for connections B -&gt; A)</p>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_type, :any %>
-          <%= form.label :target_type, value: :any do %>
-            Любой тип
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_type, :same_as_source %>
-          <%= form.label :target_type, value: :same_as_source do %>
-            Тот же что и source
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_type, :specific_type %>
-          <%= form.label :target_type, value: :specific_type do %>
-            Конкретный тип
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_type, :specific_subtype %>
-          <%= form.label :target_type, value: :specific_subtype do %>
-            Конкретный подтип конкретного типа
-          <% end %>
-        </div>
-      </div>
-      <div class="form-group" id='specificTypeContainer' >
-        <label for="input-3">Выберете тип таргетов</label>
-        <div class="dropdown" data-pgc-define="jr.dropdown" data-pgc-define-name="Dropdown Menu" data-pgc-section="Page components">
-          <%= form.collection_select :target_record_type_id, @target_record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
-        </div>
-      </div>
-      <div class="form-group" id='specificSubTypeContainer'>
-        <label for="input-3">Выберете тип под-таргетов</label>
-        <p>* виден только если выбран &quot;подтип типов&quot;</p>
-        <div class="dropdown" data-pgc="jr.dropdown">
-          <%= form.collection_select :target_record_subtype_id, @target_record_types, :id, :name, { include_blank: true }, { class: "btn btn-light dropdown-toggle px-5" } %>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="input-3">Records of what hierarchy can be selected as a target</label>
-        <p>* as B (for connections A -&gt; B)</p>
-        <p></p>
-        <p>* as A (for connections B -&gt; A)</p>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :all %>
-          <%= form.label :target_hierarchy, value: :all do %>
-            Все пункты (кроме парентов? и пра-парентов? и т.п.)
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :all_roots %>
-          <%= form.label :target_hierarchy, value: :all_roots do %>
-            Все корни всех деревьев
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :deep_siblings %>
-          <%= form.label :target_hierarchy, value: :deep_siblings do %>
-            Чайлды моего дерева того же колена что и А (напр. другие правнуки моего прадеда)
-          <% end %>
-        </div>
-        <div class="icheck-material-white">
-          <%= form.radio_button :target_hierarchy, :siblings %>
-          <%= form.label :target_hierarchy, value: :siblings do %>
-            Сиблинги (чайлды моего прямого парента)
-          <% end %>
-        </div>
-      </div>
-      <div class="form-group">
-        <%= form.label :is_public %>
-        <%= form.check_box :is_public %>
-      </div>
-      <div class="form-group d-flex d-sm-flex justify-content-between">
-        <%= button_tag type: :submit, class: "btn btn-light px-5" do %>
-          <i class="fa fa-check mx-1"></i><%= submit_name %>
-        <% end %>
-        <%= link_to connection_types_path, class: 'btn btn-light px-5' do %>
-          <i class="fa fa-close mx-1"></i>Cancel
-        <% end %>
+        </ul>
       </div>
     <% end %>
-  </div>
+
+    <div class="mb-4">
+      <%= form.label :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "Enter Connection Type Name" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :description, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_area :description, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "Enter Description" %>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Directional</label>
+      <p class="mb-3 text-sm">Once you know you have two records (A and B) that are connected, will this mean that once you solve one of them, the other will go away on its own?</p>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :directional, true, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :directional, value: true, class: "ml-2 text-sm" do %>
+          Yes (directional, A becomes irrelevant once I solve B or vice versa)
+        <% end %>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.radio_button :directional, false, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :directional, value: false, class: "ml-2 text-sm" do %>
+          No (non-directional, both A and B need to be solved individually despite the fact that they are connected)
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Destructive</label>
+      <p>* visible only if &quot;directional&quot; is chosen.</p>
+      <p class="mb-3 text-sm">If you have two records (A and B), and say you need to summarize their progress, will progress in A mean that B received progress too? Or progress in A won&apos;t matter for progress of B?</p>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :destructive, true, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :destructive, value: true, class: "ml-2 text-sm" do %>
+          Yes (destructive, progress of A means progress of B grows too)
+        <% end %>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.radio_button :destructive, false, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :destructive, value: false, class: "ml-2 text-sm" do %>
+          No (non-destructive, progress of A does not affect progress of B, they are separate in terms of values or properties)
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">How many such connections can a record have</label>
+      <p>* visible for both &quot;directional&quot; and &quot;non-directional&quot;</p>
+      <p class="mb-3 text-sm">If you have two records (A and B), and say you need to summarize their progress, will progress in A mean that B received progress too? Or progress in A won&apos;t matter for progress of B?</p>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :one_to_many, true, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :one_to_many, value: true, class: "ml-2 text-sm" do %>
+          <p> One-To-One </p>
+          <p> (if it is directional, a record for this type of connection can be mentioned not more than once as A and not more than once as B), One a record has such connection as A, an option to connect it as A with some other record will be disabled (the record will be excluded from the list. If the connection is directional, a record can have at most two such connections). </p>
+        <% end %>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.radio_button :one_to_many, false, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :one_to_many, value: false, class: "ml-2 text-sm" do %>
+          <p> One-To-Many </p>
+          <p> (you can mention some record as A - source - for this type of connection only once, but that same record can be mentioed many times as B - target - with this type of connection, to any number of records, an example would be &quot;a system has many subsystems, but a subsystem belongs to only one system&quot;) </p>
+        <% end %>
+      </div>
+    </div>
+
+
+    <!-- Records of what type can be selected as a target -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Records of what type can be selected as a target</label>
+      <p class="text-sm mb-2">* as B (for connections A -> B)</p>
+      <p class="text-sm mb-2">* as A (for connections B -> A)</p>
+
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :target_type, :any, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_type, value: :any, class: "ml-2 text-sm" do %>
+          Любой тип
+        <% end %>
+      </div>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :target_type, :same_as_source, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_type, value: :same_as_source, class: "ml-2 text-sm" do %>
+          Тот же что и source
+        <% end %>
+      </div>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :target_type, :specific_type, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_type, value: :specific_type, class: "ml-2 text-sm" do %>
+          Конкретный тип
+        <% end %>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.radio_button :target_type, :specific_subtype, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_type, value: :specific_subtype, class: "ml-2 text-sm" do %>
+          Конкретный подтип конкретного типа
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Specific type container -->
+    <div class="mb-4" id='specificTypeContainer'>
+      <label class="block text-gray-700 text-sm font-bold mb-2">Выберете тип таргетов</label>
+      <div class="relative">
+        <%= form.collection_select :target_record_type_id, @target_record_types, :id, :name, { include_blank: true }, { class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" } %>
+      </div>
+    </div>
+
+    <!-- Specific subtype container -->
+    <div class="mb-4" id='specificSubTypeContainer'>
+      <label class="block text-gray-700 text-sm font-bold mb-2">Выберете тип под-таргетов</label>
+      <p class="text-sm mb-2">* виден только если выбран "подтип типов"</p>
+      <div class="relative">
+        <%= form.collection_select :target_record_subtype_id, @target_record_types, :id, :name, { include_blank: true }, { class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" } %>
+      </div>
+    </div>
+
+    <!-- Records of what hierarchy can be selected as a target -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Records of what hierarchy can be selected as a target</label>
+      <p class="text-sm mb-2">* as B (for connections A -> B)</p>
+      <p class="text-sm mb-2">* as A (for connections B -> A)</p>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :target_hierarchy, :all, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_hierarchy, value: :all, class: "ml-2 text-sm" do %>
+          Все пункты (кроме парентов? и пра-парентов? и т.п.)
+        <% end %>
+      </div>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :target_hierarchy, :all_roots, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_hierarchy, value: :all_roots, class: "ml-2 text-sm" do %>
+          Все корни всех деревьев
+        <% end %>
+      </div>
+      <div class="flex items-center mb-2">
+        <%= form.radio_button :target_hierarchy, :deep_siblings, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_hierarchy, value: :deep_siblings, class: "ml-2 text-sm" do %>
+          Чайлды моего дерева того же колена что и А (напр. другие правнуки моего прадеда)
+        <% end %>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.radio_button :target_hierarchy, :siblings, class: "form-radio h-5 w-5 text-blue-600" %>
+        <%= form.label :target_hierarchy, value: :siblings, class: "ml-2 text-sm" do %>
+          Сиблинги (чайлды моего прямого парента)
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between mt-6">
+      <%= button_tag type: :submit, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" do %>
+        <i class="fa fa-check mx-1"></i><%= submit_name %>
+    <% end %>
+    <%= link_to connection_types_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' do %>
+      <i class="fa fa-close mx-1"></i>Cancel
+    <% end %>
+    </div>
+  <% end %>
 </div>

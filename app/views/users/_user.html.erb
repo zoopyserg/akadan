@@ -1,13 +1,13 @@
-<div class="card" data-pgc="jr.person">
-  <div class="card-body">
-    <div class="row">
-      <div class="align-items-center col-sm-8 d-flex flex-column justify-content-center text-center">
-        <%= image_tag user.avatar_url(:thumb), class: "rounded-circle", width: "100px", 'height' => "100px" %>
+<div class="bg-white shadow-md rounded overflow-hidden" data-pgc="jr.person">
+  <div class="p-4">
+    <div class="flex flex-wrap">
+      <div class="flex flex-col justify-center items-center text-center w-full sm:w-2/3">
+        <% #= image_tag user.avatar_url(:thumb), class: "rounded-full", width: "100", height: "100" %>
         <h5>
-          <%= link_to user.full_name, user %>
+          <%= link_to user.full_name, user, class: "text-lg font-semibold" %>
         </h5>
       </div>
-      <div class="col-sm-4" data-pgc-field="buttons">
+      <div class="w-full sm:w-1/3" data-pgc-field="buttons">
         <%= render "users/buttons", user: user %>
       </div>
     </div>

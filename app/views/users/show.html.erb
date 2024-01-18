@@ -1,72 +1,65 @@
-<div class="row" id='userShowHeader'>
-  <div class="col-md-12">
-    <div class="card mb-3">
-      <div class="card-body text-center shadow">
-        <%= image_tag @user.avatar_url(:thumb), class: "rounded-circle mb-3 mt-4", width: "160px", 'data-pgc-edit' => "image[src, no_content]", height: "160px" %>
+<div class="flex flex-wrap mt-3" id='userShowHeader'>
+  <div class="w-full">
+    <div class="bg-white shadow-md rounded overflow-hidden mb-3">
+      <div class="p-4 text-center">
+        <% #= image_tag @user.avatar_url(:thumb), class: "rounded-full mb-3 mt-4", width: "160", height: "160", 'data-pgc-edit' => "image[src, no_content]" %>
         <div class="mb-3">
-          <h5 class="card-title"><%= @user.full_name %></h5>
+          <h5 class="text-xl font-bold"><%= @user.full_name %></h5>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="row mt-3">
-  <div class="col-lg-4">
-    <div class="card profile-card-2">
-      <div class="card-body pt-5">
-        <div class="col-sm-12" data-pgc-field="buttons">
+<div class="flex flex-wrap mt-3">
+  <div class="w-full lg:w-1/3">
+    <div class="bg-white shadow-md rounded overflow-hidden">
+      <div class="p-5">
+        <div class="mb-3" data-pgc-field="buttons">
           <%= render "users/buttons", user: @user %>
         </div>
         <hr/>
-        <h6>Bio</h6>
+        <h6 class="text-lg font-semibold">Bio</h6>
         <p><%= @user.bio %></p>
-        <h6>About</h6>
+        <h6 class="text-lg font-semibold">About</h6>
         <p><%= @user.about %></p>
-        <div class="icon-block">
-          <a href="javascript:void();"><i class="fa fa-facebook bg-facebook text-white"></i></a>
-          <a href="javascript:void();"> <i class="fa fa-twitter bg-twitter text-white"></i></a>
-          <a href="javascript:void();"> <i class="fa fa-google-plus bg-google-plus text-white"></i></a>
+        <div class="flex space-x-2">
+          <a href="javascript:void();"><i class="fa fa-facebook bg-blue-600 text-white p-2 rounded"></i></a>
+          <a href="javascript:void();"> <i class="fa fa-twitter bg-blue-400 text-white p-2 rounded"></i></a>
+          <a href="javascript:void();"> <i class="fa fa-google-plus bg-red-600 text-white p-2 rounded"></i></a>
         </div>
       </div>
       <%= render "users/friends_list" %>
     </div>
   </div>
-  <div class="col-lg-8">
-    <div class="card">
-      <div class="card-body">
-        <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
-          <li class="nav-item">
-            <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+  <div class="w-full lg:w-2/3">
+    <div class="bg-white shadow-md rounded overflow-hidden">
+      <div class="p-4">
+        <ul class="flex justify-evenly">
+          <li>
+            <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="text-lg font-semibold"><i class="icon-user"></i> <span>Profile</span></a>
           </li>
         </ul>
-        <div class="tab-content p-3">
-          <div class="tab-pane active" id="profile">
-            <div class="row">
-              <div class="col-md-12">
-                <h6>Stats</h6>
-                <span class="badge badge-primary"><i class="fa fa-user"></i> <%= FriendRequest.where(friend_id: @user).where.not(user_id: User.mutual_friend_ids(@user)).count %> Followers</span>
-                <span class="badge badge-success"><i class="fa fa-cog"></i> <%= User.mutual_friend_ids(@user).count %> Friends</span>
-                <span class="badge badge-secondary"><i class="fa fa-eye"></i><%= @user.records.projects.count %> Projects</span>
-                <span class="badge badge-danger"><i class="fa fa-eye"></i> <%= @user.connections.count %> Associations</span>
-                <!-- span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span -->
+        <div class="p-3">
+          <div id="profile">
+            <div class="flex flex-wrap">
+              <div class="w-full">
+                <h6 class="text-lg font-semibold">Stats</h6>
+                <!-- Badges -->
                 <hr>
-                <h6>Badges</h6>
-                <% # todo: test badges and come up with a good list of badges that increase desire of using the website %>
-                <% # todo: show progress (how much is left until the badge) %>
+                <h6 class="text-lg font-semibold">Badges</h6>
                 <%= render "users/badges/friendly" %>
                 <%= render "users/badges/proactive" %>
                 <%= render "users/badges/observant" %>
                 <hr>
               </div>
-              <div class="col-md-12">
-                <h6 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h6>
-                <div class="row">
+              <div class="w-full">
+                <h6 class="mt-2 mb-3 text-lg font-semibold"><span class="fa fa-clock-o float-right"></span> Recent Activity</h6>
+                <div class="flex flex-wrap">
                   <%= render "users/recent_activity" %>
                 </div>
               </div>
             </div>
-            <!--/row-->
           </div>
         </div>
       </div>

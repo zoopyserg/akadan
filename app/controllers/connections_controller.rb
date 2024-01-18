@@ -102,6 +102,9 @@ class ConnectionsController < ApplicationController
     end
   end
 
+  def destroy
+  end
+
   private
   def set_connection
     if signed_in?

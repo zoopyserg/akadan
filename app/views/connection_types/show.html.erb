@@ -1,9 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div class="p-4">
+  <p id="notice" class="text-lg"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @connection_type.name %>
-</p>
+  <div class="mt-4">
+    <strong>Name:</strong>
+    <%= @connection_type.name %>
+  </div>
 
-<%= link_to 'Edit', edit_connection_type_path(@connection_type) %> |
-<%= link_to 'Back', connection_types_path %>
+  <div class="mt-4">
+    <%= link_to 'Edit', edit_connection_type_path(@connection_type), class: "text-blue-500 hover:underline" %> |
+    <%= link_to 'Back', connection_types_path, class: "text-blue-500 hover:underline" %>
+  </div>
+</div>

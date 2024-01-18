@@ -1,31 +1,27 @@
 <% # todo: do a Vue component for duration picker as right now all these turbolinks are too glitchy without 2-way binding %>
 <% # todo: plus it submits time as a string - "1h 38m 28s" - I thought it will be submitting seconds only, definitely need Vue, but on back-end side everything works, tired wasting my time on datepickers that aren't even needed %>
-<div class="form-group">
-  <%= form.label :description, class: "d-flex justify-content-between" do %>
-    <span> Description </span>
+<div class="mb-4">
+  <%= form.label :description, class: "flex justify-between items-center" do %>
+    <span>Description</span>
     <i class="fa fa-microphone"></i>
   <% end %>
-  <%= form.text_area :description, class: "form-control", placeholder: 'Enter description' %>
+  <%= form.text_area :description, class: "form-input mt-1 block w-full", placeholder: 'Enter description' %>
 </div>
 
-<div class="form-group">
-  <%= form.label :duration, class: "d-flex justify-content-between" do %>
+<div class="mb-4">
+  <%= form.label :duration, class: "flex justify-between items-center" do %>
     Duration
   <% end %>
-  <p class="hint">How long did it last?</p>
-  <%= form.text_field :duration, class: "form-control duration_picker_field" %>
+  <p class="text-sm text-gray-600">How long did it last?</p>
+  <%= form.text_field :duration, class: "form-input mt-1 block w-full" %>
 
-  <div class="row">
-    <div class='col col-lg-12'>
-      <label class="">StopWatch</label>
-    </div>
+  <div class="mt-4">
+    <label class="block">StopWatch</label>
   </div>
 
-  <div class="row">
-    <div class='col col-lg-12'>
-      <button class="btn btn-primary " id="startButton">Start </button>
-      <button class="btn btn-danger" id="stopButton" >Stop </button>
-      <button class=" btn btn-warning" id="resetButton">Reset </button>
-    </div>
+  <div class="mt-2">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" id="startButton">Start</button>
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" id="stopButton">Stop</button>
+    <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="resetButton">Reset</button>
   </div>
 </div>
