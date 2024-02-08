@@ -23,6 +23,7 @@ void display_record(Record record) {
 // Function to fetch the records from the DB:
 const char *connection = "dbname=journal_development user=diamondserge password=112223 host=localhost";
 
+// Adjusted fetch_records to include the name in the SELECT query
 Record* fetch_records(int *num_records) {
     PGconn *conn = PQconnectdb(connection);
 
@@ -32,7 +33,8 @@ Record* fetch_records(int *num_records) {
         exit(1);
     }
 
-    PGresult *res = PQexec(conn, "SELECT id, user_id, is_public, record_type_id FROM records");
+    // Include 'name' in the SELECT
+    PGresult *res = PQexec(conn, "SELECT id, user_id, is_public, record_type_id, name FROM records");
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         fprintf(stderr, "SELECT failed: %s\n", PQerrorMessage(conn));
@@ -42,30 +44,22 @@ Record* fetch_records(int *num_records) {
     }
 
     int nrows = PQntuples(res);
-    int capacity = 100;  // initial capacity
-    Record *records = malloc(capacity * sizeof(Record));
+    Record *records = malloc(nrows * sizeof(Record)); // Assuming you'll not exceed initial capacity for simplicity
     if (!records) {
         // handle memory allocation error
+        PQclear(res);
+        PQfinish(conn);
         exit(1);
     }
 
-    *num_records = 0; // Counter for actual number of records
+    *num_records = nrows;
     for (int i = 0; i < nrows; i++) {
-        if (*num_records == capacity) {
-            capacity *= 2; // double the capacity
-            records = realloc(records, capacity * sizeof(Record));
-            if (!records) {
-                // handle memory allocation error
-                exit(1);
-            }
-        }
-        records[*num_records] = create_record(
-            atoi(PQgetvalue(res, i, 0)),
-            atoi(PQgetvalue(res, i, 1)),
-            PQgetvalue(res, i, 2)[0] == 't',
-            atoi(PQgetvalue(res, i, 3))
-        );
-        (*num_records)++;
+        records[i].id = atoi(PQgetvalue(res, i, 0));
+        records[i].userId = atoi(PQgetvalue(res, i, 1));
+        records[i].isPublic = PQgetvalue(res, i, 2)[0] == 't';
+        records[i].recordTypeId = atoi(PQgetvalue(res, i, 3));
+        strncpy(records[i].name, PQgetvalue(res, i, 4), sizeof(records[i].name) - 1);
+        records[i].name[sizeof(records[i].name) - 1] = '\0'; // Ensure null termination
     }
 
     PQclear(res);
