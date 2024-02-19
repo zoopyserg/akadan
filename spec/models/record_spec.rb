@@ -106,7 +106,6 @@ RSpec.describe Record, type: :model do
         it { expect(Record.where(id: record1.id).only_unsolved).not_to include solution1 }
         it { expect(Record.where(id: record1.id).only_unsolved).not_to include solution2 }
       end
-
     end
 
     describe 'parentship scopes' do

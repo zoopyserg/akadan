@@ -1,10 +1,14 @@
+#include "record.h"
+#include "connection.h"
+#include "connection_type.h"
+#include "record_type.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 
 // Assuming Record, Connection, ConnectionType structs and fetch functions are defined elsewhere
-
 typedef struct {
     int childId;
     bool isDestructive;
@@ -19,7 +23,7 @@ int findRecordIndexById(int id, Record* records, int numRecords) {
 }
 
 // Function to build child adjacency lists
-ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnections, Record* records, int numRecords, ConnectionType* connectionTypes, int numConnectionTypes) {
+ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnections, Record* records, int numRecords, ConnectionType* connectionTypes, int numConnectionTypes, int** outChildCounts) {
     ChildEntry** childAdjLists = calloc(numRecords, sizeof(ChildEntry*));
     int* childCounts = calloc(numRecords, sizeof(int)); // Track number of children for each record
 
@@ -47,32 +51,50 @@ ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnection
         childCounts[parentIndex]++;
     }
 
-    free(childCounts); // Cleanup
+    *outChildCounts = childCounts;
+
     return childAdjLists;
 }
 
 // Recursive function to determine if a record is solved
-void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** childAdjLists, int* childCounts, int numRecords) {
+// Updated dfsSolve function signature to include numConnections
+void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** childAdjLists, int* childCounts, Record* records, int numRecords, Connection* connections, int numConnections, int solutionConnectionTypeId) {
+    if (currentIndex < 0 || currentIndex >= numRecords) {
+        return; // Guard against invalid indices.
+    }
+
     visited[currentIndex] = true;
 
-    bool allChildrenSolved = true;
-    for (int i = 0; i < childCounts[currentIndex]; i++) {
-        int childIndex = childAdjLists[currentIndex][i].childId;
-        bool isDestructive = childAdjLists[currentIndex][i].isDestructive;
-
-        if (!visited[childIndex]) {
-            dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, numRecords);
-        }
-
-        // If connection is destructive and any child is unsolved, the current record is not solved
-        if (isDestructive && !solvedStatus[childIndex]) {
-            allChildrenSolved = false;
-            break; // No need to check further children
+    bool isDirectlySolved = false;
+    for (int i = 0; i < numConnections; i++) {
+        if (connections[i].recordAId == records[currentIndex].id && connections[i].connectionTypeId == solutionConnectionTypeId) {
+            isDirectlySolved = true;
+            break;
         }
     }
 
-    // Mark as solved if all children are solved or there are no destructive children
-    solvedStatus[currentIndex] = allChildrenSolved;
+    // Early mark as solved if directly solved, but still check children to propagate non-solved status up if necessary.
+    solvedStatus[currentIndex] = isDirectlySolved;
+
+    bool hasDestructiveChildren = false;
+    for (int i = 0; i < childCounts[currentIndex]; i++) {
+        int childId = childAdjLists[currentIndex][i].childId;
+        int childIndex = findRecordIndexById(childId, records, numRecords);
+
+        if (childIndex < 0 || childIndex >= numRecords || visited[childIndex]) continue; // Skip already visited or invalid indices.
+
+        dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, records, numRecords, connections, numConnections, solutionConnectionTypeId);
+
+        // If any child (especially destructive ones) is not solved, then this record can't be considered solved.
+        if (!solvedStatus[childIndex] && childAdjLists[currentIndex][i].isDestructive) {
+            hasDestructiveChildren = true;
+        }
+    }
+
+    // Only mark as unsolved if it has destructive children that are unsolved, overriding direct solution.
+    if (hasDestructiveChildren) {
+        solvedStatus[currentIndex] = false;
+    }
 }
 
 int main(int argc, char* argv[]) {
@@ -86,33 +108,64 @@ int main(int argc, char* argv[]) {
     Connection* connections = fetch_connections(&numConnections);
     ConnectionType* connectionTypes = fetch_connection_types(&numConnectionTypes);
 
-    ChildEntry** childAdjLists = buildChildAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes);
+    // Find a connection type ID for the solution connection type (where name == "Is Solved By...")
+    int solutionConnectionTypeId;
+    for (int i = 0; i < numConnectionTypes; i++) {
+        if (strcmp(connectionTypes[i].name, "Is Solved By...") == 0) {
+            solutionConnectionTypeId = connectionTypes[i].id;
+            break;
+        }
+    }
 
+    int* childCounts;
+    ChildEntry** childAdjLists = buildChildAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes, &childCounts);
+
+    // output adjacency lists
     bool* solvedStatus = calloc(numRecords, sizeof(bool)); // Initialize all to unsolved
     bool* visited = calloc(numRecords, sizeof(bool)); // Track visited records to prevent cycles
 
     // Solve for each record
     for (int i = 0; i < numRecords; i++) {
         if (!visited[i]) {
-            dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, numRecords);
+            dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, records, numRecords, connections, numConnections, solutionConnectionTypeId);
         }
     }
 
     // Output solved status for each record
     for (int i = 0; i < numRecords; i++) {
-        printf("%d: %d\n", records[i].id, solvedStatus[i] ? 1 : 0);
+        printf("%d: %d\n", records[i].id, solvedStatus[i]);
     }
 
     // Cleanup
     for (int i = 0; i < numRecords; i++) {
-        free(childAdjLists[i]);
+        if (childAdjLists[i]) {
+            free(childAdjLists[i]);
+            childAdjLists[i] = NULL; // Prevent use-after-free
+        }
     }
-    free(childAdjLists);
-    free(solvedStatus);
-    free(visited);
-    free(records);
-    free(connections);
-    free(connectionTypes);
+    if (childAdjLists) {
+        free(childAdjLists);
+        childAdjLists = NULL; // Prevent use-after-free
+    }
+
+    if (solvedStatus != NULL) {
+        free(solvedStatus);
+    }
+    if (visited != NULL) {
+        free(visited);
+    }
+    // Assuming records, connections, connectionTypes are dynamically allocated
+    // and it's safe to free them here
+    if (records != NULL) {
+        free(records);
+    }
+    if (connections != NULL) {
+        free(connections);
+    }
+    if (connectionTypes != NULL) {
+        free(connectionTypes);
+    }
+
 
     return 0;
 }

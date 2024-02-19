@@ -4,6 +4,7 @@
 #include "connection_type_test.h"
 #include "record_test.h"
 #include "connection_test.h"
+#include "all_solved_tree_record_ids_test.h"
 #include "common_insert.h"
 #include "common_cleanup.h"
 
@@ -24,7 +25,8 @@ int main() {
         (NULL == CU_add_test(pSuite, "Test fetch_record_types", test_fetch_record_types)) ||
         (NULL == CU_add_test(pSuite, "Test fetch_connection_types", test_fetch_connection_types)) ||
         (NULL == CU_add_test(pSuite, "Test fetch_records", test_fetch_records)) ||
-        (NULL == CU_add_test(pSuite, "Test fetch_connections", test_fetch_connections))
+        (NULL == CU_add_test(pSuite, "Test fetch_connections", test_fetch_connections)) ||
+        (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs", test_all_solved_tree_record_ids))
        ) {
         CU_cleanup_registry();
         return CU_get_error();
