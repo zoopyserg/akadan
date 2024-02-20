@@ -83,9 +83,6 @@ void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** 
         int childIndex = childAdjLists[currentIndex][i].childId;
 
         if (childIndex < 0 || childIndex >= numRecords) continue;
-        // todo: it used to Skip already visited or invalid indices:  || visited[childIndex]
-        // but I'm not sure if I need it here because they may be visited from another branch
-        // one solution may solve many problems.
 
         if (childAdjLists[currentIndex][i].isSolution) {
           solvedStatus[currentIndex] = true;
@@ -98,9 +95,12 @@ void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** 
         int childIndex = childAdjLists[currentIndex][i].childId;
 
         if (childIndex < 0 || childIndex >= numRecords) continue; // Skip already visited or invalid indices.
+        // todo: it used to Skip already visited or invalid indices:  || visited[childIndex]
+        // but I'm not sure if I need it here because they may be visited from another branch
+        // one solution may solve many problems.
 
         // check all children
-        if (childAdjLists[currentIndex][i].isDestructive) {
+        if (childAdjLists[currentIndex][i].isDestructive && !visited[childIndex]) {
             dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
         }
     }
