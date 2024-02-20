@@ -12,6 +12,7 @@
 typedef struct {
     int childId;
     bool isDestructive;
+    bool isSolution;
 } ChildEntry;
 
 // Utility function to find a record's index by its ID
@@ -23,7 +24,7 @@ int findRecordIndexById(int id, Record* records, int numRecords) {
 }
 
 // Function to build child adjacency lists
-ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnections, Record* records, int numRecords, ConnectionType* connectionTypes, int numConnectionTypes, int** outChildCounts) {
+ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnections, Record* records, int numRecords, ConnectionType* connectionTypes, int numConnectionTypes, int solutionConnectionTypeId, int** outChildCounts) {
     ChildEntry** childAdjLists = calloc(numRecords, sizeof(ChildEntry*));
     int* childCounts = calloc(numRecords, sizeof(int)); // Track number of children for each record
 
@@ -31,6 +32,9 @@ ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnection
         int parentIndex = findRecordIndexById(connections[i].recordAId, records, numRecords);
         int childIndex = findRecordIndexById(connections[i].recordBId, records, numRecords);
         if (parentIndex == -1 || childIndex == -1) continue; // Skip if indices not found
+
+        // Determine if the connection is a solution
+        bool isSolution = connections[i].connectionTypeId == solutionConnectionTypeId;
 
         // Determine if the connection is destructive
         bool isDestructive = false;
@@ -48,6 +52,7 @@ ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnection
 
         childAdjLists[parentIndex][childCounts[parentIndex]].childId = childIndex;
         childAdjLists[parentIndex][childCounts[parentIndex]].isDestructive = isDestructive;
+        childAdjLists[parentIndex][childCounts[parentIndex]].isSolution = isSolution;
         childCounts[parentIndex]++;
     }
 
@@ -58,43 +63,60 @@ ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnection
 
 // Recursive function to determine if a record is solved
 // Updated dfsSolve function signature to include numConnections
-void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** childAdjLists, int* childCounts, Record* records, int numRecords, Connection* connections, int numConnections, int solutionConnectionTypeId) {
+void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** childAdjLists, int* childCounts, Record* records, int numRecords) {
     if (currentIndex < 0 || currentIndex >= numRecords) {
         return; // Guard against invalid indices.
     }
 
     visited[currentIndex] = true;
 
-    bool isDirectlySolved = false;
-    for (int i = 0; i < numConnections; i++) {
-        if (connections[i].recordAId == records[currentIndex].id && connections[i].connectionTypeId == solutionConnectionTypeId) {
-            isDirectlySolved = true;
+    // // if it has 0 children then it should not be solved
+    if (childCounts[currentIndex] == 0) {
+        solvedStatus[currentIndex] = false;
+        return;
+    }
+
+    // // if it has 1 child or more - then:
+    // // - check if that child is a solution (and if so - mark current as solved and return early)
+    for (int i = 0; i < childCounts[currentIndex]; i++) {
+        // printf("currentIndex: %d, i: %d\n", currentIndex, i);
+        int childIndex = childAdjLists[currentIndex][i].childId;
+
+        if (childIndex < 0 || childIndex >= numRecords) continue;
+        // todo: it used to Skip already visited or invalid indices:  || visited[childIndex]
+        // but I'm not sure if I need it here because they may be visited from another branch
+        // one solution may solve many problems.
+
+        if (childAdjLists[currentIndex][i].isSolution) {
+          solvedStatus[currentIndex] = true;
+          return;
+        }
+    }
+
+    // - check if all children are solved recursively (and if so - mark current as solved)
+    for (int i = 0; i < childCounts[currentIndex]; i++) {
+        int childIndex = childAdjLists[currentIndex][i].childId;
+
+        if (childIndex < 0 || childIndex >= numRecords) continue; // Skip already visited or invalid indices.
+
+        // check all children
+        dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
+    }
+
+    // if all children are solved then current is solved too:
+    bool allChuldrenSolved = true;
+    for (int i = 0; i < childCounts[currentIndex]; i++) {
+        int childIndex = childAdjLists[currentIndex][i].childId;
+        if (solvedStatus[childIndex] == false) {
+            allChuldrenSolved = false;
             break;
         }
     }
 
-    // Early mark as solved if directly solved, but still check children to propagate non-solved status up if necessary.
-    solvedStatus[currentIndex] = isDirectlySolved;
-
-    bool hasDestructiveChildren = false;
-    for (int i = 0; i < childCounts[currentIndex]; i++) {
-        int childId = childAdjLists[currentIndex][i].childId;
-        int childIndex = findRecordIndexById(childId, records, numRecords);
-
-        if (childIndex < 0 || childIndex >= numRecords || visited[childIndex]) continue; // Skip already visited or invalid indices.
-
-        dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, records, numRecords, connections, numConnections, solutionConnectionTypeId);
-
-        // If any child (especially destructive ones) is not solved, then this record can't be considered solved.
-        if (!solvedStatus[childIndex] && childAdjLists[currentIndex][i].isDestructive) {
-            hasDestructiveChildren = true;
-        }
+    if (allChuldrenSolved) {
+        solvedStatus[currentIndex] = true;
     }
 
-    // Only mark as unsolved if it has destructive children that are unsolved, overriding direct solution.
-    if (hasDestructiveChildren) {
-        solvedStatus[currentIndex] = false;
-    }
 }
 
 int main(int argc, char* argv[]) {
@@ -118,7 +140,16 @@ int main(int argc, char* argv[]) {
     }
 
     int* childCounts;
-    ChildEntry** childAdjLists = buildChildAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes, &childCounts);
+    ChildEntry** childAdjLists = buildChildAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes, solutionConnectionTypeId, &childCounts);
+
+    // Output childAjdLists for debugging, like pp in ruby:
+    // for (int i = 0; i < numRecords; i++) {
+    //     printf("Record %d: ", records[i].id);
+    //     for (int j = 0; j < childCounts[i]; j++) {
+    //         printf("%d ", childAdjLists[i][j].childId);
+    //     }
+    //     printf("\n");
+    // }
 
     // output adjacency lists
     bool* solvedStatus = calloc(numRecords, sizeof(bool)); // Initialize all to unsolved
@@ -127,7 +158,8 @@ int main(int argc, char* argv[]) {
     // Solve for each record
     for (int i = 0; i < numRecords; i++) {
         if (!visited[i]) {
-            dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, records, numRecords, connections, numConnections, solutionConnectionTypeId);
+            // printf("triggering dfsSolve with i: %d\n", i);
+            dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
         }
     }
 
