@@ -122,7 +122,7 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_both_solved(void
 
     // insert a regular connection type
     char* connectionTypeColumns2[] = {"name", "user_id", "is_public", "directional", "destructive", "target_type", "target_record_type_id", "target_record_subtype_id", "target_hierarchy", "closest_parent_type_id", "one_to_many", "created_at", "updated_at", NULL};
-    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "FALSE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
+    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "TRUE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
     char* connectionTypeId2 = common_insert("connection_types", connectionTypeColumns2, connectionTypeValues2);
     if (!connectionTypeId2) {
         fprintf(stderr, "Setup failed: Unable to insert connection type.\n");

@@ -100,7 +100,9 @@ void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** 
         if (childIndex < 0 || childIndex >= numRecords) continue; // Skip already visited or invalid indices.
 
         // check all children
-        dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
+        if (childAdjLists[currentIndex][i].isDestructive) {
+            dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
+        }
     }
 
     // if all children are solved then current is solved too:

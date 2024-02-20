@@ -1,4 +1,3 @@
-// #include "all_solved_tree_record_ids.h"
 #include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
 #include "common_insert.h"
@@ -11,12 +10,13 @@ extern char* rootRecordId;
 extern char* recordId1;
 extern char* recordId2;
 extern char* solutionId1;
+extern char* solutionId2;
 
 // (root)
-// |---(1) -- solved with (Solution 1)
-// |---(2)
+// |---(1 non-destructive) -- solved with (Solution 1)
+// |---(2 non-destructive) -- solved with (Solution 2)
 
-int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void) {
+int setup_all_solved_tree_record_ids_two_non_destructive_subrecords_both_solved(void) {
     common_cleanup();
 
     // Insert a user
@@ -89,6 +89,21 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
         return -1; // Abort setup
     }
 
+    // Insert a solution2
+    char* solutionColumns2[] = {"user_id", "name", "is_public", "record_type_id", "created_at", "updated_at", NULL};
+    char* solutionValues2[] = {userId, "Solution 2", "TRUE", recordTypeId, "NOW()", "NOW()", NULL};
+    solutionId2 = common_insert("records", solutionColumns2, solutionValues2);
+    if (!solutionId2) {
+        fprintf(stderr, "Setup failed: Unable to insert solution.\n");
+        free(userId); // Clean up the userId string
+        free(recordTypeId);
+        free(recordId1);
+        free(recordId2);
+        free(solutionId1);
+        free(rootRecordId);
+        return -1; // Abort setup
+    }
+
     // Insert a solution connection type
     char* connectionTypeColumns[] = {"name", "user_id", "is_public", "directional", "destructive", "target_type", "target_record_type_id", "target_record_subtype_id", "target_hierarchy", "closest_parent_type_id", "one_to_many", "created_at", "updated_at", NULL};
     char* connectionTypeValues[] = {"Is Solved By...", userId, "TRUE", "TRUE", "TRUE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
@@ -100,13 +115,14 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
         free(recordId1);
         free(recordId2);
         free(solutionId1);
+        free(solutionId2);
         free(rootRecordId);
         return -1; // Abort setup
     }
 
     // insert a regular connection type
     char* connectionTypeColumns2[] = {"name", "user_id", "is_public", "directional", "destructive", "target_type", "target_record_type_id", "target_record_subtype_id", "target_hierarchy", "closest_parent_type_id", "one_to_many", "created_at", "updated_at", NULL};
-    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "TRUE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
+    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "FALSE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
     char* connectionTypeId2 = common_insert("connection_types", connectionTypeColumns2, connectionTypeValues2);
     if (!connectionTypeId2) {
         fprintf(stderr, "Setup failed: Unable to insert connection type.\n");
@@ -115,6 +131,7 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
         free(recordId1);
         free(recordId2);
         free(solutionId1);
+        free(solutionId2);
         free(connectionTypeId);
         free(rootRecordId);
         return -1; // Abort setup
@@ -131,15 +148,16 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
         free(recordId1);
         free(recordId2);
         free(solutionId1);
+        free(solutionId2);
         free(connectionTypeId);
         free(connectionTypeId2);
         free(rootRecordId);
         return -1; // Abort setup
     }
 
-    // Insert a connection between rootRecord and record1
+    // Insert a connection between record2 and solution2
     char* connectionColumns2[] = {"name", "user_id", "is_public", "record_a_id", "record_b_id", "connection_type_id", "created_at", "updated_at", NULL};
-    char* connectionValues2[] = {"Test Connection 2", userId, "TRUE", rootRecordId, recordId1, connectionTypeId2, "NOW()", "NOW()", NULL};
+    char* connectionValues2[] = {"Test Connection 2", userId, "TRUE", recordId2, solutionId2, connectionTypeId, "NOW()", "NOW()", NULL};
     char* connectionId2 = common_insert("connections", connectionColumns2, connectionValues2);
     if (!connectionId2) {
         fprintf(stderr, "Setup failed: Unable to insert connection.\n");
@@ -148,6 +166,7 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
         free(recordId1);
         free(recordId2);
         free(solutionId1);
+        free(solutionId2);
         free(connectionTypeId);
         free(connectionTypeId2);
         free(connectionId);
@@ -155,9 +174,9 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
         return -1; // Abort setup
     }
 
-    // Insert a connection between rootRecord and record2
+    // Insert a connection between rootRecord and record1
     char* connectionColumns3[] = {"name", "user_id", "is_public", "record_a_id", "record_b_id", "connection_type_id", "created_at", "updated_at", NULL};
-    char* connectionValues3[] = {"Test Connection 3", userId, "TRUE", rootRecordId, recordId2, connectionTypeId2, "NOW()", "NOW()", NULL};
+    char* connectionValues3[] = {"Test Connection 3", userId, "TRUE", rootRecordId, recordId1, connectionTypeId2, "NOW()", "NOW()", NULL};
     char* connectionId3 = common_insert("connections", connectionColumns3, connectionValues3);
     if (!connectionId3) {
         fprintf(stderr, "Setup failed: Unable to insert connection.\n");
@@ -166,10 +185,32 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
         free(recordId1);
         free(recordId2);
         free(solutionId1);
+        free(solutionId2);
         free(connectionTypeId);
         free(connectionTypeId2);
         free(connectionId);
         free(connectionId2);
+        free(rootRecordId);
+        return -1; // Abort setup
+    }
+
+    // Insert a connection between rootRecord and record2
+    char* connectionColumns4[] = {"name", "user_id", "is_public", "record_a_id", "record_b_id", "connection_type_id", "created_at", "updated_at", NULL};
+    char* connectionValues4[] = {"Test Connection 4", userId, "TRUE", rootRecordId, recordId2, connectionTypeId2, "NOW()", "NOW()", NULL};
+    char* connectionId4 = common_insert("connections", connectionColumns4, connectionValues4);
+    if (!connectionId4) {
+        fprintf(stderr, "Setup failed: Unable to insert connection.\n");
+        free(userId); // Clean up the userId string
+        free(recordTypeId);
+        free(recordId1);
+        free(recordId2);
+        free(solutionId1);
+        free(solutionId2);
+        free(connectionTypeId);
+        free(connectionTypeId2);
+        free(connectionId);
+        free(connectionId2);
+        free(connectionId3);
         free(rootRecordId);
         return -1; // Abort setup
     }
@@ -180,18 +221,20 @@ int setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved(void)
     free(recordId1);
     free(recordId2);
     free(solutionId1);
+    free(solutionId2);
     free(connectionTypeId);
     free(connectionTypeId2);
     free(connectionId);
     free(connectionId2);
     free(connectionId3);
+    free(connectionId4);
     free(rootRecordId);
 
     return 0;
 }
 
-void test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved() {
-    setup_all_solved_tree_record_ids_two_destructive_subrecords_one_solved();
+void test_all_solved_tree_record_ids_two_non_destructive_subrecords_both_solved() {
+    setup_all_solved_tree_record_ids_two_non_destructive_subrecords_both_solved();
 
     int num_records = 0;
     Record* records = fetch_records(&num_records);
@@ -201,6 +244,7 @@ void test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved() {
     Record* record1 = NULL;
     Record* record2 = NULL;
     Record* solution1 = NULL;
+    Record* solution2 = NULL;
     for (int i = 0; i < num_records; i++) {
         if (strcmp(records[i].name, "Root Record") == 0) {
             rootRecord = &records[i];
@@ -210,6 +254,8 @@ void test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved() {
             record2 = &records[i];
         } else if (strcmp(records[i].name, "Solution 1") == 0) {
             solution1 = &records[i];
+        } else if (strcmp(records[i].name, "Solution 2") == 0) {
+            solution2 = &records[i];
         }
     }
 
@@ -224,22 +270,25 @@ void test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved() {
     char recordId1[100];
     char recordId2[100];
     char solutionId1[100];
+    char solutionId2[100];
 
     sprintf(rootRecordId, "%d", rootRecord->id);
     sprintf(recordId1, "%d", record1->id);
     sprintf(recordId2, "%d", record2->id);
     sprintf(solutionId1, "%d", solution1->id);
+    sprintf(solutionId2, "%d", solution2->id);
 
-    char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000];
+    char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000], expectedOutput5[1000];
 
     // Format the expected output strings using the actual record IDs
     sprintf(expectedOutput1, "%s: 0", rootRecordId);
     sprintf(expectedOutput2, "%s: 1", recordId1);
-    sprintf(expectedOutput3, "%s: 0", recordId2);
+    sprintf(expectedOutput3, "%s: 1", recordId2);
     sprintf(expectedOutput4, "%s: 0", solutionId1);
+    sprintf(expectedOutput5, "%s: 0", solutionId2);
 
     // Replace the static initialization with dynamically generated strings
-    char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4};
+    char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4, expectedOutput5};
     int expectedLines = sizeof(expectedOutput) / sizeof(expectedOutput[0]);
 
     // Logic to run the test and compare output as you previously mentioned
