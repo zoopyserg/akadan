@@ -7,6 +7,7 @@
 #include "all_solved_tree_record_ids_test.h"
 #include "all_solved_tree_record_ids_single_unsolved_test.h"
 #include "all_solved_tree_record_ids_single_solved_test.h"
+#include "all_solved_tree_record_ids_two_destructive_subrecords_one_solved_test.h"
 #include "common_insert.h"
 #include "common_cleanup.h"
 
@@ -30,7 +31,8 @@ int main() {
         (NULL == CU_add_test(pSuite, "Test fetch_connections", test_fetch_connections)) ||
         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs", test_all_solved_tree_record_ids)) ||
         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Unsolved", test_all_solved_tree_record_ids_single_unsolved)) ||
-        (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Solved", test_all_solved_tree_record_ids_single_solved))
+        (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Solved", test_all_solved_tree_record_ids_single_solved)) ||
+        (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Two Destructive Subrecords One Solved", test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved))
        ) {
         CU_cleanup_registry();
         return CU_get_error();
