@@ -411,6 +411,7 @@ RSpec.describe Record, type: :model do
           it { expect(solved_records).not_to include record5 }
         end
 
+        # +
         context 'two subrecords, one destructive, one non-destructive, both solved' do
           let!(:record1) { create :record, user: user1, is_public: true }
           let!(:record2) { create :record, user: user1, is_public: true }
