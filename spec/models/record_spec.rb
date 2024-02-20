@@ -335,6 +335,7 @@ RSpec.describe Record, type: :model do
           it { expect(solved_records).not_to include record1 }
         end
 
+        # +
         context 'single solved record' do
           let!(:record1) { create :record, user: user1, is_public: true }
           let!(:solution) { create :record, user: user1, is_public: true }

@@ -1,3 +1,4 @@
+// #include "all_solved_tree_record_ids.h"
 #include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
 #include "common_insert.h"
@@ -7,10 +8,11 @@
 
 // Global variables for record IDs
 extern char* rootRecordId;
+extern char* solutionId1;
 
-// (root)
+// (root) - solved with (Solution 1)
 
-int setup_all_solved_tree_record_ids_single_unsolved(void) {
+int setup_all_solved_tree_record_ids_single_solved(void) {
     common_cleanup();
 
     // Insert a user
@@ -43,6 +45,17 @@ int setup_all_solved_tree_record_ids_single_unsolved(void) {
         return -1; // Abort setup
     }
 
+    // Insert a solution1
+    char* solutionColumns1[] = {"user_id", "name", "is_public", "record_type_id", "created_at", "updated_at", NULL};
+    char* solutionValues1[] = {userId, "Solution 1", "TRUE", recordTypeId, "NOW()", "NOW()", NULL};
+    solutionId1 = common_insert("records", solutionColumns1, solutionValues1);
+    if (!solutionId1) {
+        fprintf(stderr, "Setup failed: Unable to insert solution.\n");
+        free(userId); // Clean up the userId string
+        free(recordTypeId);
+        free(rootRecordId);
+        return -1; // Abort setup
+    }
 
     // Insert a solution connection type
     char* connectionTypeColumns[] = {"name", "user_id", "is_public", "directional", "destructive", "target_type", "target_record_type_id", "target_record_subtype_id", "target_hierarchy", "closest_parent_type_id", "one_to_many", "created_at", "updated_at", NULL};
@@ -53,29 +66,49 @@ int setup_all_solved_tree_record_ids_single_unsolved(void) {
         free(userId); // Clean up the userId string
         free(recordTypeId);
         free(rootRecordId);
+        free(solutionId1);
+        return -1; // Abort setup
+    }
+
+    // Insert a connection between root and solution1
+    char* connectionColumns[] = {"name", "user_id", "is_public", "record_a_id", "record_b_id", "connection_type_id", "created_at", "updated_at", NULL};
+    char* connectionValues[] = {"Test Connection", userId, "TRUE", rootRecordId, solutionId1, connectionTypeId, "NOW()", "NOW()", NULL};
+    char* connectionId = common_insert("connections", connectionColumns, connectionValues);
+    if (!connectionId) {
+        fprintf(stderr, "Setup failed: Unable to insert connection.\n");
+        free(userId); // Clean up the userId string
+        free(recordTypeId);
+        free(rootRecordId);
+        free(solutionId1);
+        free(connectionTypeId);
         return -1; // Abort setup
     }
 
     // Cleanup
     free(userId);
     free(recordTypeId);
-    free(connectionTypeId);
     free(rootRecordId);
+    free(solutionId1);
+    free(connectionTypeId);
+    free(connectionId);
 
     return 0;
 }
 
-void test_all_solved_tree_record_ids_single_unsolved(void) {
-    setup_all_solved_tree_record_ids_single_unsolved();
+void test_all_solved_tree_record_ids_single_solved(void) {
+    setup_all_solved_tree_record_ids_single_solved();
 
     int num_records = 0;
     Record* records = fetch_records(&num_records);
 
     // find a record with a name "Root Record"
     Record* rootRecord = NULL;
+    Record* solution1 = NULL;
     for (int i = 0; i < num_records; i++) {
         if (strcmp(records[i].name, "Root Record") == 0) {
             rootRecord = &records[i];
+        } else if (strcmp(records[i].name, "Solution 1") == 0) {
+            solution1 = &records[i];
         }
     }
 
@@ -87,16 +120,19 @@ void test_all_solved_tree_record_ids_single_unsolved(void) {
 
     // output root record id
     char rootRecordId[100];
+    char solutionId1[100];
 
     sprintf(rootRecordId, "%d", rootRecord->id);
+    sprintf(solutionId1, "%d", solution1->id);
 
-    char expectedOutput1[1000];
+    char expectedOutput1[1000], expectedOutput2[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 0", rootRecordId);
+    sprintf(expectedOutput1, "%s: 1", rootRecordId);
+    sprintf(expectedOutput2, "%s: 0", solutionId1);
 
     // Replace the static initialization with dynamically generated strings
-    char* expectedOutput[] = {expectedOutput1};
+    char* expectedOutput[] = {expectedOutput1, expectedOutput2};
     int expectedLines = sizeof(expectedOutput) / sizeof(expectedOutput[0]);
 
     // Logic to run the test and compare output as you previously mentioned
