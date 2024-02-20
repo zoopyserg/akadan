@@ -7,11 +7,11 @@
 #include "record.h"
 
 // Global variables for record IDs
+char* rootRecordId;
 char* recordId1;
 char* recordId2;
 char* recordId3;
 char* recordId4;
-char* rootRecordId;
 char* solutionId1;
 char* solutionId2;
 

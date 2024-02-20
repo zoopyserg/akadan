@@ -328,6 +328,7 @@ RSpec.describe Record, type: :model do
         let!(:solution_connection_type) { create :connection_type, name: 'Is Solved By...' }
         let(:solved_records) { Record.all_solved_tree_records_of_record(record1) }
 
+        # +
         context 'single unsolved record' do
           let!(:record1) { create :record, user: user1, is_public: true }
 
