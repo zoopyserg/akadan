@@ -20,11 +20,9 @@ void display_record(Record record) {
     // Display other fields as needed
 }
 
-// Function to fetch the records from the DB:
-const char *connection = "dbname=journal_development user=diamondserge password=112223 host=localhost";
-
 // Adjusted fetch_records to include the name in the SELECT query
 Record* fetch_records(int *num_records) {
+    const char *connection = "dbname=journal_development user=diamondserge password=112223 host=localhost";
     PGconn *conn = PQconnectdb(connection);
 
     if (PQstatus(conn) == CONNECTION_BAD) {

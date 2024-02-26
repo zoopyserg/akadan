@@ -13,7 +13,7 @@ COMMON_CLEANUP=./common_cleanup.c
 COMMON_INSERT=./common_insert.c
 
 # Source files from your program that are required for the tests
-PROGRAM_SRCS=$(PROGRAM_DIR)/record_type.c $(PROGRAM_DIR)/common.c $(PROGRAM_DIR)/connection_type.c $(PROGRAM_DIR)/connection.c $(PROGRAM_DIR)/record.c
+PROGRAM_SRCS=$(PROGRAM_DIR)/record_type.c $(PROGRAM_DIR)/common.c $(PROGRAM_DIR)/connection_type.c $(PROGRAM_DIR)/connection.c $(PROGRAM_DIR)/record.c $(PROGRAM_DIR)/dot.c
 
 # Test runner and test source files
 TEST_RUNNER=all_tests_runner.c

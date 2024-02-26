@@ -4,6 +4,7 @@
 #include "connection_type_test.h"
 #include "record_test.h"
 #include "connection_test.h"
+#include "dot_test.h"
 #include "all_solved_tree_record_ids_test.h"
 #include "all_solved_tree_record_ids_single_unsolved_test.h"
 #include "all_solved_tree_record_ids_single_solved_test.h"
@@ -32,6 +33,7 @@ int main() {
         (NULL == CU_add_test(pSuite, "Test fetch_connection_types", test_fetch_connection_types)) ||
         (NULL == CU_add_test(pSuite, "Test fetch_records", test_fetch_records)) ||
         (NULL == CU_add_test(pSuite, "Test fetch_connections", test_fetch_connections)) ||
+        (NULL == CU_add_test(pSuite, "Test fetch_dots", test_fetch_dots)) ||
         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs", test_all_solved_tree_record_ids)) ||
         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Unsolved", test_all_solved_tree_record_ids_single_unsolved)) ||
         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Solved", test_all_solved_tree_record_ids_single_solved)) ||
