@@ -1,4 +1,5 @@
 #include "record.h"
+#include "dot.h"
 #include "connection.h"
 #include "connection_type.h"
 #include "record_type.h"
@@ -19,12 +20,6 @@ typedef struct {
     int parentId;
     bool isDestructive;
 } ParentEntry;
-
-typedef struct TreeInfo {
-    int depth;
-    int nodesCount;
-    int dotsCount;
-} TreeInfo;
 
 // Utility function to find a record's index by its ID
 int findRecordIndexById(int id, Record* records, int numRecords) {
@@ -107,6 +102,31 @@ ParentEntry** buildParentAdjacencyLists(Connection* connections, int numConnecti
     return parentAdjLists;
 }
 
+void buildDotAdjacencyList(Dot* dots, int numDots, Record* records, int numRecords, int** outDotCounts) {
+    *outDotCounts = calloc(numRecords, sizeof(int));
+    if (*outDotCounts == NULL) {
+        fprintf(stderr, "Memory allocation failed for dotCounts.\n");
+        return;
+    }
+
+    // Initialize all counts to 0
+    for (int i = 0; i < numRecords; i++) {
+        (*outDotCounts)[i] = 0;
+    }
+
+    // Iterate over all dots to count them per record
+    for (int i = 0; i < numDots; i++) {
+        for (int j = 0; j < numRecords; j++) {
+            if (dots[i].recordId == records[j].id) {
+                (*outDotCounts)[j]++;
+                break; // Break the inner loop as soon as the record is found and counted
+            }
+        }
+    }
+
+    // No need to return anything as the counts are stored in the passed pointer
+}
+
 // Recursive function to determine if a record is solved
 // Updated dfsSolve function signature to include numConnections
 void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** childAdjLists, int* childCounts, Record* records, int numRecords) {
@@ -167,105 +187,15 @@ void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** 
 
 }
 
-// typedef struct {
-//     int nodeId;
-//     int depth;
-// } QueueNode;
-//
-// // Queue implementation is assumed
-// typedef struct Queue {
-//     QueueNode* nodes;
-//     int front, rear, size;
-//     unsigned capacity;
-// } Queue;
-//
-// Queue* createQueue(unsigned capacity) {
-//     Queue* queue = (Queue*) malloc(sizeof(Queue));
-//     queue->capacity = capacity;
-//     queue->front = queue->size = 0;
-//     queue->rear = capacity - 1;
-//     queue->nodes = (QueueNode*) malloc(queue->capacity * sizeof(QueueNode));
-//     return queue;
-// }
-//
-// bool isQueueFull(Queue* queue) { return (queue->size == queue->capacity); }
-// bool isQueueEmpty(Queue* queue) { return (queue->size == 0); }
-//
-// void enqueue(Queue* queue, QueueNode item) {
-//     if (isQueueFull(queue)) return;
-//     queue->rear = (queue->rear + 1) % queue->capacity;
-//     queue->nodes[queue->rear] = item;
-//     queue->size = queue->size + 1;
-// }
-//
-// QueueNode dequeue(Queue* queue) {
-//     QueueNode item = {.nodeId = -1, .depth = 0};
-//     if (isQueueEmpty(queue)) return item;
-//     item = queue->nodes[queue->front];
-//     queue->front = (queue->front + 1) % queue->capacity;
-//     queue->size = queue->size - 1;
-//     return item;
-// }
-//
-// // A function to free the queue memory
-// void freeQueue(Queue* queue) {
-//     free(queue->nodes);
-//     free(queue);
-// }
-//
-// // Function prototypes for BFS rank calculation
-// void bfsRank();
-//
-// // Main BFS Rank Calculation Function
-// void bfsRank() {
-//     bool* visited = calloc(numRecords, sizeof(bool));
-//     for (int i = 0; i < numRecords; i++) {
-//         if (!visited[i]) {
-//             Queue* queue = createQueue(100); // Arbitrary size; adjust based on expected tree sizes
-//             enqueue(queue, (QueueNode){.nodeId = i, .depth = 1});
-//             visited[i] = true;
-//
-//             int depth = 0;
-//             int nodeCount = 0;
-//             int dotCount = 0;
-//
-//             while (!isQueueEmpty(queue)) {
-//                 QueueNode current = dequeue(queue);
-//                 nodeCount++;
-//                 dotCount += dotsPerRecord[current.nodeId];
-//                 depth = current.depth;
-//
-//                 // Enqueue children
-//                 for (int j = 0; j < childCounts[current.nodeId]; j++) {
-//                     int childId = childAdjLists[current.nodeId][j].childId;
-//                     if (!visited[childId]) {
-//                         enqueue(queue, (QueueNode){.nodeId = childId, .depth = current.depth + 1});
-//                         visited[childId] = true;
-//                     }
-//                 }
-//
-//                 // Enqueue parents if needed, similar to children but using parentAdjLists
-//             }
-//
-//             // After BFS, calculate and assign rank
-//             double rank = depth * (nodeCount + 0.1 * dotCount);
-//             printf("Tree rooted at %d has rank: %f\n", i, rank);
-//
-//             freeQueue(queue);
-//         }
-//     }
-//     free(visited);
-// }
-
-
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <recordId>\n", argv[0]);
         return 1;
     }
 
-    int numRecords, numConnections, numConnectionTypes;
+    int numRecords, numConnections, numConnectionTypes, numDots;
     Record* records = fetch_records(&numRecords);
+    Dot* dots = fetch_dots(&numDots);
     Connection* connections = fetch_connections(&numConnections);
     ConnectionType* connectionTypes = fetch_connection_types(&numConnectionTypes);
 
@@ -282,6 +212,8 @@ int main(int argc, char* argv[]) {
     ChildEntry** childAdjLists = buildChildAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes, solutionConnectionTypeId, &childCounts);
     int* parentCounts;
     ParentEntry** parentAdjLists = buildParentAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes, solutionConnectionTypeId, &parentCounts);
+    int* dotCounts = NULL;
+    buildDotAdjacencyList(dots, numDots, records, numRecords, &dotCounts);
 
     // Output childAjdLists for debugging, like pp in ruby:
     // for (int i = 0; i < numRecords; i++) {
@@ -303,8 +235,6 @@ int main(int argc, char* argv[]) {
             dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
         }
     }
-
-    // bfsRank();
 
     // Output solved status for each record
     for (int i = 0; i < numRecords; i++) {
@@ -341,6 +271,9 @@ int main(int argc, char* argv[]) {
         free(connectionTypes);
     }
 
+    if (dotCounts != NULL) {
+        free(dotCounts);
+    }
 
     return 0;
 }
