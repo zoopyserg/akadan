@@ -277,13 +277,17 @@ int main(int argc, char* argv[]) {
     int* dotCounts = NULL;
     buildDotAdjacencyList(dots, numDots, records, numRecords, &dotCounts);
 
-
-
     // Output childAjdLists for debugging, like pp in ruby:
     // for (int i = 0; i < numRecords; i++) {
-    //     printf("Record %d: ", records[i].id);
+    //     printf("Record with index %d and DB ID %d children: ", i, records[i].id);
     //     for (int j = 0; j < childCounts[i]; j++) {
-    //         printf("%d ", childAdjLists[i][j].childId);
+    //         printf("Child Index: %d ", childAdjLists[i][j].childId);
+    //     }
+    //     printf("\n");
+
+    //     printf("Record with index %d and DB ID %d parents: ", i, records[i].id);
+    //     for (int j = 0; j < parentCounts[i]; j++) {
+    //         printf("Parent Index: %d ", parentAdjLists[i][j].parentId);
     //     }
     //     printf("\n");
     // }
@@ -311,7 +315,7 @@ int main(int argc, char* argv[]) {
 
     // Output solved status for each record
     for (int i = 0; i < numRecords; i++) {
-        printf("%d: %d\n", records[i].id, solvedStatus[i]);
+        printf("%d: %d : %f\n", records[i].id, solvedStatus[i], records[i].rank);
     }
 
     // Cleanup

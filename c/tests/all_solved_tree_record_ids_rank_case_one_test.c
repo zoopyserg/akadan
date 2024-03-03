@@ -184,10 +184,10 @@ void test_all_solved_tree_record_ids_rank_case_one(void) {
     char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 0", rootRecordId1);
-    sprintf(expectedOutput2, "%s: 0", rootRecordId2);
-    sprintf(expectedOutput3, "%s: 0", solutionId1);
-    sprintf(expectedOutput4, "%s: 0", solutionId2);
+    sprintf(expectedOutput1, "%s: 1 : 4.200000", rootRecordId1);
+    sprintf(expectedOutput2, "%s: 1 : 4.400000", rootRecordId2);
+    sprintf(expectedOutput3, "%s: 0 : 4.200000", solutionId1);
+    sprintf(expectedOutput4, "%s: 0 : 4.400000", solutionId2);
 
     // Replace the static initialization with dynamically generated strings
     char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4};
