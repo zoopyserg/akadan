@@ -34,23 +34,23 @@ int main() {
 
     // Register tests from each test file
     if (
-        // (NULL == CU_add_test(pSuite, "Test fetch_record_types", test_fetch_record_types)) ||
-        // (NULL == CU_add_test(pSuite, "Test fetch_connection_types", test_fetch_connection_types)) ||
-        // (NULL == CU_add_test(pSuite, "Test fetch_records", test_fetch_records)) ||
-        // (NULL == CU_add_test(pSuite, "Test fetch_connections", test_fetch_connections)) ||
-        // (NULL == CU_add_test(pSuite, "Test fetch_dots", test_fetch_dots)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs", test_all_solved_tree_record_ids)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Unsolved", test_all_solved_tree_record_ids_single_unsolved)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Solved", test_all_solved_tree_record_ids_single_solved)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Two Destructive Subrecords One Solved", test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Two Destructive Subrecords Both Solved", test_all_solved_tree_record_ids_two_destructive_subrecords_both_solved)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Two Non Destructive Subrecords Both Solved", test_all_solved_tree_record_ids_two_non_destructive_subrecords_both_solved)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs One Destructive One Non Destructive Subrecord Both Solved", test_all_solved_tree_record_ids_one_destructive_one_non_destructive_subrecord_both_solved)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case One", test_all_solved_tree_record_ids_rank_case_one)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Two", test_all_solved_tree_record_ids_rank_case_two)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Three", test_all_solved_tree_record_ids_rank_case_three)) ||
-        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Four", test_all_solved_tree_record_ids_rank_case_four)) ||
-        (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Five", test_all_solved_tree_record_ids_rank_case_five))
+         (NULL == CU_add_test(pSuite, "Test fetch_record_types", test_fetch_record_types)) ||
+         (NULL == CU_add_test(pSuite, "Test fetch_connection_types", test_fetch_connection_types)) ||
+         (NULL == CU_add_test(pSuite, "Test fetch_records", test_fetch_records)) ||
+         (NULL == CU_add_test(pSuite, "Test fetch_connections", test_fetch_connections)) ||
+         (NULL == CU_add_test(pSuite, "Test fetch_dots", test_fetch_dots)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs", test_all_solved_tree_record_ids)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Unsolved", test_all_solved_tree_record_ids_single_unsolved)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Single Solved", test_all_solved_tree_record_ids_single_solved)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Two Destructive Subrecords One Solved", test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Two Destructive Subrecords Both Solved", test_all_solved_tree_record_ids_two_destructive_subrecords_both_solved)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Two Non Destructive Subrecords Both Solved", test_all_solved_tree_record_ids_two_non_destructive_subrecords_both_solved)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs One Destructive One Non Destructive Subrecord Both Solved", test_all_solved_tree_record_ids_one_destructive_one_non_destructive_subrecord_both_solved)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case One", test_all_solved_tree_record_ids_rank_case_one)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Two", test_all_solved_tree_record_ids_rank_case_two)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Three", test_all_solved_tree_record_ids_rank_case_three)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Four", test_all_solved_tree_record_ids_rank_case_four)) ||
+         (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Five", test_all_solved_tree_record_ids_rank_case_five))
        ) {
         CU_cleanup_registry();
         return CU_get_error();

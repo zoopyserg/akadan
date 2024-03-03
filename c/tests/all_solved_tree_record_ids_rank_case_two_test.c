@@ -81,17 +81,17 @@ int setup_all_solved_tree_record_ids_rank_case_two(void) {
     if (!connectionTypeId) { return 1; }
 
     // insert a regular connection type
-    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "FALSE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
+    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "TRUE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
     char* connectionTypeId2 = common_insert("connection_types", connectionTypeColumns, connectionTypeValues2);
     if (!connectionTypeId2) { return 1; }
 
     // Insert a regular connection between root record 1 and solution 1
-    char* connectionValues[] = {"Test Connection", userId, "TRUE", rootRecordId1, solutionId1, connectionTypeId2, "NOW()", "NOW()", NULL};
+    char* connectionValues[] = {"Test Connection", userId, "TRUE", rootRecordId1, solutionId1, connectionTypeId, "NOW()", "NOW()", NULL};
     char* connectionId = common_insert("connections", connectionColumns, connectionValues);
     if (!connectionId) { return 1; }
 
     // Insert a connection between root record 2 and record 1
-    char* connectionValues2[] = {"Test Connection", userId, "TRUE", rootRecordId2, recordId1, connectionTypeId, "NOW()", "NOW()", NULL};
+    char* connectionValues2[] = {"Test Connection", userId, "TRUE", rootRecordId2, recordId1, connectionTypeId2, "NOW()", "NOW()", NULL};
     char* connectionId2 = common_insert("connections", connectionColumns, connectionValues2);
     if (!connectionId2) { return 1; }
 

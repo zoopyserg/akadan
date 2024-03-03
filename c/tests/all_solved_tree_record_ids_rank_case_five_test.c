@@ -165,7 +165,7 @@ int setup_all_solved_tree_record_ids_rank_case_five(void) {
     if (!connectionTypeId) { return -1; }
 
     // insert a regular connection type
-    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "FALSE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
+    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "TRUE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
     char* connectionTypeId2 = common_insert("connection_types", connectionTypeColumns, connectionTypeValues2);
     if (!connectionTypeId2) { return -1; }
 
@@ -345,12 +345,12 @@ void test_all_solved_tree_record_ids_rank_case_five(void) {
     char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000], expectedOutput5[1000], expectedOutput6[1000], expectedOutput7[1000], expectedOutput8[1000], expectedOutput9[1000], expectedOutput10[1000], expectedOutput11[1000], expectedOutput12[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 0 : 26.400000", rootRecordId1);
-    sprintf(expectedOutput2, "%s: 0 : 26.400000", rootRecordId2);
-    sprintf(expectedOutput3, "%s: 0 : 26.400000", recordId1);
+    sprintf(expectedOutput1, "%s: 1 : 26.400000", rootRecordId1);
+    sprintf(expectedOutput2, "%s: 1 : 26.400000", rootRecordId2);
+    sprintf(expectedOutput3, "%s: 1 : 26.400000", recordId1);
     sprintf(expectedOutput4, "%s: 1 : 26.400000", recordId2);
     sprintf(expectedOutput5, "%s: 1 : 26.400000", recordId3);
-    sprintf(expectedOutput6, "%s: 0 : 26.400000", recordId4);
+    sprintf(expectedOutput6, "%s: 1 : 26.400000", recordId4);
     sprintf(expectedOutput7, "%s: 1 : 26.400000", recordId5);
     sprintf(expectedOutput8, "%s: 1 : 26.400000", recordId6);
     sprintf(expectedOutput9, "%s: 0 : 26.400000", solutionId1);
