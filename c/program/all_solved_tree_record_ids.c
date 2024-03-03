@@ -15,6 +15,17 @@ typedef struct {
     bool isSolution;
 } ChildEntry;
 
+typedef struct {
+    int parentId;
+    bool isDestructive;
+} ParentEntry;
+
+typedef struct TreeInfo {
+    int depth;
+    int nodesCount;
+    int dotsCount;
+} TreeInfo;
+
 // Utility function to find a record's index by its ID
 int findRecordIndexById(int id, Record* records, int numRecords) {
     for (int i = 0; i < numRecords; i++) {
@@ -59,6 +70,41 @@ ChildEntry** buildChildAdjacencyLists(Connection* connections, int numConnection
     *outChildCounts = childCounts;
 
     return childAdjLists;
+}
+
+ParentEntry** buildParentAdjacencyLists(Connection* connections, int numConnections, Record* records, int numRecords, ConnectionType* connectionTypes, int numConnectionTypes, int solutionConnectionTypeId, int** outParentCounts) {
+    ParentEntry** parentAdjLists = calloc(numRecords, sizeof(ParentEntry*));
+    int* parentCounts = calloc(numRecords, sizeof(int));
+
+    for (int i = 0; i < numConnections; i++) {
+        int childIndex = findRecordIndexById(connections[i].recordBId, records, numRecords);
+        int parentIndex = findRecordIndexById(connections[i].recordAId, records, numRecords);
+
+        if (childIndex == -1 || parentIndex == -1) continue; // Skip if indices not found
+
+        bool isDestructive = false;
+        // Determine if the connection is destructive by checking connectionTypes
+        for (int j = 0; j < numConnectionTypes; j++) {
+            if (connectionTypes[j].id == connections[i].connectionTypeId) {
+                isDestructive = connectionTypes[j].isDestructive;
+                break;
+            }
+        }
+
+        // Allocate or expand the parent list for the child record
+        if (parentCounts[childIndex] % 10 == 0) { // For example, expand in chunks of 10
+            parentAdjLists[childIndex] = realloc(parentAdjLists[childIndex], (parentCounts[childIndex] + 10) * sizeof(ParentEntry));
+        }
+
+        // Add the new parent entry
+        parentAdjLists[childIndex][parentCounts[childIndex]].parentId = parentIndex;
+        parentAdjLists[childIndex][parentCounts[childIndex]].isDestructive = isDestructive;
+        parentCounts[childIndex]++;
+    }
+
+    *outParentCounts = parentCounts;
+
+    return parentAdjLists;
 }
 
 // Recursive function to determine if a record is solved
@@ -121,6 +167,97 @@ void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** 
 
 }
 
+// typedef struct {
+//     int nodeId;
+//     int depth;
+// } QueueNode;
+//
+// // Queue implementation is assumed
+// typedef struct Queue {
+//     QueueNode* nodes;
+//     int front, rear, size;
+//     unsigned capacity;
+// } Queue;
+//
+// Queue* createQueue(unsigned capacity) {
+//     Queue* queue = (Queue*) malloc(sizeof(Queue));
+//     queue->capacity = capacity;
+//     queue->front = queue->size = 0;
+//     queue->rear = capacity - 1;
+//     queue->nodes = (QueueNode*) malloc(queue->capacity * sizeof(QueueNode));
+//     return queue;
+// }
+//
+// bool isQueueFull(Queue* queue) { return (queue->size == queue->capacity); }
+// bool isQueueEmpty(Queue* queue) { return (queue->size == 0); }
+//
+// void enqueue(Queue* queue, QueueNode item) {
+//     if (isQueueFull(queue)) return;
+//     queue->rear = (queue->rear + 1) % queue->capacity;
+//     queue->nodes[queue->rear] = item;
+//     queue->size = queue->size + 1;
+// }
+//
+// QueueNode dequeue(Queue* queue) {
+//     QueueNode item = {.nodeId = -1, .depth = 0};
+//     if (isQueueEmpty(queue)) return item;
+//     item = queue->nodes[queue->front];
+//     queue->front = (queue->front + 1) % queue->capacity;
+//     queue->size = queue->size - 1;
+//     return item;
+// }
+//
+// // A function to free the queue memory
+// void freeQueue(Queue* queue) {
+//     free(queue->nodes);
+//     free(queue);
+// }
+//
+// // Function prototypes for BFS rank calculation
+// void bfsRank();
+//
+// // Main BFS Rank Calculation Function
+// void bfsRank() {
+//     bool* visited = calloc(numRecords, sizeof(bool));
+//     for (int i = 0; i < numRecords; i++) {
+//         if (!visited[i]) {
+//             Queue* queue = createQueue(100); // Arbitrary size; adjust based on expected tree sizes
+//             enqueue(queue, (QueueNode){.nodeId = i, .depth = 1});
+//             visited[i] = true;
+//
+//             int depth = 0;
+//             int nodeCount = 0;
+//             int dotCount = 0;
+//
+//             while (!isQueueEmpty(queue)) {
+//                 QueueNode current = dequeue(queue);
+//                 nodeCount++;
+//                 dotCount += dotsPerRecord[current.nodeId];
+//                 depth = current.depth;
+//
+//                 // Enqueue children
+//                 for (int j = 0; j < childCounts[current.nodeId]; j++) {
+//                     int childId = childAdjLists[current.nodeId][j].childId;
+//                     if (!visited[childId]) {
+//                         enqueue(queue, (QueueNode){.nodeId = childId, .depth = current.depth + 1});
+//                         visited[childId] = true;
+//                     }
+//                 }
+//
+//                 // Enqueue parents if needed, similar to children but using parentAdjLists
+//             }
+//
+//             // After BFS, calculate and assign rank
+//             double rank = depth * (nodeCount + 0.1 * dotCount);
+//             printf("Tree rooted at %d has rank: %f\n", i, rank);
+//
+//             freeQueue(queue);
+//         }
+//     }
+//     free(visited);
+// }
+
+
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <recordId>\n", argv[0]);
@@ -143,6 +280,8 @@ int main(int argc, char* argv[]) {
 
     int* childCounts;
     ChildEntry** childAdjLists = buildChildAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes, solutionConnectionTypeId, &childCounts);
+    int* parentCounts;
+    ParentEntry** parentAdjLists = buildParentAdjacencyLists(connections, numConnections, records, numRecords, connectionTypes, numConnectionTypes, solutionConnectionTypeId, &parentCounts);
 
     // Output childAjdLists for debugging, like pp in ruby:
     // for (int i = 0; i < numRecords; i++) {
@@ -164,6 +303,8 @@ int main(int argc, char* argv[]) {
             dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
         }
     }
+
+    // bfsRank();
 
     // Output solved status for each record
     for (int i = 0; i < numRecords; i++) {
