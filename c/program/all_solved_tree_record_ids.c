@@ -21,6 +21,19 @@ typedef struct {
     bool isDestructive;
 } ParentEntry;
 
+typedef struct {
+    int recordIndex;
+    int depth;
+} QueueItem;
+
+typedef struct {
+    int* recordIds;
+    int numRecords;
+    int depth;
+    float rank;
+    int dotsCount;
+} Tree;
+
 // Utility function to find a record's index by its ID
 int findRecordIndexById(int id, Record* records, int numRecords) {
     for (int i = 0; i < numRecords; i++) {
@@ -187,6 +200,60 @@ void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** 
 
 }
 
+void bfsRank(int start, bool* bfsRankVisited, Record* records, int numRecords, ChildEntry** childAdjLists, int* childCounts, ParentEntry** parentAdjLists, int* parentCounts, int* dotCounts) {
+    if (bfsRankVisited[start]) return;
+
+    QueueItem queue[numRecords];
+    int front = 0, rear = 0;
+
+    queue[rear++] = (QueueItem){start, 1};
+    bfsRankVisited[start] = true;
+
+    Tree currentTree;
+    currentTree.recordIds = malloc(numRecords * sizeof(int));
+    currentTree.numRecords = 0;
+    currentTree.depth = 0;
+    currentTree.dotsCount = 0;
+
+    while (front < rear) {
+        QueueItem currentQueueItem = queue[front++];
+        int current = currentQueueItem.recordIndex;
+
+        currentTree.recordIds[currentTree.numRecords++] = current;
+        currentTree.dotsCount += dotCounts[current];
+
+        if (currentQueueItem.depth > currentTree.depth) {
+            currentTree.depth = currentQueueItem.depth;
+        }
+
+        // Process children
+        for (int j = 0; j < childCounts[current]; j++) {
+            int child = childAdjLists[current][j].childId;
+            if (!bfsRankVisited[child]) {
+                queue[rear++] = (QueueItem){child, currentQueueItem.depth + 1};
+                bfsRankVisited[child] = true;
+            }
+        }
+
+        // Process parents
+        for (int j = 0; j < parentCounts[current]; j++) {
+            int parent = parentAdjLists[current][j].parentId;
+            if (!bfsRankVisited[parent]) {
+                queue[rear++] = (QueueItem){parent, currentQueueItem.depth + 1};
+                bfsRankVisited[parent] = true;
+            }
+        }
+    }
+
+    currentTree.rank = currentTree.depth * (currentTree.numRecords + 0.1 * currentTree.dotsCount);
+    for (int i = 0; i < currentTree.numRecords; i++) {
+        records[currentTree.recordIds[i]].rank = currentTree.rank; // Update records' rank
+    }
+
+    // Cleanup and debug output...
+    free(currentTree.recordIds);
+}
+
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <recordId>\n", argv[0]);
@@ -215,6 +282,8 @@ int main(int argc, char* argv[]) {
     int* dotCounts = NULL;
     buildDotAdjacencyList(dots, numDots, records, numRecords, &dotCounts);
 
+
+
     // Output childAjdLists for debugging, like pp in ruby:
     // for (int i = 0; i < numRecords; i++) {
     //     printf("Record %d: ", records[i].id);
@@ -233,6 +302,15 @@ int main(int argc, char* argv[]) {
         if (!visited[i]) {
             // printf("triggering dfsSolve with i: %d\n", i);
             dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
+        }
+    }
+
+    // calculate rank
+    bool bfsRankVisited[numRecords];
+    memset(bfsRankVisited, false, sizeof(bfsRankVisited));
+    for (int i = 0; i < numRecords; i++) {
+        if (!bfsRankVisited[i]) {
+            bfsRank(i, bfsRankVisited, records, numRecords, childAdjLists, childCounts, parentAdjLists, parentCounts, dotCounts);
         }
     }
 
