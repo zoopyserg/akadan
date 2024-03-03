@@ -255,11 +255,6 @@ void bfsRank(int start, bool* bfsRankVisited, Record* records, int numRecords, C
 }
 
 int main(int argc, char* argv[]) {
-    if (argc < 2) {
-        fprintf(stderr, "Usage: %s <recordId>\n", argv[0]);
-        return 1;
-    }
-
     int numRecords, numConnections, numConnectionTypes, numDots;
     Record* records = fetch_records(&numRecords);
     Dot* dots = fetch_dots(&numDots);

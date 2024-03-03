@@ -394,7 +394,7 @@ void test_all_solved_tree_record_ids(void) {
     // Execute your program and redirect output to a file, then read and compare each line
     // For example, if your program is compiled to `all_solved_tree_record_ids`
     char command[256];
-    sprintf(command, "../program/all_solved_tree_record_ids %s > output.txt", rootRecordId);
+    sprintf(command, "../program/all_solved_tree_record_ids > output.txt");
     system(command);
 
     FILE* file = fopen("output.txt", "r");
