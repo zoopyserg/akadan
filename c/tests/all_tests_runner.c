@@ -14,6 +14,7 @@
 #include "all_solved_tree_record_ids_one_destructive_one_non_destructive_subrecord_both_solved_test.h"
 #include "all_solved_tree_record_ids_rank_case_one_test.h"
 #include "all_solved_tree_record_ids_rank_case_two_test.h"
+#include "all_solved_tree_record_ids_rank_case_three_test.h"
 #include "common_insert.h"
 #include "common_cleanup.h"
 
@@ -45,6 +46,7 @@ int main() {
         // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs One Destructive One Non Destructive Subrecord Both Solved", test_all_solved_tree_record_ids_one_destructive_one_non_destructive_subrecord_both_solved)) ||
         // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case One", test_all_solved_tree_record_ids_rank_case_one)) ||
         // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Two", test_all_solved_tree_record_ids_rank_case_two)) ||
+        // (NULL == CU_add_test(pSuite, "Test All Solved Tree Record IDs Rank Case Three", test_all_solved_tree_record_ids_rank_case_three)) ||
        ) {
         CU_cleanup_registry();
         return CU_get_error();
