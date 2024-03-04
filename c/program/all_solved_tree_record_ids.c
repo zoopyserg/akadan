@@ -313,6 +313,9 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // Save the records data into the db:
+    save_records(records, numRecords);
+
     // Output solved status for each record
     for (int i = 0; i < numRecords; i++) {
         printf("%d: %d : %f\n", records[i].id, solvedStatus[i], records[i].rank);

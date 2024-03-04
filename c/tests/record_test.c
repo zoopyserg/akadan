@@ -59,3 +59,34 @@ void test_fetch_records(void) {
 
     free(records);
 }
+
+void test_save_records(void) {
+    // Setup test environment
+    setup_record_test();
+
+    // Assuming setup_record_test inserts at least one test record and returns its ID
+    int num_records = 0;
+    Record* records = fetch_records(&num_records);
+
+    // Simulate updates
+    if (num_records > 0) {
+        records[0].isSolved = true;
+        records[0].rank = 5.0f;
+    }
+
+    // Save updates
+    save_records(records, num_records);
+
+    // Fetch again to verify updates
+    Record* updated_records = fetch_records(&num_records);
+
+    // Assertions to verify the record was updated correctly
+    if (num_records > 0) {
+        CU_ASSERT_TRUE(updated_records[0].isSolved);
+        CU_ASSERT_DOUBLE_EQUAL(updated_records[0].rank, 5.0, 0.001); // Assuming a tolerance of 0.001
+    }
+
+    // Cleanup
+    free(records);
+    free(updated_records);
+}

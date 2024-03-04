@@ -32,7 +32,7 @@ Record* fetch_records(int *num_records) {
     }
 
     // Include 'name' in the SELECT
-    PGresult *res = PQexec(conn, "SELECT id, user_id, is_public, record_type_id, name FROM records");
+    PGresult *res = PQexec(conn, "SELECT id, user_id, is_public, record_type_id, name, solved, rank FROM records");
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         fprintf(stderr, "SELECT failed: %s\n", PQerrorMessage(conn));
@@ -58,10 +58,65 @@ Record* fetch_records(int *num_records) {
         records[i].recordTypeId = atoi(PQgetvalue(res, i, 3));
         strncpy(records[i].name, PQgetvalue(res, i, 4), sizeof(records[i].name) - 1);
         records[i].name[sizeof(records[i].name) - 1] = '\0'; // Ensure null termination
+        records[i].isSolved = PQgetvalue(res, i, 5)[0] == 't';
+        records[i].rank = atof(PQgetvalue(res, i, 6));
     }
 
     PQclear(res);
     PQfinish(conn);
 
     return records;
+}
+
+#define MAX_BUFFER_SIZE 50000000  // 50MB, adjust as needed
+void save_records(Record *records, int num_records) {
+    const char *conninfo = "dbname=journal_development user=diamondserge password=112223 host=localhost";
+    PGconn *conn = PQconnectdb(conninfo);
+    if (PQstatus(conn) != CONNECTION_OK) {
+        fprintf(stderr, "Connection to database failed: %s\n", PQerrorMessage(conn));
+        PQfinish(conn);
+        return;
+    }
+
+    char *query = malloc(MAX_BUFFER_SIZE); // Adjust buffer size as needed
+    if (!query) {
+        fprintf(stderr, "Memory allocation failed for query buffer\n");
+        PQfinish(conn);
+        return;
+    }
+
+    // Start constructing the query
+    snprintf(query, MAX_BUFFER_SIZE,
+             "UPDATE records SET solved = data.solved, rank = data.rank FROM (VALUES ");
+
+    char valueBuffer[256]; // Adjust buffer size as needed for each record
+    for (int i = 0; i < num_records; i++) {
+        snprintf(valueBuffer, sizeof(valueBuffer),
+                 "(%d, %s, %f)%s",
+                 records[i].id,
+                 records[i].isSolved ? "TRUE" : "FALSE",
+                 records[i].rank,
+                 i < num_records - 1 ? ", " : "");
+        strncat(query, valueBuffer, MAX_BUFFER_SIZE - strlen(query) - 1);
+    }
+
+    // Finish constructing the query
+    strncat(query, ") AS data(id, solved, rank) WHERE records.id = data.id;",
+            MAX_BUFFER_SIZE - strlen(query) - 1);
+
+    // Execute the SQL query
+    PGresult *res = PQexec(conn, query);
+    if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+        fprintf(stderr, "UPDATE command failed: %s\n", PQerrorMessage(conn));
+        PQclear(res);
+        PQfinish(conn);
+        free(query);
+        return;
+    }
+
+    // Clean up
+    PQclear(res);
+    PQfinish(conn);
+    free(query);
+    // printf("Records updated successfully.\n");
 }

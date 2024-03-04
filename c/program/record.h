@@ -15,11 +15,13 @@ typedef struct Record {
     int unsolvedRecordsConnectedCached;
     int progressCached;
     float rank;
+    bool isSolved;
 } Record;
 
 // Function declarations
 Record create_record(int id, int userId, bool isPublic, int recordTypeId);
 void display_record(Record record);
 Record* fetch_records(int *num_records);
+void save_records(Record *records, int num_records);
 
 #endif // RECORD_H
