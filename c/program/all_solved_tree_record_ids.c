@@ -140,64 +140,54 @@ void buildDotAdjacencyList(Dot* dots, int numDots, Record* records, int numRecor
     // No need to return anything as the counts are stored in the passed pointer
 }
 
-// Recursive function to determine if a record is solved
-// Updated dfsSolve function signature to include numConnections
-void dfsSolve(int currentIndex, bool* solvedStatus, bool* visited, ChildEntry** childAdjLists, int* childCounts, Record* records, int numRecords) {
-    if (currentIndex < 0 || currentIndex >= numRecords) {
-        return; // Guard against invalid indices.
-    }
+float dfsSolveAndProgress(int currentIndex, bool* visited, ChildEntry** childAdjLists, int* childCounts, Record* records, int numRecords) {
+    if (visited[currentIndex]) return records[currentIndex].progress; // Return existing progress if already visited
 
     visited[currentIndex] = true;
 
-    // // if it has 0 children then it should not be solved
-    if (childCounts[currentIndex] == 0) {
-        solvedStatus[currentIndex] = false;
-        return;
-    }
-
-    // // if it has 1 child or more - then:
-    // // - check if that child is a solution (and if so - mark current as solved and return early)
-    for (int i = 0; i < childCounts[currentIndex]; i++) {
-        // printf("currentIndex: %d, i: %d\n", currentIndex, i);
-        int childIndex = childAdjLists[currentIndex][i].childId;
-
-        if (childIndex < 0 || childIndex >= numRecords) continue;
-
+    // Check direct solution from the adjacency list or the isSolved flag
+    bool directlySolved = records[currentIndex].isSolved;
+    for (int i = 0; !directlySolved && i < childCounts[currentIndex]; i++) {
         if (childAdjLists[currentIndex][i].isSolution) {
-          solvedStatus[currentIndex] = true;
-          return;
+            directlySolved = true;
+            break; // If any direct solution is found, no need to check further
         }
     }
 
-    // - check if all children are solved recursively (and if so - mark current as solved)
-    for (int i = 0; i < childCounts[currentIndex]; i++) {
+    if (directlySolved) {
+        records[currentIndex].isSolved = true; // Mark as solved if not already
+        records[currentIndex].progress = 100.0f;
+        return 100.0f; // Direct solution contributes 100% progress
+    }
+
+    int numberOfChildren = childCounts[currentIndex];
+    float totalProgress = 0.0f;
+
+    // Initialize counters for children that are considered in progress calculation
+    int consideredChildrenCount = 0;
+
+    for (int i = 0; i < numberOfChildren; i++) {
         int childIndex = childAdjLists[currentIndex][i].childId;
 
-        if (childIndex < 0 || childIndex >= numRecords) continue; // Skip already visited or invalid indices.
-        // todo: it used to Skip already visited or invalid indices:  || visited[childIndex]
-        // but I'm not sure if I need it here because they may be visited from another branch
-        // one solution may solve many problems.
-
-        // check all children
-        if (childAdjLists[currentIndex][i].isDestructive && !visited[childIndex]) {
-            dfsSolve(childIndex, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
+        // Only consider children connected through destructive relationships
+        if (childAdjLists[currentIndex][i].isDestructive) {
+            totalProgress += dfsSolveAndProgress(childIndex, visited, childAdjLists, childCounts, records, numRecords); // Aggregate progress from considered children
+            consideredChildrenCount++;
         }
     }
 
-    // if all children are solved then current is solved too:
-    bool allChuldrenSolved = true;
-    for (int i = 0; i < childCounts[currentIndex]; i++) {
-        int childIndex = childAdjLists[currentIndex][i].childId;
-        if (solvedStatus[childIndex] == false) {
-            allChuldrenSolved = false;
-            break;
-        }
+    // If no considered children, the record is unsolved with 0 progress
+    if (consideredChildrenCount == 0) {
+        records[currentIndex].isSolved = false;
+        records[currentIndex].progress = 0.0f;
+        return 0.0f;
     }
 
-    if (allChuldrenSolved) {
-        solvedStatus[currentIndex] = true;
-    }
+    float averageProgress = totalProgress / (float)consideredChildrenCount; // Average progress from considered children
+    records[currentIndex].progress = averageProgress; // Update record's progress
+    records[currentIndex].isSolved = averageProgress >= 100.0f; // Mark as solved if average progress is 100% or more
 
+    return averageProgress;
 }
 
 void bfsRank(int start, bool* bfsRankVisited, Record* records, int numRecords, ChildEntry** childAdjLists, int* childCounts, ParentEntry** parentAdjLists, int* parentCounts, int* dotCounts) {
@@ -293,14 +283,19 @@ int main(int argc, char* argv[]) {
     // }
 
     // output adjacency lists
-    bool* solvedStatus = calloc(numRecords, sizeof(bool)); // Initialize all to unsolved
-    bool* visited = calloc(numRecords, sizeof(bool)); // Track visited records to prevent cycles
+    bool* visited = calloc(numRecords, sizeof(bool));
+    if (!visited) {
+        fprintf(stderr, "Memory allocation failed for visited array.\n");
+        // Handle memory allocation failure (cleanup and exit)
+        return 1;
+    }
 
-    // Solve for each record
+    // Solve for each record and calculate progress
     for (int i = 0; i < numRecords; i++) {
         if (!visited[i]) {
-            // printf("triggering dfsSolve with i: %d\n", i);
-            dfsSolve(i, solvedStatus, visited, childAdjLists, childCounts, records, numRecords);
+            dfsSolveAndProgress(i, visited, childAdjLists, childCounts, records, numRecords);
+            // float progress =
+            // printf("Record %d progress: %.2f%%\n", records[i].id, progress);
         }
     }
 
@@ -318,7 +313,7 @@ int main(int argc, char* argv[]) {
 
     // Output solved status for each record
     for (int i = 0; i < numRecords; i++) {
-        printf("%d: %d : %f\n", records[i].id, solvedStatus[i], records[i].rank);
+        printf("%d: %d : %f : %f\n", records[i].id, records[i].isSolved, records[i].rank, records[i].progress);
     }
 
     // Cleanup
@@ -333,9 +328,6 @@ int main(int argc, char* argv[]) {
         childAdjLists = NULL; // Prevent use-after-free
     }
 
-    if (solvedStatus != NULL) {
-        free(solvedStatus);
-    }
     if (visited != NULL) {
         free(visited);
     }

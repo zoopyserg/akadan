@@ -72,6 +72,7 @@ void test_save_records(void) {
     if (num_records > 0) {
         records[0].isSolved = true;
         records[0].rank = 5.0f;
+        records[0].progress = 66.6f;
     }
 
     // Save updates
@@ -84,6 +85,7 @@ void test_save_records(void) {
     if (num_records > 0) {
         CU_ASSERT_TRUE(updated_records[0].isSolved);
         CU_ASSERT_DOUBLE_EQUAL(updated_records[0].rank, 5.0, 0.001); // Assuming a tolerance of 0.001
+        CU_ASSERT_DOUBLE_EQUAL(updated_records[0].progress, 66.6, 0.001); // Assuming a tolerance of 0.001
     }
 
     // Cleanup

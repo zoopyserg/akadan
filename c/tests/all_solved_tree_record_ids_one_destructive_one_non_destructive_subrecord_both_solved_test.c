@@ -304,11 +304,11 @@ void test_all_solved_tree_record_ids_one_destructive_one_non_destructive_subreco
     char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000], expectedOutput5[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 0 : 15.000000", rootRecordId);
-    sprintf(expectedOutput2, "%s: 1 : 15.000000", recordId1);
-    sprintf(expectedOutput3, "%s: 1 : 15.000000", recordId2);
-    sprintf(expectedOutput4, "%s: 0 : 15.000000", solutionId1);
-    sprintf(expectedOutput5, "%s: 0 : 15.000000", solutionId2);
+    sprintf(expectedOutput1, "%s: 1 : 15.000000 : 100.000000", rootRecordId); // philosophical question: if some some sub records are non-destructive, they don't affect the solution at all? Like no matter if they are solved or not, only the destructive ones affect the percentage? For now no. We'll figure out later
+    sprintf(expectedOutput2, "%s: 1 : 15.000000 : 100.000000", recordId1);
+    sprintf(expectedOutput3, "%s: 1 : 15.000000 : 100.000000", recordId2);
+    sprintf(expectedOutput4, "%s: 0 : 15.000000 : 0.000000", solutionId1);
+    sprintf(expectedOutput5, "%s: 0 : 15.000000 : 0.000000", solutionId2);
 
     // Replace the static initialization with dynamically generated strings
     char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4, expectedOutput5};

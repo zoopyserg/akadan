@@ -32,7 +32,7 @@ Record* fetch_records(int *num_records) {
     }
 
     // Include 'name' in the SELECT
-    PGresult *res = PQexec(conn, "SELECT id, user_id, is_public, record_type_id, name, solved, rank FROM records");
+    PGresult *res = PQexec(conn, "SELECT id, user_id, is_public, record_type_id, name, solved, rank, progress FROM records");
 
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         fprintf(stderr, "SELECT failed: %s\n", PQerrorMessage(conn));
@@ -60,6 +60,7 @@ Record* fetch_records(int *num_records) {
         records[i].name[sizeof(records[i].name) - 1] = '\0'; // Ensure null termination
         records[i].isSolved = PQgetvalue(res, i, 5)[0] == 't';
         records[i].rank = atof(PQgetvalue(res, i, 6));
+        records[i].progress = atof(PQgetvalue(res, i, 7));
     }
 
     PQclear(res);
@@ -87,21 +88,22 @@ void save_records(Record *records, int num_records) {
 
     // Start constructing the query
     snprintf(query, MAX_BUFFER_SIZE,
-             "UPDATE records SET solved = data.solved, rank = data.rank FROM (VALUES ");
+             "UPDATE records SET solved = data.solved, rank = data.rank, progress = data.progress FROM (VALUES ");
 
     char valueBuffer[256]; // Adjust buffer size as needed for each record
     for (int i = 0; i < num_records; i++) {
         snprintf(valueBuffer, sizeof(valueBuffer),
-                 "(%d, %s, %f)%s",
+                 "(%d, %s, %f, %f)%s",
                  records[i].id,
                  records[i].isSolved ? "TRUE" : "FALSE",
                  records[i].rank,
+                 records[i].progress,
                  i < num_records - 1 ? ", " : "");
         strncat(query, valueBuffer, MAX_BUFFER_SIZE - strlen(query) - 1);
     }
 
     // Finish constructing the query
-    strncat(query, ") AS data(id, solved, rank) WHERE records.id = data.id;",
+    strncat(query, ") AS data(id, solved, rank, progress) WHERE records.id = data.id;",
             MAX_BUFFER_SIZE - strlen(query) - 1);
 
     // Execute the SQL query

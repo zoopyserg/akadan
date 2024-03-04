@@ -16,6 +16,7 @@ typedef struct Record {
     int progressCached;
     float rank;
     bool isSolved;
+    float progress;
 } Record;
 
 // Function declarations
