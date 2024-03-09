@@ -14,7 +14,7 @@ class ConnectionsController < ApplicationController
     if signed_in?
       @connections = Connection.where(is_public: true).or(Connection.where(user: current_user)).order(created_at: :desc).page(params[:page])
     else
-      @connections = Connection.where(is_public: true).order(created_at: :desc).page(params[:page])
+      @connections = Connection.where(is_public: false).order(created_at: :desc).page(params[:page])
     end
   end
 

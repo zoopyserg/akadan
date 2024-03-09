@@ -4,7 +4,7 @@ class ActsAsVotableMigration < ActiveRecord::Migration[7.1]
       t.integer :votable_id
       t.string :votable_type
       t.integer :user_id, :null => false
-      t.boolean :vote_flag
+      t.boolean :vote_flag # no need for default value, 3rd position (nil) is possible
 
       t.timestamps
     end

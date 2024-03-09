@@ -36,9 +36,9 @@ Rails.application.routes.draw do
   resources :friends, only: :index do
     resources :friend_requests, only: [:create] do
       collection do
-        post :accept, as: :accept
-        delete :reject, as: :reject
-        delete :unfriend, as: :unfriend
+        get :accept, as: :accept # post
+        get :reject, as: :reject # delete
+        get :unfriend, as: :unfriend # delete
       end
     end
   end
@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     resources :connection_types, except: [:destroy] do
       resources :connections, only: [:new, :edit, :create, :update] do
         collection do
-          post :into_separate_project
+          get :into_separate_project # post
         end
       end
       resources :record_types, only: [] do

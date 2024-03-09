@@ -186,7 +186,7 @@
           <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: @subsystem_connection_type_id, record_type_id: @subsystem_record_type_id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-puzzle-piece mx-1"></i>Create / Connect Subrecords
           <% end %>
-          <%= link_to into_separate_project_record_connection_type_connections_path(record, @extracted_to_connection_type), method: :post, class: "btn btn-light btn-block" do %>
+          <%= button_to into_separate_project_record_connection_type_connections_path(record, @extracted_to_connection_type), class: "btn btn-light btn-block" do %>
             <i class="fa fa-angle-double-up mx-1"></i>Extract Into Separate Project
           <% end %>
           <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsmodal">

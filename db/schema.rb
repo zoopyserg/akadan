@@ -105,15 +105,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_014651) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.bigint "user_id", null: false
-    t.boolean "is_public"
-    t.boolean "directional"
-    t.boolean "destructive"
+    t.boolean "is_public", default: true
+    t.boolean "directional", default: false
+    t.boolean "destructive", default: true
     t.string "target_type"
     t.bigint "target_record_type_id"
     t.bigint "target_record_subtype_id"
     t.string "target_hierarchy"
     t.bigint "closest_parent_type_id"
-    t.boolean "one_to_many"
+    t.boolean "one_to_many", default: false
     t.index ["closest_parent_type_id"], name: "index_connection_types_on_closest_parent_type_id"
     t.index ["target_record_subtype_id"], name: "index_connection_types_on_target_record_subtype_id"
     t.index ["target_record_type_id"], name: "index_connection_types_on_target_record_type_id"
@@ -126,7 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_014651) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.bigint "user_id", null: false
-    t.boolean "is_public"
+    t.boolean "is_public", default: true
     t.bigint "record_a_id", null: false
     t.bigint "record_b_id", null: false
     t.bigint "connection_type_id", null: false
@@ -231,7 +231,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_014651) do
   create_table "readings", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "message_id", null: false
-    t.boolean "read"
+    t.boolean "read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_readings_on_message_id"
@@ -244,7 +244,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_014651) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.bigint "user_id", null: false
-    t.boolean "is_public"
+    t.boolean "is_public", default: true
     t.index ["user_id"], name: "index_record_types_on_user_id"
   end
 
@@ -253,7 +253,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_014651) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.boolean "is_public"
+    t.boolean "is_public", default: true
     t.bigint "record_type_id", null: false
     t.boolean "separate_project", default: false
     t.integer "records_connected_cached", default: 0
@@ -279,7 +279,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_014651) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.text "description"
-    t.boolean "is_public"
+    t.boolean "is_public", default: true
     t.index ["user_id"], name: "index_sensors_on_user_id"
   end
 
@@ -313,9 +313,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_014651) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
-    t.boolean "accept_terms"
+    t.boolean "accept_terms", default: false
     t.string "avatar"
-    t.boolean "is_public"
+    t.boolean "is_public", default: true
     t.text "bio"
     t.text "about"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
