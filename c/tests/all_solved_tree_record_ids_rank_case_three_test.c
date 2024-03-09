@@ -217,12 +217,12 @@ void test_all_solved_tree_record_ids_rank_case_three(void) {
     char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000], expectedOutput5[1000], expectedOutput6[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 1 : 9.600000 : 100.000000", rootRecordId1); // todo: for some reason, dfsSolve doesn't solve root records by inheritence.
-    sprintf(expectedOutput2, "%s: 1 : 10.800000 : 100.000000", rootRecordId2);
-    sprintf(expectedOutput3, "%s: 1 : 9.600000 : 100.000000", recordId1);
-    sprintf(expectedOutput4, "%s: 1 : 10.800000 : 100.000000", recordId2);
-    sprintf(expectedOutput5, "%s: 0 : 9.600000 : 0.000000", solutionId1);
-    sprintf(expectedOutput6, "%s: 0 : 10.800000 : 0.000000", solutionId2);
+    sprintf(expectedOutput1, "%s: 1 : 0 : 9.600000 : 100.000000", rootRecordId1); // todo: for some reason, dfsSolve doesn't solve root records by inheritence.
+    sprintf(expectedOutput2, "%s: 1 : 0 : 10.800000 : 100.000000", rootRecordId2);
+    sprintf(expectedOutput3, "%s: 1 : 0 : 9.600000 : 100.000000", recordId1);
+    sprintf(expectedOutput4, "%s: 1 : 0 : 10.800000 : 100.000000", recordId2);
+    sprintf(expectedOutput5, "%s: 0 : 1 : 9.600000 : 0.000000", solutionId1);
+    sprintf(expectedOutput6, "%s: 0 : 1 : 10.800000 : 0.000000", solutionId2);
 
     // Replace the static initialization with dynamically generated strings
     char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4, expectedOutput5, expectedOutput6};

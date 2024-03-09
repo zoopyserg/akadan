@@ -244,6 +244,32 @@ void bfsRank(int start, bool* bfsRankVisited, Record* records, int numRecords, C
     free(currentTree.recordIds);
 }
 
+void setShouldSolveFlags(Record* records, int numRecords, ChildEntry** childAdjLists, int* childCounts) {
+    for (int i = 0; i < numRecords; i++) {
+        // Default to false
+        records[i].shouldSolve = false;
+
+        // If record is already solved, skip
+        if (records[i].isSolved) {
+            continue;
+        }
+
+        bool hasDestructiveChildren = false;
+        // Check if the record has any destructive children
+        for (int j = 0; j < childCounts[i]; j++) {
+            if (childAdjLists[i][j].isDestructive) {
+                hasDestructiveChildren = true;
+                break; // No need to check further if any destructive child is found
+            }
+        }
+
+        // If the record is not solved and has no children or no destructive children, it should be solved
+        if (!hasDestructiveChildren || childCounts[i] == 0) {
+            records[i].shouldSolve = true;
+        }
+    }
+}
+
 int main(int argc, char* argv[]) {
     int numRecords, numConnections, numConnectionTypes, numDots;
     Record* records = fetch_records(&numRecords);
@@ -308,13 +334,16 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // Set shouldSolve flags
+    setShouldSolveFlags(records, numRecords, childAdjLists, childCounts);
+
     // Save the records data into the db:
     save_records(records, numRecords);
 
     // Output solved status for each record (for testing, disabled for production)
-    // for (int i = 0; i < numRecords; i++) {
-    //     printf("%d: %d : %f : %f\n", records[i].id, records[i].isSolved, records[i].rank, records[i].progress);
-    // }
+    for (int i = 0; i < numRecords; i++) {
+        printf("%d: %d : %d : %f : %f\n", records[i].id, records[i].isSolved, records[i].shouldSolve, records[i].rank, records[i].progress);
+    }
 
     // Cleanup
     for (int i = 0; i < numRecords; i++) {

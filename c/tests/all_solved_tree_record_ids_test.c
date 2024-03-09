@@ -160,7 +160,7 @@ int setup_all_solved_tree_record_ids(void) {
 
     // insert a regular connection type
     char* connectionTypeColumns2[] = {"name", "user_id", "is_public", "directional", "destructive", "target_type", "target_record_type_id", "target_record_subtype_id", "target_hierarchy", "closest_parent_type_id", "one_to_many", "created_at", "updated_at", NULL};
-    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "FALSE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
+    char* connectionTypeValues2[] = {"Is Related To...", userId, "TRUE", "FALSE", "TRUE", "record", recordTypeId, recordTypeId, "NULL", recordTypeId, "TRUE", "NOW()", "NOW()", NULL};
     char* connectionTypeId2 = common_insert("connection_types", connectionTypeColumns2, connectionTypeValues2);
     if (!connectionTypeId2) {
         fprintf(stderr, "Setup failed: Unable to insert connection type.\n");
@@ -378,13 +378,13 @@ void test_all_solved_tree_record_ids(void) {
     char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000], expectedOutput5[1000], expectedOutput6[1000], expectedOutput7[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 0 : 21.000000 : 0.000000", rootRecordId);
-    sprintf(expectedOutput2, "%s: 0 : 21.000000 : 0.000000", recordId1);
-    sprintf(expectedOutput3, "%s: 1 : 21.000000 : 100.000000", recordId2);
-    sprintf(expectedOutput4, "%s: 0 : 21.000000 : 0.000000", recordId3);
-    sprintf(expectedOutput5, "%s: 1 : 21.000000 : 100.000000", recordId4);
-    sprintf(expectedOutput6, "%s: 0 : 21.000000 : 0.000000", solutionId1);
-    sprintf(expectedOutput7, "%s: 0 : 21.000000 : 0.000000", solutionId2);
+    sprintf(expectedOutput1, "%s: 0 : 0 : 21.000000 : 50.000000", rootRecordId);
+    sprintf(expectedOutput2, "%s: 0 : 1 : 21.000000 : 0.000000", recordId1);
+    sprintf(expectedOutput3, "%s: 1 : 0 : 21.000000 : 100.000000", recordId2);
+    sprintf(expectedOutput4, "%s: 0 : 1 : 21.000000 : 0.000000", recordId3);
+    sprintf(expectedOutput5, "%s: 1 : 0 : 21.000000 : 100.000000", recordId4);
+    sprintf(expectedOutput6, "%s: 0 : 1 : 21.000000 : 0.000000", solutionId1);
+    sprintf(expectedOutput7, "%s: 0 : 1 : 21.000000 : 0.000000", solutionId2);
 
     // Replace the static initialization with dynamically generated strings
     char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4, expectedOutput5, expectedOutput6, expectedOutput7};

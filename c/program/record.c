@@ -93,17 +93,18 @@ void save_records(Record *records, int num_records) {
     char valueBuffer[256]; // Adjust buffer size as needed for each record
     for (int i = 0; i < num_records; i++) {
         snprintf(valueBuffer, sizeof(valueBuffer),
-                 "(%d, %s, %f, %f)%s",
+                 "(%d, %s, %f, %f, %s)%s",
                  records[i].id,
                  records[i].isSolved ? "TRUE" : "FALSE",
                  records[i].rank,
                  records[i].progress,
+                 records[i].shouldSolve ? "TRUE" : "FALSE",
                  i < num_records - 1 ? ", " : "");
         strncat(query, valueBuffer, MAX_BUFFER_SIZE - strlen(query) - 1);
     }
 
     // Finish constructing the query
-    strncat(query, ") AS data(id, solved, rank, progress) WHERE records.id = data.id;",
+    strncat(query, ") AS data(id, solved, rank, progress, should_solve) WHERE records.id = data.id;",
             MAX_BUFFER_SIZE - strlen(query) - 1);
 
     // Execute the SQL query
