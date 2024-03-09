@@ -1,5 +1,7 @@
 class Dot < ApplicationRecord
   ### INCLUDES
+  include TriggerCProgram
+
   ### DEFAULT SCOPE
   ### CONSTANTS
   ### ATTR ACCESSORS

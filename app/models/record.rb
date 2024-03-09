@@ -1,5 +1,7 @@
 class Record < ApplicationRecord
   ### INCLUDES
+  include TriggerCProgram
+
   ### DEFAULT SCOPE
   ### CONSTANTS
   ### ATTR ACCESSORS
@@ -20,7 +22,6 @@ class Record < ApplicationRecord
   ### VALIDATIONS (validates, validate)
   validates :name, presence: true
   ### CALLBACKS
-  after_create :recalculate_cached_tree_counters
 
   ### NESTED ATTRIBUTES
   accepts_nested_attributes_for :dots
