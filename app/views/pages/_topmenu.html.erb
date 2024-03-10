@@ -46,17 +46,17 @@
                 </li>
             <% end %>
             <% if user_signed_in? %>
-                <li class="relative" style="z-index:999">
+                <li class="relative" data-controller="dropdown" style="z-index:999" data-action="click->dropdown#toggle click@window->dropdown#clickOutside">
                     <a class="flex items-center space-x-2 hover:text-gray-800" href="#">
-                        <span class="user-profile">
-                            <%= image_tag 'person.jpg', class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;' %>
+                        <span class="user-profile" data-action="click->dropdown#toggle">
+                            <%= image_tag 'person.jpg', class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;', 'data-action'=>"click->dropdown#toggle" %>
                         </span>
                     </a>
-                    <ul class="absolute right-0 mt-2 bg-white border border-gray-200 rounded shadow-md">
+                    <ul class="absolute right-0 mt-2 bg-white border border-gray-200 rounded shadow-md" style="display: none;" data-target="dropdown.menu">
                         <li class="p-3">
                             <div class="flex items-center space-x-3">
                                 <div class="avatar">
-                                    <% #= image_tag current_user.avatar_url(:thumb), class: 'rounded-full', alt: "user avatar" %>
+                                    <%= image_tag 'person.jpg', class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;' %>
                                 </div>
                                 <div>
                                     <h6 class="font-medium text-gray-800"><%= current_user.full_name %></h6>
