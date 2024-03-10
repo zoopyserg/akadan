@@ -128,8 +128,8 @@ void test_all_solved_tree_record_ids_single_solved(void) {
     char expectedOutput1[1000], expectedOutput2[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 1 : 0 : 4.000000 : 100.000000", rootRecordId);
-    sprintf(expectedOutput2, "%s: 0 : 1 : 4.000000 : 0.000000", solutionId1);
+    sprintf(expectedOutput1, "%s: 1 : 0 : 4.000000 : 100.000000 : %s", rootRecordId, solutionId1);
+    sprintf(expectedOutput2, "%s: 0 : 1 : 4.000000 : 0.000000 : %s", solutionId1, rootRecordId);
 
     // Replace the static initialization with dynamically generated strings
     char* expectedOutput[] = {expectedOutput1, expectedOutput2};

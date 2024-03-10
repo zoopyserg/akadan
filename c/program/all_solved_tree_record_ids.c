@@ -244,6 +244,7 @@ void bfsRank(int start, bool* bfsRankVisited, Record* records, int numRecords, C
     free(currentTree.recordIds);
 }
 
+// Set shouldSolve flags for each record
 void setShouldSolveFlags(Record* records, int numRecords, ChildEntry** childAdjLists, int* childCounts) {
     for (int i = 0; i < numRecords; i++) {
         // Default to false
@@ -267,6 +268,56 @@ void setShouldSolveFlags(Record* records, int numRecords, ChildEntry** childAdjL
         if (!hasDestructiveChildren || childCounts[i] == 0) {
             records[i].shouldSolve = true;
         }
+    }
+}
+
+// Exclude records as possible record B's for each record
+void addExcludedIdToRecord(Record* record, int id) {
+    if (record->excludedCount % 10 == 0) { // Increase capacity in chunks of 10
+        int newCapacity = (record->excludedCount + 10);
+        record->excludedRecordBs = realloc(record->excludedRecordBs, newCapacity * sizeof(int));
+    }
+    record->excludedRecordBs[record->excludedCount++] = id;
+}
+
+void addUniqueParentIds(Record* record, int currentIndex, ParentEntry** parentAdjLists, int* parentCounts, bool* visited) {
+    for (int i = 0; i < parentCounts[currentIndex]; i++) {
+        int parentId = parentAdjLists[currentIndex][i].parentId;
+        if (!visited[parentId]) {
+            visited[parentId] = true; // Mark this parent as visited
+            addExcludedIdToRecord(record, parentId); // Add this parent ID to the excluded list
+            addUniqueParentIds(record, parentId, parentAdjLists, parentCounts, visited); // Recursively add this parent's parents
+        }
+    }
+}
+
+void populateExcludedIdsForRecords(Record* records, int numRecords, ChildEntry** childAdjLists, int* childCounts, ParentEntry** parentAdjLists, int* parentCounts) {
+    for (int i = 0; i < numRecords; i++) {
+        records[i].excludedRecordBs = NULL;
+        records[i].excludedCount = 0;
+        bool* visitedParents = calloc(numRecords, sizeof(bool)); // To track visited parents for each record
+
+        // Ensure memory allocation succeeded
+        if (!visitedParents) {
+            fprintf(stderr, "Memory allocation failed for visitedParents.\n");
+            // Handle memory allocation failure (cleanup and exit)
+            continue; // Or return, based on your error handling strategy
+        }
+
+        // Populate direct children (to prevent duplication)
+        for (int j = 0; j < childCounts[i]; j++) {
+            int childId = childAdjLists[i][j].childId;
+            // Ensure not to add duplicate child ID
+            if (!visitedParents[childId]) {
+                visitedParents[childId] = true;
+                addExcludedIdToRecord(&records[i], childId);
+            }
+        }
+
+        // Populate parents and their ancestors (to prevent circular dependencies)
+        addUniqueParentIds(&records[i], i, parentAdjLists, parentCounts, visitedParents);
+
+        free(visitedParents); // Cleanup the visitedParents array for the current record
     }
 }
 
@@ -337,12 +388,26 @@ int main(int argc, char* argv[]) {
     // Set shouldSolve flags
     setShouldSolveFlags(records, numRecords, childAdjLists, childCounts);
 
+    // Populate excluded Record B's
+    populateExcludedIdsForRecords(records, numRecords, childAdjLists, childCounts, parentAdjLists, parentCounts);
+
     // Save the records data into the db:
     save_records(records, numRecords);
 
     // Output solved status for each record (for testing, disabled for production)
+    #define EXCLUDED_IDS_BUFFER_SIZE 1024
     for (int i = 0; i < numRecords; i++) {
-        printf("%d: %d : %d : %f : %f\n", records[i].id, records[i].isSolved, records[i].shouldSolve, records[i].rank, records[i].progress);
+        char excludedIds[EXCLUDED_IDS_BUFFER_SIZE] = {0}; // Buffer for holding comma-separated IDs
+        for (int j = 0; j < records[i].excludedCount; j++) {
+            int recordDbId = records[records[i].excludedRecordBs[j]].id; // Look up the database ID using the index
+            char idBuffer[20]; // Assuming an ID won't exceed this length
+            snprintf(idBuffer, sizeof(idBuffer), "%d", recordDbId);
+            strcat(excludedIds, idBuffer);
+            if (j < records[i].excludedCount - 1) {
+                strcat(excludedIds, ","); // Add comma after all but the last ID
+            }
+        }
+        printf("%d: %d : %d : %f : %f : %s\n", records[i].id, records[i].isSolved, records[i].shouldSolve, records[i].rank, records[i].progress, excludedIds);
     }
 
     // Cleanup

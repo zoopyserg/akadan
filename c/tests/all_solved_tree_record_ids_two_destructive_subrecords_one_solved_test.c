@@ -233,10 +233,10 @@ void test_all_solved_tree_record_ids_two_destructive_subrecords_one_solved() {
     char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 0 : 0 : 12.000000 : 50.000000", rootRecordId);
-    sprintf(expectedOutput2, "%s: 1 : 0 : 12.000000 : 100.000000", recordId1);
-    sprintf(expectedOutput3, "%s: 0 : 1 : 12.000000 : 0.000000", recordId2);
-    sprintf(expectedOutput4, "%s: 0 : 1 : 12.000000 : 0.000000", solutionId1);
+    sprintf(expectedOutput1, "%s: 0 : 0 : 12.000000 : 50.000000 : %s,%s", rootRecordId, recordId1, recordId2);
+    sprintf(expectedOutput2, "%s: 1 : 0 : 12.000000 : 100.000000 : %s,%s", recordId1, solutionId1, rootRecordId);
+    sprintf(expectedOutput3, "%s: 0 : 1 : 12.000000 : 0.000000 : %s", recordId2, rootRecordId);
+    sprintf(expectedOutput4, "%s: 0 : 1 : 12.000000 : 0.000000 : %s,%s", solutionId1, recordId1, rootRecordId);
 
     // Replace the static initialization with dynamically generated strings
     char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4};

@@ -69,7 +69,11 @@ Record* fetch_records(int *num_records) {
     return records;
 }
 
-#define MAX_BUFFER_SIZE 50000000  // 50MB, adjust as needed
+// enough for roughly 50k records
+#define MAX_BUFFER_SIZE (100 * 1024 * 1024) // 1MB for the whole query, should be more than enough
+#define EXCLUDED_IDS_BUFFER_SIZE (100 * 500) // Enough for the excluded IDs list per record
+#define VALUE_BUFFER_SIZE (100 * 1024) // 1KB for each record's portion of the query
+
 void save_records(Record *records, int num_records) {
     const char *conninfo = "dbname=journal_development user=diamondserge password=112223 host=localhost";
     PGconn *conn = PQconnectdb(conninfo);
@@ -88,23 +92,37 @@ void save_records(Record *records, int num_records) {
 
     // Start constructing the query
     snprintf(query, MAX_BUFFER_SIZE,
-             "UPDATE records SET solved = data.solved, rank = data.rank, progress = data.progress FROM (VALUES ");
+             "UPDATE records SET solved = data.solved, rank = data.rank, progress = data.progress, should_solve = data.should_solve, excluded_ids = data.excluded_ids FROM (VALUES ");
 
-    char valueBuffer[256]; // Adjust buffer size as needed for each record
     for (int i = 0; i < num_records; i++) {
+        // Construct the comma-separated string of excluded record IDs for this record
+        char excludedIds[EXCLUDED_IDS_BUFFER_SIZE] = {0}; // Adjust size as needed
+        for (int j = 0; j < records[i].excludedCount; j++) {
+            char idBuffer[20]; // Assuming an ID won't exceed this length
+            int recordDbId = records[records[i].excludedRecordBs[j]].id; // Convert index to database ID
+            snprintf(idBuffer, sizeof(idBuffer), "%d,", recordDbId);
+            strncat(excludedIds, idBuffer, sizeof(excludedIds) - strlen(excludedIds) - 1);
+        }
+        if (records[i].excludedCount > 0) {
+            excludedIds[strlen(excludedIds) - 1] = '\0'; // Remove trailing comma
+        }
+
+        // Add record update data to the query
+        char valueBuffer[VALUE_BUFFER_SIZE]; // Adjust buffer size as needed
         snprintf(valueBuffer, sizeof(valueBuffer),
-                 "(%d, %s, %f, %f, %s)%s",
+                 "(%d, %s, %f, %f, %s, '%s')%s",
                  records[i].id,
                  records[i].isSolved ? "TRUE" : "FALSE",
                  records[i].rank,
                  records[i].progress,
                  records[i].shouldSolve ? "TRUE" : "FALSE",
+                 excludedIds,
                  i < num_records - 1 ? ", " : "");
         strncat(query, valueBuffer, MAX_BUFFER_SIZE - strlen(query) - 1);
     }
 
     // Finish constructing the query
-    strncat(query, ") AS data(id, solved, rank, progress, should_solve) WHERE records.id = data.id;",
+    strncat(query, ") AS data(id, solved, rank, progress, should_solve, excluded_ids) WHERE records.id = data.id;",
             MAX_BUFFER_SIZE - strlen(query) - 1);
 
     // Execute the SQL query
@@ -121,5 +139,4 @@ void save_records(Record *records, int num_records) {
     PQclear(res);
     PQfinish(conn);
     free(query);
-    // printf("Records updated successfully.\n");
 }

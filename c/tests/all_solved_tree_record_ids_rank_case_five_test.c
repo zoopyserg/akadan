@@ -345,18 +345,18 @@ void test_all_solved_tree_record_ids_rank_case_five(void) {
     char expectedOutput1[1000], expectedOutput2[1000], expectedOutput3[1000], expectedOutput4[1000], expectedOutput5[1000], expectedOutput6[1000], expectedOutput7[1000], expectedOutput8[1000], expectedOutput9[1000], expectedOutput10[1000], expectedOutput11[1000], expectedOutput12[1000];
 
     // Format the expected output strings using the actual record IDs
-    sprintf(expectedOutput1, "%s: 1 : 0 : 26.400000 : 100.000000", rootRecordId1);
-    sprintf(expectedOutput2, "%s: 1 : 0 : 26.400000 : 100.000000", rootRecordId2);
-    sprintf(expectedOutput3, "%s: 1 : 0 : 26.400000 : 100.000000", recordId1);
-    sprintf(expectedOutput4, "%s: 1 : 0 : 26.400000 : 100.000000", recordId2);
-    sprintf(expectedOutput5, "%s: 1 : 0 : 26.400000 : 100.000000", recordId3);
-    sprintf(expectedOutput6, "%s: 1 : 0 : 26.400000 : 100.000000", recordId4);
-    sprintf(expectedOutput7, "%s: 1 : 0 : 26.400000 : 100.000000", recordId5);
-    sprintf(expectedOutput8, "%s: 1 : 0 : 26.400000 : 100.000000", recordId6);
-    sprintf(expectedOutput9, "%s: 0 : 1 : 26.400000 : 0.000000", solutionId1);
-    sprintf(expectedOutput10, "%s: 0 : 1 : 26.400000 : 0.000000", solutionId2);
-    sprintf(expectedOutput11, "%s: 0 : 1 : 26.400000 : 0.000000", solutionId3);
-    sprintf(expectedOutput12, "%s: 0 : 1 : 26.400000 : 0.000000", solutionId4);
+    sprintf(expectedOutput1, "%s: 1 : 0 : 26.400000 : 100.000000 : %s", rootRecordId1, recordId1);
+    sprintf(expectedOutput2, "%s: 1 : 0 : 26.400000 : 100.000000 : %s", rootRecordId2, recordId4);
+    sprintf(expectedOutput3, "%s: 1 : 0 : 26.400000 : 100.000000 : %s,%s,%s", recordId1, recordId2, recordId3, rootRecordId1);
+    sprintf(expectedOutput4, "%s: 1 : 0 : 26.400000 : 100.000000 : %s,%s,%s", recordId2, solutionId1, recordId1, rootRecordId1);
+    sprintf(expectedOutput5, "%s: 1 : 0 : 26.400000 : 100.000000 : %s,%s,%s", recordId3, solutionId2, recordId1, rootRecordId1);
+    sprintf(expectedOutput6, "%s: 1 : 0 : 26.400000 : 100.000000 : %s,%s,%s", recordId4, recordId5, recordId6, rootRecordId2);
+    sprintf(expectedOutput7, "%s: 1 : 0 : 26.400000 : 100.000000 : %s,%s,%s", recordId5, solutionId3, recordId4, rootRecordId2);
+    sprintf(expectedOutput8, "%s: 1 : 0 : 26.400000 : 100.000000 : %s,%s,%s", recordId6, solutionId4, recordId4, rootRecordId2);
+    sprintf(expectedOutput9, "%s: 0 : 1 : 26.400000 : 0.000000 : %s,%s,%s", solutionId1, recordId2, recordId1, rootRecordId1);
+    sprintf(expectedOutput10, "%s: 0 : 1 : 26.400000 : 0.000000 : %s,%s,%s", solutionId2, recordId3, recordId1, rootRecordId1);
+    sprintf(expectedOutput11, "%s: 0 : 1 : 26.400000 : 0.000000 : %s,%s,%s", solutionId3, recordId5, recordId4, rootRecordId2);
+    sprintf(expectedOutput12, "%s: 0 : 1 : 26.400000 : 0.000000 : %s,%s,%s", solutionId4, recordId6, recordId4, rootRecordId2);
 
     // Replace the static initialization with dynamically generated strings
     char* expectedOutput[] = {expectedOutput1, expectedOutput2, expectedOutput3, expectedOutput4, expectedOutput5, expectedOutput6, expectedOutput7, expectedOutput8, expectedOutput9, expectedOutput10, expectedOutput11, expectedOutput12};

@@ -18,6 +18,8 @@ typedef struct Record {
     bool isSolved;
     float progress;
     bool shouldSolve;
+    int* excludedRecordBs;
+    int excludedCount;
 } Record;
 
 // Function declarations
