@@ -46,10 +46,10 @@
                 </li>
             <% end %>
             <% if user_signed_in? %>
-                <li class="relative">
+                <li class="relative" style="z-index:999">
                     <a class="flex items-center space-x-2 hover:text-gray-800" href="#">
                         <span class="user-profile">
-                            <% #= image_tag current_user.avatar_url(:thumb), class: 'rounded-full', alt: "user avatar" %>
+                            <%= image_tag 'person.jpg', class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;' %>
                         </span>
                     </a>
                     <ul class="absolute right-0 mt-2 bg-white border border-gray-200 rounded shadow-md">
