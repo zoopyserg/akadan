@@ -3,6 +3,7 @@ class Record < ApplicationRecord
   include TriggerCProgram
 
   ### DEFAULT SCOPE
+  default_scope { order(rank: :desc) }
   ### CONSTANTS
   ### ATTR ACCESSORS
   ### ENUMS
@@ -76,14 +77,14 @@ class Record < ApplicationRecord
 
   def self.only_unsolved
     # Record.where(id: only_unsolved_record_ids)
-    where(solved: false)
+    where(should_solve: true)
   end
 
   def self.only_unsolved_record_ids
     # all.select do |record|
     #   Record.all_unsolved_tree_records_of_record(record).pluck(:id).include? record.id
     # end
-    where(solved: false).pluck(:id)
+    where(should_solve: true).pluck(:id)
   end
 
   def self.all_unsolved_tree_records_of_record(record)
