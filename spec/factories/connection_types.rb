@@ -4,7 +4,7 @@ FactoryBot.define do
     description { Faker::Quote.yoda }
     is_public { false }
     directional { false }
-    destructive { false }
+    destructive { true }
     target_type { :any }
     target_hierarchy { :all }
     one_to_many { false }

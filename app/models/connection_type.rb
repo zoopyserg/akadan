@@ -1,5 +1,7 @@
 class ConnectionType < ApplicationRecord
   ### INCLUDES
+  include TriggerCProgram
+
   ### DEFAULT SCOPE
   ### CONSTANTS
   SUBSYSTEM_NAME = 'Subsystem'
