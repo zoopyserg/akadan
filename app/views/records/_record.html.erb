@@ -180,6 +180,9 @@
             <% # this button redirects to "new record dot" form with descriptions photo fields, and a belongs_to_project field with a passed optional project id etc. %>
             <i class="fa fa-repeat mx-1"></i>Repeated
           <% end %>
+          <%= link_to new_record_connection_type_connection_path(record, @irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
+            <i class="fa fa-close mx-1"></i>Irrelevant
+          <% end %>
           <%= link_to new_record_connection_type_record_type_bulk_record_path(record_id: record.id, connection_type_id: @solution_connection_type_id, record_type_id: @solution_record_type_id), class: "btn btn-light btn-block" do %>
             <i class="fa fa-check mx-1"></i>Solve
           <% end %>
@@ -192,9 +195,6 @@
           <button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#permissionsmodal">
             <i class="fa fa-lock"></i>Permissions
           </button>
-          <%= link_to new_record_connection_type_connection_path(record, @irrelevant_because_connection_type), class: "btn btn-light btn-block" do %>
-            <i class="fa fa-close mx-1"></i>Irrelevant
-          <% end %>
         </div>
       <% end %>
     </div>
