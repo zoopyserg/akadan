@@ -115,8 +115,12 @@ class ConnectionType < ApplicationRecord
       possible_records_b_by_type_for(user, record_a).all_roots_without_cycles(record_a)
     elsif hierarchy_siblings?
       possible_records_b_by_type_for(user, record_a).siblings(user, record_a).without_potential_cycles(record_a)
-    elsif hierarchy_deep_siblings?
-      possible_records_b_by_type_for(user, record_a).deep_siblings(record_a)
+    # elsif hierarchy_deep_siblings?
+    #   # todo: this one is not done yet, it requires all tree records
+    #   # possible_records_b_by_type_for(user, record_a).deep_siblings(record_a)
+    #   raise 'Not implemented yet'
+    else
+      possible_records_b_by_type_for(user, record_a).without_potential_cycles(record_a)
     end
   end
 

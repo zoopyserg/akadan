@@ -28,18 +28,18 @@ class Record < ApplicationRecord
   ### SCOPES
   scope :projects, -> { where(separate_project: true) }
 
-  scope :visible_to_user, -> (user) { all } # where(is_public: true).or(where(user: user)) }
-  scope :without_source, -> (record_a) { all } # where.not(id: record_a.id) }
-  scope :of_type, -> (type) { all } # where(record_type: type) }
+  scope :visible_to_user, -> (user) { where(is_public: true).or(where(user: user)) }
+  scope :without_source, -> (record_a) { where.not(id: record_a.id) }
+  scope :of_type, -> (type) { where(record_type: type) }
 
-  scope :accessible_record_bs, -> (user, record_a) { all } # visible_to_user(user).without_source(record_a) }
-  scope :accessible_record_bs_by_type, -> (user, record_a, type) { all } # accessible_record_bs(user, record_a).of_type(type) }
-  scope :accessible_record_bs_by_subtype, -> (user, record_a, type, subtype) { all } # accessible_record_bs_by_type(user, record_a, subtype).joins(:connections_as_target).where(connections: { record_a: (accessible_record_bs_by_type(user, record_a, type) ) })}
+  scope :accessible_record_bs, -> (user, record_a) { visible_to_user(user).without_source(record_a) }
+  scope :accessible_record_bs_by_type, -> (user, record_a, type) { accessible_record_bs(user, record_a).of_type(type) }
+  scope :accessible_record_bs_by_subtype, -> (user, record_a, type, subtype) { accessible_record_bs_by_type(user, record_a, subtype).joins(:connections_as_target).where(connections: { record_a: (accessible_record_bs_by_type(user, record_a, type) ) })}
 
-  scope :all_roots, -> { all } # where.not(id: Connection.pluck(:record_b_id)) }
-  scope :siblings, -> (user, record_a) { all } # where(id: Record.children(Record.parents(record_a)) ).without_source(record_a) }
-  scope :children, -> (parent_ids) { all } # Connection.where(record_a_id: parent_ids).pluck(:record_b_id) }
-  scope :parents, -> (record_a) { all } # Connection.where(record_b_id: record_a.id).pluck(:record_a_id) }
+  scope :all_roots, -> { where.not(id: Connection.pluck(:record_b_id)) }
+  scope :siblings, -> (user, record_a) { where(id: Record.children(Record.parents(record_a)) ).without_source(record_a) }
+  scope :children, -> (parent_ids) { Connection.where(record_a_id: parent_ids).pluck(:record_b_id) }
+  scope :parents, -> (record_a) { Connection.where(record_b_id: record_a.id).pluck(:record_a_id) }
 
   scope :all_parents_of_record, -> (record) { all } # where(id: ActiveRecord::Base.connection.execute(all_parent_ids(record)).pluck('id')).without_source(record) }
   scope :all_tree_records_of_record, -> (record) { all } # where(id: ActiveRecord::Base.connection.execute(all_tree_record_ids(record)).pluck('id')) }
@@ -49,9 +49,9 @@ class Record < ApplicationRecord
   scope :parents_specific_type, -> (record, _type) { all } # all_parents_of_record(record).where(record_type: _type).without_source(record) }
   scope :closest_of_type, -> (record, _type) { all } # all_parents_of_record(record).where(record_type: _type).order(created_at: :desc).limit(1) }
 
-  scope :without_potential_cycles, -> (record) { all } # where.not(id: ActiveRecord::Base.connection.execute(all_parent_ids(record)).pluck('id')).without_source(record) }
-  scope :all_without_cycles, -> (record) { all } # without_potential_cycles(record).without_source(record) }
-  scope :all_roots_without_cycles, -> (record) { all } # all_roots.without_potential_cycles(record).without_source(record) }
+  scope :without_potential_cycles, -> (record) { where.not(id: record.all_parent_ids).without_source(record) }
+  scope :all_without_cycles, -> (record) { without_potential_cycles(record).without_source(record) }
+  scope :all_roots_without_cycles, -> (record) { all_roots.without_potential_cycles(record).without_source(record) }
 
   scope :all_children_of_record, -> (record) { all } # where(id: ActiveRecord::Base.connection.execute(all_child_ids(record)).pluck('id')).without_source(record) }
   scope :last_children_of_record, -> (record) { all } # all_children_of_record(record).where.not(id: Record.joins(:connections_as_source).where(id: Record.all_children_of_record(record).pluck(:id))) }
@@ -94,24 +94,6 @@ class Record < ApplicationRecord
   def self.all_solved_tree_records_of_record(record)
     # Record.where(id: ActiveRecord::Base.connection.execute(all_solved_tree_record_ids(record)).pluck('id'))
     where(id: all_solved_tree_record_ids(record))
-  end
-
-  def self.all_parent_ids(record)
-    # <<-SQL
-    #   WITH RECURSIVE search_tree(id, path) AS (
-    #       SELECT id, ARRAY[id]
-    #       FROM records
-    #       WHERE id = #{record.id}
-    #     UNION
-    #       SELECT records.id, path || records.id
-    #       FROM search_tree
-    #       JOIN connections ON connections.record_b_id = search_tree.id
-    #       JOIN records ON records.id = connections.record_a_id
-    #       WHERE NOT records.id = ANY(path)
-    #   )
-    #   SELECT id FROM search_tree ORDER BY path
-    # SQL
-    all.pluck(:id)
   end
 
   def self.all_tree_record_ids(record)
@@ -320,17 +302,13 @@ class Record < ApplicationRecord
     all.pluck(:id)
   end
 
-  def progress
-    # ((1 - ( (Record.last_children_of_record(self).count.to_f) / ( Record.all_children_of_record(self).count.to_f + 1 ) )) * 100).to_i
-    100
+  def all_parent_ids
+    excluded_ids.split(',').map(&:to_i)
+  rescue
+    []
   end
 
   def children
-    # Record.where(id: Record.children(self.id))
-    all
-  end
-
-  def recalculate_cached_tree_counters
-    # CountersUpdateWorker.perform_async(self.reload.id)
+    Record.where(id: Record.children(self.id))
   end
 end

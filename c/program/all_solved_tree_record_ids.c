@@ -395,20 +395,20 @@ int main(int argc, char* argv[]) {
     save_records(records, numRecords);
 
     // Output solved status for each record (for testing, disabled for production)
-    #define EXCLUDED_IDS_BUFFER_SIZE 1024
-    for (int i = 0; i < numRecords; i++) {
-        char excludedIds[EXCLUDED_IDS_BUFFER_SIZE] = {0}; // Buffer for holding comma-separated IDs
-        for (int j = 0; j < records[i].excludedCount; j++) {
-            int recordDbId = records[records[i].excludedRecordBs[j]].id; // Look up the database ID using the index
-            char idBuffer[20]; // Assuming an ID won't exceed this length
-            snprintf(idBuffer, sizeof(idBuffer), "%d", recordDbId);
-            strcat(excludedIds, idBuffer);
-            if (j < records[i].excludedCount - 1) {
-                strcat(excludedIds, ","); // Add comma after all but the last ID
-            }
-        }
-        printf("%d: %d : %d : %f : %f : %s\n", records[i].id, records[i].isSolved, records[i].shouldSolve, records[i].rank, records[i].progress, excludedIds);
-    }
+    // #define EXCLUDED_IDS_BUFFER_SIZE 1024
+    // for (int i = 0; i < numRecords; i++) {
+    //     char excludedIds[EXCLUDED_IDS_BUFFER_SIZE] = {0}; // Buffer for holding comma-separated IDs
+    //     for (int j = 0; j < records[i].excludedCount; j++) {
+    //         int recordDbId = records[records[i].excludedRecordBs[j]].id; // Look up the database ID using the index
+    //         char idBuffer[20]; // Assuming an ID won't exceed this length
+    //         snprintf(idBuffer, sizeof(idBuffer), "%d", recordDbId);
+    //         strcat(excludedIds, idBuffer);
+    //         if (j < records[i].excludedCount - 1) {
+    //             strcat(excludedIds, ","); // Add comma after all but the last ID
+    //         }
+    //     }
+    //     printf("%d: %d : %d : %f : %f : %s\n", records[i].id, records[i].isSolved, records[i].shouldSolve, records[i].rank, records[i].progress, excludedIds);
+    // }
 
     // Cleanup
     for (int i = 0; i < numRecords; i++) {

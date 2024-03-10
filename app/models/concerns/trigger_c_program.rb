@@ -2,7 +2,7 @@ module TriggerCProgram
   extend ActiveSupport::Concern
 
   included do
-    after_create :trigger_c_program
+    after_save :trigger_c_program
   end
 
   private
