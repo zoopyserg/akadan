@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    store_current_path_globally('users', 'show', @user.id, @user, true)
+    # store_current_path_globally('users', 'show', @user.id, @user, true)
 
     if signed_in? && (@user == current_user)
       @records = Record.where(user: @user)
