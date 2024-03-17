@@ -4,58 +4,60 @@
             <% #= image_pack_tag 'logo-icon.png', class: "logo-icon h-8 w-8", alt: "logo icon" %>
             <h5 class="logo-text text-white text-2xl">Dedu</h5>
             <span class='text-gray-400 text-xs'>
-                <small>Deduction Wiki Social Network</small>
+                <small>Deduction Social Network</small>
             </span>
         <% end %>
     </div>
     <ul class="sidebar-menu overflow-y-auto text-white text-sm">
-        <li class="sidebar-header px-4 py-2 uppercase">MAIN NAVIGATION</li>
-        <li>
-            <%= link_to records_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
+        <!--li class="sidebar-header px-4 py-2 uppercase">MAIN NAVIGATION</li-->
+        <li class="flex justify-between items-center py-2 px-4 hover:bg-gray-700">
+            <%= link_to records_path, class: "flex items-center" do %>
                 <i class="zmdi zmdi-format-list-bulleted mr-2"></i>
-                <span>Repetitive Records / Projects</span>
+                <span>Repetitive Problems</span>
+            <% end %>
+            <% if user_signed_in? %>
+                <%= link_to new_record_path, class: "flex items-center" do %>
+                    New
+                <% end %>
             <% end %>
         </li>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to new_record_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
-                    <i class="zmdi zmdi-plus-square mr-2"></i>
-                    <span>Add a New Record</span>
-                <% end %>
-            </li>
-        <% end %>
-        <li>
-            <%= link_to record_types_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
+        <li class="flex justify-between items-center py-2 px-4 hover:bg-gray-700">
+            <%= link_to records_path, class: "flex items-center" do %>
                 <i class="zmdi zmdi-format-list-bulleted mr-2"></i>
-                <span>Types of Repetitive Records</span>
+                <span>Projects</span>
+            <% end %>
+            <% if user_signed_in? %>
+                <%= link_to new_record_path, class: "flex items-center" do %>
+                    New
+                <% end %>
             <% end %>
         </li>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to new_record_type_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
-                    <i class="zmdi zmdi-plus-square mr-2"></i>
-                    <span>Add a New Record Type</span>
-                <% end %>
-            </li>
-        <% end %>
-        <li>
-            <%= link_to connection_types_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
+        <li class="flex justify-between items-center py-2 px-4 hover:bg-gray-700">
+            <%= link_to record_types_path, class: "flex items-center" do %>
                 <i class="zmdi zmdi-format-list-bulleted mr-2"></i>
-                <span>Types of Connections Between Repetitive Records</span>
+                <span>Problem Types</span>
+            <% end %>
+            <% if user_signed_in? %>
+                <%= link_to new_record_type_path, class: "flex items-center" do %>
+                    New
+                <% end %>
             <% end %>
         </li>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to new_connection_type_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
-                    <i class="zmdi zmdi-plus-square mr-2"></i>
-                    <span>Add a New Connection Type</span>
+        <li class="flex justify-between items-center py-2 px-4 hover:bg-gray-700">
+            <%= link_to connection_types_path, class: "flex items-center" do %>
+                <i class="zmdi zmdi-format-list-bulleted mr-2"></i>
+                <span>Connectoin Types</span>
+            <% end %>
+            <% if user_signed_in? %>
+                <%= link_to new_connection_type_path, class: "flex items-center" do %>
+                    New
                 <% end %>
-            </li>
-        <% end %>
+            <% end %>
+        </li>
         <li>
             <%= link_to connections_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
                 <i class="zmdi zmdi-format-list-bulleted mr-2"></i>
-                <span>Connections Between Repetitive Records</span>
+                <span>Connections</span>
             <% end %>
         </li>
         <% if user_signed_in? %>
@@ -72,19 +74,16 @@
                 <span>People</span>
             <% end %>
         </li>
-        <li>
-            <%= link_to sensors_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
+        <li class="flex justify-between items-center py-2 px-4 hover:bg-gray-700">
+            <%= link_to sensors_path, class: "flex items-center" do %>
                 <i class="zmdi zmdi-format-list-bulleted mr-2"></i>
-                <span>Sensors / Camera Recognitions</span>
+                <span>Sensors</span>
+            <% end %>
+            <% if user_signed_in? %>
+                <%= link_to new_sensor_path, class: "flex items-center" do %>
+                    New
+                <% end %>
             <% end %>
         </li>
-        <% if user_signed_in? %>
-            <li>
-                <%= link_to new_sensor_path, class: "flex items-center py-2 px-4 hover:bg-gray-700" do %>
-                    <i class="zmdi zmdi-plus-square mr-2"></i>
-                    <span>Add a New Sensor</span>
-                <% end %>
-            </li>
-        <% end %>
     </ul>
 </div>
