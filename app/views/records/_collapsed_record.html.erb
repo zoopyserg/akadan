@@ -19,7 +19,7 @@
           <% end %>
         <% end %>
       <% else %>
-        <%= link_to record_bookmarks_path(record_id: record.id), class: "text-gray-400 hover:text-gray-600" do %>
+        <%= link_to create_bookmark_record_bookmarks_path(record_id: record.id), class: "text-gray-400 hover:text-gray-600" do %>
           <i class="far fa-star"></i>
         <% end %>
       <% end %>

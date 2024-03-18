@@ -12,6 +12,10 @@ export default class extends Controller {
     }
   }
 
+  stopPropagation(event) {
+    event.stopPropagation(); // This will stop the click from closing the dropdown
+  }
+
   close() {
     this.menuTarget.style.display = "none";
   }

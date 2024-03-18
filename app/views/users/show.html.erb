@@ -2,7 +2,11 @@
   <div class="w-full">
     <div class="bg-white shadow-md rounded overflow-hidden mb-3">
       <div class="p-4 text-center">
-        <% #= image_tag @user.avatar_url(:thumb), class: "rounded-full mb-3 mt-4", width: "160", height: "160", 'data-pgc-edit' => "image[src, no_content]" %>
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: 'rounded-full mb-3 mt-4 mx-auto block', width: '160', height: '160', alt: "user avatar", style: 'width: 160px; height: 160px;' %>
+        <% else %>
+          <%= image_tag 'no-photo-placeholder.png', class: 'rounded-full mb-3 mt-4 mx-auto block', alt: "default avatar", width: '160', height: '160', style: 'width: 160px; height: 160px;' %>
+        <% end %>
         <div class="mb-3">
           <h5 class="text-xl font-bold"><%= @user.full_name %></h5>
         </div>

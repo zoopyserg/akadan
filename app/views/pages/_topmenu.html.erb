@@ -49,14 +49,22 @@
                 <li class="relative" data-controller="dropdown" style="z-index:999" data-action="click->dropdown#toggle click@window->dropdown#clickOutside">
                     <a class="flex items-center space-x-2 hover:text-gray-800" href="#">
                         <span class="user-profile" data-action="click->dropdown#toggle">
-                            <%= image_tag 'person.jpg', class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;', 'data-action'=>"click->dropdown#toggle" %>
+                            <% if current_user.avatar.attached? %>
+                              <%= image_tag current_user.avatar, class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;', 'data-action'=>"click->dropdown#toggle" %>
+                            <% else %>
+                              <%= image_tag 'no-photo-placeholder.png', class: 'rounded-full', alt: "default avatar", style: 'width: 50px; height: 50px;', 'data-action'=>"click->dropdown#toggle" %>
+                            <% end %>
                         </span>
                     </a>
                     <ul class="absolute right-0 mt-2 bg-white border border-gray-200 rounded shadow-md" style="display: none;" data-target="dropdown.menu">
                         <li class="p-3">
                             <div class="flex items-center space-x-3">
                                 <div class="avatar">
-                                    <%= image_tag 'person.jpg', class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;' %>
+                                  <% if current_user.avatar.attached? %>
+                                    <%= image_tag current_user.avatar, class: 'rounded-full', alt: "user avatar", style: 'width: 50px; height: 50px;' %>
+                                  <% else %>
+                                    <%= image_tag 'no-photo-placeholder.png', class: 'rounded-full', alt: "default avatar", style: 'width: 50px; height: 50px;' %>
+                                  <% end %>
                                 </div>
                                 <div>
                                     <h6 class="font-medium text-gray-800"><%= current_user.full_name %></h6>
@@ -66,21 +74,21 @@
                         </li>
                         <% if user_signed_in? %>
                             <li class="border-t border-gray-100">
-                                <%= link_to conversations_path, class: "flex items-center space-x-2 p-3 hover:bg-gray-100" do %>
+                                <%= link_to conversations_path, class: "flex items-center space-x-2 p-3 hover:bg-gray-100", 'data-action' => "click->dropdown#stopPropagation"  do %>
                                     <i class="icon-envelope"></i> Inbox
                                 <% end %>
                             </li>
                         <% end %>
                         <% if user_signed_in? %>
                             <li class="border-t border-gray-100">
-                                <%= link_to user_path(current_user), class: "flex items-center space-x-2 p-3 hover:bg-gray-100" do %>
-                                    <i class="icon-wallet"></i> My Profile
-                                <% end %>
+                              <%= link_to user_path(current_user), class: "flex items-center space-x-2 p-3 hover:bg-gray-100", 'data-action' => "click->dropdown#stopPropagation" do %>
+                                <i class="icon-wallet"></i> My Profile
+                              <% end %>
                             </li>
                         <% end %>
                         <% if user_signed_in? %>
                             <li class="border-t border-gray-100">
-                                <%= link_to blocked_users_path, class: "flex items-center space-x-2 p-3 hover:bg-gray-100" do %>
+                                <%= link_to blocked_users_path, class: "flex items-center space-x-2 p-3 hover:bg-gray-100", 'data-action' => "click->dropdown#stopPropagation"  do %>
                                     <i class="icon-lock"></i>
                                     <span>Blocked Users</span>
                                 <% end %>
@@ -88,14 +96,14 @@
                         <% end %>
                         <% if user_signed_in? %>
                             <li class="border-t border-gray-100">
-                                <%= link_to edit_user_path(current_user), class: "flex items-center space-x-2 p-3 hover:bg-gray-100" do %>
+                                <%= link_to edit_user_path(current_user), class: "flex items-center space-x-2 p-3 hover:bg-gray-100", 'data-action' => "click->dropdown#stopPropagation"  do %>
                                     <i class="icon-settings"></i> Settings
                                 <% end %>
                             </li>
                         <% end %>
                         <% if user_signed_in? %>
                             <li class="border-t border-gray-100">
-                                <%= link_to destroy_user_session_path, method: :delete, class: "flex items-center space-x-2 p-3 hover:bg-gray-100" do %>
+                                <%= link_to destroy_user_session_path, method: :delete, class: "flex items-center space-x-2 p-3 hover:bg-gray-100", 'data-action' => "click->dropdown#stopPropagation"  do %>
                                     <i class="icon-power"></i> Logout
                                 <% end %>
                             </li>

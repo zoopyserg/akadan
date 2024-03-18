@@ -81,7 +81,13 @@ module DesignableController
   end
 
   def redirect_to_user_design
-    build_columns_from_user_design(session[:designable])
+    designable = if session[:designable].present? && ( session[:designable].is_a?(User) || session[:designable].is_a?(Record) )
+      session[:designable]
+    else
+      User.first
+    end
+
+    build_columns_from_user_design(designable)
     redirect_to_same_path_with_columns
   end
 

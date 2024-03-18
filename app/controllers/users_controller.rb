@@ -29,18 +29,37 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    # Check if the user is trying to change their password
+    if updating_password?
+      update_with_password
+    else
+      update_without_password
     end
   end
 
   private
+  def update_with_password
+    if @user.update_with_password(user_params)
+      bypass_sign_in(@user) # Sign in the user by bypassing validation in case their password changed
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def update_without_password
+    params = user_params.except(:current_password, :password, :password_confirmation)
+    if @user.update_without_password(params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  def updating_password?
+    params[:user][:password].present? && params[:user][:password_confirmation].present?
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_user_to_show
     @user = User.find(params[:id])
@@ -52,7 +71,11 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name)
+    list_of_permitted_parameters = [:first_name, :last_name, :email, :username, :bio, :about, :avatar]
+    if updating_password?
+      list_of_permitted_parameters += [:password, :password_confirmation, :current_password]
+    end
+    params.require(:user).permit(*list_of_permitted_parameters)
   end
 
   def recorect_to_people_path

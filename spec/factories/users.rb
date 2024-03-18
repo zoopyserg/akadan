@@ -32,23 +32,11 @@ FactoryBot.define do
     end
 
     trait :with_avatar do
-      # remote_avatar_url {
-      #   [
-      #     Faker::LoremFlickr.image(search_terms: ['sports']),
-      #     Faker::LoremFlickr.image(search_terms: ['fitness']),
-      #     Faker::LoremFlickr.image(search_terms: ['person']),
-      #     Faker::LoremFlickr.image(search_terms: ['cat']),
-      #     Faker::LoremFlickr.image(search_terms: ['office']),
-      #     Faker::LoremFlickr.image(search_terms: ['professional']),
-      #     Faker::LoremFlickr.image(search_terms: ['worker']),
-      #     Faker::LoremFlickr.image(search_terms: ['analyst']),
-      #     Faker::LoremFlickr.image(search_terms: ['hero']),
-      #     Faker::LoremFlickr.image(search_terms: ['photo']),
-      #     Faker::LoremFlickr.image(search_terms: ['toy']),
-      #     Faker::LoremFlickr.image(search_terms: ['seller']),
-      #     Faker::LoremFlickr.image(search_terms: ['baker'])
-      #   ].sample
-      # }
+      after(:build) do |user|
+        image_url = Faker::LoremFlickr.image(size: "300x300", search_terms: ['sports', 'fitness', 'person', 'cat', 'office', 'professional', 'worker', 'analyst', 'hero', 'photo', 'toy', 'seller', 'baker'])
+        file = URI.open(image_url)
+        user.avatar.attach(io: file, filename: 'avatar.jpg', content_type: 'image/jpeg')
+      end
     end
   end
 end
