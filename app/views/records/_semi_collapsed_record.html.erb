@@ -32,11 +32,11 @@
     <% if user_signed_in? %>
       <% bookmark = current_user.bookmarks.find_by(record: record) %>
       <% if bookmark %>
-        <%= link_to record_bookmark_path(bookmark), method: :delete, class: 'text-yellow-400 hover:text-yellow-500' do %>
+        <%= link_to destroy_bookmark_record_bookmark_path(record_id: record.id, id: bookmark.id), class: 'text-yellow-400 hover:text-yellow-500' do %>
           <i class="fas fa-star"></i> Remove from Favourites
         <% end %>
       <% else %>
-        <%= link_to record_bookmarks_path(record_id: record.id), method: :post, class: 'text-gray-400 hover:text-gray-600' do %>
+        <%= link_to create_bookmark_record_bookmarks_path(record_id: record.id), class: 'text-gray-400 hover:text-gray-600' do %>
           <i class="far fa-star"></i> Add to Favourites
         <% end %>
       <% end %>

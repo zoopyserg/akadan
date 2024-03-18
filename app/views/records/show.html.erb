@@ -37,12 +37,12 @@
             </div-->
             <% if user_signed_in? %>
               <% if current_user.bookmarked?(@record) %>
-                <%= link_to record_bookmark_path(record_id: @record.id, id: Bookmark.find_by(user: current_user, record: @record).id ), method: :delete, class: 'btn btn-link btn-sm flex items-center' do %>
+                <%= link_to destroy_bookmark_record_bookmark_path(record_id: @record.id, id: Bookmark.find_by(user: current_user, record: @record).id ), class: 'btn btn-link btn-sm flex items-center' do %>
                   <span><i class="fa fa-star mr-1"></i></span>
                   <span>Remove from Favourites</span>
                 <% end %>
               <% else %>
-                <%= link_to record_bookmarks_path(record_id: @record.id), method: :post, class: 'btn btn-link btn-sm flex items-center' do %>
+                <%= link_to create_bookmark_record_bookmarks_path(record_id: @record.id), method: :post, class: 'btn btn-link btn-sm flex items-center' do %>
                   <span><i class="fa fa-star-o mr-1"></i></span>
                   <span>Add to Favourites</span>
                 <% end %>

@@ -3,10 +3,10 @@ class BookmarksController < ApplicationController
   before_action :set_record
   before_action :set_bookmark
   before_action :set_back_path
-  before_action :redirect_to_records_path, only: :create, if: :bookmark_present?
+  before_action :redirect_to_records_path, only: :create_bookmark, if: :bookmark_present?
 
   # POST /bookmarks or /bookmarks.json
-  def create
+  def create_bookmark
     @bookmark = current_user.bookmarks.new
     @bookmark.record = @record
 
@@ -22,7 +22,7 @@ class BookmarksController < ApplicationController
   end
 
   # DELETE /bookmarks/1 or /bookmarks/1.json
-  def destroy
+  def destroy_bookmark
     @bookmark.destroy
     respond_to do |format|
       format.html { redirect_to @back_path, notice: "Bookmark was successfully destroyed." }

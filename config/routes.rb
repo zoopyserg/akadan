@@ -58,7 +58,14 @@ Rails.application.routes.draw do
     resources :comments, only: [:new, :create]
 
     resources :dots, only: [:new, :create] # maybe do Index too. 'cause it's a scaffold baby
-    resources :bookmarks, only: [:create, :destroy]
+    resources :bookmarks, only: [] do
+      collection do
+        get :create_bookmark
+      end
+      member do
+        get :destroy_bookmark
+      end
+    end
     resources :connection_types, except: [:destroy] do
       resources :connections, only: [:new, :edit, :create, :update] do
         collection do

@@ -10,11 +10,11 @@
       </button>
       <% if user_signed_in? %>
         <% if current_user.bookmarked?(record) %>
-          <%= link_to record_bookmark_path(record_id: record.id, id: Bookmark.find_by(user: current_user, record:record).id ), method: :delete, class: "text-indigo-600 hover:text-indigo-800" do %>
+          <%= link_to destroy_bookmark_record_bookmark_path(record_id: record.id, id: Bookmark.find_by(user: current_user, record:record).id ), class: "text-indigo-600 hover:text-indigo-800" do %>
             <i class="fas fa-star"></i>
           <% end %>
         <% else %>
-          <%= link_to record_bookmarks_path(record_id: record.id), method: :post, class: "text-gray-400 hover:text-gray-600" do %>
+          <%= link_to create_bookmark_record_bookmarks_path(record_id: record.id), class: "text-gray-400 hover:text-gray-600" do %>
             <i class="far fa-star"></i>
           <% end %>
         <% end %>
