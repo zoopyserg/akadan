@@ -39,3 +39,6 @@
 
 spec/examples.txt
 .byebug_history
+
+/lib/assets/avatars/*
+

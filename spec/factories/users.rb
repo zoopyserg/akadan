@@ -33,9 +33,11 @@ FactoryBot.define do
 
     trait :with_avatar do
       after(:build) do |user|
-        image_url = Faker::LoremFlickr.image(size: "300x300", search_terms: ['sports', 'fitness', 'person', 'cat', 'office', 'professional', 'worker', 'analyst', 'hero', 'photo', 'toy', 'seller', 'baker'])
-        file = URI.open(image_url)
-        user.avatar.attach(io: file, filename: 'avatar.jpg', content_type: 'image/jpeg')
+        avatars_dir = Rails.root.join('lib', 'assets', 'avatars')
+        avatar_files = Dir[avatars_dir.join('avatar_*.jpg')]
+        random_avatar_file = File.open(avatar_files.sample)
+
+        user.avatar.attach(io: random_avatar_file, filename: File.basename(random_avatar_file), content_type: 'image/jpeg')
       end
     end
   end
